@@ -15,6 +15,7 @@ type Mutation {
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!
   createProject(name: String!): Project!
+  addProjectMember(user: ID!, project: ID!): Project!
 }
 
 type AuthPayload {
@@ -27,6 +28,4 @@ type User {
   email: String!
   name: String!
   posts: [Post!]!
-  projectMember: [Project!]!
-  projectAdmin: [Project!]!
 }
