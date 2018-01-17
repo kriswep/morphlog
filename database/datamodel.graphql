@@ -8,10 +8,21 @@ type Post {
   author: User!
 }
 
+type Project {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  member: [User!]! @relation(name: "ProjectMember")
+  admin: [User!]! @relation(name: "ProjectAdmin")
+}
+
 type User {
   id: ID! @unique
   email: String! @unique
   password: String!
   name: String!
   posts: [Post!]!
+  projectMember: [Project!]! @relation(name: "ProjectMember")
+  projectAdmin: [Project!]! @relation(name: "ProjectAdmin")
 }

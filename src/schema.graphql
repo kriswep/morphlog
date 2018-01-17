@@ -4,6 +4,7 @@ type Query {
   feed: [Post!]!
   drafts: [Post!]!
   post(id: ID!): Post!
+  project(id: ID!): Project!
   me: User
 }
 
@@ -13,6 +14,7 @@ type Mutation {
   createDraft(title: String!, text: String!): Post!
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!
+  createProject(name: String!): Project!
 }
 
 type AuthPayload {
@@ -25,4 +27,6 @@ type User {
   email: String!
   name: String!
   posts: [Post!]!
+  projectMember: [Project!]!
+  projectAdmin: [Project!]!
 }
