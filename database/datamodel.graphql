@@ -17,6 +17,15 @@ type Project {
   admin: [User!]! @relation(name: "ProjectAdmin")
 }
 
+type Change {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  text: String!
+  author: User!
+  project: Project!
+}
+
 type User {
   id: ID! @unique
   email: String! @unique

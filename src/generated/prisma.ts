@@ -9,6 +9,15 @@ const typeDefs = `
 # Model Types
 #
 
+type Change implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  text: String!
+  author(where: UserWhereInput): User!
+  project(where: ProjectWhereInput): Project!
+}
+
 type Post implements Node {
   id: ID!
   createdAt: DateTime!
@@ -43,6 +52,10 @@ type User implements Node {
 # Other Types
 #
 
+type AggregateChange {
+  count: Int!
+}
+
 type AggregatePost {
   count: Int!
 }
@@ -59,6 +72,119 @@ type BatchPayload {
   count: Long!
 }
 
+type ChangeConnection {
+  pageInfo: PageInfo!
+  edges: [ChangeEdge]!
+  aggregate: AggregateChange!
+}
+
+input ChangeCreateInput {
+  text: String!
+  author: UserCreateOneInput!
+  project: ProjectCreateOneInput!
+}
+
+type ChangeEdge {
+  node: Change!
+  cursor: String!
+}
+
+enum ChangeOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  text_ASC
+  text_DESC
+}
+
+type ChangePreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  text: String!
+}
+
+type ChangeSubscriptionPayload {
+  mutation: MutationType!
+  node: Change
+  updatedFields: [String!]
+  previousValues: ChangePreviousValues
+}
+
+input ChangeSubscriptionWhereInput {
+  AND: [ChangeSubscriptionWhereInput!]
+  OR: [ChangeSubscriptionWhereInput!]
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ChangeWhereInput
+}
+
+input ChangeUpdateInput {
+  text: String
+  author: UserUpdateOneInput
+  project: ProjectUpdateOneInput
+}
+
+input ChangeWhereInput {
+  AND: [ChangeWhereInput!]
+  OR: [ChangeWhereInput!]
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
+  author: UserWhereInput
+  project: ProjectWhereInput
+}
+
+input ChangeWhereUniqueInput {
+  id: ID
+}
+
 scalar DateTime
 
 scalar Long
@@ -66,21 +192,27 @@ scalar Long
 type Mutation {
   createPost(data: PostCreateInput!): Post!
   createProject(data: ProjectCreateInput!): Project!
+  createChange(data: ChangeCreateInput!): Change!
   createUser(data: UserCreateInput!): User!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
+  updateChange(data: ChangeUpdateInput!, where: ChangeWhereUniqueInput!): Change
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   deletePost(where: PostWhereUniqueInput!): Post
   deleteProject(where: ProjectWhereUniqueInput!): Project
+  deleteChange(where: ChangeWhereUniqueInput!): Change
   deleteUser(where: UserWhereUniqueInput!): User
   upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
   upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
+  upsertChange(where: ChangeWhereUniqueInput!, create: ChangeCreateInput!, update: ChangeUpdateInput!): Change!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   updateManyPosts(data: PostUpdateInput!, where: PostWhereInput!): BatchPayload!
   updateManyProjects(data: ProjectUpdateInput!, where: ProjectWhereInput!): BatchPayload!
+  updateManyChanges(data: ChangeUpdateInput!, where: ChangeWhereInput!): BatchPayload!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput!): BatchPayload!
   deleteManyPosts(where: PostWhereInput!): BatchPayload!
   deleteManyProjects(where: ProjectWhereInput!): BatchPayload!
+  deleteManyChanges(where: ChangeWhereInput!): BatchPayload!
   deleteManyUsers(where: UserWhereInput!): BatchPayload!
 }
 
@@ -296,6 +428,11 @@ input ProjectCreateManyWithoutMemberInput {
   connect: [ProjectWhereUniqueInput!]
 }
 
+input ProjectCreateOneInput {
+  create: ProjectCreateInput
+  connect: ProjectWhereUniqueInput
+}
+
 input ProjectCreateWithoutAdminInput {
   name: String!
   member: UserCreateManyWithoutProjectMemberInput
@@ -368,6 +505,13 @@ input ProjectUpdateManyWithoutMemberInput {
   delete: [ProjectWhereUniqueInput!]
   update: [ProjectUpdateWithoutMemberInput!]
   upsert: [ProjectUpsertWithoutMemberInput!]
+}
+
+input ProjectUpdateOneInput {
+  create: ProjectCreateInput
+  connect: ProjectWhereUniqueInput
+  disconnect: ProjectWhereUniqueInput
+  delete: ProjectWhereUniqueInput
 }
 
 input ProjectUpdateWithoutAdminDataInput {
@@ -464,12 +608,15 @@ input ProjectWhereUniqueInput {
 type Query {
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
   projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project]!
+  changes(where: ChangeWhereInput, orderBy: ChangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Change]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   post(where: PostWhereUniqueInput!): Post
   project(where: ProjectWhereUniqueInput!): Project
+  change(where: ChangeWhereUniqueInput!): Change
   user(where: UserWhereUniqueInput!): User
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
   projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
+  changesConnection(where: ChangeWhereInput, orderBy: ChangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChangeConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   node(id: ID!): Node
 }
@@ -477,6 +624,7 @@ type Query {
 type Subscription {
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
   project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
+  change(where: ChangeSubscriptionWhereInput): ChangeSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
@@ -503,6 +651,11 @@ input UserCreateManyWithoutProjectAdminInput {
 input UserCreateManyWithoutProjectMemberInput {
   create: [UserCreateWithoutProjectMemberInput!]
   connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateOneWithoutPostsInput {
@@ -603,6 +756,13 @@ input UserUpdateManyWithoutProjectMemberInput {
   delete: [UserWhereUniqueInput!]
   update: [UserUpdateWithoutProjectMemberInput!]
   upsert: [UserUpsertWithoutProjectMemberInput!]
+}
+
+input UserUpdateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
+  disconnect: UserWhereUniqueInput
+  delete: UserWhereUniqueInput
 }
 
 input UserUpdateOneWithoutPostsInput {
@@ -785,15 +945,25 @@ export type UserOrderByInput =
   'createdAt_ASC' |
   'createdAt_DESC'
 
+export type ChangeOrderByInput = 
+  'id_ASC' |
+  'id_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'text_ASC' |
+  'text_DESC'
+
 export type MutationType = 
   'CREATED' |
   'UPDATED' |
   'DELETED'
 
-export interface ProjectCreateInput {
-  name: String
-  member?: UserCreateManyWithoutProjectMemberInput
-  admin?: UserCreateManyWithoutProjectAdminInput
+export interface ChangeCreateInput {
+  text: String
+  author: UserCreateOneInput
+  project: ProjectCreateOneInput
 }
 
 export interface PostWhereInput {
@@ -862,13 +1032,9 @@ export interface PostWhereInput {
   author?: UserWhereInput
 }
 
-export interface UserUpdateOneWithoutPostsInput {
-  create?: UserCreateWithoutPostsInput
-  connect?: UserWhereUniqueInput
-  disconnect?: UserWhereUniqueInput
-  delete?: UserWhereUniqueInput
-  update?: UserUpdateWithoutPostsInput
-  upsert?: UserUpsertWithoutPostsInput
+export interface ProjectCreateOneInput {
+  create?: ProjectCreateInput
+  connect?: ProjectWhereUniqueInput
 }
 
 export interface ProjectWhereInput {
@@ -926,9 +1092,9 @@ export interface ProjectWhereInput {
   admin_none?: UserWhereInput
 }
 
-export interface UserCreateManyWithoutProjectAdminInput {
-  create?: UserCreateWithoutProjectAdminInput[] | UserCreateWithoutProjectAdminInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
+export interface ProjectCreateManyWithoutMemberInput {
+  create?: ProjectCreateWithoutMemberInput[] | ProjectCreateWithoutMemberInput
+  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
 }
 
 export interface PostUpsertWithoutAuthorInput {
@@ -937,117 +1103,9 @@ export interface PostUpsertWithoutAuthorInput {
   create: PostCreateWithoutAuthorInput
 }
 
-export interface UserCreateWithoutProjectAdminInput {
-  email: String
-  password: String
+export interface ProjectCreateWithoutMemberInput {
   name: String
-  posts?: PostCreateManyWithoutAuthorInput
-  projectMember?: ProjectCreateManyWithoutMemberInput
-}
-
-export interface UserUpdateWithoutPostsInput {
-  where: UserWhereUniqueInput
-  data: UserUpdateWithoutPostsDataInput
-}
-
-export interface PostCreateManyWithoutAuthorInput {
-  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput
-  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput
-}
-
-export interface UserSubscriptionWhereInput {
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: UserWhereInput
-}
-
-export interface PostCreateWithoutAuthorInput {
-  isPublished?: Boolean
-  title: String
-  text: String
-}
-
-export interface PostSubscriptionWhereInput {
-  AND?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
-  OR?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: PostWhereInput
-}
-
-export interface ProjectCreateManyWithoutAdminInput {
-  create?: ProjectCreateWithoutAdminInput[] | ProjectCreateWithoutAdminInput
-  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-}
-
-export interface PostWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface ProjectCreateWithoutAdminInput {
-  name: String
-  member?: UserCreateManyWithoutProjectMemberInput
-}
-
-export interface UserWhereUniqueInput {
-  id?: ID_Input
-  email?: String
-}
-
-export interface UserCreateManyWithoutProjectMemberInput {
-  create?: UserCreateWithoutProjectMemberInput[] | UserCreateWithoutProjectMemberInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-}
-
-export interface UserUpsertWithoutPostsInput {
-  where: UserWhereUniqueInput
-  update: UserUpdateWithoutPostsDataInput
-  create: UserCreateWithoutPostsInput
-}
-
-export interface UserCreateWithoutProjectMemberInput {
-  email: String
-  password: String
-  name: String
-  posts?: PostCreateManyWithoutAuthorInput
-  projectAdmin?: ProjectCreateManyWithoutAdminInput
-}
-
-export interface UserUpsertWithoutProjectMemberInput {
-  where: UserWhereUniqueInput
-  update: UserUpdateWithoutProjectMemberDataInput
-  create: UserCreateWithoutProjectMemberInput
-}
-
-export interface ProjectUpsertWithoutMemberInput {
-  where: ProjectWhereUniqueInput
-  update: ProjectUpdateWithoutMemberDataInput
-  create: ProjectCreateWithoutMemberInput
-}
-
-export interface UserUpdateWithoutProjectMemberInput {
-  where: UserWhereUniqueInput
-  data: UserUpdateWithoutProjectMemberDataInput
-}
-
-export interface UserCreateInput {
-  email: String
-  password: String
-  name: String
-  posts?: PostCreateManyWithoutAuthorInput
-  projectMember?: ProjectCreateManyWithoutMemberInput
-  projectAdmin?: ProjectCreateManyWithoutAdminInput
-}
-
-export interface ProjectUpdateWithoutAdminDataInput {
-  name?: String
-  member?: UserUpdateManyWithoutProjectMemberInput
+  admin?: UserCreateManyWithoutProjectAdminInput
 }
 
 export interface PostUpdateInput {
@@ -1057,13 +1115,9 @@ export interface PostUpdateInput {
   author?: UserUpdateOneWithoutPostsInput
 }
 
-export interface ProjectUpdateManyWithoutAdminInput {
-  create?: ProjectCreateWithoutAdminInput[] | ProjectCreateWithoutAdminInput
-  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  disconnect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  delete?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  update?: ProjectUpdateWithoutAdminInput[] | ProjectUpdateWithoutAdminInput
-  upsert?: ProjectUpsertWithoutAdminInput[] | ProjectUpsertWithoutAdminInput
+export interface UserCreateManyWithoutProjectAdminInput {
+  create?: UserCreateWithoutProjectAdminInput[] | UserCreateWithoutProjectAdminInput
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
 }
 
 export interface UserWhereInput {
@@ -1136,9 +1190,144 @@ export interface UserWhereInput {
   projectAdmin_none?: ProjectWhereInput
 }
 
-export interface UserCreateOneWithoutPostsInput {
-  create?: UserCreateWithoutPostsInput
+export interface UserCreateWithoutProjectAdminInput {
+  email: String
+  password: String
+  name: String
+  posts?: PostCreateManyWithoutAuthorInput
+  projectMember?: ProjectCreateManyWithoutMemberInput
+}
+
+export interface ProjectSubscriptionWhereInput {
+  AND?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput
+  OR?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: ProjectWhereInput
+}
+
+export interface PostCreateManyWithoutAuthorInput {
+  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput
+  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput
+}
+
+export interface PostSubscriptionWhereInput {
+  AND?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
+  OR?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: PostWhereInput
+}
+
+export interface PostCreateWithoutAuthorInput {
+  isPublished?: Boolean
+  title: String
+  text: String
+}
+
+export interface PostWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface ProjectCreateManyWithoutAdminInput {
+  create?: ProjectCreateWithoutAdminInput[] | ProjectCreateWithoutAdminInput
+  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
+}
+
+export interface ChangeWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface ProjectCreateWithoutAdminInput {
+  name: String
+  member?: UserCreateManyWithoutProjectMemberInput
+}
+
+export interface ProjectUpdateOneInput {
+  create?: ProjectCreateInput
+  connect?: ProjectWhereUniqueInput
+  disconnect?: ProjectWhereUniqueInput
+  delete?: ProjectWhereUniqueInput
+}
+
+export interface UserCreateManyWithoutProjectMemberInput {
+  create?: UserCreateWithoutProjectMemberInput[] | UserCreateWithoutProjectMemberInput
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
+}
+
+export interface ChangeUpdateInput {
+  text?: String
+  author?: UserUpdateOneInput
+  project?: ProjectUpdateOneInput
+}
+
+export interface UserCreateWithoutProjectMemberInput {
+  email: String
+  password: String
+  name: String
+  posts?: PostCreateManyWithoutAuthorInput
+  projectAdmin?: ProjectCreateManyWithoutAdminInput
+}
+
+export interface UserUpsertWithoutPostsInput {
+  where: UserWhereUniqueInput
+  update: UserUpdateWithoutPostsDataInput
+  create: UserCreateWithoutPostsInput
+}
+
+export interface ProjectCreateInput {
+  name: String
+  member?: UserCreateManyWithoutProjectMemberInput
+  admin?: UserCreateManyWithoutProjectAdminInput
+}
+
+export interface UserUpsertWithoutProjectMemberInput {
+  where: UserWhereUniqueInput
+  update: UserUpdateWithoutProjectMemberDataInput
+  create: UserCreateWithoutProjectMemberInput
+}
+
+export interface ProjectUpsertWithoutMemberInput {
+  where: ProjectWhereUniqueInput
+  update: ProjectUpdateWithoutMemberDataInput
+  create: ProjectCreateWithoutMemberInput
+}
+
+export interface UserUpdateWithoutProjectMemberInput {
+  where: UserWhereUniqueInput
+  data: UserUpdateWithoutProjectMemberDataInput
+}
+
+export interface UserCreateOneInput {
+  create?: UserCreateInput
   connect?: UserWhereUniqueInput
+}
+
+export interface ProjectUpdateWithoutAdminDataInput {
+  name?: String
+  member?: UserUpdateManyWithoutProjectMemberInput
+}
+
+export interface UserCreateInput {
+  email: String
+  password: String
+  name: String
+  posts?: PostCreateManyWithoutAuthorInput
+  projectMember?: ProjectCreateManyWithoutMemberInput
+  projectAdmin?: ProjectCreateManyWithoutAdminInput
+}
+
+export interface ProjectUpdateManyWithoutAdminInput {
+  create?: ProjectCreateWithoutAdminInput[] | ProjectCreateWithoutAdminInput
+  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
+  disconnect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
+  delete?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
+  update?: ProjectUpdateWithoutAdminInput[] | ProjectUpdateWithoutAdminInput
+  upsert?: ProjectUpsertWithoutAdminInput[] | ProjectUpsertWithoutAdminInput
 }
 
 export interface UserUpsertWithoutProjectAdminInput {
@@ -1147,9 +1336,95 @@ export interface UserUpsertWithoutProjectAdminInput {
   create: UserCreateWithoutProjectAdminInput
 }
 
-export interface ProjectCreateManyWithoutMemberInput {
-  create?: ProjectCreateWithoutMemberInput[] | ProjectCreateWithoutMemberInput
-  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
+export interface UserCreateOneWithoutPostsInput {
+  create?: UserCreateWithoutPostsInput
+  connect?: UserWhereUniqueInput
+}
+
+export interface UserSubscriptionWhereInput {
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: UserWhereInput
+}
+
+export interface ChangeWhereInput {
+  AND?: ChangeWhereInput[] | ChangeWhereInput
+  OR?: ChangeWhereInput[] | ChangeWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  createdAt?: DateTime
+  createdAt_not?: DateTime
+  createdAt_in?: DateTime[] | DateTime
+  createdAt_not_in?: DateTime[] | DateTime
+  createdAt_lt?: DateTime
+  createdAt_lte?: DateTime
+  createdAt_gt?: DateTime
+  createdAt_gte?: DateTime
+  updatedAt?: DateTime
+  updatedAt_not?: DateTime
+  updatedAt_in?: DateTime[] | DateTime
+  updatedAt_not_in?: DateTime[] | DateTime
+  updatedAt_lt?: DateTime
+  updatedAt_lte?: DateTime
+  updatedAt_gt?: DateTime
+  updatedAt_gte?: DateTime
+  text?: String
+  text_not?: String
+  text_in?: String[] | String
+  text_not_in?: String[] | String
+  text_lt?: String
+  text_lte?: String
+  text_gt?: String
+  text_gte?: String
+  text_contains?: String
+  text_not_contains?: String
+  text_starts_with?: String
+  text_not_starts_with?: String
+  text_ends_with?: String
+  text_not_ends_with?: String
+  author?: UserWhereInput
+  project?: ProjectWhereInput
+}
+
+export interface UserUpdateOneWithoutPostsInput {
+  create?: UserCreateWithoutPostsInput
+  connect?: UserWhereUniqueInput
+  disconnect?: UserWhereUniqueInput
+  delete?: UserWhereUniqueInput
+  update?: UserUpdateWithoutPostsInput
+  upsert?: UserUpsertWithoutPostsInput
+}
+
+export interface ProjectWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface UserUpdateWithoutPostsInput {
+  where: UserWhereUniqueInput
+  data: UserUpdateWithoutPostsDataInput
+}
+
+export interface UserUpdateOneInput {
+  create?: UserCreateInput
+  connect?: UserWhereUniqueInput
+  disconnect?: UserWhereUniqueInput
+  delete?: UserWhereUniqueInput
 }
 
 export interface UserUpdateWithoutPostsDataInput {
@@ -1160,13 +1435,10 @@ export interface UserUpdateWithoutPostsDataInput {
   projectAdmin?: ProjectUpdateManyWithoutAdminInput
 }
 
-export interface UserUpdateInput {
-  email?: String
-  password?: String
-  name?: String
-  posts?: PostUpdateManyWithoutAuthorInput
-  projectMember?: ProjectUpdateManyWithoutMemberInput
-  projectAdmin?: ProjectUpdateManyWithoutAdminInput
+export interface ProjectUpsertWithoutAdminInput {
+  where: ProjectWhereUniqueInput
+  update: ProjectUpdateWithoutAdminDataInput
+  create: ProjectCreateWithoutAdminInput
 }
 
 export interface ProjectUpdateManyWithoutMemberInput {
@@ -1178,10 +1450,13 @@ export interface ProjectUpdateManyWithoutMemberInput {
   upsert?: ProjectUpsertWithoutMemberInput[] | ProjectUpsertWithoutMemberInput
 }
 
-export interface ProjectUpdateInput {
-  name?: String
-  member?: UserUpdateManyWithoutProjectMemberInput
-  admin?: UserUpdateManyWithoutProjectAdminInput
+export interface UserUpdateManyWithoutProjectMemberInput {
+  create?: UserCreateWithoutProjectMemberInput[] | UserCreateWithoutProjectMemberInput
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput
+  update?: UserUpdateWithoutProjectMemberInput[] | UserUpdateWithoutProjectMemberInput
+  upsert?: UserUpsertWithoutProjectMemberInput[] | UserUpsertWithoutProjectMemberInput
 }
 
 export interface ProjectUpdateWithoutMemberInput {
@@ -1189,12 +1464,11 @@ export interface ProjectUpdateWithoutMemberInput {
   data: ProjectUpdateWithoutMemberDataInput
 }
 
-export interface UserUpdateWithoutProjectMemberDataInput {
-  email?: String
-  password?: String
-  name?: String
-  posts?: PostUpdateManyWithoutAuthorInput
-  projectAdmin?: ProjectUpdateManyWithoutAdminInput
+export interface PostCreateInput {
+  isPublished?: Boolean
+  title: String
+  text: String
+  author: UserCreateOneWithoutPostsInput
 }
 
 export interface ProjectUpdateWithoutMemberDataInput {
@@ -1202,9 +1476,14 @@ export interface ProjectUpdateWithoutMemberDataInput {
   admin?: UserUpdateManyWithoutProjectAdminInput
 }
 
-export interface ProjectUpdateWithoutAdminInput {
-  where: ProjectWhereUniqueInput
-  data: ProjectUpdateWithoutAdminDataInput
+export interface ChangeSubscriptionWhereInput {
+  AND?: ChangeSubscriptionWhereInput[] | ChangeSubscriptionWhereInput
+  OR?: ChangeSubscriptionWhereInput[] | ChangeSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: ChangeWhereInput
 }
 
 export interface UserUpdateManyWithoutProjectAdminInput {
@@ -1216,12 +1495,9 @@ export interface UserUpdateManyWithoutProjectAdminInput {
   upsert?: UserUpsertWithoutProjectAdminInput[] | UserUpsertWithoutProjectAdminInput
 }
 
-export interface UserCreateWithoutPostsInput {
-  email: String
-  password: String
-  name: String
-  projectMember?: ProjectCreateManyWithoutMemberInput
-  projectAdmin?: ProjectCreateManyWithoutAdminInput
+export interface UserWhereUniqueInput {
+  id?: ID_Input
+  email?: String
 }
 
 export interface UserUpdateWithoutProjectAdminInput {
@@ -1229,14 +1505,12 @@ export interface UserUpdateWithoutProjectAdminInput {
   data: UserUpdateWithoutProjectAdminDataInput
 }
 
-export interface ProjectSubscriptionWhereInput {
-  AND?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput
-  OR?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: ProjectWhereInput
+export interface UserUpdateWithoutProjectMemberDataInput {
+  email?: String
+  password?: String
+  name?: String
+  posts?: PostUpdateManyWithoutAuthorInput
+  projectAdmin?: ProjectUpdateManyWithoutAdminInput
 }
 
 export interface PostUpdateWithoutAuthorDataInput {
@@ -1267,35 +1541,32 @@ export interface UserUpdateWithoutProjectAdminDataInput {
   projectMember?: ProjectUpdateManyWithoutMemberInput
 }
 
-export interface ProjectWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface ProjectCreateWithoutMemberInput {
-  name: String
-  admin?: UserCreateManyWithoutProjectAdminInput
-}
-
-export interface PostCreateInput {
-  isPublished?: Boolean
-  title: String
-  text: String
-  author: UserCreateOneWithoutPostsInput
-}
-
-export interface UserUpdateManyWithoutProjectMemberInput {
-  create?: UserCreateWithoutProjectMemberInput[] | UserCreateWithoutProjectMemberInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  update?: UserUpdateWithoutProjectMemberInput[] | UserUpdateWithoutProjectMemberInput
-  upsert?: UserUpsertWithoutProjectMemberInput[] | UserUpsertWithoutProjectMemberInput
-}
-
-export interface ProjectUpsertWithoutAdminInput {
+export interface ProjectUpdateWithoutAdminInput {
   where: ProjectWhereUniqueInput
-  update: ProjectUpdateWithoutAdminDataInput
-  create: ProjectCreateWithoutAdminInput
+  data: ProjectUpdateWithoutAdminDataInput
+}
+
+export interface ProjectUpdateInput {
+  name?: String
+  member?: UserUpdateManyWithoutProjectMemberInput
+  admin?: UserUpdateManyWithoutProjectAdminInput
+}
+
+export interface UserUpdateInput {
+  email?: String
+  password?: String
+  name?: String
+  posts?: PostUpdateManyWithoutAuthorInput
+  projectMember?: ProjectUpdateManyWithoutMemberInput
+  projectAdmin?: ProjectUpdateManyWithoutAdminInput
+}
+
+export interface UserCreateWithoutPostsInput {
+  email: String
+  password: String
+  name: String
+  projectMember?: ProjectCreateManyWithoutMemberInput
+  projectAdmin?: ProjectCreateManyWithoutAdminInput
 }
 
 export interface Node {
@@ -1309,24 +1580,13 @@ export interface UserPreviousValues {
   name: String
 }
 
-export interface PageInfo {
-  hasNextPage: Boolean
-  hasPreviousPage: Boolean
-  startCursor?: String
-  endCursor?: String
-}
-
-export interface ProjectSubscriptionPayload {
-  mutation: MutationType
-  node?: Project
-  updatedFields?: String[]
-  previousValues?: ProjectPreviousValues
-}
-
-export interface PostConnection {
-  pageInfo: PageInfo
-  edges: PostEdge[]
-  aggregate: AggregatePost
+export interface Change extends Node {
+  id: ID_Output
+  createdAt: DateTime
+  updatedAt: DateTime
+  text: String
+  author: User
+  project: Project
 }
 
 export interface Post extends Node {
@@ -1339,6 +1599,14 @@ export interface Post extends Node {
   author: User
 }
 
+export interface BatchPayload {
+  count: Long
+}
+
+export interface AggregateUser {
+  count: Int
+}
+
 export interface UserSubscriptionPayload {
   mutation: MutationType
   node?: User
@@ -1346,17 +1614,34 @@ export interface UserSubscriptionPayload {
   previousValues?: UserPreviousValues
 }
 
+export interface Project extends Node {
+  id: ID_Output
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+  member?: User[]
+  admin?: User[]
+}
+
 export interface UserEdge {
   node: User
   cursor: String
 }
 
-export interface BatchPayload {
-  count: Long
+export interface UserConnection {
+  pageInfo: PageInfo
+  edges: UserEdge[]
+  aggregate: AggregateUser
 }
 
-export interface AggregateProject {
+export interface AggregateChange {
   count: Int
+}
+
+export interface ChangeConnection {
+  pageInfo: PageInfo
+  edges: ChangeEdge[]
+  aggregate: AggregateChange
 }
 
 export interface User extends Node {
@@ -1369,15 +1654,60 @@ export interface User extends Node {
   projectAdmin?: Project[]
 }
 
-export interface ProjectConnection {
-  pageInfo: PageInfo
-  edges: ProjectEdge[]
-  aggregate: AggregateProject
+export interface ProjectEdge {
+  node: Project
+  cursor: String
 }
 
-export interface PostEdge {
-  node: Post
+export interface ChangePreviousValues {
+  id: ID_Output
+  createdAt: DateTime
+  updatedAt: DateTime
+  text: String
+}
+
+export interface AggregatePost {
+  count: Int
+}
+
+export interface PostSubscriptionPayload {
+  mutation: MutationType
+  node?: Post
+  updatedFields?: String[]
+  previousValues?: PostPreviousValues
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  startCursor?: String
+  endCursor?: String
+}
+
+export interface ChangeEdge {
+  node: Change
   cursor: String
+}
+
+export interface ProjectPreviousValues {
+  id: ID_Output
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+}
+
+export interface ProjectSubscriptionPayload {
+  mutation: MutationType
+  node?: Project
+  updatedFields?: String[]
+  previousValues?: ProjectPreviousValues
+}
+
+export interface ChangeSubscriptionPayload {
+  mutation: MutationType
+  node?: Change
+  updatedFields?: String[]
+  previousValues?: ChangePreviousValues
 }
 
 export interface PostPreviousValues {
@@ -1389,52 +1719,28 @@ export interface PostPreviousValues {
   text: String
 }
 
-export interface PostSubscriptionPayload {
-  mutation: MutationType
-  node?: Post
-  updatedFields?: String[]
-  previousValues?: PostPreviousValues
-}
-
-export interface ProjectPreviousValues {
-  id: ID_Output
-  createdAt: DateTime
-  updatedAt: DateTime
-  name: String
-}
-
-export interface Project extends Node {
-  id: ID_Output
-  createdAt: DateTime
-  updatedAt: DateTime
-  name: String
-  member?: User[]
-  admin?: User[]
-}
-
-export interface AggregateUser {
+export interface AggregateProject {
   count: Int
 }
 
-export interface AggregatePost {
-  count: Int
+export interface PostConnection {
+  pageInfo: PageInfo
+  edges: PostEdge[]
+  aggregate: AggregatePost
 }
 
-export interface ProjectEdge {
-  node: Project
+export interface PostEdge {
+  node: Post
   cursor: String
 }
 
-export interface UserConnection {
+export interface ProjectConnection {
   pageInfo: PageInfo
-  edges: UserEdge[]
-  aggregate: AggregateUser
+  edges: ProjectEdge[]
+  aggregate: AggregateProject
 }
 
-/*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean
+export type Long = string
 
 /*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
@@ -1447,7 +1753,10 @@ The `ID` scalar type represents a unique identifier, often used to refetch an ob
 export type ID_Input = string | number
 export type ID_Output = string
 
-export type Long = string
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean
 
 export type DateTime = string
 
@@ -1465,12 +1774,15 @@ export interface Schema {
 export type Query = {
   posts: (args: { where?: PostWhereInput, orderBy?: PostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string) => Promise<Post[]>
   projects: (args: { where?: ProjectWhereInput, orderBy?: ProjectOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string) => Promise<Project[]>
+  changes: (args: { where?: ChangeWhereInput, orderBy?: ChangeOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string) => Promise<Change[]>
   users: (args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string) => Promise<User[]>
   post: (args: { where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string) => Promise<Post | null>
   project: (args: { where: ProjectWhereUniqueInput }, info?: GraphQLResolveInfo | string) => Promise<Project | null>
+  change: (args: { where: ChangeWhereUniqueInput }, info?: GraphQLResolveInfo | string) => Promise<Change | null>
   user: (args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string) => Promise<User | null>
   postsConnection: (args: { where?: PostWhereInput, orderBy?: PostOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string) => Promise<PostConnection>
   projectsConnection: (args: { where?: ProjectWhereInput, orderBy?: ProjectOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string) => Promise<ProjectConnection>
+  changesConnection: (args: { where?: ChangeWhereInput, orderBy?: ChangeOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string) => Promise<ChangeConnection>
   usersConnection: (args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string) => Promise<UserConnection>
   node: (args: { id: ID_Output }, info?: GraphQLResolveInfo | string) => Promise<Node | null>
 }
@@ -1478,27 +1790,34 @@ export type Query = {
 export type Mutation = {
   createPost: (args: { data: PostCreateInput }, info?: GraphQLResolveInfo | string) => Promise<Post>
   createProject: (args: { data: ProjectCreateInput }, info?: GraphQLResolveInfo | string) => Promise<Project>
+  createChange: (args: { data: ChangeCreateInput }, info?: GraphQLResolveInfo | string) => Promise<Change>
   createUser: (args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string) => Promise<User>
   updatePost: (args: { data: PostUpdateInput, where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string) => Promise<Post | null>
   updateProject: (args: { data: ProjectUpdateInput, where: ProjectWhereUniqueInput }, info?: GraphQLResolveInfo | string) => Promise<Project | null>
+  updateChange: (args: { data: ChangeUpdateInput, where: ChangeWhereUniqueInput }, info?: GraphQLResolveInfo | string) => Promise<Change | null>
   updateUser: (args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string) => Promise<User | null>
   deletePost: (args: { where: PostWhereUniqueInput }, info?: GraphQLResolveInfo | string) => Promise<Post | null>
   deleteProject: (args: { where: ProjectWhereUniqueInput }, info?: GraphQLResolveInfo | string) => Promise<Project | null>
+  deleteChange: (args: { where: ChangeWhereUniqueInput }, info?: GraphQLResolveInfo | string) => Promise<Change | null>
   deleteUser: (args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string) => Promise<User | null>
   upsertPost: (args: { where: PostWhereUniqueInput, create: PostCreateInput, update: PostUpdateInput }, info?: GraphQLResolveInfo | string) => Promise<Post>
   upsertProject: (args: { where: ProjectWhereUniqueInput, create: ProjectCreateInput, update: ProjectUpdateInput }, info?: GraphQLResolveInfo | string) => Promise<Project>
+  upsertChange: (args: { where: ChangeWhereUniqueInput, create: ChangeCreateInput, update: ChangeUpdateInput }, info?: GraphQLResolveInfo | string) => Promise<Change>
   upsertUser: (args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string) => Promise<User>
   updateManyPosts: (args: { data: PostUpdateInput, where: PostWhereInput }, info?: GraphQLResolveInfo | string) => Promise<BatchPayload>
   updateManyProjects: (args: { data: ProjectUpdateInput, where: ProjectWhereInput }, info?: GraphQLResolveInfo | string) => Promise<BatchPayload>
+  updateManyChanges: (args: { data: ChangeUpdateInput, where: ChangeWhereInput }, info?: GraphQLResolveInfo | string) => Promise<BatchPayload>
   updateManyUsers: (args: { data: UserUpdateInput, where: UserWhereInput }, info?: GraphQLResolveInfo | string) => Promise<BatchPayload>
   deleteManyPosts: (args: { where: PostWhereInput }, info?: GraphQLResolveInfo | string) => Promise<BatchPayload>
   deleteManyProjects: (args: { where: ProjectWhereInput }, info?: GraphQLResolveInfo | string) => Promise<BatchPayload>
+  deleteManyChanges: (args: { where: ChangeWhereInput }, info?: GraphQLResolveInfo | string) => Promise<BatchPayload>
   deleteManyUsers: (args: { where: UserWhereInput }, info?: GraphQLResolveInfo | string) => Promise<BatchPayload>
 }
 
 export type Subscription = {
   post: (args: { where?: PostSubscriptionWhereInput }, infoOrQuery?: GraphQLResolveInfo | string) => Promise<AsyncIterator<PostSubscriptionPayload>>
   project: (args: { where?: ProjectSubscriptionWhereInput }, infoOrQuery?: GraphQLResolveInfo | string) => Promise<AsyncIterator<ProjectSubscriptionPayload>>
+  change: (args: { where?: ChangeSubscriptionWhereInput }, infoOrQuery?: GraphQLResolveInfo | string) => Promise<AsyncIterator<ChangeSubscriptionPayload>>
   user: (args: { where?: UserSubscriptionWhereInput }, infoOrQuery?: GraphQLResolveInfo | string) => Promise<AsyncIterator<UserSubscriptionPayload>>
 }
 
@@ -1511,18 +1830,22 @@ export class Prisma extends BasePrisma {
   exists = {
     Post: (where: PostWhereInput): Promise<boolean> => super.existsDelegate('query', 'posts', { where }, {}, '{ id }'),
     Project: (where: ProjectWhereInput): Promise<boolean> => super.existsDelegate('query', 'projects', { where }, {}, '{ id }'),
+    Change: (where: ChangeWhereInput): Promise<boolean> => super.existsDelegate('query', 'changes', { where }, {}, '{ id }'),
     User: (where: UserWhereInput): Promise<boolean> => super.existsDelegate('query', 'users', { where }, {}, '{ id }')
   }
 
   query: Query = {
     posts: (args, info): Promise<Post[]> => super.delegate('query', 'posts', args, {}, info),
     projects: (args, info): Promise<Project[]> => super.delegate('query', 'projects', args, {}, info),
+    changes: (args, info): Promise<Change[]> => super.delegate('query', 'changes', args, {}, info),
     users: (args, info): Promise<User[]> => super.delegate('query', 'users', args, {}, info),
     post: (args, info): Promise<Post | null> => super.delegate('query', 'post', args, {}, info),
     project: (args, info): Promise<Project | null> => super.delegate('query', 'project', args, {}, info),
+    change: (args, info): Promise<Change | null> => super.delegate('query', 'change', args, {}, info),
     user: (args, info): Promise<User | null> => super.delegate('query', 'user', args, {}, info),
     postsConnection: (args, info): Promise<PostConnection> => super.delegate('query', 'postsConnection', args, {}, info),
     projectsConnection: (args, info): Promise<ProjectConnection> => super.delegate('query', 'projectsConnection', args, {}, info),
+    changesConnection: (args, info): Promise<ChangeConnection> => super.delegate('query', 'changesConnection', args, {}, info),
     usersConnection: (args, info): Promise<UserConnection> => super.delegate('query', 'usersConnection', args, {}, info),
     node: (args, info): Promise<Node | null> => super.delegate('query', 'node', args, {}, info)
   }
@@ -1530,27 +1853,34 @@ export class Prisma extends BasePrisma {
   mutation: Mutation = {
     createPost: (args, info): Promise<Post> => super.delegate('mutation', 'createPost', args, {}, info),
     createProject: (args, info): Promise<Project> => super.delegate('mutation', 'createProject', args, {}, info),
+    createChange: (args, info): Promise<Change> => super.delegate('mutation', 'createChange', args, {}, info),
     createUser: (args, info): Promise<User> => super.delegate('mutation', 'createUser', args, {}, info),
     updatePost: (args, info): Promise<Post | null> => super.delegate('mutation', 'updatePost', args, {}, info),
     updateProject: (args, info): Promise<Project | null> => super.delegate('mutation', 'updateProject', args, {}, info),
+    updateChange: (args, info): Promise<Change | null> => super.delegate('mutation', 'updateChange', args, {}, info),
     updateUser: (args, info): Promise<User | null> => super.delegate('mutation', 'updateUser', args, {}, info),
     deletePost: (args, info): Promise<Post | null> => super.delegate('mutation', 'deletePost', args, {}, info),
     deleteProject: (args, info): Promise<Project | null> => super.delegate('mutation', 'deleteProject', args, {}, info),
+    deleteChange: (args, info): Promise<Change | null> => super.delegate('mutation', 'deleteChange', args, {}, info),
     deleteUser: (args, info): Promise<User | null> => super.delegate('mutation', 'deleteUser', args, {}, info),
     upsertPost: (args, info): Promise<Post> => super.delegate('mutation', 'upsertPost', args, {}, info),
     upsertProject: (args, info): Promise<Project> => super.delegate('mutation', 'upsertProject', args, {}, info),
+    upsertChange: (args, info): Promise<Change> => super.delegate('mutation', 'upsertChange', args, {}, info),
     upsertUser: (args, info): Promise<User> => super.delegate('mutation', 'upsertUser', args, {}, info),
     updateManyPosts: (args, info): Promise<BatchPayload> => super.delegate('mutation', 'updateManyPosts', args, {}, info),
     updateManyProjects: (args, info): Promise<BatchPayload> => super.delegate('mutation', 'updateManyProjects', args, {}, info),
+    updateManyChanges: (args, info): Promise<BatchPayload> => super.delegate('mutation', 'updateManyChanges', args, {}, info),
     updateManyUsers: (args, info): Promise<BatchPayload> => super.delegate('mutation', 'updateManyUsers', args, {}, info),
     deleteManyPosts: (args, info): Promise<BatchPayload> => super.delegate('mutation', 'deleteManyPosts', args, {}, info),
     deleteManyProjects: (args, info): Promise<BatchPayload> => super.delegate('mutation', 'deleteManyProjects', args, {}, info),
+    deleteManyChanges: (args, info): Promise<BatchPayload> => super.delegate('mutation', 'deleteManyChanges', args, {}, info),
     deleteManyUsers: (args, info): Promise<BatchPayload> => super.delegate('mutation', 'deleteManyUsers', args, {}, info)
   }
 
   subscription: Subscription = {
     post: (args, infoOrQuery): Promise<AsyncIterator<PostSubscriptionPayload>> => super.delegateSubscription('post', args, {}, infoOrQuery),
     project: (args, infoOrQuery): Promise<AsyncIterator<ProjectSubscriptionPayload>> => super.delegateSubscription('project', args, {}, infoOrQuery),
+    change: (args, infoOrQuery): Promise<AsyncIterator<ChangeSubscriptionPayload>> => super.delegateSubscription('change', args, {}, infoOrQuery),
     user: (args, infoOrQuery): Promise<AsyncIterator<UserSubscriptionPayload>> => super.delegateSubscription('user', args, {}, infoOrQuery)
   }
 }
