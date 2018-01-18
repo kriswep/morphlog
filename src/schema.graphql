@@ -5,6 +5,8 @@ type Query {
   drafts: [Post!]!
   post(id: ID!): Post!
   project(id: ID!): Project!
+  change(id: ID!): Change!
+  changes(projectId: ID!): [Change!]!
   me: User
 }
 
@@ -16,6 +18,7 @@ type Mutation {
   deletePost(id: ID!): Post!
   createProject(name: String!): Project!
   addProjectMember(user: ID!, project: ID!): Project!
+  addChange(projectId: ID!, text: String!): Change!
 }
 
 type AuthPayload {

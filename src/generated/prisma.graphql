@@ -9,7 +9,7 @@ type Change implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  name: String!
+  text: String!
   author(where: UserWhereInput): User!
   project(where: ProjectWhereInput): Project!
 }
@@ -75,7 +75,7 @@ type ChangeConnection {
 }
 
 input ChangeCreateInput {
-  name: String!
+  text: String!
   author: UserCreateOneInput!
   project: ProjectCreateOneInput!
 }
@@ -92,15 +92,15 @@ enum ChangeOrderByInput {
   createdAt_DESC
   updatedAt_ASC
   updatedAt_DESC
-  name_ASC
-  name_DESC
+  text_ASC
+  text_DESC
 }
 
 type ChangePreviousValues {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
-  name: String!
+  text: String!
 }
 
 type ChangeSubscriptionPayload {
@@ -121,7 +121,7 @@ input ChangeSubscriptionWhereInput {
 }
 
 input ChangeUpdateInput {
-  name: String
+  text: String
   author: UserUpdateOneInput
   project: ProjectUpdateOneInput
 }
@@ -159,20 +159,20 @@ input ChangeWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
+  text: String
+  text_not: String
+  text_in: [String!]
+  text_not_in: [String!]
+  text_lt: String
+  text_lte: String
+  text_gt: String
+  text_gte: String
+  text_contains: String
+  text_not_contains: String
+  text_starts_with: String
+  text_not_starts_with: String
+  text_ends_with: String
+  text_not_ends_with: String
   author: UserWhereInput
   project: ProjectWhereInput
 }
