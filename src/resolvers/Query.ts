@@ -1,7 +1,8 @@
-import { getUserId, Context } from '../utils'
+import { getUserId, isUserProjectAllowed, Context } from '../utils'
 
 export const Query = {
-  project(parent, { id }, ctx: Context, info) {
+  async project(parent, { id }, ctx: Context, info) {
+    await isUserProjectAllowed(ctx, id)
     return ctx.db.query.project({ where: { id: id } }, info)
   },
 
@@ -9,7 +10,8 @@ export const Query = {
     return ctx.db.query.change({ where: { id: id } }, info)
   },
 
-  changes(parent, { projectId }, ctx: Context, info) {
+  async changes(parent, { projectId }, ctx: Context, info) {
+    await isUserProjectAllowed(ctx, projectId)
     const where = {
       project: {
         id: projectId,
