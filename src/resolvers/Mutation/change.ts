@@ -3,15 +3,15 @@ import { getUserId, Context } from '../../utils'
 export const change = {
   async addChange(parent, { projectId, text }, ctx: Context, info) {
     const userId = getUserId(ctx)
-    const projectMember = await ctx.db.exists.Project({
+    const projectMember = ctx.db.exists.Project({
       id: projectId,
       member_some: { id: userId },
     })
-    const projectAdmin = await ctx.db.exists.Project({
+    const projectAdmin = ctx.db.exists.Project({
       id: projectId,
       admin_some: { id: userId },
     })
-    if (!projectMember && ! projectAdmin) {
+    if (!await projectMember && !await projectAdmin) {
       throw new Error(`Project not found or not allowed`)
     }
 
