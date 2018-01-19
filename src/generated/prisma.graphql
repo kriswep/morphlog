@@ -21,6 +21,7 @@ type Project implements Node {
   name: String!
   member(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   admin(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  change(where: ChangeWhereInput, orderBy: ChangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Change!]
 }
 
 type User implements Node {
@@ -62,7 +63,17 @@ type ChangeConnection {
 input ChangeCreateInput {
   text: String!
   author: UserCreateOneInput!
-  project: ProjectCreateOneInput!
+  project: ProjectCreateOneWithoutChangeInput!
+}
+
+input ChangeCreateManyWithoutProjectInput {
+  create: [ChangeCreateWithoutProjectInput!]
+  connect: [ChangeWhereUniqueInput!]
+}
+
+input ChangeCreateWithoutProjectInput {
+  text: String!
+  author: UserCreateOneInput!
 }
 
 type ChangeEdge {
@@ -108,7 +119,32 @@ input ChangeSubscriptionWhereInput {
 input ChangeUpdateInput {
   text: String
   author: UserUpdateOneInput
-  project: ProjectUpdateOneInput
+  project: ProjectUpdateOneWithoutChangeInput
+}
+
+input ChangeUpdateManyWithoutProjectInput {
+  create: [ChangeCreateWithoutProjectInput!]
+  connect: [ChangeWhereUniqueInput!]
+  disconnect: [ChangeWhereUniqueInput!]
+  delete: [ChangeWhereUniqueInput!]
+  update: [ChangeUpdateWithoutProjectInput!]
+  upsert: [ChangeUpsertWithoutProjectInput!]
+}
+
+input ChangeUpdateWithoutProjectDataInput {
+  text: String
+  author: UserUpdateOneInput
+}
+
+input ChangeUpdateWithoutProjectInput {
+  where: ChangeWhereUniqueInput!
+  data: ChangeUpdateWithoutProjectDataInput!
+}
+
+input ChangeUpsertWithoutProjectInput {
+  where: ChangeWhereUniqueInput!
+  update: ChangeUpdateWithoutProjectDataInput!
+  create: ChangeCreateWithoutProjectInput!
 }
 
 input ChangeWhereInput {
@@ -218,6 +254,7 @@ input ProjectCreateInput {
   name: String!
   member: UserCreateManyWithoutProjectMemberInput
   admin: UserCreateManyWithoutProjectAdminInput
+  change: ChangeCreateManyWithoutProjectInput
 }
 
 input ProjectCreateManyWithoutAdminInput {
@@ -230,19 +267,27 @@ input ProjectCreateManyWithoutMemberInput {
   connect: [ProjectWhereUniqueInput!]
 }
 
-input ProjectCreateOneInput {
-  create: ProjectCreateInput
+input ProjectCreateOneWithoutChangeInput {
+  create: ProjectCreateWithoutChangeInput
   connect: ProjectWhereUniqueInput
 }
 
 input ProjectCreateWithoutAdminInput {
   name: String!
   member: UserCreateManyWithoutProjectMemberInput
+  change: ChangeCreateManyWithoutProjectInput
+}
+
+input ProjectCreateWithoutChangeInput {
+  name: String!
+  member: UserCreateManyWithoutProjectMemberInput
+  admin: UserCreateManyWithoutProjectAdminInput
 }
 
 input ProjectCreateWithoutMemberInput {
   name: String!
   admin: UserCreateManyWithoutProjectAdminInput
+  change: ChangeCreateManyWithoutProjectInput
 }
 
 type ProjectEdge {
@@ -289,6 +334,7 @@ input ProjectUpdateInput {
   name: String
   member: UserUpdateManyWithoutProjectMemberInput
   admin: UserUpdateManyWithoutProjectAdminInput
+  change: ChangeUpdateManyWithoutProjectInput
 }
 
 input ProjectUpdateManyWithoutAdminInput {
@@ -309,16 +355,19 @@ input ProjectUpdateManyWithoutMemberInput {
   upsert: [ProjectUpsertWithoutMemberInput!]
 }
 
-input ProjectUpdateOneInput {
-  create: ProjectCreateInput
+input ProjectUpdateOneWithoutChangeInput {
+  create: ProjectCreateWithoutChangeInput
   connect: ProjectWhereUniqueInput
   disconnect: ProjectWhereUniqueInput
   delete: ProjectWhereUniqueInput
+  update: ProjectUpdateWithoutChangeInput
+  upsert: ProjectUpsertWithoutChangeInput
 }
 
 input ProjectUpdateWithoutAdminDataInput {
   name: String
   member: UserUpdateManyWithoutProjectMemberInput
+  change: ChangeUpdateManyWithoutProjectInput
 }
 
 input ProjectUpdateWithoutAdminInput {
@@ -326,9 +375,21 @@ input ProjectUpdateWithoutAdminInput {
   data: ProjectUpdateWithoutAdminDataInput!
 }
 
+input ProjectUpdateWithoutChangeDataInput {
+  name: String
+  member: UserUpdateManyWithoutProjectMemberInput
+  admin: UserUpdateManyWithoutProjectAdminInput
+}
+
+input ProjectUpdateWithoutChangeInput {
+  where: ProjectWhereUniqueInput!
+  data: ProjectUpdateWithoutChangeDataInput!
+}
+
 input ProjectUpdateWithoutMemberDataInput {
   name: String
   admin: UserUpdateManyWithoutProjectAdminInput
+  change: ChangeUpdateManyWithoutProjectInput
 }
 
 input ProjectUpdateWithoutMemberInput {
@@ -340,6 +401,12 @@ input ProjectUpsertWithoutAdminInput {
   where: ProjectWhereUniqueInput!
   update: ProjectUpdateWithoutAdminDataInput!
   create: ProjectCreateWithoutAdminInput!
+}
+
+input ProjectUpsertWithoutChangeInput {
+  where: ProjectWhereUniqueInput!
+  update: ProjectUpdateWithoutChangeDataInput!
+  create: ProjectCreateWithoutChangeInput!
 }
 
 input ProjectUpsertWithoutMemberInput {
@@ -401,6 +468,9 @@ input ProjectWhereInput {
   admin_every: UserWhereInput
   admin_some: UserWhereInput
   admin_none: UserWhereInput
+  change_every: ChangeWhereInput
+  change_some: ChangeWhereInput
+  change_none: ChangeWhereInput
 }
 
 input ProjectWhereUniqueInput {

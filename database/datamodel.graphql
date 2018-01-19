@@ -5,6 +5,7 @@ type Project {
   name: String!
   member: [User!]! @relation(name: "ProjectMember")
   admin: [User!]! @relation(name: "ProjectAdmin")
+  change: [Change!]! @relation(name: "ProjectChange")
 }
 
 type Change {
@@ -13,7 +14,7 @@ type Change {
   updatedAt: DateTime!
   text: String!
   author: User!
-  project: Project!
+  project: Project! @relation(name: "ProjectChange")
 }
 
 type User {

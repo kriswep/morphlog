@@ -25,6 +25,7 @@ type Project implements Node {
   name: String!
   member(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   admin(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  change(where: ChangeWhereInput, orderBy: ChangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Change!]
 }
 
 type User implements Node {
@@ -66,7 +67,17 @@ type ChangeConnection {
 input ChangeCreateInput {
   text: String!
   author: UserCreateOneInput!
-  project: ProjectCreateOneInput!
+  project: ProjectCreateOneWithoutChangeInput!
+}
+
+input ChangeCreateManyWithoutProjectInput {
+  create: [ChangeCreateWithoutProjectInput!]
+  connect: [ChangeWhereUniqueInput!]
+}
+
+input ChangeCreateWithoutProjectInput {
+  text: String!
+  author: UserCreateOneInput!
 }
 
 type ChangeEdge {
@@ -112,7 +123,32 @@ input ChangeSubscriptionWhereInput {
 input ChangeUpdateInput {
   text: String
   author: UserUpdateOneInput
-  project: ProjectUpdateOneInput
+  project: ProjectUpdateOneWithoutChangeInput
+}
+
+input ChangeUpdateManyWithoutProjectInput {
+  create: [ChangeCreateWithoutProjectInput!]
+  connect: [ChangeWhereUniqueInput!]
+  disconnect: [ChangeWhereUniqueInput!]
+  delete: [ChangeWhereUniqueInput!]
+  update: [ChangeUpdateWithoutProjectInput!]
+  upsert: [ChangeUpsertWithoutProjectInput!]
+}
+
+input ChangeUpdateWithoutProjectDataInput {
+  text: String
+  author: UserUpdateOneInput
+}
+
+input ChangeUpdateWithoutProjectInput {
+  where: ChangeWhereUniqueInput!
+  data: ChangeUpdateWithoutProjectDataInput!
+}
+
+input ChangeUpsertWithoutProjectInput {
+  where: ChangeWhereUniqueInput!
+  update: ChangeUpdateWithoutProjectDataInput!
+  create: ChangeCreateWithoutProjectInput!
 }
 
 input ChangeWhereInput {
@@ -222,6 +258,7 @@ input ProjectCreateInput {
   name: String!
   member: UserCreateManyWithoutProjectMemberInput
   admin: UserCreateManyWithoutProjectAdminInput
+  change: ChangeCreateManyWithoutProjectInput
 }
 
 input ProjectCreateManyWithoutAdminInput {
@@ -234,19 +271,27 @@ input ProjectCreateManyWithoutMemberInput {
   connect: [ProjectWhereUniqueInput!]
 }
 
-input ProjectCreateOneInput {
-  create: ProjectCreateInput
+input ProjectCreateOneWithoutChangeInput {
+  create: ProjectCreateWithoutChangeInput
   connect: ProjectWhereUniqueInput
 }
 
 input ProjectCreateWithoutAdminInput {
   name: String!
   member: UserCreateManyWithoutProjectMemberInput
+  change: ChangeCreateManyWithoutProjectInput
+}
+
+input ProjectCreateWithoutChangeInput {
+  name: String!
+  member: UserCreateManyWithoutProjectMemberInput
+  admin: UserCreateManyWithoutProjectAdminInput
 }
 
 input ProjectCreateWithoutMemberInput {
   name: String!
   admin: UserCreateManyWithoutProjectAdminInput
+  change: ChangeCreateManyWithoutProjectInput
 }
 
 type ProjectEdge {
@@ -293,6 +338,7 @@ input ProjectUpdateInput {
   name: String
   member: UserUpdateManyWithoutProjectMemberInput
   admin: UserUpdateManyWithoutProjectAdminInput
+  change: ChangeUpdateManyWithoutProjectInput
 }
 
 input ProjectUpdateManyWithoutAdminInput {
@@ -313,16 +359,19 @@ input ProjectUpdateManyWithoutMemberInput {
   upsert: [ProjectUpsertWithoutMemberInput!]
 }
 
-input ProjectUpdateOneInput {
-  create: ProjectCreateInput
+input ProjectUpdateOneWithoutChangeInput {
+  create: ProjectCreateWithoutChangeInput
   connect: ProjectWhereUniqueInput
   disconnect: ProjectWhereUniqueInput
   delete: ProjectWhereUniqueInput
+  update: ProjectUpdateWithoutChangeInput
+  upsert: ProjectUpsertWithoutChangeInput
 }
 
 input ProjectUpdateWithoutAdminDataInput {
   name: String
   member: UserUpdateManyWithoutProjectMemberInput
+  change: ChangeUpdateManyWithoutProjectInput
 }
 
 input ProjectUpdateWithoutAdminInput {
@@ -330,9 +379,21 @@ input ProjectUpdateWithoutAdminInput {
   data: ProjectUpdateWithoutAdminDataInput!
 }
 
+input ProjectUpdateWithoutChangeDataInput {
+  name: String
+  member: UserUpdateManyWithoutProjectMemberInput
+  admin: UserUpdateManyWithoutProjectAdminInput
+}
+
+input ProjectUpdateWithoutChangeInput {
+  where: ProjectWhereUniqueInput!
+  data: ProjectUpdateWithoutChangeDataInput!
+}
+
 input ProjectUpdateWithoutMemberDataInput {
   name: String
   admin: UserUpdateManyWithoutProjectAdminInput
+  change: ChangeUpdateManyWithoutProjectInput
 }
 
 input ProjectUpdateWithoutMemberInput {
@@ -344,6 +405,12 @@ input ProjectUpsertWithoutAdminInput {
   where: ProjectWhereUniqueInput!
   update: ProjectUpdateWithoutAdminDataInput!
   create: ProjectCreateWithoutAdminInput!
+}
+
+input ProjectUpsertWithoutChangeInput {
+  where: ProjectWhereUniqueInput!
+  update: ProjectUpdateWithoutChangeDataInput!
+  create: ProjectCreateWithoutChangeInput!
 }
 
 input ProjectUpsertWithoutMemberInput {
@@ -405,6 +472,9 @@ input ProjectWhereInput {
   admin_every: UserWhereInput
   admin_some: UserWhereInput
   admin_none: UserWhereInput
+  change_every: ChangeWhereInput
+  change_some: ChangeWhereInput
+  change_none: ChangeWhereInput
 }
 
 input ProjectWhereUniqueInput {
@@ -698,10 +768,9 @@ export type MutationType =
   'UPDATED' |
   'DELETED'
 
-export interface ChangeCreateInput {
-  text: String
-  author: UserCreateOneInput
-  project: ProjectCreateOneInput
+export interface ProjectCreateOneWithoutChangeInput {
+  create?: ProjectCreateWithoutChangeInput
+  connect?: ProjectWhereUniqueInput
 }
 
 export interface ProjectWhereInput {
@@ -757,12 +826,333 @@ export interface ProjectWhereInput {
   admin_every?: UserWhereInput
   admin_some?: UserWhereInput
   admin_none?: UserWhereInput
+  change_every?: ChangeWhereInput
+  change_some?: ChangeWhereInput
+  change_none?: ChangeWhereInput
+}
+
+export interface UserUpdateManyWithoutProjectMemberInput {
+  create?: UserCreateWithoutProjectMemberInput[] | UserCreateWithoutProjectMemberInput
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput
+  update?: UserUpdateWithoutProjectMemberInput[] | UserUpdateWithoutProjectMemberInput
+  upsert?: UserUpsertWithoutProjectMemberInput[] | UserUpsertWithoutProjectMemberInput
+}
+
+export interface ChangeWhereInput {
+  AND?: ChangeWhereInput[] | ChangeWhereInput
+  OR?: ChangeWhereInput[] | ChangeWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  createdAt?: DateTime
+  createdAt_not?: DateTime
+  createdAt_in?: DateTime[] | DateTime
+  createdAt_not_in?: DateTime[] | DateTime
+  createdAt_lt?: DateTime
+  createdAt_lte?: DateTime
+  createdAt_gt?: DateTime
+  createdAt_gte?: DateTime
+  updatedAt?: DateTime
+  updatedAt_not?: DateTime
+  updatedAt_in?: DateTime[] | DateTime
+  updatedAt_not_in?: DateTime[] | DateTime
+  updatedAt_lt?: DateTime
+  updatedAt_lte?: DateTime
+  updatedAt_gt?: DateTime
+  updatedAt_gte?: DateTime
+  text?: String
+  text_not?: String
+  text_in?: String[] | String
+  text_not_in?: String[] | String
+  text_lt?: String
+  text_lte?: String
+  text_gt?: String
+  text_gte?: String
+  text_contains?: String
+  text_not_contains?: String
+  text_starts_with?: String
+  text_not_starts_with?: String
+  text_ends_with?: String
+  text_not_ends_with?: String
+  author?: UserWhereInput
+  project?: ProjectWhereInput
+}
+
+export interface ChangeCreateWithoutProjectInput {
+  text: String
+  author: UserCreateOneInput
+}
+
+export interface UserUpdateManyWithoutProjectAdminInput {
+  create?: UserCreateWithoutProjectAdminInput[] | UserCreateWithoutProjectAdminInput
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput
+  update?: UserUpdateWithoutProjectAdminInput[] | UserUpdateWithoutProjectAdminInput
+  upsert?: UserUpsertWithoutProjectAdminInput[] | UserUpsertWithoutProjectAdminInput
+}
+
+export interface UserCreateOneInput {
+  create?: UserCreateInput
+  connect?: UserWhereUniqueInput
+}
+
+export interface UserUpdateWithoutProjectMemberInput {
+  where: UserWhereUniqueInput
+  data: UserUpdateWithoutProjectMemberDataInput
+}
+
+export interface UserCreateInput {
+  email: String
+  password: String
+  name: String
+  projectMember?: ProjectCreateManyWithoutMemberInput
+  projectAdmin?: ProjectCreateManyWithoutAdminInput
+}
+
+export interface UserSubscriptionWhereInput {
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: UserWhereInput
+}
+
+export interface ProjectCreateManyWithoutMemberInput {
+  create?: ProjectCreateWithoutMemberInput[] | ProjectCreateWithoutMemberInput
+  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
+}
+
+export interface ProjectSubscriptionWhereInput {
+  AND?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput
+  OR?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: ProjectWhereInput
+}
+
+export interface ProjectCreateWithoutMemberInput {
+  name: String
+  admin?: UserCreateManyWithoutProjectAdminInput
+  change?: ChangeCreateManyWithoutProjectInput
+}
+
+export interface ChangeWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface UserCreateManyWithoutProjectAdminInput {
+  create?: UserCreateWithoutProjectAdminInput[] | UserCreateWithoutProjectAdminInput
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
+}
+
+export interface UserUpdateInput {
+  email?: String
+  password?: String
+  name?: String
+  projectMember?: ProjectUpdateManyWithoutMemberInput
+  projectAdmin?: ProjectUpdateManyWithoutAdminInput
+}
+
+export interface UserCreateWithoutProjectAdminInput {
+  email: String
+  password: String
+  name: String
+  projectMember?: ProjectCreateManyWithoutMemberInput
+}
+
+export interface ProjectUpdateWithoutChangeDataInput {
+  name?: String
+  member?: UserUpdateManyWithoutProjectMemberInput
+  admin?: UserUpdateManyWithoutProjectAdminInput
+}
+
+export interface ChangeCreateInput {
+  text: String
+  author: UserCreateOneInput
+  project: ProjectCreateOneWithoutChangeInput
+}
+
+export interface ProjectUpdateOneWithoutChangeInput {
+  create?: ProjectCreateWithoutChangeInput
+  connect?: ProjectWhereUniqueInput
+  disconnect?: ProjectWhereUniqueInput
+  delete?: ProjectWhereUniqueInput
+  update?: ProjectUpdateWithoutChangeInput
+  upsert?: ProjectUpsertWithoutChangeInput
+}
+
+export interface UserUpdateWithoutProjectAdminDataInput {
+  email?: String
+  password?: String
+  name?: String
+  projectMember?: ProjectUpdateManyWithoutMemberInput
+}
+
+export interface UserUpsertWithoutProjectAdminInput {
+  where: UserWhereUniqueInput
+  update: UserUpdateWithoutProjectAdminDataInput
+  create: UserCreateWithoutProjectAdminInput
+}
+
+export interface ProjectCreateWithoutChangeInput {
+  name: String
+  member?: UserCreateManyWithoutProjectMemberInput
+  admin?: UserCreateManyWithoutProjectAdminInput
+}
+
+export interface ProjectUpdateWithoutMemberDataInput {
+  name?: String
+  admin?: UserUpdateManyWithoutProjectAdminInput
+  change?: ChangeUpdateManyWithoutProjectInput
+}
+
+export interface ProjectUpdateInput {
+  name?: String
+  member?: UserUpdateManyWithoutProjectMemberInput
+  admin?: UserUpdateManyWithoutProjectAdminInput
+  change?: ChangeUpdateManyWithoutProjectInput
+}
+
+export interface ProjectUpdateManyWithoutMemberInput {
+  create?: ProjectCreateWithoutMemberInput[] | ProjectCreateWithoutMemberInput
+  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
+  disconnect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
+  delete?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
+  update?: ProjectUpdateWithoutMemberInput[] | ProjectUpdateWithoutMemberInput
+  upsert?: ProjectUpsertWithoutMemberInput[] | ProjectUpsertWithoutMemberInput
+}
+
+export interface UserUpdateWithoutProjectAdminInput {
+  where: UserWhereUniqueInput
+  data: UserUpdateWithoutProjectAdminDataInput
+}
+
+export interface UserCreateManyWithoutProjectMemberInput {
+  create?: UserCreateWithoutProjectMemberInput[] | UserCreateWithoutProjectMemberInput
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
+}
+
+export interface ProjectCreateManyWithoutAdminInput {
+  create?: ProjectCreateWithoutAdminInput[] | ProjectCreateWithoutAdminInput
+  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
+}
+
+export interface ChangeCreateManyWithoutProjectInput {
+  create?: ChangeCreateWithoutProjectInput[] | ChangeCreateWithoutProjectInput
+  connect?: ChangeWhereUniqueInput[] | ChangeWhereUniqueInput
+}
+
+export interface UserUpdateWithoutProjectMemberDataInput {
+  email?: String
+  password?: String
+  name?: String
+  projectAdmin?: ProjectUpdateManyWithoutAdminInput
+}
+
+export interface ChangeSubscriptionWhereInput {
+  AND?: ChangeSubscriptionWhereInput[] | ChangeSubscriptionWhereInput
+  OR?: ChangeSubscriptionWhereInput[] | ChangeSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: ChangeWhereInput
+}
+
+export interface ProjectUpdateManyWithoutAdminInput {
+  create?: ProjectCreateWithoutAdminInput[] | ProjectCreateWithoutAdminInput
+  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
+  disconnect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
+  delete?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
+  update?: ProjectUpdateWithoutAdminInput[] | ProjectUpdateWithoutAdminInput
+  upsert?: ProjectUpsertWithoutAdminInput[] | ProjectUpsertWithoutAdminInput
+}
+
+export interface UserWhereUniqueInput {
+  id?: ID_Input
+  email?: String
+}
+
+export interface ProjectUpdateWithoutAdminInput {
+  where: ProjectWhereUniqueInput
+  data: ProjectUpdateWithoutAdminDataInput
+}
+
+export interface ProjectUpdateWithoutChangeInput {
+  where: ProjectWhereUniqueInput
+  data: ProjectUpdateWithoutChangeDataInput
+}
+
+export interface ProjectUpdateWithoutAdminDataInput {
+  name?: String
+  member?: UserUpdateManyWithoutProjectMemberInput
+  change?: ChangeUpdateManyWithoutProjectInput
+}
+
+export interface ProjectUpsertWithoutMemberInput {
+  where: ProjectWhereUniqueInput
+  update: ProjectUpdateWithoutMemberDataInput
+  create: ProjectCreateWithoutMemberInput
+}
+
+export interface ChangeUpdateManyWithoutProjectInput {
+  create?: ChangeCreateWithoutProjectInput[] | ChangeCreateWithoutProjectInput
+  connect?: ChangeWhereUniqueInput[] | ChangeWhereUniqueInput
+  disconnect?: ChangeWhereUniqueInput[] | ChangeWhereUniqueInput
+  delete?: ChangeWhereUniqueInput[] | ChangeWhereUniqueInput
+  update?: ChangeUpdateWithoutProjectInput[] | ChangeUpdateWithoutProjectInput
+  upsert?: ChangeUpsertWithoutProjectInput[] | ChangeUpsertWithoutProjectInput
 }
 
 export interface ProjectCreateInput {
   name: String
   member?: UserCreateManyWithoutProjectMemberInput
   admin?: UserCreateManyWithoutProjectAdminInput
+  change?: ChangeCreateManyWithoutProjectInput
+}
+
+export interface ChangeUpdateWithoutProjectInput {
+  where: ChangeWhereUniqueInput
+  data: ChangeUpdateWithoutProjectDataInput
+}
+
+export interface ProjectCreateWithoutAdminInput {
+  name: String
+  member?: UserCreateManyWithoutProjectMemberInput
+  change?: ChangeCreateManyWithoutProjectInput
+}
+
+export interface ChangeUpdateWithoutProjectDataInput {
+  text?: String
+  author?: UserUpdateOneInput
+}
+
+export interface ProjectWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface UserUpsertWithoutProjectMemberInput {
+  where: UserWhereUniqueInput
+  update: UserUpdateWithoutProjectMemberDataInput
+  create: UserCreateWithoutProjectMemberInput
 }
 
 export interface ProjectUpsertWithoutAdminInput {
@@ -771,21 +1161,23 @@ export interface ProjectUpsertWithoutAdminInput {
   create: ProjectCreateWithoutAdminInput
 }
 
-export interface UserCreateManyWithoutProjectMemberInput {
-  create?: UserCreateWithoutProjectMemberInput[] | UserCreateWithoutProjectMemberInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
+export interface ChangeUpsertWithoutProjectInput {
+  where: ChangeWhereUniqueInput
+  update: ChangeUpdateWithoutProjectDataInput
+  create: ChangeCreateWithoutProjectInput
 }
 
-export interface ProjectCreateOneInput {
-  create?: ProjectCreateInput
-  connect?: ProjectWhereUniqueInput
+export interface UserUpdateOneInput {
+  create?: UserCreateInput
+  connect?: UserWhereUniqueInput
+  disconnect?: UserWhereUniqueInput
+  delete?: UserWhereUniqueInput
 }
 
-export interface UserCreateWithoutProjectMemberInput {
-  email: String
-  password: String
-  name: String
-  projectAdmin?: ProjectCreateManyWithoutAdminInput
+export interface ProjectUpsertWithoutChangeInput {
+  where: ProjectWhereUniqueInput
+  update: ProjectUpdateWithoutChangeDataInput
+  create: ProjectCreateWithoutChangeInput
 }
 
 export interface UserWhereInput {
@@ -855,249 +1247,11 @@ export interface UserWhereInput {
   projectAdmin_none?: ProjectWhereInput
 }
 
-export interface ProjectCreateManyWithoutAdminInput {
-  create?: ProjectCreateWithoutAdminInput[] | ProjectCreateWithoutAdminInput
-  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-}
-
-export interface ChangeWhereInput {
-  AND?: ChangeWhereInput[] | ChangeWhereInput
-  OR?: ChangeWhereInput[] | ChangeWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  createdAt?: DateTime
-  createdAt_not?: DateTime
-  createdAt_in?: DateTime[] | DateTime
-  createdAt_not_in?: DateTime[] | DateTime
-  createdAt_lt?: DateTime
-  createdAt_lte?: DateTime
-  createdAt_gt?: DateTime
-  createdAt_gte?: DateTime
-  updatedAt?: DateTime
-  updatedAt_not?: DateTime
-  updatedAt_in?: DateTime[] | DateTime
-  updatedAt_not_in?: DateTime[] | DateTime
-  updatedAt_lt?: DateTime
-  updatedAt_lte?: DateTime
-  updatedAt_gt?: DateTime
-  updatedAt_gte?: DateTime
-  text?: String
-  text_not?: String
-  text_in?: String[] | String
-  text_not_in?: String[] | String
-  text_lt?: String
-  text_lte?: String
-  text_gt?: String
-  text_gte?: String
-  text_contains?: String
-  text_not_contains?: String
-  text_starts_with?: String
-  text_not_starts_with?: String
-  text_ends_with?: String
-  text_not_ends_with?: String
-  author?: UserWhereInput
-  project?: ProjectWhereInput
-}
-
-export interface ProjectCreateWithoutAdminInput {
-  name: String
-  member?: UserCreateManyWithoutProjectMemberInput
-}
-
-export interface ProjectSubscriptionWhereInput {
-  AND?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput
-  OR?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: ProjectWhereInput
-}
-
-export interface UserCreateManyWithoutProjectAdminInput {
-  create?: UserCreateWithoutProjectAdminInput[] | UserCreateWithoutProjectAdminInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-}
-
-export interface ChangeWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface UserCreateWithoutProjectAdminInput {
+export interface UserCreateWithoutProjectMemberInput {
   email: String
   password: String
   name: String
-  projectMember?: ProjectCreateManyWithoutMemberInput
-}
-
-export interface UserUpdateInput {
-  email?: String
-  password?: String
-  name?: String
-  projectMember?: ProjectUpdateManyWithoutMemberInput
-  projectAdmin?: ProjectUpdateManyWithoutAdminInput
-}
-
-export interface ProjectCreateManyWithoutMemberInput {
-  create?: ProjectCreateWithoutMemberInput[] | ProjectCreateWithoutMemberInput
-  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-}
-
-export interface UserUpdateOneInput {
-  create?: UserCreateInput
-  connect?: UserWhereUniqueInput
-  disconnect?: UserWhereUniqueInput
-  delete?: UserWhereUniqueInput
-}
-
-export interface ProjectCreateWithoutMemberInput {
-  name: String
-  admin?: UserCreateManyWithoutProjectAdminInput
-}
-
-export interface UserUpsertWithoutProjectAdminInput {
-  where: UserWhereUniqueInput
-  update: UserUpdateWithoutProjectAdminDataInput
-  create: UserCreateWithoutProjectAdminInput
-}
-
-export interface UserUpdateManyWithoutProjectAdminInput {
-  create?: UserCreateWithoutProjectAdminInput[] | UserCreateWithoutProjectAdminInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  update?: UserUpdateWithoutProjectAdminInput[] | UserUpdateWithoutProjectAdminInput
-  upsert?: UserUpsertWithoutProjectAdminInput[] | UserUpsertWithoutProjectAdminInput
-}
-
-export interface ProjectUpdateWithoutMemberDataInput {
-  name?: String
-  admin?: UserUpdateManyWithoutProjectAdminInput
-}
-
-export interface UserCreateOneInput {
-  create?: UserCreateInput
-  connect?: UserWhereUniqueInput
-}
-
-export interface ProjectUpdateManyWithoutMemberInput {
-  create?: ProjectCreateWithoutMemberInput[] | ProjectCreateWithoutMemberInput
-  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  disconnect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  delete?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  update?: ProjectUpdateWithoutMemberInput[] | ProjectUpdateWithoutMemberInput
-  upsert?: ProjectUpsertWithoutMemberInput[] | ProjectUpsertWithoutMemberInput
-}
-
-export interface UserCreateInput {
-  email: String
-  password: String
-  name: String
-  projectMember?: ProjectCreateManyWithoutMemberInput
   projectAdmin?: ProjectCreateManyWithoutAdminInput
-}
-
-export interface UserUpdateWithoutProjectAdminInput {
-  where: UserWhereUniqueInput
-  data: UserUpdateWithoutProjectAdminDataInput
-}
-
-export interface UserUpsertWithoutProjectMemberInput {
-  where: UserWhereUniqueInput
-  update: UserUpdateWithoutProjectMemberDataInput
-  create: UserCreateWithoutProjectMemberInput
-}
-
-export interface UserSubscriptionWhereInput {
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: UserWhereInput
-}
-
-export interface ProjectUpdateInput {
-  name?: String
-  member?: UserUpdateManyWithoutProjectMemberInput
-  admin?: UserUpdateManyWithoutProjectAdminInput
-}
-
-export interface ProjectWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface UserUpdateManyWithoutProjectMemberInput {
-  create?: UserCreateWithoutProjectMemberInput[] | UserCreateWithoutProjectMemberInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  update?: UserUpdateWithoutProjectMemberInput[] | UserUpdateWithoutProjectMemberInput
-  upsert?: UserUpsertWithoutProjectMemberInput[] | UserUpsertWithoutProjectMemberInput
-}
-
-export interface ProjectUpdateOneInput {
-  create?: ProjectCreateInput
-  connect?: ProjectWhereUniqueInput
-  disconnect?: ProjectWhereUniqueInput
-  delete?: ProjectWhereUniqueInput
-}
-
-export interface UserUpdateWithoutProjectMemberInput {
-  where: UserWhereUniqueInput
-  data: UserUpdateWithoutProjectMemberDataInput
-}
-
-export interface ProjectUpsertWithoutMemberInput {
-  where: ProjectWhereUniqueInput
-  update: ProjectUpdateWithoutMemberDataInput
-  create: ProjectCreateWithoutMemberInput
-}
-
-export interface UserUpdateWithoutProjectAdminDataInput {
-  email?: String
-  password?: String
-  name?: String
-  projectMember?: ProjectUpdateManyWithoutMemberInput
-}
-
-export interface ProjectUpdateWithoutAdminDataInput {
-  name?: String
-  member?: UserUpdateManyWithoutProjectMemberInput
-}
-
-export interface ProjectUpdateWithoutAdminInput {
-  where: ProjectWhereUniqueInput
-  data: ProjectUpdateWithoutAdminDataInput
-}
-
-export interface ProjectUpdateManyWithoutAdminInput {
-  create?: ProjectCreateWithoutAdminInput[] | ProjectCreateWithoutAdminInput
-  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  disconnect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  delete?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  update?: ProjectUpdateWithoutAdminInput[] | ProjectUpdateWithoutAdminInput
-  upsert?: ProjectUpsertWithoutAdminInput[] | ProjectUpsertWithoutAdminInput
-}
-
-export interface UserUpdateWithoutProjectMemberDataInput {
-  email?: String
-  password?: String
-  name?: String
-  projectAdmin?: ProjectUpdateManyWithoutAdminInput
 }
 
 export interface ProjectUpdateWithoutMemberInput {
@@ -1108,22 +1262,7 @@ export interface ProjectUpdateWithoutMemberInput {
 export interface ChangeUpdateInput {
   text?: String
   author?: UserUpdateOneInput
-  project?: ProjectUpdateOneInput
-}
-
-export interface UserWhereUniqueInput {
-  id?: ID_Input
-  email?: String
-}
-
-export interface ChangeSubscriptionWhereInput {
-  AND?: ChangeSubscriptionWhereInput[] | ChangeSubscriptionWhereInput
-  OR?: ChangeSubscriptionWhereInput[] | ChangeSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: ChangeWhereInput
+  project?: ProjectUpdateOneWithoutChangeInput
 }
 
 export interface Node {
@@ -1150,6 +1289,7 @@ export interface Project extends Node {
   name: String
   member?: User[]
   admin?: User[]
+  change?: Change[]
 }
 
 export interface BatchPayload {
