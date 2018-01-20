@@ -1,6 +1,13 @@
 # import Project from "./generated/prisma.graphql"
 
 type Query {
+  projects(
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Project!]!
   project(id: ID!): Project!
   change(id: ID!): Change!
   changes(projectId: ID!): [Change!]!
