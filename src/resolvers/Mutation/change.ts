@@ -1,8 +1,8 @@
-import { getUserId, isUserProjectAllowed, Context } from '../../utils'
+import { getUserId, isUserProjectAllowed, Context } from '../../utils';
 
 export const change = {
   async addChange(parent, { projectId, text }, ctx: Context, info) {
-    const userId = getUserId(ctx)
+    const userId = getUserId(ctx);
     await isUserProjectAllowed(ctx, projectId);
 
     return ctx.db.mutation.createChange(
@@ -17,8 +17,7 @@ export const change = {
           },
         },
       },
-      info
-    )
+      info,
+    );
   },
-
-}
+};
