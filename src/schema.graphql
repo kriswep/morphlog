@@ -10,7 +10,14 @@ type Query {
   ): [Project!]!
   project(id: ID!): Project!
   change(id: ID!): Change!
-  changes(projectId: ID!): [Change!]!
+  changes(
+    projectId: ID!
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Change!]!
   me: User
 }
 

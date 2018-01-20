@@ -7,27 +7,31 @@ export const Query = {
   },
 
   change(parent, { id }, ctx: Context, info) {
-    return ctx.db.query.change({ where: { id: id } }, info)
+    return ctx.db.query.change({ where: { id: id } }, info);
   },
 
-
-
-  async projects(parent, filter, ctx: Context, info) {
+  projects(parent, filter, ctx: Context, info) {
     const id = getUserId(ctx);
 
-    return ctx.db.query.projects({
-      ...filter,
-      where: {
-        OR: [{
-          member_some: { id },
-        }, {
-          admin_some: { id },
-        }]
-      }
-    }, info);
+    return ctx.db.query.projects(
+      {
+        ...filter,
+        where: {
+          OR: [
+            {
+              member_some: { id },
+            },
+            {
+              admin_some: { id },
+            },
+          ],
+        },
+      },
+      info,
+    );
   },
 
-  async changes(parent, { projectId }, ctx: Context, info) {
+  async changes(parent, { projectId, ...filter }, ctx: Context, info) {
     await isUserProjectAllowed(ctx, projectId);
     const where = {
       project: {
@@ -35,7 +39,7 @@ export const Query = {
       },
     };
 
-    return ctx.db.query.changes({ where }, info);
+    return ctx.db.query.changes({ ...filter, where }, info);
   },
 
   me(parent, args, ctx: Context, info) {
