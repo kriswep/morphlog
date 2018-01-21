@@ -2,11 +2,13 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
 
+const initialState = {
+  email: '',
+  password: '',
+};
+
 class Profile extends React.Component {
-  state = {
-    email: '',
-    password: '',
-  };
+  state = initialState;
 
   dispatch = (e, v, x) => {
     if (e.target.dataset && e.target.dataset.state) {
@@ -30,6 +32,9 @@ class Profile extends React.Component {
       })
       .catch(error => {
         console.log('there was an error sending the query', error);
+      })
+      .finally(() => {
+        this.setState(initialState);
       });
   };
 
@@ -47,6 +52,9 @@ class Profile extends React.Component {
       })
       .catch(error => {
         console.log('there was an error sending the query', error);
+      })
+      .finally(() => {
+        this.setState(initialState);
       });
   };
 
@@ -55,12 +63,14 @@ class Profile extends React.Component {
       <div>
         <h2>Profile</h2>
         <input
+          value={this.state.email}
           type="text"
           placeholder="email"
           data-state="email"
           onChange={this.dispatch}
         />
         <input
+          value={this.state.password}
           type="password"
           placeholder="password"
           data-state="password"
