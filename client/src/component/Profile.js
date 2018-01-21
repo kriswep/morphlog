@@ -51,7 +51,6 @@ class Profile extends React.Component {
   };
 
   render() {
-    console.log(this.props.profileQuery);
     return (
       <div>
         <h2>Profile</h2>
