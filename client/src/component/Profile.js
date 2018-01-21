@@ -26,6 +26,7 @@ class Profile extends React.Component {
       })
       .then(({ data }) => {
         console.log('got data', data);
+        localStorage.setItem('auth', data.signup.token);
       })
       .catch(error => {
         console.log('there was an error sending the query', error);
@@ -42,6 +43,7 @@ class Profile extends React.Component {
       })
       .then(({ data }) => {
         console.log('got data', data);
+        localStorage.setItem('auth', data.login.token);
       })
       .catch(error => {
         console.log('there was an error sending the query', error);
@@ -49,6 +51,7 @@ class Profile extends React.Component {
   };
 
   render() {
+    console.log(this.props.profileQuery);
     return (
       <div>
         <h2>Profile</h2>
@@ -66,6 +69,12 @@ class Profile extends React.Component {
         />
         <button onClick={this.signup}>SignUp</button>
         <button onClick={this.signin}>SignIn</button>
+        {!this.props.profileQuery.loading && (
+          <section>
+            <p>Name: {this.props.profileQuery.me.name}</p>
+            <p>E-Mail: {this.props.profileQuery.me.email}</p>
+          </section>
+        )}
       </div>
     );
   }
@@ -78,6 +87,7 @@ const SIGNUP_MUTATION = gql`
       user {
         id
         name
+        email
       }
     }
   }
@@ -89,13 +99,23 @@ const SIGNIN_MUTATION = gql`
       user {
         id
         name
+        email
       }
+    }
+  }
+`;
+const PROFILE_QUERY = gql`
+  query profile {
+    me {
+      id
+      name
+      email
     }
   }
 `;
 
 export default compose(
+  graphql(PROFILE_QUERY, { name: 'profileQuery' }),
   graphql(SIGNUP_MUTATION, { name: 'signupMutation' }),
   graphql(SIGNIN_MUTATION, { name: 'signinMutation' }),
 )(Profile);
-// export default Profile;
