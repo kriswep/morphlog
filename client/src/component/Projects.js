@@ -1,6 +1,7 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
+import { Link } from 'react-router-dom';
 
 const initialState = {
   name: '',
@@ -55,11 +56,13 @@ class Projects extends React.Component {
         <button onClick={this.addProject}>add</button>
         <ul>
           {projects && (
-            <p>
+            <ul>
               {projects.map(project => (
-                <li key={project.id}>{project.name}</li>
+                <li key={project.id}>
+                  <Link to={`/project/${project.id}`}>{project.name}</Link>
+                </li>
               ))}
-            </p>
+            </ul>
           )}
         </ul>
       </div>

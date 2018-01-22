@@ -90,7 +90,7 @@ class Profile extends React.Component {
 }
 
 const SIGNUP_MUTATION = gql`
-  mutation s($email: String!, $password: String!) {
+  mutation signup($email: String!, $password: String!) {
     signup(email: $email, password: $password, name: "demo3") {
       token
       user {

@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Home from './component/Home';
 import Profile from './component/Profile';
 import Projects from './component/Projects';
+import Project from './component/Project';
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/projects" component={Projects} />
+          <Route exact path="/project/:projectId" component={Project} />
         </Switch>
       </div>
     );
