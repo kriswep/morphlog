@@ -36,7 +36,6 @@ export async function isUserProjectAllowed(ctx: Context, projectId) {
     admin_some: { id: userId },
   });
   if ((await projectMember) || (await projectAdmin)) {
-    console.log(projectMember, projectAdmin);
     return true;
   }
 
