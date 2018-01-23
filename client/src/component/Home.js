@@ -7,7 +7,7 @@ const ContentContainer = styled.section`
 
 const Home = props => (
   <ContentContainer>
-    <h1>MorphLog</h1>
+    <h1>TODO...</h1>
   </ContentContainer>
 );
 

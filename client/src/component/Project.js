@@ -120,7 +120,9 @@ const ADD_CHANGE_MUTATION = gql`
 export default compose(
   graphql(PROJECT_QUERY, {
     name: 'projectQuery',
-    options: ({ match }) => ({ variables: { id: match.params.projectId } }),
+    options: props => ({
+      variables: { id: props.projectId || props.match.params.projectId },
+    }),
   }),
   graphql(ADD_CHANGE_MUTATION, { name: 'addChangeMutation' }),
 )(Project);

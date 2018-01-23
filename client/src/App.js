@@ -4,7 +4,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import 'normalize.css';
 import 'typeface-roboto';
 
-import Menu from './component/Menu';
+import Header from './component/Header';
 import Home from './component/Home';
 import Profile from './component/Profile';
 import Projects from './component/Projects';
@@ -24,8 +24,7 @@ const Main = styled.section`
   grid-template-columns: 17.5rem 1fr;
   grid-template-rows: auto 1fr auto auto;
   grid-template-areas:
-    'header header header' 'content content content' 'sidebar sidebar sidebar'
-    'footer footer footer';
+    "header header" "content content" "sidebar sidebar" "footer footer";
   ${media.m`
   grid-gap: 10px;
   grid-template-rows: auto 1fr auto;
@@ -48,9 +47,9 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <Main className="App">
-          <Route path="/" component={Menu} />
+          <Route path="/" component={Header} />
           <Route exact path="/" component={Home} />
-          <Route path="/project" component={Projects} />
+          <Route path="/project/:projectId?" component={Projects} />
           <Route path="/project/:projectId" component={Project} />
           <Route exact path="/profile" component={Profile} />
         </Main>

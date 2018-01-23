@@ -3,6 +3,9 @@ import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Route, Redirect } from 'react-router';
+
+import Project from './Project';
 
 const SidebarContainer = styled.section`
   grid-area: sidebar;
@@ -10,6 +13,11 @@ const SidebarContainer = styled.section`
 
 const initialState = {
   name: '',
+};
+
+const ProjectWrapper = props => {
+  const projectId = props;
+  return <Project {...props} />;
 };
 
 class Projects extends React.Component {
@@ -48,7 +56,19 @@ class Projects extends React.Component {
 
   render() {
     const projects = this.props.projectsQuery.projects;
-    return (
+
+    let projectId = this.props.match.params.projectId;
+    if (
+      !this.props.match.params.projectId &&
+      projects &&
+      projects.length >= 0 &&
+      projects[0].id
+    ) {
+      // no project open, but we have projects: render project comp
+      projectId = projects[0].id;
+    }
+    return [
+      projectId && <Project projectId={projectId} />,
       <SidebarContainer>
         <h2>Projects</h2>
         <input
@@ -68,8 +88,8 @@ class Projects extends React.Component {
             ))}
           </ul>
         )}
-      </SidebarContainer>
-    );
+      </SidebarContainer>,
+    ];
   }
 }
 
