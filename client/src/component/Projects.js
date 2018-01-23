@@ -16,6 +16,16 @@ const SidebarContainer = styled.section`
   `};
 `;
 
+const ProjectsContainer = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+`;
+
+const ProjectLink = styled(Link)`
+  color: ${props => props.theme.darkShades};
+`;
+
 const initialState = {
   name: '',
 };
@@ -85,13 +95,15 @@ class Projects extends React.Component {
         />
         <button onClick={this.addProject}>add</button>
         {projects && (
-          <ul>
+          <ProjectsContainer>
             {projects.map(project => (
               <li key={project.id}>
-                <Link to={`/project/${project.id}`}>{project.name}</Link>
+                <ProjectLink to={`/project/${project.id}`}>
+                  {project.name}
+                </ProjectLink>
               </li>
             ))}
-          </ul>
+          </ProjectsContainer>
         )}
       </SidebarContainer>,
     ];
