@@ -15,6 +15,7 @@ const HeaderContainer = styled.header`
   grid-template-areas: 'nav' 'title';
   ${media.m`
     grid-gap: 10px;
+    padding 1rem 0.75rem;
   `};
 `;
 
@@ -29,7 +30,7 @@ const NavContainer = styled.nav`
     color: ${props => props.theme.darkShades};
   }
   a.active {
-    color: ${props => props.theme.darkestShades};
+    color: ${props => props.theme.darkAccent};
   }
 `;
 

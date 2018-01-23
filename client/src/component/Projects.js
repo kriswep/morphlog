@@ -5,10 +5,15 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Route, Redirect } from 'react-router';
 
+import media from '../styles/media';
 import Project from './Project';
 
 const SidebarContainer = styled.section`
   grid-area: sidebar;
+  padding: 0.25rem;
+  ${media.m`
+    padding 0.75rem;
+  `};
 `;
 
 const initialState = {

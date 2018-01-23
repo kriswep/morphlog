@@ -3,7 +3,7 @@ const theme = {
   lightestAccent: '#F1DFF0',
   lightAccent: '#B8A896',
   main: '#DC680B',
-  darkAccent: '#4B8CDC',
+  darkAccent: '#454346',
   darkShades: '#251D32',
   darkestShades: '#09070c',
 };

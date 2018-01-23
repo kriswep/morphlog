@@ -3,8 +3,14 @@ import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
 import styled from 'styled-components';
 
+import media from '../styles/media';
+
 const ContentContainer = styled.section`
   grid-area: content;
+  padding: 0.25rem;
+  ${media.m`
+    padding 0.75rem;
+  `};
 `;
 
 const initialState = {
