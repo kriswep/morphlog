@@ -5,6 +5,7 @@ const theme = {
   main: '#DC680B',
   darkAccent: '#4B8CDC',
   darkShades: '#251D32',
+  darkestShades: '#09070c',
 };
 
 export default theme;

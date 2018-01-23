@@ -17,6 +17,7 @@ import './app.css';
 
 const Main = styled.section`
   min-height: 100vh;
+  color: ${props => props.theme.darkShades};
   background: ${props => props.theme.lightShades};
   line-height: 1.625rem;
   display: grid;
@@ -24,11 +25,11 @@ const Main = styled.section`
   grid-template-columns: 17.5rem 1fr;
   grid-template-rows: auto 1fr auto auto;
   grid-template-areas:
-    "header header" "content content" "sidebar sidebar" "footer footer";
+    'header header' 'content content' 'sidebar sidebar' 'footer footer';
   ${media.m`
   grid-gap: 10px;
   grid-template-rows: auto 1fr auto;
-  grid-template-areas: "header header header" "sidebar content content" "footer footer footer";
+  grid-template-areas: 'header header header' 'sidebar content content' 'footer footer footer';
   `} ${media.l`
     grid-template-columns: 20rem 1fr;
   `} ${media.xl`
