@@ -2,6 +2,11 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const SidebarContainer = styled.section`
+  grid-area: sidebar;
+`;
 
 const initialState = {
   name: '',
@@ -44,7 +49,7 @@ class Projects extends React.Component {
   render() {
     const projects = this.props.projectsQuery.projects;
     return (
-      <div>
+      <SidebarContainer>
         <h2>Projects</h2>
         <input
           value={this.state.name}
@@ -54,18 +59,16 @@ class Projects extends React.Component {
           onChange={this.dispatch}
         />
         <button onClick={this.addProject}>add</button>
-        <ul>
-          {projects && (
-            <ul>
-              {projects.map(project => (
-                <li key={project.id}>
-                  <Link to={`/project/${project.id}`}>{project.name}</Link>
-                </li>
-              ))}
-            </ul>
-          )}
-        </ul>
-      </div>
+        {projects && (
+          <ul>
+            {projects.map(project => (
+              <li key={project.id}>
+                <Link to={`/project/${project.id}`}>{project.name}</Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </SidebarContainer>
     );
   }
 }

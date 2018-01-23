@@ -1,9 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const ContentContainer = styled.section`
+  grid-area: content;
+`;
 
 const Home = props => (
-  <div>
+  <ContentContainer>
     <h1>MorphLog</h1>
-  </div>
+  </ContentContainer>
 );
 
 export default Home;

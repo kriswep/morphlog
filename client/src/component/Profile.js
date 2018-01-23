@@ -1,6 +1,11 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
+import styled from 'styled-components';
+
+const ContentContainer = styled.section`
+  grid-area: content;
+`;
 
 const initialState = {
   email: '',
@@ -60,7 +65,7 @@ class Profile extends React.Component {
 
   render() {
     return (
-      <div>
+      <ContentContainer>
         <h2>Profile</h2>
         <input
           value={this.state.email}
@@ -84,7 +89,7 @@ class Profile extends React.Component {
             <p>E-Mail: {this.props.profileQuery.me.email}</p>
           </section>
         )}
-      </div>
+      </ContentContainer>
     );
   }
 }

@@ -1,6 +1,11 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
+import styled from 'styled-components';
+
+const ContentContainer = styled.section`
+  grid-area: content;
+`;
 
 const initialState = {
   text: '',
@@ -39,7 +44,7 @@ class Project extends React.Component {
   render() {
     const project = this.props.projectQuery.project;
     return (
-      <div>
+      <ContentContainer>
         {project && (
           <div>
             <h2>{project.name}</h2>
@@ -62,7 +67,7 @@ class Project extends React.Component {
             </ul>
           </div>
         )}
-      </div>
+      </ContentContainer>
     );
   }
 }
