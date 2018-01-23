@@ -13,6 +13,12 @@ const ContentContainer = styled.section`
   `};
 `;
 
+const ChangeContainer = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+`;
+
 const initialState = {
   text: '',
 };
@@ -62,7 +68,7 @@ class Project extends React.Component {
               onChange={this.dispatch}
             />
             <button onClick={this.addProject}>add</button>
-            <ul>
+            <ChangeContainer>
               {project.change.map(change => (
                 <li key={change.id}>
                   {change.author.name}({new Date(
@@ -70,7 +76,7 @@ class Project extends React.Component {
                   ).toLocaleString()}): {change.text}
                 </li>
               ))}
-            </ul>
+            </ChangeContainer>
           </div>
         )}
       </ContentContainer>
