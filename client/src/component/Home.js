@@ -2,7 +2,7 @@ import React from 'react';
 
 const Home = props => (
   <div>
-    <h2>Home TODO</h2>
+    <h1>MorphLog</h1>
   </div>
 );
 
