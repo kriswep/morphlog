@@ -7,6 +7,7 @@ import { Route, Redirect } from 'react-router';
 
 import media from '../styles/media';
 import Project from './Project';
+import Input from './Input';
 
 const SidebarContainer = styled.section`
   grid-area: sidebar;
@@ -86,10 +87,12 @@ class Projects extends React.Component {
       projectId && <Project projectId={projectId} />,
       <SidebarContainer>
         <h2>Projects</h2>
-        <input
+        <Input
+          name="name"
+          label="new project name"
           value={this.state.name}
           type="text"
-          placeholder="new project name"
+          placeholder="awesome project"
           data-state="name"
           onChange={this.dispatch}
         />

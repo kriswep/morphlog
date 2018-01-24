@@ -3,6 +3,8 @@ import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
 import styled from 'styled-components';
 
+import Input from './Input';
+
 const ContentContainer = styled.section`
   grid-area: content;
 `;
@@ -16,9 +18,9 @@ class Profile extends React.Component {
   state = initialState;
 
   dispatch = (e, v, x) => {
-    if (e.target.dataset && e.target.dataset.state) {
+    if (e.target.name && e.target.name) {
       const newState = {};
-      newState[e.target.dataset.state] = e.target.value;
+      newState[e.target.name] = e.target.value;
       this.setState(newState);
     }
   };
@@ -67,18 +69,20 @@ class Profile extends React.Component {
     return (
       <ContentContainer>
         <h2>Profile</h2>
-        <input
+        <Input
+          name="email"
+          label="email"
           value={this.state.email}
           type="text"
           placeholder="email"
-          data-state="email"
           onChange={this.dispatch}
         />
-        <input
+        <Input
+          name="password"
+          label="password"
           value={this.state.password}
           type="password"
           placeholder="password"
-          data-state="password"
           onChange={this.dispatch}
         />
         <button onClick={this.signup}>SignUp</button>
