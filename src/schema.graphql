@@ -27,6 +27,7 @@ type Mutation {
   createProject(name: String!): Project!
   addProjectMember(user: ID!, project: ID!): Project!
   addChange(projectId: ID!, text: String!): Change!
+  updateChange(changeId: ID!, projectId: ID!, text: String!): Change!
 }
 
 type AuthPayload {
