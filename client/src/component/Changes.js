@@ -42,6 +42,35 @@ class Project extends React.Component {
           projectId: this.props.projectId,
           txt: this.state.text,
         },
+        update: (proxy, { data: { addChange } }) => {
+          // Read the data from our cache for this query.
+          const data = proxy.readQuery({
+            query: CHANGES_QUERY,
+            variables: {
+              projectId: addChange.project.id,
+            },
+          });
+
+          // Add our todo from the mutation to the end.
+          const newChanges = [addChange, ...data.changes];
+
+          // Write our data back to the cache.
+          proxy.writeQuery({
+            query: CHANGES_QUERY,
+            variables: {
+              projectId: addChange.project.id,
+            },
+            data: { changes: newChanges },
+          });
+        },
+        refetchQueries: [
+          {
+            query: CHANGES_QUERY,
+            variables: {
+              projectId: this.props.projectId,
+            },
+          },
+        ],
       })
       .then(({ data }) => {
         console.log('got data', data);
@@ -109,16 +138,6 @@ const ADD_CHANGE_MUTATION = gql`
       }
       project {
         id
-        name
-        change {
-          id
-          createdAt
-          text
-          author {
-            id
-            name
-          }
-        }
       }
     }
   }
