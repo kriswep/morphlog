@@ -71,7 +71,7 @@ class Profile extends React.Component {
         <h2>Profile</h2>
         <Input
           name="email"
-          label="email"
+          label="Email"
           value={this.state.email}
           type="text"
           placeholder="email"
@@ -79,7 +79,7 @@ class Profile extends React.Component {
         />
         <Input
           name="password"
-          label="password"
+          label="Password"
           value={this.state.password}
           type="password"
           placeholder="password"

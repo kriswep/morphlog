@@ -50,8 +50,8 @@ const Header = props => (
       <h1>MorphLog</h1>
     </Title>
     <NavContainer>
-      <NavLink to="/project">Projekte</NavLink>
-      <NavLink to="/profile">Profil</NavLink>
+      <NavLink to="/project">Projects</NavLink>
+      <NavLink to="/profile">Profile</NavLink>
     </NavContainer>
   </HeaderContainer>
 );

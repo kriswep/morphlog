@@ -91,7 +91,7 @@ class Projects extends React.Component {
         <h2>Projects</h2>
         <Input
           name="name"
-          label="new project name"
+          label="New project name"
           value={this.state.name}
           type="text"
           placeholder="awesome project"
