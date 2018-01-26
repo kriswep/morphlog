@@ -3,11 +3,11 @@ import { getUserId, isUserProjectAllowed, Context } from '../utils';
 export const Query = {
   async project(parent, { id }, ctx: Context, info) {
     await isUserProjectAllowed(ctx, id);
-    return ctx.db.query.project({ where: { id: id } }, info);
+    return ctx.db.query.project({ where: { id } }, info);
   },
 
   change(parent, { id }, ctx: Context, info) {
-    return ctx.db.query.change({ where: { id: id } }, info);
+    return ctx.db.query.change({ where: { id } }, info);
   },
 
   projects(parent, filter, ctx: Context, info) {
@@ -39,7 +39,10 @@ export const Query = {
       },
     };
 
-    return ctx.db.query.changes({ ...filter, where }, info);
+    return ctx.db.query.changes(
+      { ...filter, orderBy: 'createdAt_DESC', where },
+      info,
+    );
   },
 
   me(parent, args, ctx: Context, info) {

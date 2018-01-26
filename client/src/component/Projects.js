@@ -40,9 +40,9 @@ class Projects extends React.Component {
   state = initialState;
 
   dispatch = (e, v, x) => {
-    if (e.target.dataset && e.target.dataset.state) {
+    if (e.target.name && e.target.name) {
       const newState = {};
-      newState[e.target.dataset.state] = e.target.value;
+      newState[e.target.name] = e.target.value;
       this.setState(newState);
     }
   };
@@ -93,7 +93,6 @@ class Projects extends React.Component {
           value={this.state.name}
           type="text"
           placeholder="awesome project"
-          data-state="name"
           onChange={this.dispatch}
         />
         <button onClick={this.addProject}>add</button>
