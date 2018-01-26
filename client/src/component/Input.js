@@ -9,6 +9,7 @@ const Container = styled.div`
 const Label = styled.label`
   line-height: 1rem;
   padding: 0.1rem 0;
+  font-size: 0.8rem;
 `;
 
 const Input = styled.input`
