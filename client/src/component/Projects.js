@@ -84,8 +84,10 @@ class Projects extends React.Component {
       projectId = projects[0].id;
     }
     return [
-      projectId && <Project projectId={projectId} />,
-      <SidebarContainer>
+      projectId && (
+        <Project key={`${projectId}Project}`} projectId={projectId} />
+      ),
+      <SidebarContainer key={`${projectId}ProjectList}`}>
         <h2>Projects</h2>
         <Input
           name="name"
