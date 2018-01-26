@@ -75,9 +75,10 @@ class Projects extends React.Component {
 
     let projectId = this.props.match.params.projectId;
     if (
-      !this.props.match.params.projectId &&
+      !projectId &&
       projects &&
       projects.length >= 0 &&
+      projects[0] &&
       projects[0].id
     ) {
       // no project open, but we have projects: render project comp
