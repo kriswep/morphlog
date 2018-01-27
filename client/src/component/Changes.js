@@ -2,10 +2,10 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
 import styled from 'styled-components';
+import { Button } from 'semantic-ui-react';
 
 import media from '../styles/media';
 import Input from './Input';
-import Button from './Button';
 
 const ContentContainer = styled.section`
   grid-area: content;
@@ -97,7 +97,9 @@ class Project extends React.Component {
           placeholder="describe your change"
           onChange={this.dispatch}
         />
-        <Button onClick={this.addChange}>add</Button>
+        <Button color="teal" onClick={this.addChange}>
+          Add
+        </Button>
         {changes && (
           <ChangeContainer>
             {changes.map(change => (

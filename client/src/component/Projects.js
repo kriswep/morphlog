@@ -4,11 +4,11 @@ import { graphql, compose } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Route, Redirect } from 'react-router';
+import { Button, Icon } from 'semantic-ui-react';
 
 import media from '../styles/media';
 import Project from './Project';
 import Input from './Input';
-import Button from './Button';
 
 const SidebarContainer = styled.section`
   grid-area: sidebar;
@@ -99,7 +99,12 @@ class Projects extends React.Component {
           placeholder="awesome project"
           onChange={this.dispatch}
         />
-        <Button onClick={this.addProject}>add</Button>
+        <Button color="teal" animated>
+          <Button.Content visible>Add</Button.Content>
+          <Button.Content hidden>
+            <Icon name="right arrow" />
+          </Button.Content>
+        </Button>
         {projects && (
           <ProjectsContainer>
             {projects.map(project => (

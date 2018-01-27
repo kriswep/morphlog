@@ -2,9 +2,9 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
 import styled from 'styled-components';
+import { Button } from 'semantic-ui-react';
 
 import Input from './Input';
-import Button from './Button';
 
 const ContentContainer = styled.section`
   grid-area: content;
@@ -87,8 +87,12 @@ class Profile extends React.Component {
           onChange={this.dispatch}
         />
 
-        <Button onClick={this.signup}>SignUp</Button>
-        <Button onClick={this.signin}>SignIn</Button>
+        <Button color="teal" onClick={this.signup}>
+          SignUp
+        </Button>
+        <Button color="teal" onClick={this.signin}>
+          SignIn
+        </Button>
         {!this.props.profileQuery.loading && (
           <section>
             <p>Name: {this.props.profileQuery.me.name}</p>
