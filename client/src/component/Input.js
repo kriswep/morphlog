@@ -26,11 +26,22 @@ const Input = styled.input`
   }
 `;
 
-export default ({ name, label, ...rest }) => {
+const Textarea = Input.withComponent('textarea').extend`
+  resize: none;
+  height: 8rem;
+`;
+
+const MyInput = ({ textarea, name, label, ...rest }) => {
   return (
     <Container>
       {name && label && <Label for={name}>{label}</Label>}
-      <Input name={name} {...rest} />
+      {textarea ? (
+        <Textarea name={name} {...rest} />
+      ) : (
+        <Input name={name} {...rest} />
+      )}
     </Container>
   );
 };
+
+export default MyInput;

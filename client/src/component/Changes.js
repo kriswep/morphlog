@@ -88,6 +88,7 @@ class Project extends React.Component {
     return (
       <div>
         <Input
+          textarea
           name="text"
           label="Change"
           value={this.state.text}
