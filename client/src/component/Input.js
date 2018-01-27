@@ -13,7 +13,7 @@ const Label = styled.label`
 `;
 
 const Input = styled.input`
-  background-color: transparent;
+  background: transparent;
   border: 1px solid ${props => props.theme.lightAccent};
   padding: 0.5rem 0.25rem;
   box-shadow: -0.05rem 0.05rem 0.2rem ${props => props.theme.lightAccent};

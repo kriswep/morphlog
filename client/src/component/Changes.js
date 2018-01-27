@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import media from '../styles/media';
 import Input from './Input';
+import Button from './Button';
 
 const ContentContainer = styled.section`
   grid-area: content;
@@ -96,7 +97,7 @@ class Project extends React.Component {
           placeholder="describe your change"
           onChange={this.dispatch}
         />
-        <button onClick={this.addChange}>add</button>
+        <Button onClick={this.addChange}>add</Button>
         {changes && (
           <ChangeContainer>
             {changes.map(change => (

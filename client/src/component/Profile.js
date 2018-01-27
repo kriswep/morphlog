@@ -4,6 +4,7 @@ import { graphql, compose } from 'react-apollo';
 import styled from 'styled-components';
 
 import Input from './Input';
+import Button from './Button';
 
 const ContentContainer = styled.section`
   grid-area: content;
@@ -85,8 +86,9 @@ class Profile extends React.Component {
           placeholder="password"
           onChange={this.dispatch}
         />
-        <button onClick={this.signup}>SignUp</button>
-        <button onClick={this.signin}>SignIn</button>
+
+        <Button onClick={this.signup}>SignUp</Button>
+        <Button onClick={this.signin}>SignIn</Button>
         {!this.props.profileQuery.loading && (
           <section>
             <p>Name: {this.props.profileQuery.me.name}</p>

@@ -8,6 +8,7 @@ import { Route, Redirect } from 'react-router';
 import media from '../styles/media';
 import Project from './Project';
 import Input from './Input';
+import Button from './Button';
 
 const SidebarContainer = styled.section`
   grid-area: sidebar;
@@ -98,7 +99,7 @@ class Projects extends React.Component {
           placeholder="awesome project"
           onChange={this.dispatch}
         />
-        <button onClick={this.addProject}>add</button>
+        <Button onClick={this.addProject}>add</Button>
         {projects && (
           <ProjectsContainer>
             {projects.map(project => (
