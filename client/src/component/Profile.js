@@ -12,10 +12,14 @@ import {
   Message,
 } from 'semantic-ui-react';
 
-import Input from './Input';
+import media from '../styles/media';
 
 const ContentContainer = styled.section`
   grid-area: content;
+  padding: 0.25rem;
+  ${media.m`
+    padding 0.75rem;
+  `};
 `;
 
 const initialState = {
@@ -82,7 +86,7 @@ class Profile extends React.Component {
             <Header as="h2" color="teal" textAlign="center">
               Profile
             </Header>
-            <Segment stacked>
+            <Segment raised>
               <Form.Input
                 value={this.state.email}
                 onChange={this.dispatch}
