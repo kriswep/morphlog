@@ -5,13 +5,9 @@ import { Menu, Icon } from 'semantic-ui-react';
 
 import media from '../styles/media';
 
-const HeaderContainer = styled.header`
-  grid-area: header;
-`;
-
 const activeItem = 'home';
 const Header = props => (
-  <HeaderContainer>
+  <header>
     <Menu color="teal" size="huge" pointing secondary>
       <Menu.Item as={Link} to="/" active={props.match.isExact}>
         <Icon size="large" name="home" />
@@ -28,7 +24,7 @@ const Header = props => (
         </Menu.Item>
       </Menu.Menu>
     </Menu>
-  </HeaderContainer>
+  </header>
 );
 
 export default Header;

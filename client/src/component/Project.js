@@ -7,10 +7,9 @@ import media from '../styles/media';
 import Changes from './Changes';
 
 const ContentContainer = styled.section`
-  grid-area: content;
-  padding: 0.25rem;
+  padding: 1rem 0.25rem 0.75rem;
   ${media.m`
-    padding 0.75rem;
+    padding: 1rem 0.75rem 0.75rem;
   `};
 `;
 

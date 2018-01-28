@@ -47,13 +47,15 @@ class App extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <Main className="App">
+        {/* <Main className="App"> */}
+        <div>
           <Route path="/" component={Header} />
           <Route exact path="/" component={Home} />
           <Route path="/project/:projectId?" component={Projects} />
           <Route path="/project/:projectId" component={Project} />
           <Route exact path="/profile" component={Profile} />
-        </Main>
+        </div>
+        {/* </Main> */}
       </ThemeProvider>
     );
   }

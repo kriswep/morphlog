@@ -1,8 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import media from '../styles/media';
+
 const ContentContainer = styled.section`
-  grid-area: content;
+  padding: 1rem 0.25rem 0.75rem;
+  ${media.m`
+    padding: 1rem 0.75rem 0.75rem;
+  `};
 `;
 
 const Home = props => (
