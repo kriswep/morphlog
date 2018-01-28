@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Menu } from 'semantic-ui-react';
 
 import media from '../styles/media';
 
@@ -43,16 +44,29 @@ const Title = styled(Link)`
     margin: 0.125rem 0 0.5rem 0;
   }
 `;
-
+const activeItem = 'home';
 const Header = props => (
   <HeaderContainer>
-    <Title to="/">
+    <Menu pointing secondary>
+      <Menu.Item active={activeItem === 'home'}>
+        <NavLink to="/">Home</NavLink>
+      </Menu.Item>
+      <Menu.Item active={activeItem === 'friends'}>
+        <NavLink to="/project">Projects</NavLink>
+      </Menu.Item>
+      <Menu.Menu position="right">
+        <Menu.Item active={activeItem === 'logout'}>
+          <NavLink to="/profile">Profile</NavLink>
+        </Menu.Item>
+      </Menu.Menu>
+    </Menu>
+    {/* <Title to="/">
       <h1>MorphLog</h1>
-    </Title>
-    <NavContainer>
+    </Title> */}
+    {/* <NavContainer>
       <NavLink to="/project">Projects</NavLink>
       <NavLink to="/profile">Profile</NavLink>
-    </NavContainer>
+    </NavContainer> */}
   </HeaderContainer>
 );
 
