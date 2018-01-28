@@ -5,7 +5,7 @@ import { Menu } from 'semantic-ui-react';
 
 import media from '../styles/media';
 
-const HeaderContainer = styled.header`
+const HeaderContainer = styled.div`
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1.45rem), 0 100%);
   grid-area: header;
   background: ${props => props.theme.main};
@@ -20,53 +20,22 @@ const HeaderContainer = styled.header`
   `};
 `;
 
-const NavContainer = styled.nav`
-  grid-column: 3 span;
-  grid-area: nav;
-  display: flex;
-  justify-content: space-between;
-  a {
-    text-decoration: none;
-    margin: 0 0.4rem 0 0;
-    color: ${props => props.theme.darkShades};
-  }
-  a.active {
-    color: ${props => props.theme.darkAccent};
-  }
-`;
-
-const Title = styled(Link)`
-  grid-column: 3 span;
-  grid-area: title;
-  text-decoration: none;
-  color: ${props => props.theme.darkShades};
-  h1 {
-    margin: 0.125rem 0 0.5rem 0;
-  }
-`;
 const activeItem = 'home';
 const Header = props => (
   <HeaderContainer>
     <Menu pointing secondary>
-      <Menu.Item active={activeItem === 'home'}>
-        <NavLink to="/">Home</NavLink>
+      <Menu.Item as={Link} to="/" active={props.match.isExact}>
+        Home
       </Menu.Item>
-      <Menu.Item active={activeItem === 'friends'}>
-        <NavLink to="/project">Projects</NavLink>
+      <Menu.Item as={NavLink} to="/project">
+        Projects
       </Menu.Item>
       <Menu.Menu position="right">
-        <Menu.Item active={activeItem === 'logout'}>
-          <NavLink to="/profile">Profile</NavLink>
+        <Menu.Item as={NavLink} to="/profile">
+          Profile
         </Menu.Item>
       </Menu.Menu>
     </Menu>
-    {/* <Title to="/">
-      <h1>MorphLog</h1>
-    </Title> */}
-    {/* <NavContainer>
-      <NavLink to="/project">Projects</NavLink>
-      <NavLink to="/profile">Profile</NavLink>
-    </NavContainer> */}
   </HeaderContainer>
 );
 
