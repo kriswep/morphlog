@@ -2,7 +2,15 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
 import styled from 'styled-components';
-import { Button } from 'semantic-ui-react';
+import {
+  Container,
+  Form,
+  Grid,
+  Button,
+  Header,
+  Segment,
+  Message,
+} from 'semantic-ui-react';
 
 import Input from './Input';
 
@@ -69,36 +77,54 @@ class Profile extends React.Component {
   render() {
     return (
       <ContentContainer>
-        <h2>Profile</h2>
-        <Input
-          name="email"
-          label="Email"
-          value={this.state.email}
-          type="text"
-          placeholder="email"
-          onChange={this.dispatch}
-        />
-        <Input
-          name="password"
-          label="Password"
-          value={this.state.password}
-          type="password"
-          placeholder="password"
-          onChange={this.dispatch}
-        />
-
-        <Button color="teal" onClick={this.signup}>
-          SignUp
-        </Button>
-        <Button color="teal" onClick={this.signin}>
-          SignIn
-        </Button>
-        {!this.props.profileQuery.loading && (
-          <section>
-            <p>Name: {this.props.profileQuery.me.name}</p>
-            <p>E-Mail: {this.props.profileQuery.me.email}</p>
-          </section>
-        )}
+        <Container>
+          <Form size="large">
+            <Header as="h2" color="teal" textAlign="center">
+              Profile
+            </Header>
+            <Segment stacked>
+              <Form.Input
+                value={this.state.email}
+                onChange={this.dispatch}
+                name="email"
+                label="E-Mail Address"
+                fluid
+                icon="user"
+                iconPosition="left"
+                placeholder="E-Mail Address"
+              />
+              <Form.Input
+                value={this.state.password}
+                onChange={this.dispatch}
+                name="password"
+                label="Password"
+                fluid
+                icon="lock"
+                iconPosition="left"
+                placeholder="Password"
+                type="password"
+              />
+              <Grid columns={2}>
+                <Grid.Column>
+                  <Button color="teal" fluid size="large" onClick={this.signin}>
+                    SignIn
+                  </Button>
+                </Grid.Column>
+                <Grid.Column>
+                  <Button fluid size="large" onClick={this.signup}>
+                    SignUp
+                  </Button>
+                </Grid.Column>
+              </Grid>
+            </Segment>
+          </Form>
+          {!this.props.profileQuery.loading && (
+            <Message>
+              <p>Name: {this.props.profileQuery.me.name}</p>
+              <p>E-Mail: {this.props.profileQuery.me.email}</p>
+            </Message>
+          )}
+        </Container>
       </ContentContainer>
     );
   }
