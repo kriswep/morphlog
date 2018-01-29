@@ -4,7 +4,7 @@ import { graphql, compose } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Route, Redirect } from 'react-router';
-import { Button, Icon } from 'semantic-ui-react';
+import { Grid, Button, Icon } from 'semantic-ui-react';
 
 import media from '../styles/media';
 import Project from './Project';
@@ -84,39 +84,91 @@ class Projects extends React.Component {
       // no project open, but we have projects: render project comp
       projectId = projects[0].id;
     }
-    return [
-      projectId && (
-        <Project key={`${projectId}Project}`} projectId={projectId} />
-      ),
-      <SidebarContainer key={`${projectId}ProjectList}`}>
-        <h2>Projects</h2>
-        <Input
-          name="name"
-          label="New project name"
-          value={this.state.name}
-          type="text"
-          placeholder="awesome project"
-          onChange={this.dispatch}
-        />
-        <Button color="teal" animated>
-          <Button.Content visible>Add</Button.Content>
-          <Button.Content hidden>
-            <Icon name="right arrow" />
-          </Button.Content>
-        </Button>
-        {projects && (
-          <ProjectsContainer>
-            {projects.map(project => (
-              <li key={project.id}>
-                <ProjectLink to={`/project/${project.id}`}>
-                  {project.name}
-                </ProjectLink>
-              </li>
-            ))}
-          </ProjectsContainer>
-        )}
-      </SidebarContainer>,
-    ];
+    return (
+      <Grid reverserd="mobile">
+        <Grid.Column
+          mobile={16}
+          tablet={8}
+          computer={8}
+          largeScreen={8}
+          widescreen={8}
+        >
+          <SidebarContainer key={`${projectId}ProjectList}`}>
+            <h2>Projects</h2>
+            <Input
+              name="name"
+              label="New project name"
+              value={this.state.name}
+              type="text"
+              placeholder="awesome project"
+              onChange={this.dispatch}
+            />
+            <Button color="teal" animated>
+              <Button.Content visible>Add</Button.Content>
+              <Button.Content hidden>
+                <Icon name="right arrow" />
+              </Button.Content>
+            </Button>
+            {projects && (
+              <ProjectsContainer>
+                {projects.map(project => (
+                  <li key={project.id}>
+                    <ProjectLink to={`/project/${project.id}`}>
+                      {project.name}
+                    </ProjectLink>
+                  </li>
+                ))}
+              </ProjectsContainer>
+            )}
+          </SidebarContainer>
+        </Grid.Column>
+        <Grid.Column
+          mobile={16}
+          tablet={8}
+          computer={8}
+          largeScreen={8}
+          widescreen={8}
+        >
+          {projectId && (
+            <Project key={`${projectId}Project}`} projectId={projectId} />
+          )}
+        </Grid.Column>
+      </Grid>
+    );
+
+    // return [
+    //   projectId && (
+    //     <Project key={`${projectId}Project}`} projectId={projectId} />
+    //   ),
+    //   <SidebarContainer key={`${projectId}ProjectList}`}>
+    //     <h2>Projects</h2>
+    //     <Input
+    //       name="name"
+    //       label="New project name"
+    //       value={this.state.name}
+    //       type="text"
+    //       placeholder="awesome project"
+    //       onChange={this.dispatch}
+    //     />
+    //     <Button color="teal" animated>
+    //       <Button.Content visible>Add</Button.Content>
+    //       <Button.Content hidden>
+    //         <Icon name="right arrow" />
+    //       </Button.Content>
+    //     </Button>
+    //     {projects && (
+    //       <ProjectsContainer>
+    //         {projects.map(project => (
+    //           <li key={project.id}>
+    //             <ProjectLink to={`/project/${project.id}`}>
+    //               {project.name}
+    //             </ProjectLink>
+    //           </li>
+    //         ))}
+    //       </ProjectsContainer>
+    //     )}
+    //   </SidebarContainer>,
+    // ];
   }
 }
 
