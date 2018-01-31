@@ -48,7 +48,6 @@ class App extends Component {
           <Route path="/" component={Header} />
           <Route exact path="/" component={Home} />
           <Route path="/project/:projectId?" component={Projects} />
-          <Route path="/project/:projectId" component={Project} />
           <Route exact path="/profile" component={Profile} />
         </div>
         {/* </Main> */}
