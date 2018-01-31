@@ -88,10 +88,10 @@ class Projects extends React.Component {
       <Grid reverserd="mobile">
         <Grid.Column
           mobile={16}
-          tablet={8}
-          computer={8}
-          largeScreen={8}
-          widescreen={8}
+          tablet={4}
+          computer={4}
+          largeScreen={4}
+          widescreen={4}
         >
           <SidebarContainer key={`${projectId}ProjectList}`}>
             <h2>Projects</h2>
@@ -124,10 +124,10 @@ class Projects extends React.Component {
         </Grid.Column>
         <Grid.Column
           mobile={16}
-          tablet={8}
-          computer={8}
-          largeScreen={8}
-          widescreen={8}
+          tablet={12}
+          computer={12}
+          largeScreen={12}
+          widescreen={12}
         >
           {projectId && (
             <Project key={`${projectId}Project}`} projectId={projectId} />
