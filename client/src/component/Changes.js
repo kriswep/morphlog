@@ -2,23 +2,13 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
 import styled from 'styled-components';
-import { Button } from 'semantic-ui-react';
+import { Button, Comment } from 'semantic-ui-react';
 
 import media from '../styles/media';
 import Input from './Input';
 
-const ContentContainer = styled.section`
-  grid-area: content;
-  padding: 0.25rem;
-  ${media.m`
-    padding 0.75rem;
-  `};
-`;
-
-const ChangeContainer = styled.ul`
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+const Author = styled.div`
+  display: inline-block;
 `;
 
 const initialState = {
@@ -101,15 +91,24 @@ class Project extends React.Component {
           Add
         </Button>
         {changes && (
-          <ChangeContainer>
+          <Comment.Group>
             {changes.map(change => (
-              <li key={change.id}>
-                {change.author.name}({new Date(
-                  change.createdAt,
-                ).toLocaleString()}): {change.text}
-              </li>
+              <Comment key={change.id}>
+                <Comment.Content>
+                  <Comment.Author as={Author}>
+                    {change.author.name}
+                  </Comment.Author>
+                  <Comment.Metadata>
+                    <div>{new Date(change.createdAt).toLocaleString()}</div>
+                  </Comment.Metadata>
+                  <Comment.Text>{change.text}</Comment.Text>
+                  <Comment.Actions>
+                    <Comment.Action>Maybe Change</Comment.Action>
+                  </Comment.Actions>
+                </Comment.Content>
+              </Comment>
             ))}
-          </ChangeContainer>
+          </Comment.Group>
         )}
       </div>
     );
