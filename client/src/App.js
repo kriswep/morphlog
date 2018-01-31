@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
-// import 'normalize.css';
-// import 'typeface-roboto';
 
 import Header from './component/Header';
 import Home from './component/Home';
@@ -12,8 +10,6 @@ import Project from './component/Project';
 
 import theme from './styles/theme';
 import media from './styles/media';
-
-// import './app.css';
 
 const Main = styled.section`
   min-height: 100vh;
