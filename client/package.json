@@ -3,18 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "apollo-client-preset": "^1.0.6",
-    "graphql": "^0.12.3",
-    "graphql-tag": "^2.6.1",
+    "apollo-client-preset": "^1.0.8",
+    "graphql": "^0.13.0",
+    "graphql-tag": "^2.7.3",
     "react": "^16.2.0",
     "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.0",
-    "semantic-ui-css": "^2.2.12",
-    "semantic-ui-react": "^0.77.2",
-    "styled-components": "^3.0.2"
+    "react-scripts": "1.1.1",
+    "semantic-ui-css": "^2.2.14",
+    "semantic-ui-react": "^0.78.2",
+    "styled-components": "^3.1.6"
   },
   "scripts": {
     "start": "react-scripts start",
