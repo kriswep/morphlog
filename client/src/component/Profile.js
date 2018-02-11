@@ -48,7 +48,9 @@ class Profile extends React.Component {
       .then(({ data }) => {
         console.log('got data', data);
         localStorage.setItem('auth', data.signup.token);
+        return this.props.profileQuery.refetch();
       })
+      .then(() => this.props.history.push('/profile'))
       .catch(error => {
         console.log('there was an error sending the query', error);
       })
@@ -68,7 +70,9 @@ class Profile extends React.Component {
       .then(({ data }) => {
         console.log('got data', data);
         localStorage.setItem('auth', data.login.token);
+        return this.props.profileQuery.refetch();
       })
+      .then(() => this.props.history.push('/profile'))
       .catch(error => {
         console.log('there was an error sending the query', error);
       })
@@ -81,52 +85,60 @@ class Profile extends React.Component {
     return (
       <ContentContainer>
         <Container>
-          <Form size="large">
-            <Header as="h2" color="teal" textAlign="center">
-              Profile
-            </Header>
-            <Segment raised>
-              <Form.Input
-                value={this.state.email}
-                onChange={this.dispatch}
-                name="email"
-                label="E-Mail Address"
-                fluid
-                icon="user"
-                iconPosition="left"
-                placeholder="E-Mail Address"
-              />
-              <Form.Input
-                value={this.state.password}
-                onChange={this.dispatch}
-                name="password"
-                label="Password"
-                fluid
-                icon="lock"
-                iconPosition="left"
-                placeholder="Password"
-                type="password"
-              />
-              <Grid columns={2}>
-                <Grid.Column>
-                  <Button color="teal" fluid size="large" onClick={this.signin}>
-                    SignIn
-                  </Button>
-                </Grid.Column>
-                <Grid.Column>
-                  <Button fluid size="large" onClick={this.signup}>
-                    SignUp
-                  </Button>
-                </Grid.Column>
-              </Grid>
-            </Segment>
-          </Form>
-          {!this.props.profileQuery.loading && (
-            <Message>
-              <p>Name: {this.props.profileQuery.me.name}</p>
-              <p>E-Mail: {this.props.profileQuery.me.email}</p>
-            </Message>
+          {!this.props.profileQuery.me && (
+            <Form size="large">
+              <Header as="h2" color="teal" textAlign="center">
+                Profile
+              </Header>
+              <Segment raised>
+                <Form.Input
+                  value={this.state.email}
+                  onChange={this.dispatch}
+                  name="email"
+                  label="E-Mail Address"
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  placeholder="E-Mail Address"
+                />
+                <Form.Input
+                  value={this.state.password}
+                  onChange={this.dispatch}
+                  name="password"
+                  label="Password"
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  type="password"
+                />
+                <Grid columns={2}>
+                  <Grid.Column>
+                    <Button
+                      color="teal"
+                      fluid
+                      size="large"
+                      onClick={this.signin}
+                    >
+                      SignIn
+                    </Button>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Button fluid size="large" onClick={this.signup}>
+                      SignUp
+                    </Button>
+                  </Grid.Column>
+                </Grid>
+              </Segment>
+            </Form>
           )}
+          {!this.props.profileQuery.loading &&
+            this.props.profileQuery.me && (
+              <Message>
+                <p>Name: {this.props.profileQuery.me.name}</p>
+                <p>E-Mail: {this.props.profileQuery.me.email}</p>
+              </Message>
+            )}
         </Container>
       </ContentContainer>
     );
