@@ -1,6 +1,6 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import { graphql, compose } from 'react-apollo';
+import { graphql, compose, withApollo } from 'react-apollo';
 import styled from 'styled-components';
 import {
   Container,
@@ -27,7 +27,20 @@ const initialState = {
 };
 
 class Profile extends React.Component {
-  state = initialState;
+  // state = initialState;
+  constructor(props) {
+    super(props);
+
+    this.state = initialState;
+
+    this.props.client.onResetStore(async () => {
+      console.log('store reset');
+
+      await this.props.profileQuery
+        .refetch()
+        .finally(() => this.props.history.replace('/profile'));
+    });
+  }
 
   dispatch = (e, v, x) => {
     if (e.target.name && e.target.name) {
@@ -35,6 +48,12 @@ class Profile extends React.Component {
       newState[e.target.name] = e.target.value;
       this.setState(newState);
     }
+  };
+
+  logOut = async () => {
+    localStorage.removeItem('auth');
+    this.props.history.replace('/profile');
+    // await this.props.client.resetStore();
   };
 
   signup = e => {
@@ -45,12 +64,11 @@ class Profile extends React.Component {
           password: this.state.password,
         },
       })
-      .then(({ data }) => {
+      .then(async ({ data }) => {
         console.log('got data', data);
         localStorage.setItem('auth', data.signup.token);
-        return this.props.profileQuery.refetch();
+        return await this.props.client.resetStore();
       })
-      .then(() => this.props.history.push('/profile'))
       .catch(error => {
         console.log('there was an error sending the query', error);
       })
@@ -67,12 +85,11 @@ class Profile extends React.Component {
           password: this.state.password,
         },
       })
-      .then(({ data }) => {
+      .then(async ({ data }) => {
         console.log('got data', data);
         localStorage.setItem('auth', data.login.token);
-        return this.props.profileQuery.refetch();
+        return await this.props.client.resetStore();
       })
-      .then(() => this.props.history.push('/profile'))
       .catch(error => {
         console.log('there was an error sending the query', error);
       })
@@ -137,6 +154,10 @@ class Profile extends React.Component {
               <Message>
                 <p>Name: {this.props.profileQuery.me.name}</p>
                 <p>E-Mail: {this.props.profileQuery.me.email}</p>
+
+                <Button color="teal" fluid size="large" onClick={this.logOut}>
+                  LogOut
+                </Button>
               </Message>
             )}
         </Container>
@@ -179,8 +200,13 @@ const PROFILE_QUERY = gql`
   }
 `;
 
-export default compose(
-  graphql(PROFILE_QUERY, { name: 'profileQuery' }),
-  graphql(SIGNUP_MUTATION, { name: 'signupMutation' }),
-  graphql(SIGNIN_MUTATION, { name: 'signinMutation' }),
-)(Profile);
+export default withApollo(
+  compose(
+    graphql(PROFILE_QUERY, {
+      name: 'profileQuery',
+      options: { fetchPolicy: 'network-only' },
+    }),
+    graphql(SIGNUP_MUTATION, { name: 'signupMutation' }),
+    graphql(SIGNIN_MUTATION, { name: 'signinMutation' }),
+  )(Profile),
+);
