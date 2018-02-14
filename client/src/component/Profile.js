@@ -36,9 +36,7 @@ class Profile extends React.Component {
     this.props.client.onResetStore(async () => {
       console.log('store reset');
 
-      await this.props.profileQuery
-        .refetch()
-        .finally(() => this.props.history.replace('/profile'));
+      await this.props.profileQuery.refetch();
     });
   }
 
@@ -52,8 +50,7 @@ class Profile extends React.Component {
 
   logOut = async () => {
     localStorage.removeItem('auth');
-    this.props.history.replace('/profile');
-    // await this.props.client.resetStore();
+    await this.props.client.resetStore();
   };
 
   signup = e => {
