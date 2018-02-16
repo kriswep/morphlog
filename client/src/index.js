@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
+// import ApolloClient from 'apollo-boost';
 import { ApolloClient } from 'apollo-client';
 import { createHttpLink } from 'apollo-link-http';
 import { ApolloLink } from 'apollo-client-preset';
@@ -10,6 +11,19 @@ import 'semantic-ui-css/semantic.min.css';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+
+// const client = new ApolloClient({
+//   uri: 'http://localhost:4000',
+//   request: async (operation, demo, v) => {
+//     const token = localStorage.getItem('auth');
+//     const authorization = token ? `Bearer ${token}` : null;
+//     operation.setContext({
+//       headers: {
+//         authorization,
+//       },
+//     });
+//   },
+// });
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000',
