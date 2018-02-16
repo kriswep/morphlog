@@ -103,7 +103,7 @@ class Projects extends React.Component {
               placeholder="awesome project"
               onChange={this.dispatch}
             />
-            <Button color="teal" animated>
+            <Button color="teal" animated onClick={this.addProject}>
               <Button.Content visible>Add</Button.Content>
               <Button.Content hidden>
                 <Icon name="right arrow" />
