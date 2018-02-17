@@ -14,7 +14,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 // const client = new ApolloClient({
 //   uri: 'http://localhost:4000',
-//   request: async (operation, demo, v) => {
+//   request: async operation => {
 //     const token = localStorage.getItem('auth');
 //     const authorization = token ? `Bearer ${token}` : null;
 //     operation.setContext({
