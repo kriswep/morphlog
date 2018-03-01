@@ -1,5 +1,6 @@
 import { getUserId, isUserProjectAllowed, Context } from './utils';
-
+// see https://github.com/LawJolla/prisma-auth0-example
+// https://blog.graph.cool/graphql-directive-permissions-authorization-made-easy-54c076b5368e
 const directiveResolvers = {
   isAuthenticated: (next, source, args, context: Context) => {
     getUserId(context);
