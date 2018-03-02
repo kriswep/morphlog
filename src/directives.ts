@@ -6,25 +6,29 @@ const directiveResolvers = {
     getUserId(context);
     return next();
   },
-  isAllowed: (next, source, args, context: Context) => {
-    /**
-     * sadly only works with querys with variables:
-    query project($id: ID!) {
-      project(id: $id) {
-        id
-        name
-      }
-    }
-     * not
-    {
-      project(id: "cjcp94wxp025801100npb28yg") {
-        id
-        name
-      }
-    }
-     */
-    const { id: projectId } = context.request.body.variables;
-    isUserProjectAllowed(context, projectId);
+  isAllowed: async (
+    next,
+    source,
+    { fieldNode, argumentName },
+    context: Context,
+    info,
+  ) => {
+    // // doesn't really work with variable querys, but with normal ones
+    // const projectId = info.fieldNodes
+    //   .filter(node => node.name.value === fieldNode)
+    //   .reduce(
+    //     (acc, node) =>
+    //       (acc = [
+    //         ...acc,
+    //         ...node.arguments.filter(arg => arg.name.value === argumentName),
+    //       ]),
+    //     [],
+    //   )
+    //   .reduce((acc, args) => (acc = args.value.value), '');
+    // debugger;
+    // // doesn't really work with normal querys, but with variable ones
+    // // const { id: projectId } = context.request.body.variables;
+    // await isUserProjectAllowed(context, projectId);
     return next();
   },
 };
