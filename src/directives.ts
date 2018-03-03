@@ -13,6 +13,7 @@ const directiveResolvers = {
     context: Context,
     info,
   ) => {
+    console.log(fieldNode);
     // // doesn't really work with variable querys, but with normal ones
     // const projectId = info.fieldNodes
     //   .filter(node => node.name.value === fieldNode)
