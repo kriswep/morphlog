@@ -1,8 +1,7 @@
 import addResolver from './addResolver';
+import { getUserId } from './index';
 
 /* eslint-disable import/prefer-default-export */
-export const requiresAuth = addResolver((parent, args, { user }) => {
-  if (!user || !user.sub) {
-    throw new Error('Not authenticated');
-  }
+export const requiresAuth = addResolver((parent, args, context) => {
+  return getUserId(context);
 });

@@ -1,29 +1,39 @@
 import * as jwt from 'jsonwebtoken';
 // import { Prisma } from 'prisma-binding';
-import { Prisma } from '../generated/prisma';
+import { Prisma, ID_Input } from '../generated/prisma';
 
 export interface Context {
   db: Prisma;
   request: any;
 }
 
-export function getUserId(ctx: Context) {
+export class AuthError extends Error {
+  constructor() {
+    super('Not Authenticated');
+  }
+}
+
+export class AccessError extends Error {
+  constructor() {
+    super('No Access');
+  }
+}
+
+export function getUserId(ctx: Context): ID_Input {
   const Authorization = ctx.request.get('Authorization');
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '');
-    const { userId } = jwt.verify(token, process.env.APP_SECRET) as {
-      userId: string;
-    };
-    return userId;
+    try {
+      const { userId } = jwt.verify(token, process.env.APP_SECRET) as {
+        userId: string;
+      };
+      return userId;
+    } catch (e) {
+      throw new AuthError();
+    }
   }
 
   throw new AuthError();
-}
-
-export class AuthError extends Error {
-  constructor() {
-    super('Not authorized');
-  }
 }
 
 export async function isUserProjectAllowed(ctx: Context, projectId) {
@@ -41,10 +51,4 @@ export async function isUserProjectAllowed(ctx: Context, projectId) {
   }
 
   throw new AccessError();
-}
-
-export class AccessError extends Error {
-  constructor() {
-    super('No Access');
-  }
 }

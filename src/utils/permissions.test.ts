@@ -1,17 +1,33 @@
 /* globals test expect */
-
 import { requiresAuth } from './permissions';
+import * as jwt from 'jsonwebtoken';
 
-test('requiresAuth should not throw if authenticated', async () => {
-  const user = { sub: 3 };
+test('requiresAuth should not throw if authenticated with token', async () => {
+  const auth = jwt.sign({ userId: 1 }, process.env.APP_SECRET);
 
-  expect(requiresAuth.bind(null, '', '', { user })).not.toThrow();
+  const userId = requiresAuth('', '', {
+    request: { get: () => auth },
+  });
+  expect(userId).toBe(1);
+});
+
+test('requiresAuth should throw if trying to authenticate with false token', async () => {
+  const invalidTokenAuth = jwt.sign({ userId: 1 }, 'malicious secret');
+
+  expect(
+    requiresAuth.bind(null, '', '', {
+      request: { get: () => invalidTokenAuth },
+    }),
+  ).toThrow('Not Authenticated');
+  expect(
+    requiresAuth.bind(null, '', '', { request: { get: () => 'malformedJWT' } }),
+  ).toThrow('Not Authenticated');
 });
 
 test('requiresAuth should throw if not authenticated', async () => {
   const user = {};
 
-  expect(requiresAuth.bind(null, '', '', { user })).toThrow(
-    'Not authenticated',
-  );
+  expect(
+    requiresAuth.bind(null, '', '', { request: { get: () => {} } }),
+  ).toThrow('Not Authenticated');
 });

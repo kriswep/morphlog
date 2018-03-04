@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "scripts": {
     "start": "dotenv -- nodemon -e ts,graphql -x ts-node src/index.ts",
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "test": "dotenv -e .env.test jest -- --coverage",
+    "test:watch": "dotenv -e .env.test jest -- --watch",
     "dev": "npm-run-all --parallel start playground",
     "debug":
       "dotenv -- nodemon -e ts,graphql -x ts-node --inspect src/index.ts",
@@ -20,7 +20,7 @@
   "devDependencies": {
     "@types/bcryptjs": "2.4.1",
     "@types/jest": "^22.1.4",
-    "dotenv-cli": "1.4.0",
+    "dotenv-cli": "^1.4.0",
     "graphql-cli": "^2.14.2",
     "jest": "^22.4.2",
     "nodemon": "^1.15.1",
