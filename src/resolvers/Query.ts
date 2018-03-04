@@ -1,16 +1,19 @@
 import { getUserId, isUserProjectAllowed, Context } from '../utils';
+import { requiresAuth } from '../utils/permissions';
 
 export const Query = {
-  async project(parent, { id }, ctx: Context, info) {
-    await isUserProjectAllowed(ctx, id);
-    return ctx.db.query.project({ where: { id } }, info);
-  },
+  project: requiresAuth.addResolver(
+    async (parent, { id }, ctx: Context, info) => {
+      await isUserProjectAllowed(ctx, id);
+      return ctx.db.query.project({ where: { id } }, info);
+    },
+  ),
 
-  change(parent, { id }, ctx: Context, info) {
+  change: requiresAuth.addResolver((parent, { id }, ctx: Context, info) => {
     return ctx.db.query.change({ where: { id } }, info);
-  },
+  }),
 
-  projects(parent, filter, ctx: Context, info) {
+  projects: requiresAuth.addResolver((parent, filter, ctx: Context, info) => {
     const id = getUserId(ctx);
 
     return ctx.db.query.projects(
@@ -29,24 +32,26 @@ export const Query = {
       },
       info,
     );
-  },
+  }),
 
-  async changes(parent, { projectId, ...filter }, ctx: Context, info) {
-    await isUserProjectAllowed(ctx, projectId);
-    const where = {
-      project: {
-        id: projectId,
-      },
-    };
+  changes: requiresAuth.addResolver(
+    async (parent, { projectId, ...filter }, ctx: Context, info) => {
+      await isUserProjectAllowed(ctx, projectId);
+      const where = {
+        project: {
+          id: projectId,
+        },
+      };
 
-    return ctx.db.query.changes(
-      { ...filter, orderBy: 'createdAt_DESC', where },
-      info,
-    );
-  },
+      return ctx.db.query.changes(
+        { ...filter, orderBy: 'createdAt_DESC', where },
+        info,
+      );
+    },
+  ),
 
-  me(parent, args, ctx: Context, info) {
+  me: requiresAuth.addResolver((parent, args, ctx: Context, info) => {
     const id = getUserId(ctx);
     return ctx.db.query.user({ where: { id } }, info);
-  },
+  }),
 };
