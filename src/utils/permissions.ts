@@ -1,7 +1,17 @@
 import addResolver from './addResolver';
-import { getUserId } from './index';
+import { getUserId, isUserProjectAllowed, Context } from './index';
 
-/* eslint-disable import/prefer-default-export */
-export const requiresAuth = addResolver((parent, args, context) => {
-  return getUserId(context);
+export const requiresAuth = addResolver((parent, args, context: Context) => {
+  const userId = getUserId(context);
+
+  context.user = { id: userId };
+
+  return userId;
 });
+
+export const requiresProjectAccess = addResolver(
+  async (parent, args, context: Context) => {
+    const projectId = args.projectId || args.id;
+    return await isUserProjectAllowed(context, projectId);
+  },
+);

@@ -4,6 +4,7 @@ import { Prisma, ID_Input } from '../generated/prisma';
 export interface Context {
   db: Prisma;
   request: any;
+  user: { id: ID_Input };
 }
 
 export class AuthError extends Error {
@@ -37,6 +38,9 @@ export function getUserId(ctx: Context): ID_Input {
 
 export async function isUserProjectAllowed(ctx: Context, projectId) {
   const userId = getUserId(ctx);
+  if (!userId || !projectId) {
+    throw new AccessError();
+  }
   const projectMember = ctx.db.exists.Project({
     id: projectId,
     member_some: { id: userId },
