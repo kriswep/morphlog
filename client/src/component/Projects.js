@@ -1,6 +1,5 @@
 import React from 'react';
-// import { gql } from 'apollo-boost';
-import gql from 'graphql-tag';
+import { gql } from 'apollo-boost';
 import { graphql, compose } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
