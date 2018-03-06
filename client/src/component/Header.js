@@ -18,7 +18,7 @@ const Header = props => (
     </Menu.Item>
     <Menu.Menu position="right">
       <Menu.Item as={NavLink} to="/profile">
-        <Icon size="large" name="user circle outline" />
+        <Icon size="large" name="user" />
         Profile
       </Menu.Item>
     </Menu.Menu>
