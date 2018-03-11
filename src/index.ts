@@ -1,7 +1,7 @@
+// import { schema } from './generated/prisma.graphql';
 import { GraphQLServer } from 'graphql-yoga';
-import { Prisma } from './generated/prisma';
-import { bodyParserGraphQL } from 'body-parser-graphql';
 
+import { Prisma } from './generated/prisma';
 import resolvers from './resolvers';
 import directiveResolvers from './directives';
 
@@ -18,7 +18,5 @@ const server = new GraphQLServer({
     }),
   }),
 });
-
-server.express.use(bodyParserGraphQL());
 
 server.start(() => console.log(`Server is running on http://localhost:4000`));
