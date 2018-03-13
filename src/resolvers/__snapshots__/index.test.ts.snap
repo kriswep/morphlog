@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Query should have needed resolvers 1`] = `
+Object {
+  "AuthPayload": Object {
+    "user": [Function],
+  },
+  "Mutation": Object {
+    "addChange": [Function],
+    "addProjectMember": [Function],
+    "createProject": [Function],
+    "login": [Function],
+    "signup": [Function],
+    "updateChange": [Function],
+  },
+  "Query": Object {
+    "change": [Function],
+    "changes": [Function],
+    "me": [Function],
+    "project": [Function],
+    "projects": [Function],
+  },
+}
+`;
