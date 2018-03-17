@@ -1,12 +1,4 @@
 # import Project from "./generated/prisma.graphql"
-directive @isAuthenticated on QUERY | FIELD | MUTATION
-
-directive @isAllowed(
-  fieldNode: String
-  argumentName: String
-) on QUERY | FIELD | MUTATION
-
-# directive @hasRole(roles: [String]) on QUERY | FIELD | MUTATION
 
 type Query {
   projects(
@@ -15,9 +7,8 @@ type Query {
     before: String
     first: Int
     last: Int
-  ): [Project!]! @isAuthenticated
+  ): [Project!]!
   project(id: ID!): Project!
-    @isAllowed(fieldNode: "project", argumentName: "id")
   change(id: ID!): Change!
   changes(
     projectId: ID!
