@@ -23,12 +23,12 @@ export const project = {
       id: project,
       admin_some: { id: userId },
     });
-    const userExists = await ctx.db.exists.User({
-      id: user,
-    });
     if (!isProjectAdmin) {
       throw new Error(`Project not found or you're not an admin`);
     }
+    const userExists = await ctx.db.exists.User({
+      id: user,
+    });
     if (!userExists) {
       throw new Error(`User does not exist`);
     }
