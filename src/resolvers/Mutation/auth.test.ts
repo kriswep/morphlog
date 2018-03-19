@@ -72,7 +72,6 @@ test('auth should be able to login and return token', async () => {
   expect(err.toString()).toEqual('Error: Invalid password');
 
   // good call
-  console.log(password);
   const received = await auth.login(
     {},
     { email: 'mymail', password },
