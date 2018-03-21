@@ -4,8 +4,8 @@ import { getUserId, isUserProjectAllowed } from '../utils';
 import { Query } from './Query';
 
 jest.mock('../utils', () => ({
-  getUserId: jest.fn(),
-  isUserProjectAllowed: jest.fn(),
+  getUserId: jest.fn(() => 'userId'),
+  isUserProjectAllowed: jest.fn(() => true),
 }));
 
 test('Query should have needed resolvers', async () => {
@@ -61,6 +61,40 @@ test('query for change', async () => {
   expect(received).toBeTruthy();
   expect(context.db.query.change).toBeCalledWith(
     { where: { id: 1 } },
+    { info: 2 },
+  );
+  getUserId.mockClear();
+  isUserProjectAllowed.mockClear();
+});
+
+test('query for projects', async () => {
+  const context = {
+    user: { id: 'DS' },
+    db: {
+      query: {
+        projects: jest.fn(() => true),
+      },
+    },
+  };
+
+  const received = await Query.projects({}, { id: 1 }, context, {
+    info: 2,
+  });
+
+  // guards called?
+  expect(getUserId).toHaveBeenCalledTimes(1);
+  // check resolver
+  expect(received).toBeTruthy();
+  expect(context.db.query.projects).toBeCalledWith(
+    {
+      id: 1,
+      where: {
+        OR: [
+          { member_some: { id: 'userId' } },
+          { admin_some: { id: 'userId' } },
+        ],
+      },
+    },
     { info: 2 },
   );
   getUserId.mockClear();
