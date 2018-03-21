@@ -38,4 +38,31 @@ test('query for project', async () => {
     { where: { id: 1 } },
     { info: 2 },
   );
+  getUserId.mockClear();
+  isUserProjectAllowed.mockClear();
+});
+
+test('query for change', async () => {
+  const context = {
+    db: {
+      query: {
+        change: jest.fn(() => true),
+      },
+    },
+  };
+
+  const received = await Query.change({}, { id: 1 }, context, {
+    info: 2,
+  });
+
+  // guards called?
+  expect(getUserId).toHaveBeenCalledTimes(1);
+  // check resolver
+  expect(received).toBeTruthy();
+  expect(context.db.query.change).toBeCalledWith(
+    { where: { id: 1 } },
+    { info: 2 },
+  );
+  getUserId.mockClear();
+  isUserProjectAllowed.mockClear();
 });

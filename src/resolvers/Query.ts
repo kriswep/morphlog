@@ -8,6 +8,7 @@ export const Query = {
       ctx.db.query.project({ where: { id } }, info),
     ),
 
+  // todo: guard for project per fragments
   change: requiresAuth.addResolver((parent, { id }, ctx: Context, info) =>
     ctx.db.query.change({ where: { id } }, info),
   ),
