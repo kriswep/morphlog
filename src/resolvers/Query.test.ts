@@ -69,7 +69,6 @@ test('query for change', async () => {
 
 test('query for projects', async () => {
   const context = {
-    user: { id: 'DS' },
     db: {
       query: {
         projects: jest.fn(() => true),
@@ -95,6 +94,37 @@ test('query for projects', async () => {
         ],
       },
     },
+    { info: 2 },
+  );
+  getUserId.mockClear();
+  isUserProjectAllowed.mockClear();
+});
+
+test('query for changes', async () => {
+  const context = {
+    db: {
+      query: {
+        changes: jest.fn(() => true),
+      },
+    },
+  };
+
+  const received = await Query.changes(
+    {},
+    { projectId: 1, rest: true },
+    context,
+    {
+      info: 2,
+    },
+  );
+
+  // guards called?
+  expect(getUserId).toHaveBeenCalledTimes(1);
+  expect(isUserProjectAllowed).toHaveBeenCalledTimes(1);
+  // check resolver
+  expect(received).toBeTruthy();
+  expect(context.db.query.changes).toBeCalledWith(
+    { orderBy: 'createdAt_DESC', rest: true, where: { project: { id: 1 } } },
     { info: 2 },
   );
   getUserId.mockClear();
