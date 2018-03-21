@@ -130,3 +130,28 @@ test('query for changes', async () => {
   getUserId.mockClear();
   isUserProjectAllowed.mockClear();
 });
+
+test('query for me', async () => {
+  const context = {
+    db: {
+      query: {
+        user: jest.fn(() => true),
+      },
+    },
+  };
+
+  const received = await Query.me({}, {}, context, {
+    info: 2,
+  });
+
+  // guards called?
+  expect(getUserId).toHaveBeenCalledTimes(1);
+  // check resolver
+  expect(received).toBeTruthy();
+  expect(context.db.query.user).toBeCalledWith(
+    { where: { id: 'userId' } },
+    { info: 2 },
+  );
+  getUserId.mockClear();
+  isUserProjectAllowed.mockClear();
+});
