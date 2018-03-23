@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders without crashing and correctly 1`] = `
+<div>
+  <Route
+    component={[Function]}
+    path="/"
+  />
+  <Route
+    component={[Function]}
+    exact={true}
+    path="/"
+  />
+  <Route
+    component={[Function]}
+    path="/project/:projectId?"
+  />
+  <Route
+    component={[Function]}
+    exact={true}
+    path="/profile"
+  />
+</div>
+`;
