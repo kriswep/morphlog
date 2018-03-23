@@ -1,9 +1,6 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { Menu, Icon } from 'semantic-ui-react';
-
-import media from '../styles/media';
 
 const activeItem = 'home';
 const Header = props => (

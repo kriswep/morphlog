@@ -4,7 +4,6 @@ import { graphql, compose } from 'react-apollo';
 import styled from 'styled-components';
 import { Button, Comment } from 'semantic-ui-react';
 
-import media from '../styles/media';
 import Input from './Input';
 
 const Author = styled.div`

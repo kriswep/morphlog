@@ -1,24 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders without crashing and correctly 1`] = `
-<div>
-  <Route
-    component={[Function]}
-    path="/"
-  />
-  <Route
-    component={[Function]}
-    exact={true}
-    path="/"
-  />
-  <Route
-    component={[Function]}
-    path="/project/:projectId?"
-  />
-  <Route
-    component={[Function]}
-    exact={true}
-    path="/profile"
-  />
-</div>
+<ThemeProvider
+  theme={
+    Object {
+      "altPositiveColor": "#2b8e38",
+      "altPositiveDarkColor": "#22732d",
+      "darkAccent": "#454346",
+      "darkShades": "#251D32",
+      "darkestShades": "#09070c",
+      "lightAccent": "#B8A896",
+      "lightShades": "#F4F2F3",
+      "lightestAccent": "#F1DFF0",
+      "main": "#DC680B",
+      "positiveColor": "#39b54a",
+      "positiveDarkColor": "#34aa44",
+    }
+  }
+>
+  <div>
+    <Route
+      component={[Function]}
+      path="/"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/"
+    />
+    <Route
+      component={[Function]}
+      path="/project/:projectId?"
+    />
+    <Route
+      component={[Function]}
+      exact={true}
+      path="/profile"
+    />
+  </div>
+</ThemeProvider>
 `;
