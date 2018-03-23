@@ -1,3 +1,4 @@
+/* globals test expect jest */
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
@@ -13,9 +14,8 @@ jest.mock('./component/Profile', () => jest.fn());
 jest.mock('./component/Projects', () => jest.fn());
 jest.mock('./component/Project', () => jest.fn());
 
-it('renders without crashing and correctly', () => {
+test('renders without crashing and correctly', () => {
   const wrapper = shallow(<App />);
   expect(wrapper).toExist();
-  expect(wrapper);
   expect(toJson(wrapper)).toMatchSnapshot();
 });

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input renders a input 1`] = `
+<styled.div>
+  <styled.input
+    data-prop="myData"
+    name="myName"
+  />
+</styled.div>
+`;
+
+exports[`Input renders a textarea 1`] = `
+<styled.div>
+  <styled.label
+    for="myName"
+  >
+    myLabel
+  </styled.label>
+  <styled.textarea
+    data-prop="myData"
+    name="myName"
+  />
+</styled.div>
+`;
