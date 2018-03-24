@@ -18,13 +18,13 @@ const initialState = {};
 export class Project extends React.Component {
   state = initialState;
 
-  dispatch = (e, v, x) => {
-    if (e.target.name && e.target.name) {
-      const newState = {};
-      newState[e.target.name] = e.target.value;
-      this.setState(newState);
-    }
-  };
+  // dispatch = (e, v, x) => {
+  //   if (e.target.name && e.target.name) {
+  //     const newState = {};
+  //     newState[e.target.name] = e.target.value;
+  //     this.setState(newState);
+  //   }
+  // };
 
   render() {
     const project = this.props.projectQuery.project;
