@@ -8,7 +8,7 @@ import toJson from 'enzyme-to-json';
 import createClient from '../../utils/apolloMocks';
 import Changes from './Changes';
 
-import ProjectWithApollo, { Project } from './Project';
+import Project from './Project';
 
 jest.mock('./Changes', () => {
   return () => <div>MockedChange</div>;
@@ -31,10 +31,10 @@ const client = createClient(mocks);
 test('Projects renders correctly', async () => {
   const wrapper = mount(
     <ApolloProvider client={client}>
-      <ProjectWithApollo projectId="cjcp94wxp025801100npb28yg" />
+      <Project projectId="cjcp94wxp025801100npb28yg" />
     </ApolloProvider>,
   );
   await new Promise(res => window.setTimeout(res, 1));
   wrapper.setProps({ projectId: 'bar' }); // poke it to rerender...
-  expect(toJson(wrapper.find(Project))).toMatchSnapshot();
+  expect(toJson(wrapper.find('[data-test="project"]'))).toMatchSnapshot();
 });

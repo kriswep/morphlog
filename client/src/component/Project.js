@@ -15,21 +15,13 @@ const ContentContainer = styled.section`
 
 const initialState = {};
 
-export class Project extends React.Component {
+class Project extends React.Component {
   state = initialState;
-
-  // dispatch = (e, v, x) => {
-  //   if (e.target.name && e.target.name) {
-  //     const newState = {};
-  //     newState[e.target.name] = e.target.value;
-  //     this.setState(newState);
-  //   }
-  // };
 
   render() {
     const project = this.props.projectQuery.project;
     return (
-      <ContentContainer>
+      <ContentContainer data-test="project">
         {project && (
           <div>
             <h2>{project.name}</h2>

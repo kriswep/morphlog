@@ -1,48 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Projects renders correctly 1`] = `
-<Project
-  projectId="cjcp94wxp025801100npb28yg"
-  projectQuery={
-    Object {
-      "error": undefined,
-      "fetchMore": [Function],
-      "loading": false,
-      "networkStatus": 7,
-      "project": Object {
-        "__typename": "Project",
-        "id": "cjcp94wxp025801100npb28yg",
-        "name": "MyProject",
-        Symbol(id): "Project:cjcp94wxp025801100npb28yg",
-      },
-      "refetch": [Function],
-      "startPolling": [Function],
-      "stopPolling": [Function],
-      "subscribeToMore": [Function],
-      "updateQuery": [Function],
-      "variables": Object {
-        "id": "cjcp94wxp025801100npb28yg",
-      },
-    }
-  }
+Array [
+  <styled.section
+    data-test="project"
 >
-  <styled.section>
     <section
-      className="sc-bdVaJa fmkqYI"
+        className="sc-bdVaJa fmkqYI"
+        data-test="project"
     >
-      <div>
+        <div>
+            <h2>
+                MyProject
+            </h2>
+            <Component
+                projectId="cjcp94wxp025801100npb28yg"
+            >
+                <div>
+                    MockedChange
+                </div>
+            </Component>
+        </div>
+    </section>
+</styled.section>,
+  <section
+    className="sc-bdVaJa fmkqYI"
+    data-test="project"
+>
+    <div>
         <h2>
-          MyProject
+            MyProject
         </h2>
         <Component
-          projectId="cjcp94wxp025801100npb28yg"
+            projectId="cjcp94wxp025801100npb28yg"
         >
-          <div>
-            MockedChange
-          </div>
+            <div>
+                MockedChange
+            </div>
         </Component>
-      </div>
-    </section>
-  </styled.section>
-</Project>
+    </div>
+</section>,
+]
 `;
