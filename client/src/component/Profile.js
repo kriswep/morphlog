@@ -97,7 +97,7 @@ class Profile extends React.Component {
 
   render() {
     return (
-      <ContentContainer>
+      <ContentContainer data-test="profile">
         <Container>
           {!this.props.profileQuery.me && (
             <Form size="large">

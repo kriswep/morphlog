@@ -1,0 +1,90 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile renders correctly 1`] = `
+Array [
+  <styled.section
+    data-test="profile"
+>
+    <section
+        className="sc-bdVaJa fmkqYI"
+        data-test="profile"
+    >
+        <Container>
+            <div
+                className="ui container"
+            >
+                <Message>
+                    <div
+                        className="ui message"
+                    >
+                        <p>
+                            Name: 
+                            Hello World
+                        </p>
+                        <p>
+                            E-Mail: 
+                            Hello World
+                        </p>
+                        <Button
+                            as="button"
+                            color="teal"
+                            fluid={true}
+                            onClick={[Function]}
+                            size="large"
+                        >
+                            <button
+                                className="ui teal large fluid button"
+                                onClick={[Function]}
+                                role="button"
+                            >
+                                LogOut
+                            </button>
+                        </Button>
+                    </div>
+                </Message>
+            </div>
+        </Container>
+    </section>
+</styled.section>,
+  <section
+    className="sc-bdVaJa fmkqYI"
+    data-test="profile"
+>
+    <Container>
+        <div
+            className="ui container"
+        >
+            <Message>
+                <div
+                    className="ui message"
+                >
+                    <p>
+                        Name: 
+                        Hello World
+                    </p>
+                    <p>
+                        E-Mail: 
+                        Hello World
+                    </p>
+                    <Button
+                        as="button"
+                        color="teal"
+                        fluid={true}
+                        onClick={[Function]}
+                        size="large"
+                    >
+                        <button
+                            className="ui teal large fluid button"
+                            onClick={[Function]}
+                            role="button"
+                        >
+                            LogOut
+                        </button>
+                    </Button>
+                </div>
+            </Message>
+        </div>
+    </Container>
+</section>,
+]
+`;
