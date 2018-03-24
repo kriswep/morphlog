@@ -1,6 +1,6 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
-import { graphql, compose, Query, Mutation } from 'react-apollo';
+import { graphql, Query, Mutation } from 'react-apollo';
 import styled from 'styled-components';
 import { Button, Comment } from 'semantic-ui-react';
 

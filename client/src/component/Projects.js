@@ -1,6 +1,6 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
-import { graphql, compose, Query, Mutation } from 'react-apollo';
+import { graphql, Query, Mutation } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Route, Redirect } from 'react-router';

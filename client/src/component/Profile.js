@@ -1,6 +1,6 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
-import { graphql, compose, withApollo, Query, Mutation } from 'react-apollo';
+import { graphql, withApollo, Query, Mutation } from 'react-apollo';
 import styled from 'styled-components';
 import {
   Container,
@@ -67,11 +67,11 @@ class Profile extends React.Component {
 
     this.state = initialState;
 
-    this.props.client.onResetStore(async () => {
-      console.log('store reset');
+    // this.props.client.onResetStore(async () => {
+    //   console.log('store reset');
 
-      await this.props.profileQuery.refetch();
-    });
+    //   await this.props.profileQuery.refetch();
+    // });
   }
 
   dispatch = (e, v, x) => {
@@ -129,7 +129,7 @@ class Profile extends React.Component {
 
   render() {
     return (
-      <Query query={PROFILE_QUERY}>
+      <Query query={PROFILE_QUERY} fetchPolicy="network-only">
         {({
           loading: loadingProfile,
           error: errorProfile,
@@ -165,7 +165,7 @@ class Profile extends React.Component {
                   return (
                     <ContentContainer data-test="profile">
                       <Container>
-                        {!this.props.profileQuery.me && (
+                        {(!dataProfile || !dataProfile.me) && (
                           <Form size="large">
                             <Header as="h2" color="teal" textAlign="center">
                               Profile
@@ -222,11 +222,12 @@ class Profile extends React.Component {
                             </Segment>
                           </Form>
                         )}
-                        {!this.props.profileQuery.loading &&
-                          this.props.profileQuery.me && (
+                        {!loadingProfile &&
+                          dataProfile &&
+                          dataProfile.me && (
                             <Message>
-                              <p>Name: {this.props.profileQuery.me.name}</p>
-                              <p>E-Mail: {this.props.profileQuery.me.email}</p>
+                              <p>Name: {dataProfile.me.name}</p>
+                              <p>E-Mail: {dataProfile.me.email}</p>
 
                               <Button
                                 color="teal"
@@ -251,13 +252,4 @@ class Profile extends React.Component {
   }
 }
 
-export default withApollo(
-  compose(
-    graphql(PROFILE_QUERY, {
-      name: 'profileQuery',
-      options: { fetchPolicy: 'network-only' },
-    }),
-    graphql(SIGNUP_MUTATION, { name: 'signupMutation' }),
-    graphql(SIGNIN_MUTATION, { name: 'signinMutation' }),
-  )(Profile),
-);
+export default withApollo(Profile);
