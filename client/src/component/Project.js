@@ -15,7 +15,7 @@ const ContentContainer = styled.section`
 
 const initialState = {};
 
-class Project extends React.Component {
+export class Project extends React.Component {
   state = initialState;
 
   dispatch = (e, v, x) => {
