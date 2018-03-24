@@ -34,7 +34,7 @@ test('Projects renders correctly', async () => {
       <ProjectWithApollo projectId="cjcp94wxp025801100npb28yg" />
     </ApolloProvider>,
   );
-  await new Promise(res => window.setTimeout(res, 100));
-  wrapper.setProps({ projectId: 'bar' });
+  await new Promise(res => window.setTimeout(res, 1));
+  wrapper.setProps({ projectId: 'bar' }); // poke it to rerender...
   expect(toJson(wrapper.find(Project))).toMatchSnapshot();
 });

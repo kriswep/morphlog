@@ -76,7 +76,7 @@ class Project extends React.Component {
   render() {
     const changes = this.props.changesQuery.changes;
     return (
-      <div>
+      <div data-test="change">
         <Input
           textarea
           name="text"
