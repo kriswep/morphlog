@@ -128,6 +128,7 @@ class Project extends React.Component {
               if (loadingChanges || loadingMutation) return null;
               if (errorChanges) return `Error!: ${errorChanges}`;
               if (errorMutation) return `Error!: ${errorMutation}`;
+
               const changes = dataChanges.changes;
               return (
                 <div data-test="change">
