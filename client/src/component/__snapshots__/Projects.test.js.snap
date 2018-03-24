@@ -1,0 +1,343 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Projects renders correctly 1`] = `
+Array [
+  <Grid
+    data-test="projects"
+    reverserd="mobile"
+>
+    <div
+        className="ui grid"
+        data-test="projects"
+        reverserd="mobile"
+    >
+        <GridColumn
+            computer={4}
+            largeScreen={4}
+            mobile={16}
+            tablet={4}
+            widescreen={4}
+        >
+            <div
+                className="four wide computer four wide large screen sixteen wide mobile four wide tablet four wide widescreen column"
+            >
+                <styled.section
+                    key="cjcp94wxp025801100npb28ygProjectList}"
+                >
+                    <section
+                        className="sc-EHOje gUMYIM"
+                    >
+                        <h2>
+                            Projects
+                        </h2>
+                        <MyInput
+                            label="New project name"
+                            name="name"
+                            onChange={[Function]}
+                            placeholder="awesome project"
+                            type="text"
+                            value=""
+                        >
+                            <styled.div>
+                                <div
+                                    className="sc-bdVaJa bPGLpq"
+                                >
+                                    <styled.label
+                                        for="name"
+                                    >
+                                        <label
+                                            className="sc-bwzfXH hgqFEP"
+                                        >
+                                            New project name
+                                        </label>
+                                    </styled.label>
+                                    <styled.input
+                                        name="name"
+                                        onChange={[Function]}
+                                        placeholder="awesome project"
+                                        type="text"
+                                        value=""
+                                    >
+                                        <input
+                                            className="sc-htpNat hHFhwJ"
+                                            name="name"
+                                            onChange={[Function]}
+                                            placeholder="awesome project"
+                                            type="text"
+                                            value=""
+                                        />
+                                    </styled.input>
+                                </div>
+                            </styled.div>
+                        </MyInput>
+                        <Button
+                            animated={true}
+                            as="button"
+                            color="teal"
+                            onClick={[Function]}
+                        >
+                            <button
+                                className="ui teal animated button"
+                                onClick={[Function]}
+                                role="button"
+                            >
+                                <ButtonContent
+                                    visible={true}
+                                >
+                                    <div
+                                        className="visible content"
+                                    >
+                                        Add
+                                    </div>
+                                </ButtonContent>
+                                <ButtonContent
+                                    hidden={true}
+                                >
+                                    <div
+                                        className="hidden content"
+                                    >
+                                        <Icon
+                                            as="i"
+                                            name="right arrow"
+                                        >
+                                            <i
+                                                aria-hidden="true"
+                                                className="right arrow icon"
+                                            />
+                                        </Icon>
+                                    </div>
+                                </ButtonContent>
+                            </button>
+                        </Button>
+                        <styled.ul>
+                            <ul
+                                className="sc-bZQynM eCIGDO"
+                            >
+                                <li
+                                    key="1234"
+                                >
+                                    <Styled(Link)
+                                        to="/project/1234"
+                                    >
+                                        <Link
+                                            className="sc-gzVnrw ZyJST"
+                                            to="/project/1234"
+                                        >
+                                            <a>
+                                                MockedLink
+                                            </a>
+                                        </Link>
+                                    </Styled(Link)>
+                                </li>
+                                <li
+                                    key="5678"
+                                >
+                                    <Styled(Link)
+                                        to="/project/5678"
+                                    >
+                                        <Link
+                                            className="sc-gzVnrw ZyJST"
+                                            to="/project/5678"
+                                        >
+                                            <a>
+                                                MockedLink
+                                            </a>
+                                        </Link>
+                                    </Styled(Link)>
+                                </li>
+                            </ul>
+                        </styled.ul>
+                    </section>
+                </styled.section>
+            </div>
+        </GridColumn>
+        <GridColumn
+            computer={12}
+            largeScreen={12}
+            mobile={16}
+            tablet={12}
+            widescreen={12}
+        >
+            <div
+                className="twelve wide computer twelve wide large screen sixteen wide mobile twelve wide tablet twelve wide widescreen column"
+            >
+                <Component
+                    key="cjcp94wxp025801100npb28ygProject}"
+                    projectId="cjcp94wxp025801100npb28yg"
+                >
+                    <div>
+                        MockedProject
+                    </div>
+                </Component>
+            </div>
+        </GridColumn>
+    </div>
+</Grid>,
+  <div
+    className="ui grid"
+    data-test="projects"
+    reverserd="mobile"
+>
+    <GridColumn
+        computer={4}
+        largeScreen={4}
+        mobile={16}
+        tablet={4}
+        widescreen={4}
+    >
+        <div
+            className="four wide computer four wide large screen sixteen wide mobile four wide tablet four wide widescreen column"
+        >
+            <styled.section
+                key="cjcp94wxp025801100npb28ygProjectList}"
+            >
+                <section
+                    className="sc-EHOje gUMYIM"
+                >
+                    <h2>
+                        Projects
+                    </h2>
+                    <MyInput
+                        label="New project name"
+                        name="name"
+                        onChange={[Function]}
+                        placeholder="awesome project"
+                        type="text"
+                        value=""
+                    >
+                        <styled.div>
+                            <div
+                                className="sc-bdVaJa bPGLpq"
+                            >
+                                <styled.label
+                                    for="name"
+                                >
+                                    <label
+                                        className="sc-bwzfXH hgqFEP"
+                                    >
+                                        New project name
+                                    </label>
+                                </styled.label>
+                                <styled.input
+                                    name="name"
+                                    onChange={[Function]}
+                                    placeholder="awesome project"
+                                    type="text"
+                                    value=""
+                                >
+                                    <input
+                                        className="sc-htpNat hHFhwJ"
+                                        name="name"
+                                        onChange={[Function]}
+                                        placeholder="awesome project"
+                                        type="text"
+                                        value=""
+                                    />
+                                </styled.input>
+                            </div>
+                        </styled.div>
+                    </MyInput>
+                    <Button
+                        animated={true}
+                        as="button"
+                        color="teal"
+                        onClick={[Function]}
+                    >
+                        <button
+                            className="ui teal animated button"
+                            onClick={[Function]}
+                            role="button"
+                        >
+                            <ButtonContent
+                                visible={true}
+                            >
+                                <div
+                                    className="visible content"
+                                >
+                                    Add
+                                </div>
+                            </ButtonContent>
+                            <ButtonContent
+                                hidden={true}
+                            >
+                                <div
+                                    className="hidden content"
+                                >
+                                    <Icon
+                                        as="i"
+                                        name="right arrow"
+                                    >
+                                        <i
+                                            aria-hidden="true"
+                                            className="right arrow icon"
+                                        />
+                                    </Icon>
+                                </div>
+                            </ButtonContent>
+                        </button>
+                    </Button>
+                    <styled.ul>
+                        <ul
+                            className="sc-bZQynM eCIGDO"
+                        >
+                            <li
+                                key="1234"
+                            >
+                                <Styled(Link)
+                                    to="/project/1234"
+                                >
+                                    <Link
+                                        className="sc-gzVnrw ZyJST"
+                                        to="/project/1234"
+                                    >
+                                        <a>
+                                            MockedLink
+                                        </a>
+                                    </Link>
+                                </Styled(Link)>
+                            </li>
+                            <li
+                                key="5678"
+                            >
+                                <Styled(Link)
+                                    to="/project/5678"
+                                >
+                                    <Link
+                                        className="sc-gzVnrw ZyJST"
+                                        to="/project/5678"
+                                    >
+                                        <a>
+                                            MockedLink
+                                        </a>
+                                    </Link>
+                                </Styled(Link)>
+                            </li>
+                        </ul>
+                    </styled.ul>
+                </section>
+            </styled.section>
+        </div>
+    </GridColumn>
+    <GridColumn
+        computer={12}
+        largeScreen={12}
+        mobile={16}
+        tablet={12}
+        widescreen={12}
+    >
+        <div
+            className="twelve wide computer twelve wide large screen sixteen wide mobile twelve wide tablet twelve wide widescreen column"
+        >
+            <Component
+                key="cjcp94wxp025801100npb28ygProject}"
+                projectId="cjcp94wxp025801100npb28yg"
+            >
+                <div>
+                    MockedProject
+                </div>
+            </Component>
+        </div>
+    </GridColumn>
+</div>,
+]
+`;

@@ -85,7 +85,7 @@ class Projects extends React.Component {
       projectId = projects[0].id;
     }
     return (
-      <Grid reverserd="mobile">
+      <Grid reverserd="mobile" data-test="projects">
         <Grid.Column
           mobile={16}
           tablet={4}
