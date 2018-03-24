@@ -1,6 +1,7 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
 import { graphql, compose } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Route, Redirect } from 'react-router';
@@ -31,147 +32,6 @@ const initialState = {
   name: '',
 };
 
-const ProjectWrapper = props => {
-  const projectId = props;
-  return <Project {...props} />;
-};
-
-class Projects extends React.Component {
-  state = initialState;
-
-  dispatch = (e, v, x) => {
-    if (e.target.name && e.target.name) {
-      const newState = {};
-      newState[e.target.name] = e.target.value;
-      this.setState(newState);
-    }
-  };
-
-  addProject = e => {
-    this.props
-      .addProjectMutation({
-        variables: {
-          name: this.state.name,
-        },
-        refetchQueries: [
-          {
-            query: PROJECTS_QUERY,
-          },
-        ],
-      })
-      .then(({ data }) => {
-        console.log('got data', data);
-      })
-      .catch(error => {
-        console.log('there was an error sending the query', error);
-      })
-      .finally(() => {
-        this.setState(initialState);
-      });
-  };
-
-  render() {
-    const projects = this.props.projectsQuery.projects;
-
-    let projectId = this.props.match.params.projectId;
-    if (
-      !projectId &&
-      projects &&
-      projects.length >= 0 &&
-      projects[0] &&
-      projects[0].id
-    ) {
-      // no project open, but we have projects: render project comp
-      projectId = projects[0].id;
-    }
-    return (
-      <Grid reverserd="mobile" data-test="projects">
-        <Grid.Column
-          mobile={16}
-          tablet={4}
-          computer={4}
-          largeScreen={4}
-          widescreen={4}
-        >
-          <SidebarContainer key={`${projectId}ProjectList}`}>
-            <h2>Projects</h2>
-            <Input
-              name="name"
-              label="New project name"
-              value={this.state.name}
-              type="text"
-              placeholder="awesome project"
-              onChange={this.dispatch}
-            />
-            <Button color="teal" animated onClick={this.addProject}>
-              <Button.Content visible>Add</Button.Content>
-              <Button.Content hidden>
-                <Icon name="right arrow" />
-              </Button.Content>
-            </Button>
-            {projects && (
-              <ProjectsContainer>
-                {projects.map(project => (
-                  <li key={project.id}>
-                    <ProjectLink to={`/project/${project.id}`}>
-                      {project.name}
-                    </ProjectLink>
-                  </li>
-                ))}
-              </ProjectsContainer>
-            )}
-          </SidebarContainer>
-        </Grid.Column>
-        <Grid.Column
-          mobile={16}
-          tablet={12}
-          computer={12}
-          largeScreen={12}
-          widescreen={12}
-        >
-          {projectId && (
-            <Project key={`${projectId}Project}`} projectId={projectId} />
-          )}
-        </Grid.Column>
-      </Grid>
-    );
-
-    // return [
-    //   projectId && (
-    //     <Project key={`${projectId}Project}`} projectId={projectId} />
-    //   ),
-    //   <SidebarContainer key={`${projectId}ProjectList}`}>
-    //     <h2>Projects</h2>
-    //     <Input
-    //       name="name"
-    //       label="New project name"
-    //       value={this.state.name}
-    //       type="text"
-    //       placeholder="awesome project"
-    //       onChange={this.dispatch}
-    //     />
-    //     <Button color="teal" animated>
-    //       <Button.Content visible>Add</Button.Content>
-    //       <Button.Content hidden>
-    //         <Icon name="right arrow" />
-    //       </Button.Content>
-    //     </Button>
-    //     {projects && (
-    //       <ProjectsContainer>
-    //         {projects.map(project => (
-    //           <li key={project.id}>
-    //             <ProjectLink to={`/project/${project.id}`}>
-    //               {project.name}
-    //             </ProjectLink>
-    //           </li>
-    //         ))}
-    //       </ProjectsContainer>
-    //     )}
-    //   </SidebarContainer>,
-    // ];
-  }
-}
-
 const PROJECTS_QUERY = gql`
   query projects {
     projects {
@@ -189,7 +49,150 @@ const ADD_PROJECT_MUTATION = gql`
   }
 `;
 
-export default compose(
-  graphql(PROJECTS_QUERY, { name: 'projectsQuery' }),
-  graphql(ADD_PROJECT_MUTATION, { name: 'addProjectMutation' }),
-)(Projects);
+// const ProjectWrapper = props => {
+//   const projectId = props;
+//   return <Project {...props} />;
+// };
+
+class Projects extends React.Component {
+  state = initialState;
+
+  dispatch = (e, v, x) => {
+    if (e.target.name && e.target.name) {
+      const newState = {};
+      newState[e.target.name] = e.target.value;
+      this.setState(newState);
+    }
+  };
+
+  addProject = mutate => {
+    mutate({
+      variables: {
+        name: this.state.name,
+      },
+      refetchQueries: [
+        {
+          query: PROJECTS_QUERY,
+        },
+      ],
+    })
+      .then(({ data }) => {
+        console.log('got data', data);
+      })
+      .catch(error => {
+        console.log('there was an error sending the query', error);
+      })
+      .finally(() => {
+        this.setState(initialState);
+      });
+  };
+
+  render() {
+    return (
+      <Query query={PROJECTS_QUERY}>
+        {({
+          loading: loadingProjects,
+          error: errorProjects,
+          data: dataProjects,
+        }) => (
+          <Mutation mutation={ADD_PROJECT_MUTATION}>
+            {(
+              mutate,
+              {
+                loading: loadingMutation,
+                error: errorMutation,
+                data: dataMutation,
+              },
+            ) => {
+              if (loadingProjects || loadingMutation) return null;
+              if (errorProjects) return `Error!: ${errorProjects}`;
+              if (errorMutation) return `Error!: ${errorMutation}`;
+
+              const projects = dataProjects.projects;
+
+              let projectId = this.props.match.params.projectId;
+              if (
+                !projectId &&
+                projects &&
+                projects.length >= 0 &&
+                projects[0] &&
+                projects[0].id
+              ) {
+                // no project open, but we have projects: render project comp
+                projectId = projects[0].id;
+              }
+
+              return (
+                <Grid reverserd="mobile" data-test="projects">
+                  <Grid.Column
+                    mobile={16}
+                    tablet={4}
+                    computer={4}
+                    largeScreen={4}
+                    widescreen={4}
+                  >
+                    <SidebarContainer key={`${projectId}ProjectList}`}>
+                      <h2>Projects</h2>
+                      <Input
+                        name="name"
+                        label="New project name"
+                        value={this.state.name}
+                        type="text"
+                        placeholder="awesome project"
+                        onChange={this.dispatch}
+                      />
+                      <Button
+                        color="teal"
+                        animated
+                        onClick={e => {
+                          e.preventDefault();
+                          this.addProject(mutate);
+                        }}
+                      >
+                        <Button.Content visible>Add</Button.Content>
+                        <Button.Content hidden>
+                          <Icon name="right arrow" />
+                        </Button.Content>
+                      </Button>
+                      {projects && (
+                        <ProjectsContainer>
+                          {projects.map(project => (
+                            <li key={project.id}>
+                              <ProjectLink to={`/project/${project.id}`}>
+                                {project.name}
+                              </ProjectLink>
+                            </li>
+                          ))}
+                        </ProjectsContainer>
+                      )}
+                    </SidebarContainer>
+                  </Grid.Column>
+                  <Grid.Column
+                    mobile={16}
+                    tablet={12}
+                    computer={12}
+                    largeScreen={12}
+                    widescreen={12}
+                  >
+                    {projectId && (
+                      <Project
+                        key={`${projectId}Project}`}
+                        projectId={projectId}
+                      />
+                    )}
+                  </Grid.Column>
+                </Grid>
+              );
+            }}
+          </Mutation>
+        )}
+      </Query>
+    );
+  }
+}
+
+export default Projects;
+// export default compose(
+//   graphql(PROJECTS_QUERY, { name: 'projectsQuery' }),
+//   graphql(ADD_PROJECT_MUTATION, { name: 'addProjectMutation' }),
+// )(Projects);
