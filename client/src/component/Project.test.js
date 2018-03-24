@@ -4,9 +4,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
+import fs from 'fs';
 
 import ProjectWithApollo, { Project } from './Project';
 import Changes from './Changes';
+// import '../../'
 
 import { ApolloProvider } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
@@ -18,15 +20,8 @@ jest.mock('./Changes', () => {
   return () => <div>MockedChange</div>;
 });
 
-const typeDefs = `
-  type Project {
-    id: ID
-    name: String
-  }
-  type Query {
-    project(id: ID): Project
-  }
-`;
+const buffer = fs.readFileSync('../schema/appSchema.graphql');
+const typeDefs = buffer.toString();
 
 const mocks = {
   Query: () => ({

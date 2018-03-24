@@ -7,8 +7,7 @@
     "test": "dotenv -e .env.test jest -- --coverage",
     "test:watch": "dotenv -e .env.test jest -- --watch",
     "dev": "npm-run-all --parallel start playground",
-    "debug":
-      "dotenv -- nodemon -e ts,graphql -x ts-node --inspect src/index.ts",
+    "debug": "dotenv -- nodemon -e ts,graphql -x ts-node --inspect src/index.ts",
     "playground": "graphql playground",
     "build": "rimraf dist && tsc"
   },
@@ -47,13 +46,25 @@
       "^.+\\.tsx?$": "ts-jest"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
     "collectCoverageFrom": [
       "**/*.{js,jsx,ts,tsx}",
       "!**/node_modules/**",
       "!**/generated/**"
     ],
     "coverageDirectory": "../coverage/",
-    "coverageReporters": ["json", "lcov", "text", "text-summary"]
+    "coverageReporters": [
+      "json",
+      "lcov",
+      "text",
+      "text-summary"
+    ]
   }
 }
