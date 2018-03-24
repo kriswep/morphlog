@@ -1,6 +1,7 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
 import { graphql, compose } from 'react-apollo';
+import { Query } from 'react-apollo';
 import styled from 'styled-components';
 
 import media from '../styles/media';
@@ -13,26 +14,6 @@ const ContentContainer = styled.section`
   `};
 `;
 
-const initialState = {};
-
-class Project extends React.Component {
-  state = initialState;
-
-  render() {
-    const project = this.props.projectQuery.project;
-    return (
-      <ContentContainer data-test="project">
-        {project && (
-          <div>
-            <h2>{project.name}</h2>
-            <Changes projectId={this.props.projectQuery.project.id} />
-          </div>
-        )}
-      </ContentContainer>
-    );
-  }
-}
-
 const PROJECT_QUERY = gql`
   query project($id: ID!) {
     project(id: $id) {
@@ -42,11 +23,28 @@ const PROJECT_QUERY = gql`
   }
 `;
 
-export default compose(
-  graphql(PROJECT_QUERY, {
-    name: 'projectQuery',
-    options: props => ({
-      variables: { id: props.projectId || props.match.params.projectId },
-    }),
-  }),
-)(Project);
+const Project = ({ projectId, match }) => (
+  <Query
+    query={PROJECT_QUERY}
+    variables={{ id: projectId || match.params.projectId }}
+  >
+    {({ loading, error, data }) => {
+      if (loading) return null;
+      if (error) return `Error!: ${error}`;
+
+      const project = data.project;
+      return (
+        <ContentContainer data-test="project">
+          {project && (
+            <div>
+              <h2>{project.name}</h2>
+              <Changes projectId={project.id} />
+            </div>
+          )}
+        </ContentContainer>
+      );
+    }}
+  </Query>
+);
+
+export default Project;
