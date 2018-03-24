@@ -1,7 +1,6 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
-import { graphql, compose } from 'react-apollo';
-import { Query, Mutation } from 'react-apollo';
+import { graphql, compose, Query, Mutation } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Route, Redirect } from 'react-router';
@@ -192,7 +191,3 @@ class Projects extends React.Component {
 }
 
 export default Projects;
-// export default compose(
-//   graphql(PROJECTS_QUERY, { name: 'projectsQuery' }),
-//   graphql(ADD_PROJECT_MUTATION, { name: 'addProjectMutation' }),
-// )(Projects);

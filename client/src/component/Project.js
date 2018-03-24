@@ -1,7 +1,6 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
-import { graphql, compose } from 'react-apollo';
-import { Query } from 'react-apollo';
+import { graphql, compose, Query } from 'react-apollo';
 import styled from 'styled-components';
 
 import media from '../styles/media';
