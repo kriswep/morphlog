@@ -27,10 +27,6 @@ const ProjectLink = styled(Link)`
   color: ${props => props.theme.darkShades};
 `;
 
-const initialState = {
-  name: '',
-};
-
 const PROJECTS_QUERY = gql`
   query projects {
     projects {
@@ -48,10 +44,10 @@ const ADD_PROJECT_MUTATION = gql`
   }
 `;
 
-// const ProjectWrapper = props => {
-//   const projectId = props;
-//   return <Project {...props} />;
-// };
+const initialState = {
+  name: '',
+  initialProject: '',
+};
 
 class Projects extends React.Component {
   state = initialState;
@@ -87,7 +83,8 @@ class Projects extends React.Component {
   };
 
   render() {
-    let projectId = this.props.match.params.projectId;
+    let projectId =
+      this.props.match.params.projectId || this.state.initialProject;
 
     return (
       <Grid reverserd="mobile">
@@ -143,7 +140,8 @@ class Projects extends React.Component {
                   projects[0].id
                 ) {
                   // no project open, but we have projects: render project comp
-                  projectId = projects[0].id;
+                  this.setState({ initialProject: projects[0].id });
+                  // projectId = projects[0].id;
                 }
                 if (!projects) return null;
                 return (
