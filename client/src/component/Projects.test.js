@@ -53,5 +53,5 @@ test('Projects renders correctly', async () => {
   await new Promise(res => window.setTimeout(res, 1));
   wrapper.setProps({ projectId: 'bar' }); // poke it to rerender...
   expect(toJson(wrapper.find('[data-test="projects"]'))).toMatchSnapshot();
-  // expect(toJson(wrapper)).toMatchSnapshot();
+  expect(toJson(wrapper.find('[data-test="newProject"]'))).toMatchSnapshot();
 });
