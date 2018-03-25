@@ -105,87 +105,70 @@ class Project extends React.Component {
 
   render() {
     return (
-      <Query
-        query={CHANGES_QUERY}
-        variables={{
-          projectId: this.props.projectId || this.props.match.params.projectId,
-        }}
-      >
-        {({
-          loading: loadingChanges,
-          error: errorChanges,
-          data: dataChanges,
-        }) => (
-          <Mutation mutation={ADD_CHANGE_MUTATION}>
-            {(
-              mutate,
-              {
-                loading: loadingMutation,
-                error: errorMutation,
-                data: dataMutation,
-              },
-            ) => {
-              if (loadingChanges || loadingMutation) return null;
-              if (errorChanges) return `Error!: ${errorChanges}`;
-              if (errorMutation) return `Error!: ${errorMutation}`;
+      <div>
+        <Mutation mutation={ADD_CHANGE_MUTATION}>
+          {(mutate, { error }) => (
+            <div data-test="newChange">
+              <Input
+                textarea
+                name="text"
+                label="Change"
+                value={this.state.text}
+                type="text"
+                placeholder="describe your change"
+                onChange={this.dispatch}
+              />
+              <Button
+                color="teal"
+                onClick={e => {
+                  e.preventDefault();
+                  this.addChange(mutate);
+                }}
+              >
+                Add
+              </Button>
+              {error && `Error!: ${error}`}
+            </div>
+          )}
+        </Mutation>
+        <Query
+          query={CHANGES_QUERY}
+          variables={{
+            projectId:
+              this.props.projectId || this.props.match.params.projectId,
+          }}
+        >
+          {({ loading, error, data }) => {
+            if (loading) return null;
+            if (error) return `Error!: ${error}`;
 
-              const changes = dataChanges.changes;
-              return (
-                <div data-test="change">
-                  <Input
-                    textarea
-                    name="text"
-                    label="Change"
-                    value={this.state.text}
-                    type="text"
-                    placeholder="describe your change"
-                    onChange={this.dispatch}
-                  />
-                  <Button
-                    color="teal"
-                    onClick={e => {
-                      e.preventDefault();
-                      this.addChange(mutate);
-                    }}
-                  >
-                    Add
-                  </Button>
-                  {changes && (
-                    <Comment.Group>
-                      {changes.map(change => (
-                        <Comment key={change.id}>
-                          <Comment.Content>
-                            <Comment.Author as={Author}>
-                              {change.author.name}
-                            </Comment.Author>
-                            <Comment.Metadata>
-                              <div>
-                                {new Date(change.createdAt).toLocaleString()}
-                              </div>
-                            </Comment.Metadata>
-                            <Comment.Text>{change.text}</Comment.Text>
-                            <Comment.Actions>
-                              <Comment.Action>Maybe Change</Comment.Action>
-                            </Comment.Actions>
-                          </Comment.Content>
-                        </Comment>
-                      ))}
-                    </Comment.Group>
-                  )}
-                </div>
-              );
-            }}
-          </Mutation>
-        )}
-      </Query>
+            const changes = data.changes;
+            if (!changes) return null;
+            return (
+              <Comment.Group data-test="change">
+                {changes.map(change => (
+                  <Comment key={change.id}>
+                    <Comment.Content>
+                      <Comment.Author as={Author}>
+                        {change.author.name}
+                      </Comment.Author>
+                      <Comment.Metadata>
+                        <div>{new Date(change.createdAt).toLocaleString()}</div>
+                      </Comment.Metadata>
+                      <Comment.Text>{change.text}</Comment.Text>
+                      <Comment.Actions>
+                        <Comment.Action>Maybe Change</Comment.Action>
+                      </Comment.Actions>
+                    </Comment.Content>
+                  </Comment>
+                ))}
+              </Comment.Group>
+            );
+          }}
+        </Query>
+      </div>
     );
   }
 }
 
 export default Project;
-// export default compose(
-//   graphql(CHANGES_QUERY, {
-//     name: 'changesQuery',
-//   }),
-//   graphql(ADD_CHANGE_MUTATION, { name: 'addChangeMutation' }),
-// )(Project);

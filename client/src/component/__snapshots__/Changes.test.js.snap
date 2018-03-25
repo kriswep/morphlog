@@ -1,8 +1,259 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Changes renders correctly 1`] = `
+Array [
+  <CommentGroup
+    data-test="change"
+>
+    <div
+        className="ui comments"
+        data-test="change"
+    >
+        <Comment
+            key="1234"
+        >
+            <div
+                className="comment"
+            >
+                <CommentContent>
+                    <div
+                        className="content"
+                    >
+                        <CommentAuthor
+                            as={[Function]}
+                        >
+                            <styled.div
+                                className="author"
+                            >
+                                <div
+                                    className="author sc-EHOje iOWvOn"
+                                >
+                                    Hello World
+                                </div>
+                            </styled.div>
+                        </CommentAuthor>
+                        <CommentMetadata>
+                            <div
+                                className="metadata"
+                            >
+                                <div>
+                                    2018-1-21 21:45:06
+                                </div>
+                            </div>
+                        </CommentMetadata>
+                        <CommentText>
+                            <div
+                                className="text"
+                            >
+                                MyChange
+                            </div>
+                        </CommentText>
+                        <CommentActions>
+                            <div
+                                className="actions"
+                            >
+                                <CommentAction
+                                    as="a"
+                                >
+                                    <a
+                                        className=""
+                                    >
+                                        Maybe Change
+                                    </a>
+                                </CommentAction>
+                            </div>
+                        </CommentActions>
+                    </div>
+                </CommentContent>
+            </div>
+        </Comment>
+        <Comment
+            key="5678"
+        >
+            <div
+                className="comment"
+            >
+                <CommentContent>
+                    <div
+                        className="content"
+                    >
+                        <CommentAuthor
+                            as={[Function]}
+                        >
+                            <styled.div
+                                className="author"
+                            >
+                                <div
+                                    className="author sc-EHOje iOWvOn"
+                                >
+                                    Hello World
+                                </div>
+                            </styled.div>
+                        </CommentAuthor>
+                        <CommentMetadata>
+                            <div
+                                className="metadata"
+                            >
+                                <div>
+                                    2018-1-21 21:45:06
+                                </div>
+                            </div>
+                        </CommentMetadata>
+                        <CommentText>
+                            <div
+                                className="text"
+                            >
+                                MyOtherChange
+                            </div>
+                        </CommentText>
+                        <CommentActions>
+                            <div
+                                className="actions"
+                            >
+                                <CommentAction
+                                    as="a"
+                                >
+                                    <a
+                                        className=""
+                                    >
+                                        Maybe Change
+                                    </a>
+                                </CommentAction>
+                            </div>
+                        </CommentActions>
+                    </div>
+                </CommentContent>
+            </div>
+        </Comment>
+    </div>
+</CommentGroup>,
+  <div
+    className="ui comments"
+    data-test="change"
+>
+    <Comment
+        key="1234"
+    >
+        <div
+            className="comment"
+        >
+            <CommentContent>
+                <div
+                    className="content"
+                >
+                    <CommentAuthor
+                        as={[Function]}
+                    >
+                        <styled.div
+                            className="author"
+                        >
+                            <div
+                                className="author sc-EHOje iOWvOn"
+                            >
+                                Hello World
+                            </div>
+                        </styled.div>
+                    </CommentAuthor>
+                    <CommentMetadata>
+                        <div
+                            className="metadata"
+                        >
+                            <div>
+                                2018-1-21 21:45:06
+                            </div>
+                        </div>
+                    </CommentMetadata>
+                    <CommentText>
+                        <div
+                            className="text"
+                        >
+                            MyChange
+                        </div>
+                    </CommentText>
+                    <CommentActions>
+                        <div
+                            className="actions"
+                        >
+                            <CommentAction
+                                as="a"
+                            >
+                                <a
+                                    className=""
+                                >
+                                    Maybe Change
+                                </a>
+                            </CommentAction>
+                        </div>
+                    </CommentActions>
+                </div>
+            </CommentContent>
+        </div>
+    </Comment>
+    <Comment
+        key="5678"
+    >
+        <div
+            className="comment"
+        >
+            <CommentContent>
+                <div
+                    className="content"
+                >
+                    <CommentAuthor
+                        as={[Function]}
+                    >
+                        <styled.div
+                            className="author"
+                        >
+                            <div
+                                className="author sc-EHOje iOWvOn"
+                            >
+                                Hello World
+                            </div>
+                        </styled.div>
+                    </CommentAuthor>
+                    <CommentMetadata>
+                        <div
+                            className="metadata"
+                        >
+                            <div>
+                                2018-1-21 21:45:06
+                            </div>
+                        </div>
+                    </CommentMetadata>
+                    <CommentText>
+                        <div
+                            className="text"
+                        >
+                            MyOtherChange
+                        </div>
+                    </CommentText>
+                    <CommentActions>
+                        <div
+                            className="actions"
+                        >
+                            <CommentAction
+                                as="a"
+                            >
+                                <a
+                                    className=""
+                                >
+                                    Maybe Change
+                                </a>
+                            </CommentAction>
+                        </div>
+                    </CommentActions>
+                </div>
+            </CommentContent>
+        </div>
+    </Comment>
+</div>,
+]
+`;
+
+exports[`Changes renders correctly 2`] = `
 <div
-  data-test="change"
+  data-test="newChange"
 >
   <MyInput
     label="Change"
@@ -58,127 +309,5 @@ exports[`Changes renders correctly 1`] = `
       Add
     </button>
   </Button>
-  <CommentGroup>
-    <div
-      className="ui comments"
-    >
-      <Comment
-        key="1234"
-      >
-        <div
-          className="comment"
-        >
-          <CommentContent>
-            <div
-              className="content"
-            >
-              <CommentAuthor
-                as={[Function]}
-              >
-                <styled.div
-                  className="author"
-                >
-                  <div
-                    className="author sc-EHOje iOWvOn"
-                  >
-                    Hello World
-                  </div>
-                </styled.div>
-              </CommentAuthor>
-              <CommentMetadata>
-                <div
-                  className="metadata"
-                >
-                  <div>
-                    2018-1-21 21:45:06
-                  </div>
-                </div>
-              </CommentMetadata>
-              <CommentText>
-                <div
-                  className="text"
-                >
-                  MyChange
-                </div>
-              </CommentText>
-              <CommentActions>
-                <div
-                  className="actions"
-                >
-                  <CommentAction
-                    as="a"
-                  >
-                    <a
-                      className=""
-                    >
-                      Maybe Change
-                    </a>
-                  </CommentAction>
-                </div>
-              </CommentActions>
-            </div>
-          </CommentContent>
-        </div>
-      </Comment>
-      <Comment
-        key="5678"
-      >
-        <div
-          className="comment"
-        >
-          <CommentContent>
-            <div
-              className="content"
-            >
-              <CommentAuthor
-                as={[Function]}
-              >
-                <styled.div
-                  className="author"
-                >
-                  <div
-                    className="author sc-EHOje iOWvOn"
-                  >
-                    Hello World
-                  </div>
-                </styled.div>
-              </CommentAuthor>
-              <CommentMetadata>
-                <div
-                  className="metadata"
-                >
-                  <div>
-                    2018-1-21 21:45:06
-                  </div>
-                </div>
-              </CommentMetadata>
-              <CommentText>
-                <div
-                  className="text"
-                >
-                  MyOtherChange
-                </div>
-              </CommentText>
-              <CommentActions>
-                <div
-                  className="actions"
-                >
-                  <CommentAction
-                    as="a"
-                  >
-                    <a
-                      className=""
-                    >
-                      Maybe Change
-                    </a>
-                  </CommentAction>
-                </div>
-              </CommentActions>
-            </div>
-          </CommentContent>
-        </div>
-      </Comment>
-    </div>
-  </CommentGroup>
 </div>
 `;
