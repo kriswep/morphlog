@@ -15,6 +15,7 @@ test('Profile renders correctly', async () => {
       <Profile />
     </ApolloProvider>,
   );
+  expect(toJson(wrapper.find('[data-test="authenticate"]'))).toMatchSnapshot();
   await new Promise(res => window.setTimeout(res, 1));
   wrapper.setProps({ projectId: 'bar' }); // poke it to rerender...
   expect(toJson(wrapper.find('[data-test="profile"]'))).toMatchSnapshot();
