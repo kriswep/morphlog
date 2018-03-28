@@ -12,6 +12,7 @@ secret: ${env:PRISMA_SECRET}
 datamodel: datamodel.graphql
 
 # uncomment the following two lines to seed your service with initial data
-# seed:
+seed:
+   import: ${env:PRISMA_SEED}
 #   import: seed.graphql
 cluster: ${env:PRISMA_CLUSTER}
