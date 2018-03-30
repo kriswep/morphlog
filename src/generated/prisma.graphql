@@ -127,8 +127,8 @@ input ChangeUpdateManyWithoutProjectInput {
   connect: [ChangeWhereUniqueInput!]
   disconnect: [ChangeWhereUniqueInput!]
   delete: [ChangeWhereUniqueInput!]
-  update: [ChangeUpdateWithoutProjectInput!]
-  upsert: [ChangeUpsertWithoutProjectInput!]
+  update: [ChangeUpdateWithWhereUniqueWithoutProjectInput!]
+  upsert: [ChangeUpsertWithWhereUniqueWithoutProjectInput!]
 }
 
 input ChangeUpdateWithoutProjectDataInput {
@@ -136,12 +136,12 @@ input ChangeUpdateWithoutProjectDataInput {
   author: UserUpdateOneInput
 }
 
-input ChangeUpdateWithoutProjectInput {
+input ChangeUpdateWithWhereUniqueWithoutProjectInput {
   where: ChangeWhereUniqueInput!
   data: ChangeUpdateWithoutProjectDataInput!
 }
 
-input ChangeUpsertWithoutProjectInput {
+input ChangeUpsertWithWhereUniqueWithoutProjectInput {
   where: ChangeWhereUniqueInput!
   update: ChangeUpdateWithoutProjectDataInput!
   create: ChangeCreateWithoutProjectInput!
@@ -342,8 +342,8 @@ input ProjectUpdateManyWithoutAdminInput {
   connect: [ProjectWhereUniqueInput!]
   disconnect: [ProjectWhereUniqueInput!]
   delete: [ProjectWhereUniqueInput!]
-  update: [ProjectUpdateWithoutAdminInput!]
-  upsert: [ProjectUpsertWithoutAdminInput!]
+  update: [ProjectUpdateWithWhereUniqueWithoutAdminInput!]
+  upsert: [ProjectUpsertWithWhereUniqueWithoutAdminInput!]
 }
 
 input ProjectUpdateManyWithoutMemberInput {
@@ -351,16 +351,15 @@ input ProjectUpdateManyWithoutMemberInput {
   connect: [ProjectWhereUniqueInput!]
   disconnect: [ProjectWhereUniqueInput!]
   delete: [ProjectWhereUniqueInput!]
-  update: [ProjectUpdateWithoutMemberInput!]
-  upsert: [ProjectUpsertWithoutMemberInput!]
+  update: [ProjectUpdateWithWhereUniqueWithoutMemberInput!]
+  upsert: [ProjectUpsertWithWhereUniqueWithoutMemberInput!]
 }
 
 input ProjectUpdateOneWithoutChangeInput {
   create: ProjectCreateWithoutChangeInput
   connect: ProjectWhereUniqueInput
-  disconnect: ProjectWhereUniqueInput
-  delete: ProjectWhereUniqueInput
-  update: ProjectUpdateWithoutChangeInput
+  delete: Boolean
+  update: ProjectUpdateWithoutChangeDataInput
   upsert: ProjectUpsertWithoutChangeInput
 }
 
@@ -370,20 +369,10 @@ input ProjectUpdateWithoutAdminDataInput {
   change: ChangeUpdateManyWithoutProjectInput
 }
 
-input ProjectUpdateWithoutAdminInput {
-  where: ProjectWhereUniqueInput!
-  data: ProjectUpdateWithoutAdminDataInput!
-}
-
 input ProjectUpdateWithoutChangeDataInput {
   name: String
   member: UserUpdateManyWithoutProjectMemberInput
   admin: UserUpdateManyWithoutProjectAdminInput
-}
-
-input ProjectUpdateWithoutChangeInput {
-  where: ProjectWhereUniqueInput!
-  data: ProjectUpdateWithoutChangeDataInput!
 }
 
 input ProjectUpdateWithoutMemberDataInput {
@@ -392,24 +381,28 @@ input ProjectUpdateWithoutMemberDataInput {
   change: ChangeUpdateManyWithoutProjectInput
 }
 
-input ProjectUpdateWithoutMemberInput {
+input ProjectUpdateWithWhereUniqueWithoutAdminInput {
+  where: ProjectWhereUniqueInput!
+  data: ProjectUpdateWithoutAdminDataInput!
+}
+
+input ProjectUpdateWithWhereUniqueWithoutMemberInput {
   where: ProjectWhereUniqueInput!
   data: ProjectUpdateWithoutMemberDataInput!
 }
 
-input ProjectUpsertWithoutAdminInput {
+input ProjectUpsertWithoutChangeInput {
+  update: ProjectUpdateWithoutChangeDataInput!
+  create: ProjectCreateWithoutChangeInput!
+}
+
+input ProjectUpsertWithWhereUniqueWithoutAdminInput {
   where: ProjectWhereUniqueInput!
   update: ProjectUpdateWithoutAdminDataInput!
   create: ProjectCreateWithoutAdminInput!
 }
 
-input ProjectUpsertWithoutChangeInput {
-  where: ProjectWhereUniqueInput!
-  update: ProjectUpdateWithoutChangeDataInput!
-  create: ProjectCreateWithoutChangeInput!
-}
-
-input ProjectUpsertWithoutMemberInput {
+input ProjectUpsertWithWhereUniqueWithoutMemberInput {
   where: ProjectWhereUniqueInput!
   update: ProjectUpdateWithoutMemberDataInput!
   create: ProjectCreateWithoutMemberInput!
@@ -583,6 +576,14 @@ input UserSubscriptionWhereInput {
   node: UserWhereInput
 }
 
+input UserUpdateDataInput {
+  email: String
+  password: String
+  name: String
+  projectMember: ProjectUpdateManyWithoutMemberInput
+  projectAdmin: ProjectUpdateManyWithoutAdminInput
+}
+
 input UserUpdateInput {
   email: String
   password: String
@@ -596,8 +597,8 @@ input UserUpdateManyWithoutProjectAdminInput {
   connect: [UserWhereUniqueInput!]
   disconnect: [UserWhereUniqueInput!]
   delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithoutProjectAdminInput!]
-  upsert: [UserUpsertWithoutProjectAdminInput!]
+  update: [UserUpdateWithWhereUniqueWithoutProjectAdminInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutProjectAdminInput!]
 }
 
 input UserUpdateManyWithoutProjectMemberInput {
@@ -605,15 +606,16 @@ input UserUpdateManyWithoutProjectMemberInput {
   connect: [UserWhereUniqueInput!]
   disconnect: [UserWhereUniqueInput!]
   delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithoutProjectMemberInput!]
-  upsert: [UserUpsertWithoutProjectMemberInput!]
+  update: [UserUpdateWithWhereUniqueWithoutProjectMemberInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutProjectMemberInput!]
 }
 
 input UserUpdateOneInput {
   create: UserCreateInput
   connect: UserWhereUniqueInput
-  disconnect: UserWhereUniqueInput
-  delete: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
 }
 
 input UserUpdateWithoutProjectAdminDataInput {
@@ -623,11 +625,6 @@ input UserUpdateWithoutProjectAdminDataInput {
   projectMember: ProjectUpdateManyWithoutMemberInput
 }
 
-input UserUpdateWithoutProjectAdminInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutProjectAdminDataInput!
-}
-
 input UserUpdateWithoutProjectMemberDataInput {
   email: String
   password: String
@@ -635,18 +632,28 @@ input UserUpdateWithoutProjectMemberDataInput {
   projectAdmin: ProjectUpdateManyWithoutAdminInput
 }
 
-input UserUpdateWithoutProjectMemberInput {
+input UserUpdateWithWhereUniqueWithoutProjectAdminInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutProjectAdminDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutProjectMemberInput {
   where: UserWhereUniqueInput!
   data: UserUpdateWithoutProjectMemberDataInput!
 }
 
-input UserUpsertWithoutProjectAdminInput {
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutProjectAdminInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutProjectAdminDataInput!
   create: UserCreateWithoutProjectAdminInput!
 }
 
-input UserUpsertWithoutProjectMemberInput {
+input UserUpsertWithWhereUniqueWithoutProjectMemberInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutProjectMemberDataInput!
   create: UserCreateWithoutProjectMemberInput!

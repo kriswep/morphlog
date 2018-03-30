@@ -74,10 +74,11 @@ class Projects extends React.Component {
       .then(({ data }) => {
         console.log('got data', data);
       })
+      .then(({ data }) => {
+        this.setState(initialState);
+      })
       .catch(error => {
         console.log('there was an error sending the query', error);
-      })
-      .finally(() => {
         this.setState(initialState);
       });
   };

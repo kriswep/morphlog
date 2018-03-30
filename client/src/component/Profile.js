@@ -101,10 +101,11 @@ class Profile extends React.Component {
         localStorage.setItem('auth', data.signup.token);
         return await this.props.client.resetStore();
       })
+      .then(() => {
+        this.setState(initialState);
+      })
       .catch(error => {
         console.log('there was an error sending the query', error);
-      })
-      .finally(() => {
         this.setState(initialState);
       });
   };
@@ -121,10 +122,11 @@ class Profile extends React.Component {
         localStorage.setItem('auth', data.login.token);
         return await this.props.client.resetStore();
       })
+      .then(() => {
+        this.setState(initialState);
+      })
       .catch(error => {
         console.log('there was an error sending the query', error);
-      })
-      .finally(() => {
         this.setState(initialState);
       });
   };

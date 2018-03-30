@@ -95,12 +95,13 @@ class Project extends React.Component {
       .then(({ data }) => {
         console.log('got data', data);
       })
+      .then(() => {
+        this.setState(initialState);
+      })
       .catch(error => {
         console.log('there was an error sending the query', error);
-      })
-      .finally(() => {
         this.setState(initialState);
-      });
+      })
   };
 
   render() {
