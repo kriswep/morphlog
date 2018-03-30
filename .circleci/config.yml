@@ -3,17 +3,12 @@ jobs:
   build:
     working_directory: ~/morphlog
     docker:
-      - image: circleci/node:8
+      - image: cypress/base:8
     steps:
       - checkout
-      - run:
-          name: install dockerize
-          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-          environment:
-            DOCKERIZE_VERSION: v0.3.0
-      - run:
-          name: update-npm
-          command: 'sudo npm install -g npm@latest'
+      #- run:
+      #    name: update-npm
+      #    command: 'sudo npm install -g npm@latest'
       - run:
           name: install-npm-server
           command: npm install
@@ -27,11 +22,5 @@ jobs:
       #    name: test client
       #    command: cd client && npm test
       - run:
-          name: start e2e
-          command: 'npm run integration:start'
-      - run:
-          name: wait for server
-          command: dockerize -wait tcp://localhost:4000 -timeout 1m
-      - run:
           name: test e2e
-          command: 'npm run cypress:run'
+          command: 'npm run integration'
