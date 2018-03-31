@@ -1,6 +1,6 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
-import { graphql, withApollo, Query, Mutation } from 'react-apollo';
+import { withApollo, Query, Mutation } from 'react-apollo';
 import styled from 'styled-components';
 import {
   Container,

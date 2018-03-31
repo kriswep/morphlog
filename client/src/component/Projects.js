@@ -1,9 +1,9 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
-import { graphql, Query, Mutation } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Route, Redirect } from 'react-router';
+// import { Route, Redirect } from 'react-router';
 import { Grid, Button, Icon } from 'semantic-ui-react';
 
 import media from '../styles/media';

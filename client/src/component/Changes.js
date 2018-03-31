@@ -1,6 +1,6 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
-import { graphql, Query, Mutation } from 'react-apollo';
+import { Query, Mutation } from 'react-apollo';
 import styled from 'styled-components';
 import { Button, Comment } from 'semantic-ui-react';
 
@@ -101,7 +101,7 @@ class Project extends React.Component {
       .catch(error => {
         console.log('there was an error sending the query', error);
         this.setState(initialState);
-      })
+      });
   };
 
   render() {

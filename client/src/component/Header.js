@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Menu, Icon } from 'semantic-ui-react';
 
-const activeItem = 'home';
+// const activeItem = 'home';
 const Header = props => (
   <Menu color="teal" size="huge" pointing secondary>
     <Menu.Item as={Link} to="/" active={props.match.isExact}>
