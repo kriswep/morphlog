@@ -10,14 +10,17 @@
       "dotenv -- nodemon -e ts,graphql -x ts-node --inspect src/index.ts",
     "playground": "graphql playground",
     "build": "rimraf dist && tsc",
-    "integration:startClient": "cd client && npm run start:noOpen",
+    "integration:startClientOld": "cd client && npm run start:noOpen",
+    "integration:buildClient": "cd client && npm run build",
+    "integration:startClient":
+      "npm run integration:buildClient && http-server ./client/build -p 3030",
     "integration:startServer":
       "prisma delete -e .env.test -f && prisma deploy -e .env.test && dotenv -e .env.test -- nodemon -e ts,graphql -x ts-node src/index.ts",
     "integration:start":
       "npm-run-all --parallel integration:startServer integration:startClient",
-    "integration:testOld":
-      "wait-for-server http://localhost:3030 --tries 90 && wait-for-server http://localhost:4000 --tries 90 && npm run cypress:run",
     "integration:test":
+      "wait-for-server http://localhost:3030 --tries 90 --quiet && wait-for-server http://localhost:4000 --tries 90 --quiet && npm run cypress:run",
+    "integration:test2":
       "wait-for-server http://localhost:4000 --tries 90 && npm run cypress:run",
     "integration":
       "npm-run-all --parallel --race integration:start integration:test",
@@ -41,6 +44,7 @@
     "graphql": "^0.13.1",
     "graphql-cli": "^2.14.2",
     "graphql-tools": "^2.21.0",
+    "http-server": "^0.11.1",
     "jest": "^22.4.2",
     "nodemon": "^1.15.1",
     "npm-run-all": "4.1.2",
