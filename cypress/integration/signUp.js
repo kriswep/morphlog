@@ -1,6 +1,6 @@
 describe('SignUp', function() {
   it('opens SignUp page', function() {
-    cy.visit('http://localhost:3000');
+    cy.visit('http://localhost:3030');
 
     cy.get('a[href="/profile"]').click();
 

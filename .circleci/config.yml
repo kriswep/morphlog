@@ -9,9 +9,15 @@ jobs:
       #- run:
       #    name: update-npm
       #    command: 'sudo npm install -g npm@latest'
+      - restore_cache:
+          key: v1-server-dependency-cache-{{ checksum "package.json" }}
       - run:
           name: install-npm-server
           command: npm install
+      - save_cache:
+          key: v1-server-dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
       - run:
           name: install-npm-client
           command: cd client && npm install

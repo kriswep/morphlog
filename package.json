@@ -10,13 +10,13 @@
       "dotenv -- nodemon -e ts,graphql -x ts-node --inspect src/index.ts",
     "playground": "graphql playground",
     "build": "rimraf dist && tsc",
-    "integration:startClient": "cd client && npm run start:noOpen",
+    "integration:startClient": "cd client && PORT=3030 npm run start:noOpen",
     "integration:startServer":
       "prisma delete -e .env.test -f && prisma deploy -e .env.test && dotenv -e .env.test -- nodemon -e ts,graphql -x ts-node src/index.ts",
     "integration:start":
       "npm-run-all --parallel integration:startServer integration:startClient",
     "integration:test":
-      "wait-for-server http://localhost:3000 --tries 90 --quiet && wait-for-server http://localhost:4000 --tries 90 --quiet && npm run cypress:run",
+      "wait-for-server http://localhost:3030 --tries 90 --quiet && wait-for-server http://localhost:4000 --tries 90 --quiet && npm run cypress:run",
     "integration":
       "npm-run-all --parallel --race integration:start integration:test",
     "cypress:run": "cypress run",
