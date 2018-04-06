@@ -23,3 +23,22 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', (email, password) => {
+  const body = {
+    operationName: 'signin',
+    variables: { email: 'developer@example.com', password: 'nooneknows' },
+    query:
+      'mutation signin($email: String!, $password: String!) { login(email: $email, password: $password) { token }}',
+  };
+
+  return cy
+    .request({
+      method: 'POST',
+      url: 'http://localhost:4000/',
+      body,
+    })
+    .then(res => {
+      window.localStorage.setItem('auth', res.body.data.login.token);
+    });
+});

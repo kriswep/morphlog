@@ -1,4 +1,9 @@
 describe('SignIn', function() {
+  // beforeEach(function() {
+  //   // slower!
+  //   cy.visit('http://localhost:3030/profile');
+  // });
+
   it('opens signIn page', function() {
     cy.visit('http://localhost:3030');
 
