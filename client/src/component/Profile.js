@@ -63,17 +63,6 @@ const initialState = {
 
 class Profile extends React.Component {
   state = initialState;
-  // constructor(props) {
-  //   super(props);
-
-  //   this.state = initialState;
-
-  //   // this.props.client.onResetStore(async () => {
-  //   //   console.log('store reset');
-
-  //   //   await this.props.profileQuery.refetch();
-  //   // });
-  // }
 
   dispatch = (e, v, x) => {
     if (e.target.name && e.target.name) {

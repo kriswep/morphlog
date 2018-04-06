@@ -3,7 +3,6 @@ import { gql } from 'apollo-boost';
 import { Query, Mutation } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-// import { Route, Redirect } from 'react-router';
 import { Grid, Button, Icon } from 'semantic-ui-react';
 
 import media from '../styles/media';
@@ -142,7 +141,6 @@ class Projects extends React.Component {
                 ) {
                   // no project open, but we have projects: render project comp
                   this.setState({ initialProject: projects[0].id });
-                  // projectId = projects[0].id;
                 }
                 if (!projects) return null;
                 return (
