@@ -42,3 +42,7 @@ Cypress.Commands.add('login', (email, password) => {
       window.localStorage.setItem('auth', res.body.data.login.token);
     });
 });
+
+Cypress.Commands.add('logout', (email, password) => {
+  window.localStorage.removeItem('auth');
+});
