@@ -13,7 +13,7 @@ describe('SignUp', function() {
 
   it('SignUp with existing email', function() {
     // fill out form
-    cy.get('input[name="email"]').type('developer@example.com');
+    cy.get('input[name="email"]').type('Alice@example.com');
     cy.get('input[name="password"]').type('wrong');
 
     // submit SignUp action

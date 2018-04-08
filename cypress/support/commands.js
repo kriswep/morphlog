@@ -27,7 +27,7 @@
 Cypress.Commands.add('login', (email, password) => {
   const body = {
     operationName: 'signin',
-    variables: { email: 'developer@example.com', password: 'nooneknows' },
+    variables: { email: 'Alice@example.com', password: 'nooneknows' },
     query:
       'mutation signin($email: String!, $password: String!) { login(email: $email, password: $password) { token }}',
   };

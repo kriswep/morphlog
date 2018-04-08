@@ -1,16 +1,48 @@
-mutation {
-  createUser(
+mutation seed {
+  createTeam: createUser(
     data: {
-      email: "developer@example.com"
+      email: "Alice@example.com"
       password: "$2a$10$hACwQ5/HQI6FhbIISOUVeusy3sKyUDhSq36fF5d/54aAdiygJPFzm" # plaintext password: "nooneknows"
-      name: "Sarah"
+      name: "Alice"
       projectAdmin: {
         create: [
-          { name: "Sarah's first project" }
-          { name: "Sarah's second project" }
-          { name: "Sarah's third project" }
+          {
+            name: "Alice's first project"
+            member: {
+              create: {
+                email: "Bob@example.com"
+                password: "$2a$10$jQSE/ptyTAFkLoAQvOGIYOpI0WeTq14MYT.S6dMO6Hz6hCejr0B4q" # plaintext password: "idoknow"
+                name: "Bob"
+                projectAdmin: { create: { name: "Bob's own project" } }
+              }
+            }
+            change: {
+              create: [
+                {
+                  text: "First change"
+                  author: { connect: { email: "Alice@example.com" } }
+                }
+                {
+                  text: "Second change"
+                  author: { connect: { email: "Bob@example.com" } }
+                }
+              ]
+            }
+          }
+          { name: "Alice's second project" }
+          { name: "Alice's third project" }
         ]
       }
+    }
+  ) {
+    id
+  }
+  createExternal: createUser(
+    data: {
+      email: "Eve@example.com"
+      password: "$2a$10$GM2e4UvsyCfeST8H6qtWGeJQF6pHoxCwE813QmoVDesd2.0OlAFnG" # plaintext password: "kindasecret"
+      name: "Eve"
+      projectAdmin: { create: { name: "Eve's first project" } }
     }
   ) {
     id

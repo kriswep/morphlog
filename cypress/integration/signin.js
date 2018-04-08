@@ -32,7 +32,7 @@ describe('SignIn', function() {
 
   it('dont signIn with wrong password', function() {
     // fill out form
-    cy.get('input[name="email"]').type('developer@example.com');
+    cy.get('input[name="email"]').type('Alice@example.com');
     cy.get('input[name="password"]').type('wrong');
 
     // submit signIn action
@@ -44,14 +44,14 @@ describe('SignIn', function() {
 
   it('signIn with right credentials', function() {
     // fill out form
-    cy.get('input[name="email"]').type('developer@example.com');
+    cy.get('input[name="email"]').type('Alice@example.com');
     cy.get('input[name="password"]').type('nooneknows');
 
     // submit signIn action
     cy.contains('button', 'SignIn').click();
 
     // should show profile
-    cy.get('[data-test="profile"]').contains('developer@example.com');
+    cy.get('[data-test="profile"]').contains('Alice@example.com');
 
     // should logout
     cy.contains('button', 'LogOut').click();
