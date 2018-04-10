@@ -36,3 +36,7 @@ jobs:
       - run:
           name: test e2e
           command: 'npm run integration'
+      - store_artifacts:
+          path: cypress/videos
+      - store_artifacts:
+          path: cypress/screenshots
