@@ -24,10 +24,25 @@
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('login', (email, password) => {
+Cypress.Commands.add('login', type => {
+  let email, password;
+  switch (type) {
+    case 'member':
+      email = 'Bob@example.com';
+      password = 'idoknow';
+      break;
+    case 'external':
+      email = 'Eve@example.com';
+      password = 'kindasecret';
+      break;
+    default:
+      email = 'Alice@example.com';
+      password = 'nooneknows';
+      break;
+  }
   const body = {
     operationName: 'signin',
-    variables: { email: 'Alice@example.com', password: 'nooneknows' },
+    variables: { email, password },
     query:
       'mutation signin($email: String!, $password: String!) { login(email: $email, password: $password) { token }}',
   };
