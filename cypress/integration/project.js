@@ -44,6 +44,7 @@ describe('Project', function() {
       .click();
 
     // Should render new project
+    cy.visit('http://localhost:3030/project');
     cy.contains(projectName);
   });
 
