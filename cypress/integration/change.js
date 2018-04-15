@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('Project', function() {
+describe('Change / Project detail', function() {
   beforeEach(function() {
     cy.login();
   });
