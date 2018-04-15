@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('SignIn', function() {
   // beforeEach(function() {
   //   // slower!

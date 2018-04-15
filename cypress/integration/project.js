@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 describe('Project', function() {
   beforeEach(function() {
     cy.login();
