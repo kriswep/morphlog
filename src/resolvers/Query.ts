@@ -8,9 +8,29 @@ export const Query = {
       ctx.db.query.project({ where: { id } }, info),
     ),
 
-  // todo: guard for project per fragments
-  change: requiresAuth.addResolver((parent, { id }, ctx: Context, info) =>
-    ctx.db.query.change({ where: { id } }, info),
+  change: requiresAuth.addResolver(
+    async (parent, { id }, ctx: Context, info) => {
+      const userId = ctx.user.id;
+
+      const isAuthor = ctx.db.exists.Change({
+        id,
+        author: { id: userId },
+      });
+
+      const isAdmin = ctx.db.exists.Project({
+        AND: [
+          {
+            change_some: { id },
+            admin_some: { id: userId },
+          },
+        ],
+      });
+      if (!await isAuthor && !await isAdmin) {
+        throw new Error(`Not your Change`);
+      }
+
+      return ctx.db.query.change({ where: { id } }, info);
+    },
   ),
 
   projects: requiresAuth.addResolver((parent, args, ctx: Context, info) => {

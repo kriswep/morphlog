@@ -2,11 +2,16 @@
 import { getUserId, isUserProjectAllowed } from '../utils';
 
 import { Query } from './Query';
+import { exists } from 'fs';
 
 jest.mock('../utils', () => ({
   getUserId: jest.fn(() => 'userId'),
   isUserProjectAllowed: jest.fn(() => true),
 }));
+
+beforeEach(() => {
+  jest.clearAllMocks();
+});
 
 test('Query should have needed resolvers', async () => {
   expect(Query.project).toBeDefined();
@@ -38,8 +43,6 @@ test('query for project', async () => {
     { where: { id: 1 } },
     { info: 2 },
   );
-  getUserId.mockClear();
-  isUserProjectAllowed.mockClear();
 });
 
 test('query for change', async () => {
@@ -47,6 +50,10 @@ test('query for change', async () => {
     db: {
       query: {
         change: jest.fn(() => true),
+      },
+      exists: {
+        Change: jest.fn(() => true),
+        Project: jest.fn(() => true),
       },
     },
   };
@@ -63,8 +70,26 @@ test('query for change', async () => {
     { where: { id: 1 } },
     { info: 2 },
   );
-  getUserId.mockClear();
-  isUserProjectAllowed.mockClear();
+
+  // throw if not author or admin
+  const contextFailure = {
+    db: {
+      exists: {
+        Change: jest.fn(() => false),
+        Project: jest.fn(() => false),
+      },
+    },
+  };
+
+  let message;
+  try {
+    await Query.change({}, { id: 1 }, contextFailure, {
+      info: 2,
+    });
+  } catch (error) {
+    message = error.message;
+  }
+  expect(message).toBe('Not your Change');
 });
 
 test('query for projects', async () => {
@@ -96,8 +121,6 @@ test('query for projects', async () => {
     },
     { info: 2 },
   );
-  getUserId.mockClear();
-  isUserProjectAllowed.mockClear();
 });
 
 test('query for changes', async () => {
@@ -127,8 +150,6 @@ test('query for changes', async () => {
     { orderBy: 'createdAt_DESC', rest: true, where: { project: { id: 1 } } },
     { info: 2 },
   );
-  getUserId.mockClear();
-  isUserProjectAllowed.mockClear();
 });
 
 test('query for me', async () => {
@@ -152,6 +173,4 @@ test('query for me', async () => {
     { where: { id: 'userId' } },
     { info: 2 },
   );
-  getUserId.mockClear();
-  isUserProjectAllowed.mockClear();
 });
