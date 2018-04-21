@@ -20,7 +20,7 @@
     "start": "react-scripts start",
     "start:noOpen": "BROWSER=none react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "TZ=UTC react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
