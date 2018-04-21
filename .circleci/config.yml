@@ -30,9 +30,9 @@ jobs:
       - run:
           name: test server
           command: npm test
-      #- run:
-      #    name: test client
-      #    command: cd client && npm test
+      - run:
+          name: test client
+          command: cd client && npm test
       - run:
           name: test e2e
           command: 'npm run integration'
