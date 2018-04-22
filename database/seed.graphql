@@ -4,16 +4,39 @@ mutation seed {
       email: "Alice@example.com"
       password: "$2a$10$hACwQ5/HQI6FhbIISOUVeusy3sKyUDhSq36fF5d/54aAdiygJPFzm" # plaintext password: "nooneknows"
       name: "Alice"
+      TeamOwner: { create: { name: "todo1" } }
       projectAdmin: {
         create: [
           {
             name: "Alice's first project"
+            team: {
+              create: {
+                owner: {
+                  create: { email: "todo2", password: "todo2", name: "todo2" }
+                }
+              }
+            }
             member: {
               create: {
                 email: "Bob@example.com"
                 password: "$2a$10$jQSE/ptyTAFkLoAQvOGIYOpI0WeTq14MYT.S6dMO6Hz6hCejr0B4q" # plaintext password: "idoknow"
                 name: "Bob"
-                projectAdmin: { create: { name: "Bob's own project" } }
+                projectAdmin: {
+                  create: {
+                    name: "Bob's own project"
+                    team: {
+                      create: {
+                        owner: {
+                          create: {
+                            email: "todo3"
+                            password: "todo3"
+                            name: "todo3"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
             change: {
@@ -29,8 +52,26 @@ mutation seed {
               ]
             }
           }
-          { name: "Alice's second project" }
-          { name: "Alice's third project" }
+          {
+            name: "Alice's second project"
+            team: {
+              create: {
+                owner: {
+                  create: { email: "todo4", password: "todo4", name: "todo4" }
+                }
+              }
+            }
+          }
+          {
+            name: "Alice's third project"
+            team: {
+              create: {
+                owner: {
+                  create: { email: "todo5", password: "todo5", name: "todo5" }
+                }
+              }
+            }
+          }
         ]
       }
     }
@@ -42,7 +83,18 @@ mutation seed {
       email: "Eve@example.com"
       password: "$2a$10$GM2e4UvsyCfeST8H6qtWGeJQF6pHoxCwE813QmoVDesd2.0OlAFnG" # plaintext password: "kindasecret"
       name: "Eve"
-      projectAdmin: { create: { name: "Eve's first project" } }
+      projectAdmin: {
+        create: {
+          name: "Eve's first project"
+          team: {
+            create: {
+              owner: {
+                create: { email: "todo6", password: "todo6", name: "todo6" }
+              }
+            }
+          }
+        }
+      }
     }
   ) {
     id

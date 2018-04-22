@@ -30,7 +30,7 @@ type Team implements Node {
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String
-  project(where: ProjectWhereInput): Project
+  project(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
   owner(where: UserWhereInput): User!
   admin(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   member(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
@@ -70,23 +70,11 @@ type AggregateUser {
 }
 
 type BatchPayload {
-  """
-  The number of nodes that have been affected by the Batch operation.
-  """
   count: Long!
 }
 
-"""
-A connection to a list of items.
-"""
 type ChangeConnection {
-  """
-  Information to aid in pagination.
-  """
   pageInfo: PageInfo!
-  """
-  A list of edges.
-  """
   edges: [ChangeEdge]!
   aggregate: AggregateChange!
 }
@@ -107,17 +95,8 @@ input ChangeCreateWithoutProjectInput {
   author: UserCreateOneInput!
 }
 
-"""
-An edge in a connection.
-"""
 type ChangeEdge {
-  """
-  The item at the end of the edge.
-  """
   node: Change!
-  """
-  A cursor for use in pagination.
-  """
   cursor: String!
 }
 
@@ -147,29 +126,11 @@ type ChangeSubscriptionPayload {
 }
 
 input ChangeSubscriptionWhereInput {
-  """
-  Logical AND on all given filters.
-  """
   AND: [ChangeSubscriptionWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
   OR: [ChangeSubscriptionWhereInput!]
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
   mutation_in: [MutationType!]
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
   updatedFields_contains: String
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
   updatedFields_contains_every: [String!]
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
   updatedFields_contains_some: [String!]
   node: ChangeWhereInput
 }
@@ -185,8 +146,8 @@ input ChangeUpdateManyWithoutProjectInput {
   connect: [ChangeWhereUniqueInput!]
   disconnect: [ChangeWhereUniqueInput!]
   delete: [ChangeWhereUniqueInput!]
-  update: [ChangeUpdateWithoutProjectInput!]
-  upsert: [ChangeUpsertWithoutProjectInput!]
+  update: [ChangeUpdateWithWhereUniqueWithoutProjectInput!]
+  upsert: [ChangeUpsertWithWhereUniqueWithoutProjectInput!]
 }
 
 input ChangeUpdateWithoutProjectDataInput {
@@ -194,189 +155,63 @@ input ChangeUpdateWithoutProjectDataInput {
   author: UserUpdateOneInput
 }
 
-input ChangeUpdateWithoutProjectInput {
+input ChangeUpdateWithWhereUniqueWithoutProjectInput {
   where: ChangeWhereUniqueInput!
   data: ChangeUpdateWithoutProjectDataInput!
 }
 
-input ChangeUpsertWithoutProjectInput {
+input ChangeUpsertWithWhereUniqueWithoutProjectInput {
   where: ChangeWhereUniqueInput!
   update: ChangeUpdateWithoutProjectDataInput!
   create: ChangeCreateWithoutProjectInput!
 }
 
 input ChangeWhereInput {
-  """
-  Logical AND on all given filters.
-  """
   AND: [ChangeWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
   OR: [ChangeWhereInput!]
   id: ID
-  """
-  All values that are not equal to given value.
-  """
   id_not: ID
-  """
-  All values that are contained in given list.
-  """
   id_in: [ID!]
-  """
-  All values that are not contained in given list.
-  """
   id_not_in: [ID!]
-  """
-  All values less than the given value.
-  """
   id_lt: ID
-  """
-  All values less than or equal the given value.
-  """
   id_lte: ID
-  """
-  All values greater than the given value.
-  """
   id_gt: ID
-  """
-  All values greater than or equal the given value.
-  """
   id_gte: ID
-  """
-  All values containing the given string.
-  """
   id_contains: ID
-  """
-  All values not containing the given string.
-  """
   id_not_contains: ID
-  """
-  All values starting with the given string.
-  """
   id_starts_with: ID
-  """
-  All values not starting with the given string.
-  """
   id_not_starts_with: ID
-  """
-  All values ending with the given string.
-  """
   id_ends_with: ID
-  """
-  All values not ending with the given string.
-  """
   id_not_ends_with: ID
   createdAt: DateTime
-  """
-  All values that are not equal to given value.
-  """
   createdAt_not: DateTime
-  """
-  All values that are contained in given list.
-  """
   createdAt_in: [DateTime!]
-  """
-  All values that are not contained in given list.
-  """
   createdAt_not_in: [DateTime!]
-  """
-  All values less than the given value.
-  """
   createdAt_lt: DateTime
-  """
-  All values less than or equal the given value.
-  """
   createdAt_lte: DateTime
-  """
-  All values greater than the given value.
-  """
   createdAt_gt: DateTime
-  """
-  All values greater than or equal the given value.
-  """
   createdAt_gte: DateTime
   updatedAt: DateTime
-  """
-  All values that are not equal to given value.
-  """
   updatedAt_not: DateTime
-  """
-  All values that are contained in given list.
-  """
   updatedAt_in: [DateTime!]
-  """
-  All values that are not contained in given list.
-  """
   updatedAt_not_in: [DateTime!]
-  """
-  All values less than the given value.
-  """
   updatedAt_lt: DateTime
-  """
-  All values less than or equal the given value.
-  """
   updatedAt_lte: DateTime
-  """
-  All values greater than the given value.
-  """
   updatedAt_gt: DateTime
-  """
-  All values greater than or equal the given value.
-  """
   updatedAt_gte: DateTime
   text: String
-  """
-  All values that are not equal to given value.
-  """
   text_not: String
-  """
-  All values that are contained in given list.
-  """
   text_in: [String!]
-  """
-  All values that are not contained in given list.
-  """
   text_not_in: [String!]
-  """
-  All values less than the given value.
-  """
   text_lt: String
-  """
-  All values less than or equal the given value.
-  """
   text_lte: String
-  """
-  All values greater than the given value.
-  """
   text_gt: String
-  """
-  All values greater than or equal the given value.
-  """
   text_gte: String
-  """
-  All values containing the given string.
-  """
   text_contains: String
-  """
-  All values not containing the given string.
-  """
   text_not_contains: String
-  """
-  All values starting with the given string.
-  """
   text_starts_with: String
-  """
-  All values not starting with the given string.
-  """
   text_not_starts_with: String
-  """
-  All values ending with the given string.
-  """
   text_ends_with: String
-  """
-  All values not ending with the given string.
-  """
   text_not_ends_with: String
   author: UserWhereInput
   project: ProjectWhereInput
@@ -388,10 +223,6 @@ input ChangeWhereUniqueInput {
 
 scalar DateTime
 
-"""
-The `Long` scalar type represents non-fractional signed whole numeric values.
-Long can represent values between -(2^63) and 2^63 - 1.
-"""
 scalar Long
 
 type Mutation {
@@ -411,14 +242,14 @@ type Mutation {
   upsertChange(where: ChangeWhereUniqueInput!, create: ChangeCreateInput!, update: ChangeUpdateInput!): Change!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertTeam(where: TeamWhereUniqueInput!, create: TeamCreateInput!, update: TeamUpdateInput!): Team!
-  updateManyProjects(data: ProjectUpdateInput!, where: ProjectWhereInput!): BatchPayload!
-  updateManyChanges(data: ChangeUpdateInput!, where: ChangeWhereInput!): BatchPayload!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput!): BatchPayload!
-  updateManyTeams(data: TeamUpdateInput!, where: TeamWhereInput!): BatchPayload!
-  deleteManyProjects(where: ProjectWhereInput!): BatchPayload!
-  deleteManyChanges(where: ChangeWhereInput!): BatchPayload!
-  deleteManyUsers(where: UserWhereInput!): BatchPayload!
-  deleteManyTeams(where: TeamWhereInput!): BatchPayload!
+  updateManyProjects(data: ProjectUpdateInput!, where: ProjectWhereInput): BatchPayload!
+  updateManyChanges(data: ChangeUpdateInput!, where: ChangeWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyTeams(data: TeamUpdateInput!, where: TeamWhereInput): BatchPayload!
+  deleteManyProjects(where: ProjectWhereInput): BatchPayload!
+  deleteManyChanges(where: ChangeWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyTeams(where: TeamWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -427,49 +258,19 @@ enum MutationType {
   DELETED
 }
 
-"""
-An object with an ID
-"""
 interface Node {
-  """
-  The id of the object.
-  """
   id: ID!
 }
 
-"""
-Information about pagination in a connection.
-"""
 type PageInfo {
-  """
-  When paginating forwards, are there more items?
-  """
   hasNextPage: Boolean!
-  """
-  When paginating backwards, are there more items?
-  """
   hasPreviousPage: Boolean!
-  """
-  When paginating backwards, the cursor to continue.
-  """
   startCursor: String
-  """
-  When paginating forwards, the cursor to continue.
-  """
   endCursor: String
 }
 
-"""
-A connection to a list of items.
-"""
 type ProjectConnection {
-  """
-  Information to aid in pagination.
-  """
   pageInfo: PageInfo!
-  """
-  A list of edges.
-  """
   edges: [ProjectEdge]!
   aggregate: AggregateProject!
 }
@@ -492,13 +293,13 @@ input ProjectCreateManyWithoutMemberInput {
   connect: [ProjectWhereUniqueInput!]
 }
 
-input ProjectCreateOneWithoutChangeInput {
-  create: ProjectCreateWithoutChangeInput
-  connect: ProjectWhereUniqueInput
+input ProjectCreateManyWithoutTeamInput {
+  create: [ProjectCreateWithoutTeamInput!]
+  connect: [ProjectWhereUniqueInput!]
 }
 
-input ProjectCreateOneWithoutTeamInput {
-  create: ProjectCreateWithoutTeamInput
+input ProjectCreateOneWithoutChangeInput {
+  create: ProjectCreateWithoutChangeInput
   connect: ProjectWhereUniqueInput
 }
 
@@ -530,17 +331,8 @@ input ProjectCreateWithoutTeamInput {
   change: ChangeCreateManyWithoutProjectInput
 }
 
-"""
-An edge in a connection.
-"""
 type ProjectEdge {
-  """
-  The item at the end of the edge.
-  """
   node: Project!
-  """
-  A cursor for use in pagination.
-  """
   cursor: String!
 }
 
@@ -570,29 +362,11 @@ type ProjectSubscriptionPayload {
 }
 
 input ProjectSubscriptionWhereInput {
-  """
-  Logical AND on all given filters.
-  """
   AND: [ProjectSubscriptionWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
   OR: [ProjectSubscriptionWhereInput!]
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
   mutation_in: [MutationType!]
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
   updatedFields_contains: String
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
   updatedFields_contains_every: [String!]
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
   updatedFields_contains_some: [String!]
   node: ProjectWhereInput
 }
@@ -610,8 +384,8 @@ input ProjectUpdateManyWithoutAdminInput {
   connect: [ProjectWhereUniqueInput!]
   disconnect: [ProjectWhereUniqueInput!]
   delete: [ProjectWhereUniqueInput!]
-  update: [ProjectUpdateWithoutAdminInput!]
-  upsert: [ProjectUpsertWithoutAdminInput!]
+  update: [ProjectUpdateWithWhereUniqueWithoutAdminInput!]
+  upsert: [ProjectUpsertWithWhereUniqueWithoutAdminInput!]
 }
 
 input ProjectUpdateManyWithoutMemberInput {
@@ -619,26 +393,25 @@ input ProjectUpdateManyWithoutMemberInput {
   connect: [ProjectWhereUniqueInput!]
   disconnect: [ProjectWhereUniqueInput!]
   delete: [ProjectWhereUniqueInput!]
-  update: [ProjectUpdateWithoutMemberInput!]
-  upsert: [ProjectUpsertWithoutMemberInput!]
+  update: [ProjectUpdateWithWhereUniqueWithoutMemberInput!]
+  upsert: [ProjectUpsertWithWhereUniqueWithoutMemberInput!]
+}
+
+input ProjectUpdateManyWithoutTeamInput {
+  create: [ProjectCreateWithoutTeamInput!]
+  connect: [ProjectWhereUniqueInput!]
+  disconnect: [ProjectWhereUniqueInput!]
+  delete: [ProjectWhereUniqueInput!]
+  update: [ProjectUpdateWithWhereUniqueWithoutTeamInput!]
+  upsert: [ProjectUpsertWithWhereUniqueWithoutTeamInput!]
 }
 
 input ProjectUpdateOneWithoutChangeInput {
   create: ProjectCreateWithoutChangeInput
   connect: ProjectWhereUniqueInput
-  disconnect: ProjectWhereUniqueInput
-  delete: ProjectWhereUniqueInput
-  update: ProjectUpdateWithoutChangeInput
+  delete: Boolean
+  update: ProjectUpdateWithoutChangeDataInput
   upsert: ProjectUpsertWithoutChangeInput
-}
-
-input ProjectUpdateOneWithoutTeamInput {
-  create: ProjectCreateWithoutTeamInput
-  connect: ProjectWhereUniqueInput
-  disconnect: ProjectWhereUniqueInput
-  delete: ProjectWhereUniqueInput
-  update: ProjectUpdateWithoutTeamInput
-  upsert: ProjectUpsertWithoutTeamInput
 }
 
 input ProjectUpdateWithoutAdminDataInput {
@@ -648,21 +421,11 @@ input ProjectUpdateWithoutAdminDataInput {
   change: ChangeUpdateManyWithoutProjectInput
 }
 
-input ProjectUpdateWithoutAdminInput {
-  where: ProjectWhereUniqueInput!
-  data: ProjectUpdateWithoutAdminDataInput!
-}
-
 input ProjectUpdateWithoutChangeDataInput {
   name: String
   team: TeamUpdateOneWithoutProjectInput
   member: UserUpdateManyWithoutProjectMemberInput
   admin: UserUpdateManyWithoutProjectAdminInput
-}
-
-input ProjectUpdateWithoutChangeInput {
-  where: ProjectWhereUniqueInput!
-  data: ProjectUpdateWithoutChangeDataInput!
 }
 
 input ProjectUpdateWithoutMemberDataInput {
@@ -672,11 +435,6 @@ input ProjectUpdateWithoutMemberDataInput {
   change: ChangeUpdateManyWithoutProjectInput
 }
 
-input ProjectUpdateWithoutMemberInput {
-  where: ProjectWhereUniqueInput!
-  data: ProjectUpdateWithoutMemberDataInput!
-}
-
 input ProjectUpdateWithoutTeamDataInput {
   name: String
   member: UserUpdateManyWithoutProjectMemberInput
@@ -684,207 +442,90 @@ input ProjectUpdateWithoutTeamDataInput {
   change: ChangeUpdateManyWithoutProjectInput
 }
 
-input ProjectUpdateWithoutTeamInput {
+input ProjectUpdateWithWhereUniqueWithoutAdminInput {
+  where: ProjectWhereUniqueInput!
+  data: ProjectUpdateWithoutAdminDataInput!
+}
+
+input ProjectUpdateWithWhereUniqueWithoutMemberInput {
+  where: ProjectWhereUniqueInput!
+  data: ProjectUpdateWithoutMemberDataInput!
+}
+
+input ProjectUpdateWithWhereUniqueWithoutTeamInput {
   where: ProjectWhereUniqueInput!
   data: ProjectUpdateWithoutTeamDataInput!
 }
 
-input ProjectUpsertWithoutAdminInput {
+input ProjectUpsertWithoutChangeInput {
+  update: ProjectUpdateWithoutChangeDataInput!
+  create: ProjectCreateWithoutChangeInput!
+}
+
+input ProjectUpsertWithWhereUniqueWithoutAdminInput {
   where: ProjectWhereUniqueInput!
   update: ProjectUpdateWithoutAdminDataInput!
   create: ProjectCreateWithoutAdminInput!
 }
 
-input ProjectUpsertWithoutChangeInput {
-  where: ProjectWhereUniqueInput!
-  update: ProjectUpdateWithoutChangeDataInput!
-  create: ProjectCreateWithoutChangeInput!
-}
-
-input ProjectUpsertWithoutMemberInput {
+input ProjectUpsertWithWhereUniqueWithoutMemberInput {
   where: ProjectWhereUniqueInput!
   update: ProjectUpdateWithoutMemberDataInput!
   create: ProjectCreateWithoutMemberInput!
 }
 
-input ProjectUpsertWithoutTeamInput {
+input ProjectUpsertWithWhereUniqueWithoutTeamInput {
   where: ProjectWhereUniqueInput!
   update: ProjectUpdateWithoutTeamDataInput!
   create: ProjectCreateWithoutTeamInput!
 }
 
 input ProjectWhereInput {
-  """
-  Logical AND on all given filters.
-  """
   AND: [ProjectWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
   OR: [ProjectWhereInput!]
   id: ID
-  """
-  All values that are not equal to given value.
-  """
   id_not: ID
-  """
-  All values that are contained in given list.
-  """
   id_in: [ID!]
-  """
-  All values that are not contained in given list.
-  """
   id_not_in: [ID!]
-  """
-  All values less than the given value.
-  """
   id_lt: ID
-  """
-  All values less than or equal the given value.
-  """
   id_lte: ID
-  """
-  All values greater than the given value.
-  """
   id_gt: ID
-  """
-  All values greater than or equal the given value.
-  """
   id_gte: ID
-  """
-  All values containing the given string.
-  """
   id_contains: ID
-  """
-  All values not containing the given string.
-  """
   id_not_contains: ID
-  """
-  All values starting with the given string.
-  """
   id_starts_with: ID
-  """
-  All values not starting with the given string.
-  """
   id_not_starts_with: ID
-  """
-  All values ending with the given string.
-  """
   id_ends_with: ID
-  """
-  All values not ending with the given string.
-  """
   id_not_ends_with: ID
   createdAt: DateTime
-  """
-  All values that are not equal to given value.
-  """
   createdAt_not: DateTime
-  """
-  All values that are contained in given list.
-  """
   createdAt_in: [DateTime!]
-  """
-  All values that are not contained in given list.
-  """
   createdAt_not_in: [DateTime!]
-  """
-  All values less than the given value.
-  """
   createdAt_lt: DateTime
-  """
-  All values less than or equal the given value.
-  """
   createdAt_lte: DateTime
-  """
-  All values greater than the given value.
-  """
   createdAt_gt: DateTime
-  """
-  All values greater than or equal the given value.
-  """
   createdAt_gte: DateTime
   updatedAt: DateTime
-  """
-  All values that are not equal to given value.
-  """
   updatedAt_not: DateTime
-  """
-  All values that are contained in given list.
-  """
   updatedAt_in: [DateTime!]
-  """
-  All values that are not contained in given list.
-  """
   updatedAt_not_in: [DateTime!]
-  """
-  All values less than the given value.
-  """
   updatedAt_lt: DateTime
-  """
-  All values less than or equal the given value.
-  """
   updatedAt_lte: DateTime
-  """
-  All values greater than the given value.
-  """
   updatedAt_gt: DateTime
-  """
-  All values greater than or equal the given value.
-  """
   updatedAt_gte: DateTime
   name: String
-  """
-  All values that are not equal to given value.
-  """
   name_not: String
-  """
-  All values that are contained in given list.
-  """
   name_in: [String!]
-  """
-  All values that are not contained in given list.
-  """
   name_not_in: [String!]
-  """
-  All values less than the given value.
-  """
   name_lt: String
-  """
-  All values less than or equal the given value.
-  """
   name_lte: String
-  """
-  All values greater than the given value.
-  """
   name_gt: String
-  """
-  All values greater than or equal the given value.
-  """
   name_gte: String
-  """
-  All values containing the given string.
-  """
   name_contains: String
-  """
-  All values not containing the given string.
-  """
   name_not_contains: String
-  """
-  All values starting with the given string.
-  """
   name_starts_with: String
-  """
-  All values not starting with the given string.
-  """
   name_not_starts_with: String
-  """
-  All values ending with the given string.
-  """
   name_ends_with: String
-  """
-  All values not ending with the given string.
-  """
   name_not_ends_with: String
   team: TeamWhereInput
   member_every: UserWhereInput
@@ -915,13 +556,7 @@ type Query {
   changesConnection(where: ChangeWhereInput, orderBy: ChangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChangeConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   teamsConnection(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TeamConnection!
-  """
-  Fetches an object given its ID
-  """
-  node("""
-  The ID of an object
-  """
-  id: ID!): Node
+  node(id: ID!): Node
 }
 
 type Subscription {
@@ -931,24 +566,15 @@ type Subscription {
   team(where: TeamSubscriptionWhereInput): TeamSubscriptionPayload
 }
 
-"""
-A connection to a list of items.
-"""
 type TeamConnection {
-  """
-  Information to aid in pagination.
-  """
   pageInfo: PageInfo!
-  """
-  A list of edges.
-  """
   edges: [TeamEdge]!
   aggregate: AggregateTeam!
 }
 
 input TeamCreateInput {
   name: String
-  project: ProjectCreateOneWithoutTeamInput
+  project: ProjectCreateManyWithoutTeamInput
   owner: UserCreateOneWithoutTeamOwnerInput!
   admin: UserCreateManyWithoutTeamAdminInput
   member: UserCreateManyWithoutTeamMemberInput
@@ -976,21 +602,21 @@ input TeamCreateOneWithoutProjectInput {
 
 input TeamCreateWithoutAdminInput {
   name: String
-  project: ProjectCreateOneWithoutTeamInput
+  project: ProjectCreateManyWithoutTeamInput
   owner: UserCreateOneWithoutTeamOwnerInput!
   member: UserCreateManyWithoutTeamMemberInput
 }
 
 input TeamCreateWithoutMemberInput {
   name: String
-  project: ProjectCreateOneWithoutTeamInput
+  project: ProjectCreateManyWithoutTeamInput
   owner: UserCreateOneWithoutTeamOwnerInput!
   admin: UserCreateManyWithoutTeamAdminInput
 }
 
 input TeamCreateWithoutOwnerInput {
   name: String
-  project: ProjectCreateOneWithoutTeamInput
+  project: ProjectCreateManyWithoutTeamInput
   admin: UserCreateManyWithoutTeamAdminInput
   member: UserCreateManyWithoutTeamMemberInput
 }
@@ -1002,17 +628,8 @@ input TeamCreateWithoutProjectInput {
   member: UserCreateManyWithoutTeamMemberInput
 }
 
-"""
-An edge in a connection.
-"""
 type TeamEdge {
-  """
-  The item at the end of the edge.
-  """
   node: Team!
-  """
-  A cursor for use in pagination.
-  """
   cursor: String!
 }
 
@@ -1042,36 +659,18 @@ type TeamSubscriptionPayload {
 }
 
 input TeamSubscriptionWhereInput {
-  """
-  Logical AND on all given filters.
-  """
   AND: [TeamSubscriptionWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
   OR: [TeamSubscriptionWhereInput!]
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
   mutation_in: [MutationType!]
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
   updatedFields_contains: String
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
   updatedFields_contains_every: [String!]
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
   updatedFields_contains_some: [String!]
   node: TeamWhereInput
 }
 
 input TeamUpdateInput {
   name: String
-  project: ProjectUpdateOneWithoutTeamInput
+  project: ProjectUpdateManyWithoutTeamInput
   owner: UserUpdateOneWithoutTeamOwnerInput
   admin: UserUpdateManyWithoutTeamAdminInput
   member: UserUpdateManyWithoutTeamMemberInput
@@ -1082,8 +681,8 @@ input TeamUpdateManyWithoutAdminInput {
   connect: [TeamWhereUniqueInput!]
   disconnect: [TeamWhereUniqueInput!]
   delete: [TeamWhereUniqueInput!]
-  update: [TeamUpdateWithoutAdminInput!]
-  upsert: [TeamUpsertWithoutAdminInput!]
+  update: [TeamUpdateWithWhereUniqueWithoutAdminInput!]
+  upsert: [TeamUpsertWithWhereUniqueWithoutAdminInput!]
 }
 
 input TeamUpdateManyWithoutMemberInput {
@@ -1091,8 +690,8 @@ input TeamUpdateManyWithoutMemberInput {
   connect: [TeamWhereUniqueInput!]
   disconnect: [TeamWhereUniqueInput!]
   delete: [TeamWhereUniqueInput!]
-  update: [TeamUpdateWithoutMemberInput!]
-  upsert: [TeamUpsertWithoutMemberInput!]
+  update: [TeamUpdateWithWhereUniqueWithoutMemberInput!]
+  upsert: [TeamUpsertWithWhereUniqueWithoutMemberInput!]
 }
 
 input TeamUpdateManyWithoutOwnerInput {
@@ -1100,53 +699,37 @@ input TeamUpdateManyWithoutOwnerInput {
   connect: [TeamWhereUniqueInput!]
   disconnect: [TeamWhereUniqueInput!]
   delete: [TeamWhereUniqueInput!]
-  update: [TeamUpdateWithoutOwnerInput!]
-  upsert: [TeamUpsertWithoutOwnerInput!]
+  update: [TeamUpdateWithWhereUniqueWithoutOwnerInput!]
+  upsert: [TeamUpsertWithWhereUniqueWithoutOwnerInput!]
 }
 
 input TeamUpdateOneWithoutProjectInput {
   create: TeamCreateWithoutProjectInput
   connect: TeamWhereUniqueInput
-  disconnect: TeamWhereUniqueInput
-  delete: TeamWhereUniqueInput
-  update: TeamUpdateWithoutProjectInput
+  delete: Boolean
+  update: TeamUpdateWithoutProjectDataInput
   upsert: TeamUpsertWithoutProjectInput
 }
 
 input TeamUpdateWithoutAdminDataInput {
   name: String
-  project: ProjectUpdateOneWithoutTeamInput
+  project: ProjectUpdateManyWithoutTeamInput
   owner: UserUpdateOneWithoutTeamOwnerInput
   member: UserUpdateManyWithoutTeamMemberInput
-}
-
-input TeamUpdateWithoutAdminInput {
-  where: TeamWhereUniqueInput!
-  data: TeamUpdateWithoutAdminDataInput!
 }
 
 input TeamUpdateWithoutMemberDataInput {
   name: String
-  project: ProjectUpdateOneWithoutTeamInput
+  project: ProjectUpdateManyWithoutTeamInput
   owner: UserUpdateOneWithoutTeamOwnerInput
   admin: UserUpdateManyWithoutTeamAdminInput
 }
 
-input TeamUpdateWithoutMemberInput {
-  where: TeamWhereUniqueInput!
-  data: TeamUpdateWithoutMemberDataInput!
-}
-
 input TeamUpdateWithoutOwnerDataInput {
   name: String
-  project: ProjectUpdateOneWithoutTeamInput
+  project: ProjectUpdateManyWithoutTeamInput
   admin: UserUpdateManyWithoutTeamAdminInput
   member: UserUpdateManyWithoutTeamMemberInput
-}
-
-input TeamUpdateWithoutOwnerInput {
-  where: TeamWhereUniqueInput!
-  data: TeamUpdateWithoutOwnerDataInput!
 }
 
 input TeamUpdateWithoutProjectDataInput {
@@ -1156,209 +739,94 @@ input TeamUpdateWithoutProjectDataInput {
   member: UserUpdateManyWithoutTeamMemberInput
 }
 
-input TeamUpdateWithoutProjectInput {
+input TeamUpdateWithWhereUniqueWithoutAdminInput {
   where: TeamWhereUniqueInput!
-  data: TeamUpdateWithoutProjectDataInput!
+  data: TeamUpdateWithoutAdminDataInput!
 }
 
-input TeamUpsertWithoutAdminInput {
+input TeamUpdateWithWhereUniqueWithoutMemberInput {
+  where: TeamWhereUniqueInput!
+  data: TeamUpdateWithoutMemberDataInput!
+}
+
+input TeamUpdateWithWhereUniqueWithoutOwnerInput {
+  where: TeamWhereUniqueInput!
+  data: TeamUpdateWithoutOwnerDataInput!
+}
+
+input TeamUpsertWithoutProjectInput {
+  update: TeamUpdateWithoutProjectDataInput!
+  create: TeamCreateWithoutProjectInput!
+}
+
+input TeamUpsertWithWhereUniqueWithoutAdminInput {
   where: TeamWhereUniqueInput!
   update: TeamUpdateWithoutAdminDataInput!
   create: TeamCreateWithoutAdminInput!
 }
 
-input TeamUpsertWithoutMemberInput {
+input TeamUpsertWithWhereUniqueWithoutMemberInput {
   where: TeamWhereUniqueInput!
   update: TeamUpdateWithoutMemberDataInput!
   create: TeamCreateWithoutMemberInput!
 }
 
-input TeamUpsertWithoutOwnerInput {
+input TeamUpsertWithWhereUniqueWithoutOwnerInput {
   where: TeamWhereUniqueInput!
   update: TeamUpdateWithoutOwnerDataInput!
   create: TeamCreateWithoutOwnerInput!
 }
 
-input TeamUpsertWithoutProjectInput {
-  where: TeamWhereUniqueInput!
-  update: TeamUpdateWithoutProjectDataInput!
-  create: TeamCreateWithoutProjectInput!
-}
-
 input TeamWhereInput {
-  """
-  Logical AND on all given filters.
-  """
   AND: [TeamWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
   OR: [TeamWhereInput!]
   id: ID
-  """
-  All values that are not equal to given value.
-  """
   id_not: ID
-  """
-  All values that are contained in given list.
-  """
   id_in: [ID!]
-  """
-  All values that are not contained in given list.
-  """
   id_not_in: [ID!]
-  """
-  All values less than the given value.
-  """
   id_lt: ID
-  """
-  All values less than or equal the given value.
-  """
   id_lte: ID
-  """
-  All values greater than the given value.
-  """
   id_gt: ID
-  """
-  All values greater than or equal the given value.
-  """
   id_gte: ID
-  """
-  All values containing the given string.
-  """
   id_contains: ID
-  """
-  All values not containing the given string.
-  """
   id_not_contains: ID
-  """
-  All values starting with the given string.
-  """
   id_starts_with: ID
-  """
-  All values not starting with the given string.
-  """
   id_not_starts_with: ID
-  """
-  All values ending with the given string.
-  """
   id_ends_with: ID
-  """
-  All values not ending with the given string.
-  """
   id_not_ends_with: ID
   createdAt: DateTime
-  """
-  All values that are not equal to given value.
-  """
   createdAt_not: DateTime
-  """
-  All values that are contained in given list.
-  """
   createdAt_in: [DateTime!]
-  """
-  All values that are not contained in given list.
-  """
   createdAt_not_in: [DateTime!]
-  """
-  All values less than the given value.
-  """
   createdAt_lt: DateTime
-  """
-  All values less than or equal the given value.
-  """
   createdAt_lte: DateTime
-  """
-  All values greater than the given value.
-  """
   createdAt_gt: DateTime
-  """
-  All values greater than or equal the given value.
-  """
   createdAt_gte: DateTime
   updatedAt: DateTime
-  """
-  All values that are not equal to given value.
-  """
   updatedAt_not: DateTime
-  """
-  All values that are contained in given list.
-  """
   updatedAt_in: [DateTime!]
-  """
-  All values that are not contained in given list.
-  """
   updatedAt_not_in: [DateTime!]
-  """
-  All values less than the given value.
-  """
   updatedAt_lt: DateTime
-  """
-  All values less than or equal the given value.
-  """
   updatedAt_lte: DateTime
-  """
-  All values greater than the given value.
-  """
   updatedAt_gt: DateTime
-  """
-  All values greater than or equal the given value.
-  """
   updatedAt_gte: DateTime
   name: String
-  """
-  All values that are not equal to given value.
-  """
   name_not: String
-  """
-  All values that are contained in given list.
-  """
   name_in: [String!]
-  """
-  All values that are not contained in given list.
-  """
   name_not_in: [String!]
-  """
-  All values less than the given value.
-  """
   name_lt: String
-  """
-  All values less than or equal the given value.
-  """
   name_lte: String
-  """
-  All values greater than the given value.
-  """
   name_gt: String
-  """
-  All values greater than or equal the given value.
-  """
   name_gte: String
-  """
-  All values containing the given string.
-  """
   name_contains: String
-  """
-  All values not containing the given string.
-  """
   name_not_contains: String
-  """
-  All values starting with the given string.
-  """
   name_starts_with: String
-  """
-  All values not starting with the given string.
-  """
   name_not_starts_with: String
-  """
-  All values ending with the given string.
-  """
   name_ends_with: String
-  """
-  All values not ending with the given string.
-  """
   name_not_ends_with: String
-  project: ProjectWhereInput
+  project_every: ProjectWhereInput
+  project_some: ProjectWhereInput
+  project_none: ProjectWhereInput
   owner: UserWhereInput
   admin_every: UserWhereInput
   admin_some: UserWhereInput
@@ -1372,17 +840,8 @@ input TeamWhereUniqueInput {
   id: ID
 }
 
-"""
-A connection to a list of items.
-"""
 type UserConnection {
-  """
-  Information to aid in pagination.
-  """
   pageInfo: PageInfo!
-  """
-  A list of edges.
-  """
   edges: [UserEdge]!
   aggregate: AggregateUser!
 }
@@ -1478,17 +937,8 @@ input UserCreateWithoutTeamOwnerInput {
   projectAdmin: ProjectCreateManyWithoutAdminInput
 }
 
-"""
-An edge in a connection.
-"""
 type UserEdge {
-  """
-  The item at the end of the edge.
-  """
   node: User!
-  """
-  A cursor for use in pagination.
-  """
   cursor: String!
 }
 
@@ -1522,31 +972,24 @@ type UserSubscriptionPayload {
 }
 
 input UserSubscriptionWhereInput {
-  """
-  Logical AND on all given filters.
-  """
   AND: [UserSubscriptionWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
   OR: [UserSubscriptionWhereInput!]
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
   mutation_in: [MutationType!]
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
   updatedFields_contains: String
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
   updatedFields_contains_every: [String!]
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
   updatedFields_contains_some: [String!]
   node: UserWhereInput
+}
+
+input UserUpdateDataInput {
+  email: String
+  password: String
+  name: String
+  TeamOwner: TeamUpdateManyWithoutOwnerInput
+  TeamAdmin: TeamUpdateManyWithoutAdminInput
+  TeamMember: TeamUpdateManyWithoutMemberInput
+  projectMember: ProjectUpdateManyWithoutMemberInput
+  projectAdmin: ProjectUpdateManyWithoutAdminInput
 }
 
 input UserUpdateInput {
@@ -1565,8 +1008,8 @@ input UserUpdateManyWithoutProjectAdminInput {
   connect: [UserWhereUniqueInput!]
   disconnect: [UserWhereUniqueInput!]
   delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithoutProjectAdminInput!]
-  upsert: [UserUpsertWithoutProjectAdminInput!]
+  update: [UserUpdateWithWhereUniqueWithoutProjectAdminInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutProjectAdminInput!]
 }
 
 input UserUpdateManyWithoutProjectMemberInput {
@@ -1574,8 +1017,8 @@ input UserUpdateManyWithoutProjectMemberInput {
   connect: [UserWhereUniqueInput!]
   disconnect: [UserWhereUniqueInput!]
   delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithoutProjectMemberInput!]
-  upsert: [UserUpsertWithoutProjectMemberInput!]
+  update: [UserUpdateWithWhereUniqueWithoutProjectMemberInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutProjectMemberInput!]
 }
 
 input UserUpdateManyWithoutTeamAdminInput {
@@ -1583,8 +1026,8 @@ input UserUpdateManyWithoutTeamAdminInput {
   connect: [UserWhereUniqueInput!]
   disconnect: [UserWhereUniqueInput!]
   delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithoutTeamAdminInput!]
-  upsert: [UserUpsertWithoutTeamAdminInput!]
+  update: [UserUpdateWithWhereUniqueWithoutTeamAdminInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutTeamAdminInput!]
 }
 
 input UserUpdateManyWithoutTeamMemberInput {
@@ -1592,23 +1035,23 @@ input UserUpdateManyWithoutTeamMemberInput {
   connect: [UserWhereUniqueInput!]
   disconnect: [UserWhereUniqueInput!]
   delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithoutTeamMemberInput!]
-  upsert: [UserUpsertWithoutTeamMemberInput!]
+  update: [UserUpdateWithWhereUniqueWithoutTeamMemberInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutTeamMemberInput!]
 }
 
 input UserUpdateOneInput {
   create: UserCreateInput
   connect: UserWhereUniqueInput
-  disconnect: UserWhereUniqueInput
-  delete: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
 }
 
 input UserUpdateOneWithoutTeamOwnerInput {
   create: UserCreateWithoutTeamOwnerInput
   connect: UserWhereUniqueInput
-  disconnect: UserWhereUniqueInput
-  delete: UserWhereUniqueInput
-  update: UserUpdateWithoutTeamOwnerInput
+  delete: Boolean
+  update: UserUpdateWithoutTeamOwnerDataInput
   upsert: UserUpsertWithoutTeamOwnerInput
 }
 
@@ -1622,11 +1065,6 @@ input UserUpdateWithoutProjectAdminDataInput {
   projectMember: ProjectUpdateManyWithoutMemberInput
 }
 
-input UserUpdateWithoutProjectAdminInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutProjectAdminDataInput!
-}
-
 input UserUpdateWithoutProjectMemberDataInput {
   email: String
   password: String
@@ -1635,11 +1073,6 @@ input UserUpdateWithoutProjectMemberDataInput {
   TeamAdmin: TeamUpdateManyWithoutAdminInput
   TeamMember: TeamUpdateManyWithoutMemberInput
   projectAdmin: ProjectUpdateManyWithoutAdminInput
-}
-
-input UserUpdateWithoutProjectMemberInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutProjectMemberDataInput!
 }
 
 input UserUpdateWithoutTeamAdminDataInput {
@@ -1652,11 +1085,6 @@ input UserUpdateWithoutTeamAdminDataInput {
   projectAdmin: ProjectUpdateManyWithoutAdminInput
 }
 
-input UserUpdateWithoutTeamAdminInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutTeamAdminDataInput!
-}
-
 input UserUpdateWithoutTeamMemberDataInput {
   email: String
   password: String
@@ -1665,11 +1093,6 @@ input UserUpdateWithoutTeamMemberDataInput {
   TeamAdmin: TeamUpdateManyWithoutAdminInput
   projectMember: ProjectUpdateManyWithoutMemberInput
   projectAdmin: ProjectUpdateManyWithoutAdminInput
-}
-
-input UserUpdateWithoutTeamMemberInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutTeamMemberDataInput!
 }
 
 input UserUpdateWithoutTeamOwnerDataInput {
@@ -1682,261 +1105,118 @@ input UserUpdateWithoutTeamOwnerDataInput {
   projectAdmin: ProjectUpdateManyWithoutAdminInput
 }
 
-input UserUpdateWithoutTeamOwnerInput {
+input UserUpdateWithWhereUniqueWithoutProjectAdminInput {
   where: UserWhereUniqueInput!
-  data: UserUpdateWithoutTeamOwnerDataInput!
+  data: UserUpdateWithoutProjectAdminDataInput!
 }
 
-input UserUpsertWithoutProjectAdminInput {
+input UserUpdateWithWhereUniqueWithoutProjectMemberInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutProjectMemberDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutTeamAdminInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutTeamAdminDataInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutTeamMemberInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutTeamMemberDataInput!
+}
+
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserUpsertWithoutTeamOwnerInput {
+  update: UserUpdateWithoutTeamOwnerDataInput!
+  create: UserCreateWithoutTeamOwnerInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutProjectAdminInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutProjectAdminDataInput!
   create: UserCreateWithoutProjectAdminInput!
 }
 
-input UserUpsertWithoutProjectMemberInput {
+input UserUpsertWithWhereUniqueWithoutProjectMemberInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutProjectMemberDataInput!
   create: UserCreateWithoutProjectMemberInput!
 }
 
-input UserUpsertWithoutTeamAdminInput {
+input UserUpsertWithWhereUniqueWithoutTeamAdminInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutTeamAdminDataInput!
   create: UserCreateWithoutTeamAdminInput!
 }
 
-input UserUpsertWithoutTeamMemberInput {
+input UserUpsertWithWhereUniqueWithoutTeamMemberInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutTeamMemberDataInput!
   create: UserCreateWithoutTeamMemberInput!
 }
 
-input UserUpsertWithoutTeamOwnerInput {
-  where: UserWhereUniqueInput!
-  update: UserUpdateWithoutTeamOwnerDataInput!
-  create: UserCreateWithoutTeamOwnerInput!
-}
-
 input UserWhereInput {
-  """
-  Logical AND on all given filters.
-  """
   AND: [UserWhereInput!]
-  """
-  Logical OR on all given filters.
-  """
   OR: [UserWhereInput!]
   id: ID
-  """
-  All values that are not equal to given value.
-  """
   id_not: ID
-  """
-  All values that are contained in given list.
-  """
   id_in: [ID!]
-  """
-  All values that are not contained in given list.
-  """
   id_not_in: [ID!]
-  """
-  All values less than the given value.
-  """
   id_lt: ID
-  """
-  All values less than or equal the given value.
-  """
   id_lte: ID
-  """
-  All values greater than the given value.
-  """
   id_gt: ID
-  """
-  All values greater than or equal the given value.
-  """
   id_gte: ID
-  """
-  All values containing the given string.
-  """
   id_contains: ID
-  """
-  All values not containing the given string.
-  """
   id_not_contains: ID
-  """
-  All values starting with the given string.
-  """
   id_starts_with: ID
-  """
-  All values not starting with the given string.
-  """
   id_not_starts_with: ID
-  """
-  All values ending with the given string.
-  """
   id_ends_with: ID
-  """
-  All values not ending with the given string.
-  """
   id_not_ends_with: ID
   email: String
-  """
-  All values that are not equal to given value.
-  """
   email_not: String
-  """
-  All values that are contained in given list.
-  """
   email_in: [String!]
-  """
-  All values that are not contained in given list.
-  """
   email_not_in: [String!]
-  """
-  All values less than the given value.
-  """
   email_lt: String
-  """
-  All values less than or equal the given value.
-  """
   email_lte: String
-  """
-  All values greater than the given value.
-  """
   email_gt: String
-  """
-  All values greater than or equal the given value.
-  """
   email_gte: String
-  """
-  All values containing the given string.
-  """
   email_contains: String
-  """
-  All values not containing the given string.
-  """
   email_not_contains: String
-  """
-  All values starting with the given string.
-  """
   email_starts_with: String
-  """
-  All values not starting with the given string.
-  """
   email_not_starts_with: String
-  """
-  All values ending with the given string.
-  """
   email_ends_with: String
-  """
-  All values not ending with the given string.
-  """
   email_not_ends_with: String
   password: String
-  """
-  All values that are not equal to given value.
-  """
   password_not: String
-  """
-  All values that are contained in given list.
-  """
   password_in: [String!]
-  """
-  All values that are not contained in given list.
-  """
   password_not_in: [String!]
-  """
-  All values less than the given value.
-  """
   password_lt: String
-  """
-  All values less than or equal the given value.
-  """
   password_lte: String
-  """
-  All values greater than the given value.
-  """
   password_gt: String
-  """
-  All values greater than or equal the given value.
-  """
   password_gte: String
-  """
-  All values containing the given string.
-  """
   password_contains: String
-  """
-  All values not containing the given string.
-  """
   password_not_contains: String
-  """
-  All values starting with the given string.
-  """
   password_starts_with: String
-  """
-  All values not starting with the given string.
-  """
   password_not_starts_with: String
-  """
-  All values ending with the given string.
-  """
   password_ends_with: String
-  """
-  All values not ending with the given string.
-  """
   password_not_ends_with: String
   name: String
-  """
-  All values that are not equal to given value.
-  """
   name_not: String
-  """
-  All values that are contained in given list.
-  """
   name_in: [String!]
-  """
-  All values that are not contained in given list.
-  """
   name_not_in: [String!]
-  """
-  All values less than the given value.
-  """
   name_lt: String
-  """
-  All values less than or equal the given value.
-  """
   name_lte: String
-  """
-  All values greater than the given value.
-  """
   name_gt: String
-  """
-  All values greater than or equal the given value.
-  """
   name_gte: String
-  """
-  All values containing the given string.
-  """
   name_contains: String
-  """
-  All values not containing the given string.
-  """
   name_not_contains: String
-  """
-  All values starting with the given string.
-  """
   name_starts_with: String
-  """
-  All values not starting with the given string.
-  """
   name_not_starts_with: String
-  """
-  All values ending with the given string.
-  """
   name_ends_with: String
-  """
-  All values not ending with the given string.
-  """
   name_not_ends_with: String
   TeamOwner_every: TeamWhereInput
   TeamOwner_some: TeamWhereInput

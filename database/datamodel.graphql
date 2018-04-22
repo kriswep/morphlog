@@ -35,7 +35,7 @@ type Team {
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String
-  project: Project
+  project: [Project!]!
   owner: User! @relation(name: "TeamOwner")
   admin: [User!]! @relation(name: "TeamAdmin")
   member: [User!]! @relation(name: "TeamMember")
