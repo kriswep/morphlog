@@ -37,7 +37,13 @@ test('project should be able create a new project', async () => {
 
   expect(received).toBeTruthy();
   expect(context.db.mutation.createProject).toBeCalledWith(
-    { data: { admin: { connect: { id: true } }, name: 'name' } },
+    {
+      data: {
+        admin: { connect: { id: true } },
+        name: 'name',
+        team: { create: { owner: { connect: { id: true } } } },
+      },
+    },
     { info: 2 },
   );
 });
