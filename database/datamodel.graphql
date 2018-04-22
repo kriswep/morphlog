@@ -3,6 +3,7 @@ type Project {
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String!
+  team: Team!
   member: [User!]! @relation(name: "ProjectMember")
   admin: [User!]! @relation(name: "ProjectAdmin")
   change: [Change!]! @relation(name: "ProjectChange")
@@ -22,6 +23,20 @@ type User {
   email: String! @unique
   password: String!
   name: String!
+  TeamOwner: [Team!]! @relation(name: "TeamOwner")
+  TeamAdmin: [Team!]! @relation(name: "TeamAdmin")
+  TeamMember: [Team!]! @relation(name: "TeamMember")
   projectMember: [Project!]! @relation(name: "ProjectMember")
   projectAdmin: [Project!]! @relation(name: "ProjectAdmin")
+}
+
+type Team {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String
+  project: Project
+  owner: User! @relation(name: "TeamOwner")
+  admin: [User!]! @relation(name: "TeamAdmin")
+  member: [User!]! @relation(name: "TeamMember")
 }

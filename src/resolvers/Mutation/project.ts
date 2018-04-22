@@ -11,6 +11,11 @@ export const project = {
           admin: {
             connect: { id: userId },
           },
+          team: {
+            create: {
+              owner: { connect: { id: userId } },
+            },
+          },
         },
       },
       info,
