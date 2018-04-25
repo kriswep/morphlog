@@ -2,49 +2,6 @@ import { Prisma as BasePrisma, BasePrismaOptions } from 'prisma-binding'
 import { GraphQLResolveInfo } from 'graphql'
 
 export const typeDefs = `
-type Change implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  text: String!
-  author(where: UserWhereInput): User!
-  project(where: ProjectWhereInput): Project!
-}
-
-type Project implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  name: String!
-  team(where: TeamWhereInput): Team!
-  member(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-  admin(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-  change(where: ChangeWhereInput, orderBy: ChangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Change!]
-}
-
-type Team implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  name: String
-  project(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
-  owner(where: UserWhereInput): User!
-  admin(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-  member(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-}
-
-type User implements Node {
-  id: ID!
-  email: String!
-  password: String!
-  name: String!
-  TeamOwner(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team!]
-  TeamAdmin(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team!]
-  TeamMember(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team!]
-  projectMember(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
-  projectAdmin(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
-}
-
 type AggregateChange {
   count: Int!
 }
@@ -62,11 +19,32 @@ type AggregateUser {
 }
 
 type BatchPayload {
+  """
+  The number of nodes that have been affected by the Batch operation.
+  """
   count: Long!
 }
 
+type Change implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  text: String!
+  author(where: UserWhereInput): User!
+  project(where: ProjectWhereInput): Project!
+}
+
+"""
+A connection to a list of items.
+"""
 type ChangeConnection {
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
+  """
+  A list of edges.
+  """
   edges: [ChangeEdge]!
   aggregate: AggregateChange!
 }
@@ -87,8 +65,17 @@ input ChangeCreateWithoutProjectInput {
   author: UserCreateOneInput!
 }
 
+"""
+An edge in a connection.
+"""
 type ChangeEdge {
+  """
+  The item at the end of the edge.
+  """
   node: Change!
+  """
+  A cursor for use in pagination.
+  """
   cursor: String!
 }
 
@@ -118,11 +105,33 @@ type ChangeSubscriptionPayload {
 }
 
 input ChangeSubscriptionWhereInput {
+  """
+  Logical AND on all given filters.
+  """
   AND: [ChangeSubscriptionWhereInput!]
+  """
+  Logical OR on all given filters.
+  """
   OR: [ChangeSubscriptionWhereInput!]
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [ChangeSubscriptionWhereInput!]
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
   mutation_in: [MutationType!]
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
   updatedFields_contains: String
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
   updatedFields_contains_every: [String!]
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
   updatedFields_contains_some: [String!]
   node: ChangeWhereInput
 }
@@ -159,51 +168,181 @@ input ChangeUpsertWithWhereUniqueWithoutProjectInput {
 }
 
 input ChangeWhereInput {
+  """
+  Logical AND on all given filters.
+  """
   AND: [ChangeWhereInput!]
+  """
+  Logical OR on all given filters.
+  """
   OR: [ChangeWhereInput!]
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [ChangeWhereInput!]
   id: ID
+  """
+  All values that are not equal to given value.
+  """
   id_not: ID
+  """
+  All values that are contained in given list.
+  """
   id_in: [ID!]
+  """
+  All values that are not contained in given list.
+  """
   id_not_in: [ID!]
+  """
+  All values less than the given value.
+  """
   id_lt: ID
+  """
+  All values less than or equal the given value.
+  """
   id_lte: ID
+  """
+  All values greater than the given value.
+  """
   id_gt: ID
+  """
+  All values greater than or equal the given value.
+  """
   id_gte: ID
+  """
+  All values containing the given string.
+  """
   id_contains: ID
+  """
+  All values not containing the given string.
+  """
   id_not_contains: ID
+  """
+  All values starting with the given string.
+  """
   id_starts_with: ID
+  """
+  All values not starting with the given string.
+  """
   id_not_starts_with: ID
+  """
+  All values ending with the given string.
+  """
   id_ends_with: ID
+  """
+  All values not ending with the given string.
+  """
   id_not_ends_with: ID
   createdAt: DateTime
+  """
+  All values that are not equal to given value.
+  """
   createdAt_not: DateTime
+  """
+  All values that are contained in given list.
+  """
   createdAt_in: [DateTime!]
+  """
+  All values that are not contained in given list.
+  """
   createdAt_not_in: [DateTime!]
+  """
+  All values less than the given value.
+  """
   createdAt_lt: DateTime
+  """
+  All values less than or equal the given value.
+  """
   createdAt_lte: DateTime
+  """
+  All values greater than the given value.
+  """
   createdAt_gt: DateTime
+  """
+  All values greater than or equal the given value.
+  """
   createdAt_gte: DateTime
   updatedAt: DateTime
+  """
+  All values that are not equal to given value.
+  """
   updatedAt_not: DateTime
+  """
+  All values that are contained in given list.
+  """
   updatedAt_in: [DateTime!]
+  """
+  All values that are not contained in given list.
+  """
   updatedAt_not_in: [DateTime!]
+  """
+  All values less than the given value.
+  """
   updatedAt_lt: DateTime
+  """
+  All values less than or equal the given value.
+  """
   updatedAt_lte: DateTime
+  """
+  All values greater than the given value.
+  """
   updatedAt_gt: DateTime
+  """
+  All values greater than or equal the given value.
+  """
   updatedAt_gte: DateTime
   text: String
+  """
+  All values that are not equal to given value.
+  """
   text_not: String
+  """
+  All values that are contained in given list.
+  """
   text_in: [String!]
+  """
+  All values that are not contained in given list.
+  """
   text_not_in: [String!]
+  """
+  All values less than the given value.
+  """
   text_lt: String
+  """
+  All values less than or equal the given value.
+  """
   text_lte: String
+  """
+  All values greater than the given value.
+  """
   text_gt: String
+  """
+  All values greater than or equal the given value.
+  """
   text_gte: String
+  """
+  All values containing the given string.
+  """
   text_contains: String
+  """
+  All values not containing the given string.
+  """
   text_not_contains: String
+  """
+  All values starting with the given string.
+  """
   text_starts_with: String
+  """
+  All values not starting with the given string.
+  """
   text_not_starts_with: String
+  """
+  All values ending with the given string.
+  """
   text_ends_with: String
+  """
+  All values not ending with the given string.
+  """
   text_not_ends_with: String
   author: UserWhereInput
   project: ProjectWhereInput
@@ -215,6 +354,10 @@ input ChangeWhereUniqueInput {
 
 scalar DateTime
 
+"""
+The 'Long' scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
 scalar Long
 
 enum MutationType {
@@ -223,19 +366,60 @@ enum MutationType {
   DELETED
 }
 
+"""
+An object with an ID
+"""
 interface Node {
+  """
+  The id of the object.
+  """
   id: ID!
 }
 
+"""
+Information about pagination in a connection.
+"""
 type PageInfo {
+  """
+  When paginating forwards, are there more items?
+  """
   hasNextPage: Boolean!
+  """
+  When paginating backwards, are there more items?
+  """
   hasPreviousPage: Boolean!
+  """
+  When paginating backwards, the cursor to continue.
+  """
   startCursor: String
+  """
+  When paginating forwards, the cursor to continue.
+  """
   endCursor: String
 }
 
+type Project implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String!
+  team(where: TeamWhereInput): Team!
+  member(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  admin(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  change(where: ChangeWhereInput, orderBy: ChangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Change!]
+}
+
+"""
+A connection to a list of items.
+"""
 type ProjectConnection {
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
+  """
+  A list of edges.
+  """
   edges: [ProjectEdge]!
   aggregate: AggregateProject!
 }
@@ -296,8 +480,17 @@ input ProjectCreateWithoutTeamInput {
   change: ChangeCreateManyWithoutProjectInput
 }
 
+"""
+An edge in a connection.
+"""
 type ProjectEdge {
+  """
+  The item at the end of the edge.
+  """
   node: Project!
+  """
+  A cursor for use in pagination.
+  """
   cursor: String!
 }
 
@@ -327,11 +520,33 @@ type ProjectSubscriptionPayload {
 }
 
 input ProjectSubscriptionWhereInput {
+  """
+  Logical AND on all given filters.
+  """
   AND: [ProjectSubscriptionWhereInput!]
+  """
+  Logical OR on all given filters.
+  """
   OR: [ProjectSubscriptionWhereInput!]
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [ProjectSubscriptionWhereInput!]
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
   mutation_in: [MutationType!]
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
   updatedFields_contains: String
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
   updatedFields_contains_every: [String!]
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
   updatedFields_contains_some: [String!]
   node: ProjectWhereInput
 }
@@ -446,51 +661,181 @@ input ProjectUpsertWithWhereUniqueWithoutTeamInput {
 }
 
 input ProjectWhereInput {
+  """
+  Logical AND on all given filters.
+  """
   AND: [ProjectWhereInput!]
+  """
+  Logical OR on all given filters.
+  """
   OR: [ProjectWhereInput!]
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [ProjectWhereInput!]
   id: ID
+  """
+  All values that are not equal to given value.
+  """
   id_not: ID
+  """
+  All values that are contained in given list.
+  """
   id_in: [ID!]
+  """
+  All values that are not contained in given list.
+  """
   id_not_in: [ID!]
+  """
+  All values less than the given value.
+  """
   id_lt: ID
+  """
+  All values less than or equal the given value.
+  """
   id_lte: ID
+  """
+  All values greater than the given value.
+  """
   id_gt: ID
+  """
+  All values greater than or equal the given value.
+  """
   id_gte: ID
+  """
+  All values containing the given string.
+  """
   id_contains: ID
+  """
+  All values not containing the given string.
+  """
   id_not_contains: ID
+  """
+  All values starting with the given string.
+  """
   id_starts_with: ID
+  """
+  All values not starting with the given string.
+  """
   id_not_starts_with: ID
+  """
+  All values ending with the given string.
+  """
   id_ends_with: ID
+  """
+  All values not ending with the given string.
+  """
   id_not_ends_with: ID
   createdAt: DateTime
+  """
+  All values that are not equal to given value.
+  """
   createdAt_not: DateTime
+  """
+  All values that are contained in given list.
+  """
   createdAt_in: [DateTime!]
+  """
+  All values that are not contained in given list.
+  """
   createdAt_not_in: [DateTime!]
+  """
+  All values less than the given value.
+  """
   createdAt_lt: DateTime
+  """
+  All values less than or equal the given value.
+  """
   createdAt_lte: DateTime
+  """
+  All values greater than the given value.
+  """
   createdAt_gt: DateTime
+  """
+  All values greater than or equal the given value.
+  """
   createdAt_gte: DateTime
   updatedAt: DateTime
+  """
+  All values that are not equal to given value.
+  """
   updatedAt_not: DateTime
+  """
+  All values that are contained in given list.
+  """
   updatedAt_in: [DateTime!]
+  """
+  All values that are not contained in given list.
+  """
   updatedAt_not_in: [DateTime!]
+  """
+  All values less than the given value.
+  """
   updatedAt_lt: DateTime
+  """
+  All values less than or equal the given value.
+  """
   updatedAt_lte: DateTime
+  """
+  All values greater than the given value.
+  """
   updatedAt_gt: DateTime
+  """
+  All values greater than or equal the given value.
+  """
   updatedAt_gte: DateTime
   name: String
+  """
+  All values that are not equal to given value.
+  """
   name_not: String
+  """
+  All values that are contained in given list.
+  """
   name_in: [String!]
+  """
+  All values that are not contained in given list.
+  """
   name_not_in: [String!]
+  """
+  All values less than the given value.
+  """
   name_lt: String
+  """
+  All values less than or equal the given value.
+  """
   name_lte: String
+  """
+  All values greater than the given value.
+  """
   name_gt: String
+  """
+  All values greater than or equal the given value.
+  """
   name_gte: String
+  """
+  All values containing the given string.
+  """
   name_contains: String
+  """
+  All values not containing the given string.
+  """
   name_not_contains: String
+  """
+  All values starting with the given string.
+  """
   name_starts_with: String
+  """
+  All values not starting with the given string.
+  """
   name_not_starts_with: String
+  """
+  All values ending with the given string.
+  """
   name_ends_with: String
+  """
+  All values not ending with the given string.
+  """
   name_not_ends_with: String
   team: TeamWhereInput
   member_every: UserWhereInput
@@ -508,8 +853,28 @@ input ProjectWhereUniqueInput {
   id: ID
 }
 
+type Team implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String
+  project(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
+  owner(where: UserWhereInput): User!
+  admin(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  member(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+}
+
+"""
+A connection to a list of items.
+"""
 type TeamConnection {
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
+  """
+  A list of edges.
+  """
   edges: [TeamEdge]!
   aggregate: AggregateTeam!
 }
@@ -570,8 +935,17 @@ input TeamCreateWithoutProjectInput {
   member: UserCreateManyWithoutTeamMemberInput
 }
 
+"""
+An edge in a connection.
+"""
 type TeamEdge {
+  """
+  The item at the end of the edge.
+  """
   node: Team!
+  """
+  A cursor for use in pagination.
+  """
   cursor: String!
 }
 
@@ -601,11 +975,33 @@ type TeamSubscriptionPayload {
 }
 
 input TeamSubscriptionWhereInput {
+  """
+  Logical AND on all given filters.
+  """
   AND: [TeamSubscriptionWhereInput!]
+  """
+  Logical OR on all given filters.
+  """
   OR: [TeamSubscriptionWhereInput!]
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [TeamSubscriptionWhereInput!]
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
   mutation_in: [MutationType!]
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
   updatedFields_contains: String
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
   updatedFields_contains_every: [String!]
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
   updatedFields_contains_some: [String!]
   node: TeamWhereInput
 }
@@ -720,51 +1116,181 @@ input TeamUpsertWithWhereUniqueWithoutOwnerInput {
 }
 
 input TeamWhereInput {
+  """
+  Logical AND on all given filters.
+  """
   AND: [TeamWhereInput!]
+  """
+  Logical OR on all given filters.
+  """
   OR: [TeamWhereInput!]
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [TeamWhereInput!]
   id: ID
+  """
+  All values that are not equal to given value.
+  """
   id_not: ID
+  """
+  All values that are contained in given list.
+  """
   id_in: [ID!]
+  """
+  All values that are not contained in given list.
+  """
   id_not_in: [ID!]
+  """
+  All values less than the given value.
+  """
   id_lt: ID
+  """
+  All values less than or equal the given value.
+  """
   id_lte: ID
+  """
+  All values greater than the given value.
+  """
   id_gt: ID
+  """
+  All values greater than or equal the given value.
+  """
   id_gte: ID
+  """
+  All values containing the given string.
+  """
   id_contains: ID
+  """
+  All values not containing the given string.
+  """
   id_not_contains: ID
+  """
+  All values starting with the given string.
+  """
   id_starts_with: ID
+  """
+  All values not starting with the given string.
+  """
   id_not_starts_with: ID
+  """
+  All values ending with the given string.
+  """
   id_ends_with: ID
+  """
+  All values not ending with the given string.
+  """
   id_not_ends_with: ID
   createdAt: DateTime
+  """
+  All values that are not equal to given value.
+  """
   createdAt_not: DateTime
+  """
+  All values that are contained in given list.
+  """
   createdAt_in: [DateTime!]
+  """
+  All values that are not contained in given list.
+  """
   createdAt_not_in: [DateTime!]
+  """
+  All values less than the given value.
+  """
   createdAt_lt: DateTime
+  """
+  All values less than or equal the given value.
+  """
   createdAt_lte: DateTime
+  """
+  All values greater than the given value.
+  """
   createdAt_gt: DateTime
+  """
+  All values greater than or equal the given value.
+  """
   createdAt_gte: DateTime
   updatedAt: DateTime
+  """
+  All values that are not equal to given value.
+  """
   updatedAt_not: DateTime
+  """
+  All values that are contained in given list.
+  """
   updatedAt_in: [DateTime!]
+  """
+  All values that are not contained in given list.
+  """
   updatedAt_not_in: [DateTime!]
+  """
+  All values less than the given value.
+  """
   updatedAt_lt: DateTime
+  """
+  All values less than or equal the given value.
+  """
   updatedAt_lte: DateTime
+  """
+  All values greater than the given value.
+  """
   updatedAt_gt: DateTime
+  """
+  All values greater than or equal the given value.
+  """
   updatedAt_gte: DateTime
   name: String
+  """
+  All values that are not equal to given value.
+  """
   name_not: String
+  """
+  All values that are contained in given list.
+  """
   name_in: [String!]
+  """
+  All values that are not contained in given list.
+  """
   name_not_in: [String!]
+  """
+  All values less than the given value.
+  """
   name_lt: String
+  """
+  All values less than or equal the given value.
+  """
   name_lte: String
+  """
+  All values greater than the given value.
+  """
   name_gt: String
+  """
+  All values greater than or equal the given value.
+  """
   name_gte: String
+  """
+  All values containing the given string.
+  """
   name_contains: String
+  """
+  All values not containing the given string.
+  """
   name_not_contains: String
+  """
+  All values starting with the given string.
+  """
   name_starts_with: String
+  """
+  All values not starting with the given string.
+  """
   name_not_starts_with: String
+  """
+  All values ending with the given string.
+  """
   name_ends_with: String
+  """
+  All values not ending with the given string.
+  """
   name_not_ends_with: String
   project_every: ProjectWhereInput
   project_some: ProjectWhereInput
@@ -782,8 +1308,29 @@ input TeamWhereUniqueInput {
   id: ID
 }
 
+type User implements Node {
+  id: ID!
+  email: String!
+  password: String!
+  name: String!
+  TeamOwner(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team!]
+  TeamAdmin(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team!]
+  TeamMember(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team!]
+  projectMember(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
+  projectAdmin(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project!]
+}
+
+"""
+A connection to a list of items.
+"""
 type UserConnection {
+  """
+  Information to aid in pagination.
+  """
   pageInfo: PageInfo!
+  """
+  A list of edges.
+  """
   edges: [UserEdge]!
   aggregate: AggregateUser!
 }
@@ -879,8 +1426,17 @@ input UserCreateWithoutTeamOwnerInput {
   projectAdmin: ProjectCreateManyWithoutAdminInput
 }
 
+"""
+An edge in a connection.
+"""
 type UserEdge {
+  """
+  The item at the end of the edge.
+  """
   node: User!
+  """
+  A cursor for use in pagination.
+  """
   cursor: String!
 }
 
@@ -914,11 +1470,33 @@ type UserSubscriptionPayload {
 }
 
 input UserSubscriptionWhereInput {
+  """
+  Logical AND on all given filters.
+  """
   AND: [UserSubscriptionWhereInput!]
+  """
+  Logical OR on all given filters.
+  """
   OR: [UserSubscriptionWhereInput!]
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [UserSubscriptionWhereInput!]
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
   mutation_in: [MutationType!]
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
   updatedFields_contains: String
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
   updatedFields_contains_every: [String!]
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
   updatedFields_contains_some: [String!]
   node: UserWhereInput
 }
@@ -1102,63 +1680,229 @@ input UserUpsertWithWhereUniqueWithoutTeamMemberInput {
 }
 
 input UserWhereInput {
+  """
+  Logical AND on all given filters.
+  """
   AND: [UserWhereInput!]
+  """
+  Logical OR on all given filters.
+  """
   OR: [UserWhereInput!]
+  """
+  Logical NOT on all given filters combined by AND.
+  """
+  NOT: [UserWhereInput!]
   id: ID
+  """
+  All values that are not equal to given value.
+  """
   id_not: ID
+  """
+  All values that are contained in given list.
+  """
   id_in: [ID!]
+  """
+  All values that are not contained in given list.
+  """
   id_not_in: [ID!]
+  """
+  All values less than the given value.
+  """
   id_lt: ID
+  """
+  All values less than or equal the given value.
+  """
   id_lte: ID
+  """
+  All values greater than the given value.
+  """
   id_gt: ID
+  """
+  All values greater than or equal the given value.
+  """
   id_gte: ID
+  """
+  All values containing the given string.
+  """
   id_contains: ID
+  """
+  All values not containing the given string.
+  """
   id_not_contains: ID
+  """
+  All values starting with the given string.
+  """
   id_starts_with: ID
+  """
+  All values not starting with the given string.
+  """
   id_not_starts_with: ID
+  """
+  All values ending with the given string.
+  """
   id_ends_with: ID
+  """
+  All values not ending with the given string.
+  """
   id_not_ends_with: ID
   email: String
+  """
+  All values that are not equal to given value.
+  """
   email_not: String
+  """
+  All values that are contained in given list.
+  """
   email_in: [String!]
+  """
+  All values that are not contained in given list.
+  """
   email_not_in: [String!]
+  """
+  All values less than the given value.
+  """
   email_lt: String
+  """
+  All values less than or equal the given value.
+  """
   email_lte: String
+  """
+  All values greater than the given value.
+  """
   email_gt: String
+  """
+  All values greater than or equal the given value.
+  """
   email_gte: String
+  """
+  All values containing the given string.
+  """
   email_contains: String
+  """
+  All values not containing the given string.
+  """
   email_not_contains: String
+  """
+  All values starting with the given string.
+  """
   email_starts_with: String
+  """
+  All values not starting with the given string.
+  """
   email_not_starts_with: String
+  """
+  All values ending with the given string.
+  """
   email_ends_with: String
+  """
+  All values not ending with the given string.
+  """
   email_not_ends_with: String
   password: String
+  """
+  All values that are not equal to given value.
+  """
   password_not: String
+  """
+  All values that are contained in given list.
+  """
   password_in: [String!]
+  """
+  All values that are not contained in given list.
+  """
   password_not_in: [String!]
+  """
+  All values less than the given value.
+  """
   password_lt: String
+  """
+  All values less than or equal the given value.
+  """
   password_lte: String
+  """
+  All values greater than the given value.
+  """
   password_gt: String
+  """
+  All values greater than or equal the given value.
+  """
   password_gte: String
+  """
+  All values containing the given string.
+  """
   password_contains: String
+  """
+  All values not containing the given string.
+  """
   password_not_contains: String
+  """
+  All values starting with the given string.
+  """
   password_starts_with: String
+  """
+  All values not starting with the given string.
+  """
   password_not_starts_with: String
+  """
+  All values ending with the given string.
+  """
   password_ends_with: String
+  """
+  All values not ending with the given string.
+  """
   password_not_ends_with: String
   name: String
+  """
+  All values that are not equal to given value.
+  """
   name_not: String
+  """
+  All values that are contained in given list.
+  """
   name_in: [String!]
+  """
+  All values that are not contained in given list.
+  """
   name_not_in: [String!]
+  """
+  All values less than the given value.
+  """
   name_lt: String
+  """
+  All values less than or equal the given value.
+  """
   name_lte: String
+  """
+  All values greater than the given value.
+  """
   name_gt: String
+  """
+  All values greater than or equal the given value.
+  """
   name_gte: String
+  """
+  All values containing the given string.
+  """
   name_contains: String
+  """
+  All values not containing the given string.
+  """
   name_not_contains: String
+  """
+  All values starting with the given string.
+  """
   name_starts_with: String
+  """
+  All values not starting with the given string.
+  """
   name_not_starts_with: String
+  """
+  All values ending with the given string.
+  """
   name_ends_with: String
+  """
+  All values not ending with the given string.
+  """
   name_not_ends_with: String
   TeamOwner_every: TeamWhereInput
   TeamOwner_some: TeamWhereInput
@@ -1222,7 +1966,13 @@ type Query {
   changesConnection(where: ChangeWhereInput, orderBy: ChangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChangeConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   teamsConnection(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TeamConnection!
-  node(id: ID!): Node
+  """
+  Fetches an object given its ID
+  """
+  node("""
+  The ID of an object
+  """
+  id: ID!): Node
 }
 
 type Subscription {
@@ -1293,6 +2043,7 @@ export interface UserUpdateOneWithoutTeamOwnerInput {
 export interface ProjectWhereInput {
   AND?: ProjectWhereInput[] | ProjectWhereInput
   OR?: ProjectWhereInput[] | ProjectWhereInput
+  NOT?: ProjectWhereInput[] | ProjectWhereInput
   id?: ID_Input
   id_not?: ID_Input
   id_in?: ID_Input[] | ID_Input
@@ -1359,6 +2110,7 @@ export interface TeamUpdateWithoutAdminDataInput {
 export interface ChangeWhereInput {
   AND?: ChangeWhereInput[] | ChangeWhereInput
   OR?: ChangeWhereInput[] | ChangeWhereInput
+  NOT?: ChangeWhereInput[] | ChangeWhereInput
   id?: ID_Input
   id_not?: ID_Input
   id_in?: ID_Input[] | ID_Input
@@ -1447,6 +2199,7 @@ export interface UserCreateWithoutTeamMemberInput {
 export interface UserSubscriptionWhereInput {
   AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
   OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
@@ -1463,6 +2216,7 @@ export interface ChangeCreateInput {
 export interface TeamWhereInput {
   AND?: TeamWhereInput[] | TeamWhereInput
   OR?: TeamWhereInput[] | TeamWhereInput
+  NOT?: TeamWhereInput[] | TeamWhereInput
   id?: ID_Input
   id_not?: ID_Input
   id_in?: ID_Input[] | ID_Input
@@ -1527,6 +2281,7 @@ export interface ProjectCreateOneWithoutChangeInput {
 export interface ProjectSubscriptionWhereInput {
   AND?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput
   OR?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput
+  NOT?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
@@ -1818,6 +2573,7 @@ export interface UserUpdateWithoutTeamAdminDataInput {
 export interface UserWhereInput {
   AND?: UserWhereInput[] | UserWhereInput
   OR?: UserWhereInput[] | UserWhereInput
+  NOT?: UserWhereInput[] | UserWhereInput
   id?: ID_Input
   id_not?: ID_Input
   id_in?: ID_Input[] | ID_Input
@@ -2059,6 +2815,7 @@ export interface ChangeUpdateManyWithoutProjectInput {
 export interface TeamSubscriptionWhereInput {
   AND?: TeamSubscriptionWhereInput[] | TeamSubscriptionWhereInput
   OR?: TeamSubscriptionWhereInput[] | TeamSubscriptionWhereInput
+  NOT?: TeamSubscriptionWhereInput[] | TeamSubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
@@ -2196,6 +2953,7 @@ export interface UserUpsertWithWhereUniqueWithoutProjectMemberInput {
 export interface ChangeSubscriptionWhereInput {
   AND?: ChangeSubscriptionWhereInput[] | ChangeSubscriptionWhereInput
   OR?: ChangeSubscriptionWhereInput[] | ChangeSubscriptionWhereInput
+  NOT?: ChangeSubscriptionWhereInput[] | ChangeSubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
@@ -2230,6 +2988,10 @@ export interface UserCreateWithoutTeamOwnerInput {
   projectAdmin?: ProjectCreateManyWithoutAdminInput
 }
 
+/*
+ * An object with an ID
+
+ */
 export interface Node {
   id: ID_Output
 }
@@ -2241,6 +3003,10 @@ export interface TeamPreviousValues {
   name?: String
 }
 
+/*
+ * A connection to a list of items.
+
+ */
 export interface ProjectConnection {
   pageInfo: PageInfo
   edges: ProjectEdge[]
@@ -2289,11 +3055,19 @@ export interface User extends Node {
   projectAdmin?: Project[]
 }
 
+/*
+ * An edge in a connection.
+
+ */
 export interface TeamEdge {
   node: Team
   cursor: String
 }
 
+/*
+ * A connection to a list of items.
+
+ */
 export interface TeamConnection {
   pageInfo: PageInfo
   edges: TeamEdge[]
@@ -2304,6 +3078,10 @@ export interface AggregateUser {
   count: Int
 }
 
+/*
+ * A connection to a list of items.
+
+ */
 export interface UserConnection {
   pageInfo: PageInfo
   edges: UserEdge[]
@@ -2319,6 +3097,10 @@ export interface Change extends Node {
   project: Project
 }
 
+/*
+ * An edge in a connection.
+
+ */
 export interface ChangeEdge {
   node: Change
   cursor: String
@@ -2349,6 +3131,10 @@ export interface TeamSubscriptionPayload {
   previousValues?: TeamPreviousValues
 }
 
+/*
+ * An edge in a connection.
+
+ */
 export interface UserEdge {
   node: User
   cursor: String
@@ -2386,6 +3172,10 @@ export interface AggregateChange {
   count: Int
 }
 
+/*
+ * Information about pagination in a connection.
+
+ */
 export interface PageInfo {
   hasNextPage: Boolean
   hasPreviousPage: Boolean
@@ -2393,17 +3183,29 @@ export interface PageInfo {
   endCursor?: String
 }
 
+/*
+ * An edge in a connection.
+
+ */
 export interface ProjectEdge {
   node: Project
   cursor: String
 }
 
+/*
+ * A connection to a list of items.
+
+ */
 export interface ChangeConnection {
   pageInfo: PageInfo
   edges: ChangeEdge[]
   aggregate: AggregateChange
 }
 
+/*
+The 'Long' scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+*/
 export type Long = string
 
 /*
