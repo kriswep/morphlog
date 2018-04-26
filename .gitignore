@@ -5,6 +5,7 @@ node_modules
 *.log
 .env*
 !.env.test
+!.env.example
 coverage
 cypress/videos
 cypress/screenshots
