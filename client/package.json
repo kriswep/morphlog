@@ -28,7 +28,7 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.3",
-    "graphql-tools": "^2.24.0",
+    "graphql-tools": "^3.0.0",
     "jest-enzyme": "^6.0.0",
     "react-test-renderer": "^16.3.2"
   }
