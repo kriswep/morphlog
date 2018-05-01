@@ -85,4 +85,28 @@ export const Query = {
     .addResolver(async (parent, { id }, ctx: Context, info) =>
       ctx.db.query.team({ where: { id } }, info),
     ),
+
+  teams: requiresAuth.addResolver((parent, args, ctx: Context, info) => {
+    const id = ctx.user.id;
+
+    return ctx.db.query.teams(
+      {
+        ...args,
+        where: {
+          OR: [
+            {
+              admin_some: { id },
+            },
+            {
+              owner: { id },
+            },
+            {
+              member_some: { id },
+            },
+          ],
+        },
+      },
+      info,
+    );
+  }),
 };
