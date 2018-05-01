@@ -95,10 +95,10 @@ export const Query = {
         where: {
           OR: [
             {
-              admin_some: { id },
+              owner: { id },
             },
             {
-              owner: { id },
+              admin_some: { id },
             },
             {
               member_some: { id },
