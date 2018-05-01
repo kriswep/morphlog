@@ -7,6 +7,7 @@ import { exists } from 'fs';
 jest.mock('../utils', () => ({
   getUserId: jest.fn(() => 'userId'),
   isUserProjectAllowed: jest.fn(() => true),
+  hasTeamRead: jest.fn(() => true),
 }));
 
 beforeEach(() => {
