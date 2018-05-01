@@ -21,6 +21,8 @@ Object {
       "me": [Function],
       "project": [Function],
       "projects": [Function],
+      "team": [Function],
+      "teams": [Function],
     },
   },
   "typeDefs": "./src/schema.graphql",

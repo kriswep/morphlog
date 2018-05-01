@@ -1,6 +1,10 @@
 # import Project from "./generated/prisma.graphql"
+# import Team from "./generated/prisma.graphql"
 
 type Query {
+  me: User
+
+  project(id: ID!): Project!
   projects(
     skip: Int
     after: String
@@ -8,7 +12,7 @@ type Query {
     first: Int
     last: Int
   ): [Project!]!
-  project(id: ID!): Project!
+
   change(id: ID!): Change!
   changes(
     projectId: ID!
@@ -18,16 +22,28 @@ type Query {
     first: Int
     last: Int
   ): [Change!]!
-  me: User
+
+  team(id: ID!): Team!
+  teams(
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Team!]!
 }
 
 type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String!): AuthPayload!
+
   createProject(name: String!): Project!
   addProjectMember(user: ID!, project: ID!): Project!
+
   addChange(projectId: ID!, text: String!): Change!
   updateChange(changeId: ID!, projectId: ID!, text: String!): Change!
+
+  createTeam(name: String!): Team!
 }
 
 type AuthPayload {

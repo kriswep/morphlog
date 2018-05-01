@@ -15,3 +15,11 @@ export const requiresProjectAccess = addResolver(
     return await isUserProjectAllowed(context, projectId);
   },
 );
+
+export const requiresTeamAccess = addResolver(
+  async (parent, args, context: Context) => {
+    // const projectId = args.projectId || args.id;
+    // return await isUserProjectAllowed(context, projectId);
+    return true;
+  },
+);
