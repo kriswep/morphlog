@@ -9,6 +9,7 @@ Object {
     "addChange": [Function],
     "addProjectMember": [Function],
     "createProject": [Function],
+    "createTeam": [Function],
     "login": [Function],
     "signup": [Function],
     "updateChange": [Function],
