@@ -2,7 +2,7 @@ import { getUserId, isUserProjectAllowed, Context } from '../utils';
 import {
   requiresAuth,
   requiresProjectAccess,
-  requiresTeamAccess,
+  requiresTeamReadAccess,
 } from '../utils/permissions';
 
 export const Query = {
@@ -81,7 +81,7 @@ export const Query = {
     ),
 
   team: requiresAuth
-    .addResolver(requiresTeamAccess)
+    .addResolver(requiresTeamReadAccess)
     .addResolver(async (parent, { id }, ctx: Context, info) =>
       ctx.db.query.team({ where: { id } }, info),
     ),

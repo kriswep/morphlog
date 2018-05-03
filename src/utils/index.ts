@@ -75,3 +75,19 @@ export async function hasTeamRead(ctx: Context, teamId) {
 
   throw new AccessError();
 }
+
+export async function hasTeamWrite(ctx: Context, teamId) {
+  const userId = getUserId(ctx);
+  if (!userId || !teamId) {
+    throw new AccessError();
+  }
+  const hasAcess = ctx.db.exists.Team({
+    id: teamId,
+    OR: [{ owner: { id: userId } }, { admin_some: { id: userId } }],
+  });
+  if (await hasAcess) {
+    return true;
+  }
+
+  throw new AccessError();
+}

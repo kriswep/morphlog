@@ -2,7 +2,8 @@
 import {
   requiresAuth,
   requiresProjectAccess,
-  requiresTeamAccess,
+  requiresTeamReadAccess,
+  requiresTeamWriteAccess,
 } from './permissions';
 import * as jwt from 'jsonwebtoken';
 
@@ -88,26 +89,32 @@ test('requiresProjectAccess should throw if authenticated without projectID', as
   expect(message).toBe('No Access');
 });
 
-test('requiresTeamAccess should allow if authenticated and project member', async () => {
+test('requiresTeamReadAccess should allow if authenticated and project member, admin or owner', async () => {
   const auth = jwt.sign({ userId: 1 }, process.env.APP_SECRET);
+  const context = {
+    request: { get: () => auth },
+    db: { exists: { Team: jest.fn(() => true) } },
+  };
 
-  const access = await requiresTeamAccess(
-    '',
-    { teamId: 2 },
-    {
-      request: { get: () => auth },
-      db: { exists: { Team: () => true } },
-    },
-  );
+  const access = await requiresTeamReadAccess('', { teamId: 2 }, context);
   expect(access).toBeTruthy();
+
+  expect(context.db.exists.Team).toBeCalledWith({
+    OR: [
+      { owner: { id: 1 } },
+      { admin_some: { id: 1 } },
+      { member_some: { id: 1 } },
+    ],
+    id: 2,
+  });
 });
 
-test('requiresTeamAccess should throw if authenticated and not in team', async () => {
+test('requiresTeamReadAccess should throw if authenticated and not in team', async () => {
   const auth = jwt.sign({ userId: 1 }, process.env.APP_SECRET);
 
   let message;
   try {
-    await requiresTeamAccess(
+    await requiresTeamReadAccess(
       '',
       { id: 2 },
       {
@@ -121,12 +128,66 @@ test('requiresTeamAccess should throw if authenticated and not in team', async (
   expect(message).toBe('No Access');
 });
 
-test('requiresTeamAccess should throw if authenticated without teamId', async () => {
+test('requiresTeamReadAccess should throw if authenticated without teamId', async () => {
   const auth = jwt.sign({ userId: 1 }, process.env.APP_SECRET);
 
   let message;
   try {
-    await requiresTeamAccess(
+    await requiresTeamReadAccess(
+      '',
+      {}, // no teamId nor id
+      {
+        request: { get: () => auth },
+        db: { exists: { Team: async () => true } },
+      },
+    );
+  } catch (error) {
+    message = error.message;
+  }
+  expect(message).toBe('No Access');
+});
+
+test('requiresTeamWriteAccess should allow if authenticated and project member, admin or owner', async () => {
+  const auth = jwt.sign({ userId: 1 }, process.env.APP_SECRET);
+  const context = {
+    request: { get: () => auth },
+    db: { exists: { Team: jest.fn(() => true) } },
+  };
+
+  const access = await requiresTeamWriteAccess('', { teamId: 2 }, context);
+  expect(access).toBeTruthy();
+
+  expect(context.db.exists.Team).toBeCalledWith({
+    OR: [{ owner: { id: 1 } }, { admin_some: { id: 1 } }],
+    id: 2,
+  });
+});
+
+test('requiresTeamWriteAccess should throw if authenticated and not in team', async () => {
+  const auth = jwt.sign({ userId: 1 }, process.env.APP_SECRET);
+
+  let message;
+  try {
+    await requiresTeamWriteAccess(
+      '',
+      { id: 2 },
+      {
+        request: { get: () => auth },
+        db: { exists: { Team: async () => false } },
+      },
+    );
+  } catch (error) {
+    message = error.message;
+  }
+  expect(message).toBe('No Access');
+});
+
+test('requiresTeamWriteAccess should throw if authenticated without teamId', async () => {
+  const auth = jwt.sign({ userId: 1 }, process.env.APP_SECRET);
+
+  let message;
+  try {
+    await requiresTeamWriteAccess(
       '',
       {}, // no teamId nor id
       {
