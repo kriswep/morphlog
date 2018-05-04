@@ -44,6 +44,7 @@ type Mutation {
   updateChange(changeId: ID!, projectId: ID!, text: String!): Change!
 
   createTeam(name: String!): Team!
+  addTeamMember(teamId: ID!, email: String!): Team!
 }
 
 type AuthPayload {

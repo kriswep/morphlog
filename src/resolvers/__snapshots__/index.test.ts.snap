@@ -8,6 +8,7 @@ Object {
   "Mutation": Object {
     "addChange": [Function],
     "addProjectMember": [Function],
+    "addTeamMember": [Function],
     "createProject": [Function],
     "createTeam": [Function],
     "login": [Function],
