@@ -8,7 +8,12 @@ const buffer = fs.readFileSync('../schema/appSchema.graphql');
 const typeDefs = buffer.toString();
 
 const createClient = mocks => {
-  const schema = makeExecutableSchema({ typeDefs });
+  const schema = makeExecutableSchema({
+    typeDefs,
+    resolverValidationOptions: {
+      requireResolversForResolveType: false,
+    },
+  });
   addMockFunctionsToSchema({
     schema,
     mocks,

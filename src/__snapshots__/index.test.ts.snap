@@ -3,6 +3,9 @@
 exports[` 1`] = `
 Object {
   "context": [Function],
+  "resolverValidationOptions": Object {
+    "requireResolversForResolveType": false,
+  },
   "resolvers": Object {
     "AuthPayload": Object {
       "user": [Function],
