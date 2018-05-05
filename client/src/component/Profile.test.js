@@ -7,7 +7,7 @@ import createClient from '../../utils/apolloMocks';
 
 import Profile from './Profile';
 
-const mocks = {
+const successMock = {
   Query: () => ({
     me: () => ({
       id: 'cjcp94wxp025801100npb28yg',
@@ -18,19 +18,38 @@ const mocks = {
     }),
   }),
 };
-const client = createClient(mocks);
+const errorMock = {
+  Query: () => ({
+    me: () => {
+      throw new Error();
+    },
+  }),
+};
 
-test('Profile renders correctly', async () => {
+test('Profile renders when logged', async () => {
+  const client = createClient(successMock);
+
+  const wrapper = mount(
+    <ApolloProvider client={client}>
+      <Profile />
+    </ApolloProvider>,
+  );
+  // yes, twice..
+  wrapper.setProps({ foo: 'bar' }); // poke it to rerender...
+  await new Promise(res => window.setTimeout(res, 1));
+  wrapper.setProps({ projectId: 'bar' }); // poke it to rerender...
+  expect(toJson(wrapper.find('[data-test="profile"]'))).toMatchSnapshot();
+});
+
+test('Authenticate form renders when not logged', async () => {
+  const client = createClient(errorMock);
+
   const wrapper = mount(
     <ApolloProvider client={client}>
       <Profile />
     </ApolloProvider>,
   );
   await new Promise(res => window.setTimeout(res, 1));
-  wrapper.setProps({ foo: 'bar' }); // poke it to rerender...
-  // todo: think mock apollo error
-  // expect(toJson(wrapper.find('[data-test="authenticate"]'))).toMatchSnapshot();
-  await new Promise(res => window.setTimeout(res, 1));
   wrapper.setProps({ projectId: 'bar' }); // poke it to rerender...
-  expect(toJson(wrapper.find('[data-test="profile"]'))).toMatchSnapshot();
+  expect(toJson(wrapper.find('[data-test="authenticate"]'))).toMatchSnapshot();
 });

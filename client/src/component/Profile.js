@@ -133,7 +133,7 @@ class Profile extends React.Component {
                 {!authenticated && (
                   <Form size="large" data-test="authenticate">
                     <Header as="h2" color="teal" textAlign="center">
-                      Profile
+                      Authenticate
                     </Header>
                     <Segment raised>
                       <Form.Input
@@ -206,6 +206,9 @@ class Profile extends React.Component {
                 )}
                 {authenticated && (
                   <Message data-test="profile">
+                    <Header as="h2" color="teal" textAlign="center">
+                      Profile
+                    </Header>
                     <p>Name: {me.name}</p>
                     <p>E-Mail: {me.email}</p>
 
