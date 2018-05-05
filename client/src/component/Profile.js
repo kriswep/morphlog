@@ -58,7 +58,6 @@ const PROFILE_QUERY = gql`
 const initialState = {
   email: '',
   password: '',
-  authenticated: false,
 };
 
 class Profile extends React.Component {
@@ -75,7 +74,6 @@ class Profile extends React.Component {
   logOut = async () => {
     localStorage.removeItem('auth');
     await this.props.client.resetStore();
-    this.setState({ authenticated: false });
   };
 
   signup = mutate => {
@@ -121,112 +119,111 @@ class Profile extends React.Component {
   };
 
   render() {
-    const authenticated = this.state.authenticated;
     return (
-      <ContentContainer>
-        <Container>
-          {!authenticated && (
-            <Form size="large" data-test="authenticate">
-              <Header as="h2" color="teal" textAlign="center">
-                Profile
-              </Header>
-              <Segment raised>
-                <Form.Input
-                  value={this.state.email}
-                  onChange={this.dispatch}
-                  name="email"
-                  label="E-Mail Address"
-                  fluid
-                  icon="user"
-                  iconPosition="left"
-                  placeholder="E-Mail Address"
-                />
-                <Form.Input
-                  value={this.state.password}
-                  onChange={this.dispatch}
-                  name="password"
-                  label="Password"
-                  fluid
-                  icon="lock"
-                  iconPosition="left"
-                  placeholder="Password"
-                  type="password"
-                />
-                <Grid columns={2}>
-                  <Mutation mutation={SIGNIN_MUTATION}>
-                    {(
-                      mutateSignIn,
-                      {
-                        loading: loadingSignInMutation,
-                        error,
-                        data: dataSignInMutation,
-                      },
-                    ) => (
-                      <Grid.Column>
-                        <Button
-                          color="teal"
-                          fluid
-                          size="large"
-                          onClick={e => {
-                            e.preventDefault();
-                            this.signin(mutateSignIn);
-                          }}
-                        >
-                          SignIn
-                        </Button>
-                        {error && `Error!: ${error}`}
-                      </Grid.Column>
-                    )}
-                  </Mutation>
-                  <Mutation mutation={SIGNUP_MUTATION}>
-                    {(mutateSignUp, { error }) => (
-                      <Grid.Column>
-                        <Button
-                          fluid
-                          size="large"
-                          onClick={e => {
-                            e.preventDefault();
-                            this.signup(mutateSignUp);
-                          }}
-                        >
-                          SignUp
-                        </Button>
-                        {error && `Error!: ${error}`}
-                      </Grid.Column>
-                    )}
-                  </Mutation>
-                </Grid>
-              </Segment>
-            </Form>
-          )}
-          <Query query={PROFILE_QUERY} fetchPolicy="network-only">
-            {({ loading, error, data }) => {
-              if (loading) return null;
-              if (error && authenticated) {
-                this.setState({ authenticated: false });
-                return null;
-              }
+      <Query query={PROFILE_QUERY} fetchPolicy="network-only">
+        {({ loading, error, data }) => {
+          if (loading) return null;
 
-              const me = data && data.me;
-              if (me && !authenticated) {
-                this.setState({ authenticated: true });
-              }
+          const me = data && data.me;
+          const authenticated = me ? true : false;
 
-              if (!authenticated) return null;
-              return (
-                <Message data-test="profile">
-                  <p>Name: {me.name}</p>
-                  <p>E-Mail: {me.email}</p>
+          return (
+            <ContentContainer>
+              <Container>
+                {!authenticated && (
+                  <Form size="large" data-test="authenticate">
+                    <Header as="h2" color="teal" textAlign="center">
+                      Profile
+                    </Header>
+                    <Segment raised>
+                      <Form.Input
+                        value={this.state.email}
+                        onChange={this.dispatch}
+                        name="email"
+                        label="E-Mail Address"
+                        fluid
+                        icon="user"
+                        iconPosition="left"
+                        placeholder="E-Mail Address"
+                      />
+                      <Form.Input
+                        value={this.state.password}
+                        onChange={this.dispatch}
+                        name="password"
+                        label="Password"
+                        fluid
+                        icon="lock"
+                        iconPosition="left"
+                        placeholder="Password"
+                        type="password"
+                      />
+                      <Grid columns={2}>
+                        <Mutation mutation={SIGNIN_MUTATION}>
+                          {(
+                            mutateSignIn,
+                            {
+                              loading: loadingSignInMutation,
+                              error,
+                              data: dataSignInMutation,
+                            },
+                          ) => (
+                            <Grid.Column>
+                              <Button
+                                color="teal"
+                                fluid
+                                size="large"
+                                onClick={e => {
+                                  e.preventDefault();
+                                  this.signin(mutateSignIn);
+                                }}
+                              >
+                                SignIn
+                              </Button>
+                              {error && `Error!: ${error}`}
+                            </Grid.Column>
+                          )}
+                        </Mutation>
+                        <Mutation mutation={SIGNUP_MUTATION}>
+                          {(mutateSignUp, { error }) => (
+                            <Grid.Column>
+                              <Button
+                                fluid
+                                size="large"
+                                onClick={e => {
+                                  e.preventDefault();
+                                  this.signup(mutateSignUp);
+                                }}
+                              >
+                                SignUp
+                              </Button>
+                              {error && `Error!: ${error}`}
+                            </Grid.Column>
+                          )}
+                        </Mutation>
+                      </Grid>
+                    </Segment>
+                  </Form>
+                )}
+                {authenticated && (
+                  <Message data-test="profile">
+                    <p>Name: {me.name}</p>
+                    <p>E-Mail: {me.email}</p>
 
-                  <Button color="teal" fluid size="large" onClick={this.logOut}>
-                    LogOut
-                  </Button>
-                </Message>
-              );
-            }}
-          </Query>
-        </Container>
-      </ContentContainer>
+                    <Button
+                      color="teal"
+                      fluid
+                      size="large"
+                      onClick={this.logOut}
+                    >
+                      LogOut
+                    </Button>
+                  </Message>
+                )}
+              </Container>
+            </ContentContainer>
+          );
+        }}
+      </Query>
     );
   }
 }
