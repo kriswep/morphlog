@@ -45,7 +45,6 @@ const ADD_PROJECT_MUTATION = gql`
 
 const initialState = {
   name: '',
-  initialProject: '',
 };
 
 class Projects extends React.Component {
@@ -83,93 +82,92 @@ class Projects extends React.Component {
   };
 
   render() {
-    let projectId =
-      this.props.match.params.projectId || this.state.initialProject;
-
     return (
-      <Grid reverserd="mobile">
-        <Grid.Column
-          mobile={16}
-          tablet={4}
-          computer={4}
-          largeScreen={4}
-          widescreen={4}
-        >
-          <SidebarContainer key={`${projectId}ProjectList}`}>
-            <h2>Projects</h2>
-            <Mutation mutation={ADD_PROJECT_MUTATION}>
-              {(mutate, { error }) => (
-                <div data-test="newProject">
-                  <Input
-                    name="name"
-                    label="New project name"
-                    value={this.state.name}
-                    type="text"
-                    placeholder="awesome project"
-                    onChange={this.dispatch}
-                  />
-                  <Button
-                    color="teal"
-                    animated
-                    onClick={e => {
-                      e.preventDefault();
-                      this.addProject(mutate);
-                    }}
-                  >
-                    <Button.Content visible>Add</Button.Content>
-                    <Button.Content hidden>
-                      <Icon name="right arrow" />
-                    </Button.Content>
-                  </Button>
-                  {error && `Error!: ${error}`}
-                </div>
-              )}
-            </Mutation>
-            <Query query={PROJECTS_QUERY}>
-              {({ loading, error, data }) => {
-                if (loading) return null;
-                if (error) return `Error!: ${error}`;
+      <Query query={PROJECTS_QUERY}>
+        {({ loading, error, data }) => {
+          if (loading) return null;
+          if (error) return `Error!: ${error}`;
 
-                const projects = data.projects;
+          const projects = data.projects;
 
-                if (
-                  !projectId &&
-                  projects &&
-                  projects.length >= 0 &&
-                  projects[0] &&
-                  projects[0].id
-                ) {
-                  // no project open, but we have projects: render project comp
-                  this.setState({ initialProject: projects[0].id });
-                }
-                if (!projects) return null;
-                return (
-                  <ProjectsContainer data-test="projects">
-                    {projects.map(project => (
-                      <li key={project.id}>
-                        <ProjectLink to={`/project/${project.id}`}>
-                          {project.name}
-                        </ProjectLink>
-                      </li>
-                    ))}
-                  </ProjectsContainer>
-                );
-              }}
-            </Query>
-          </SidebarContainer>
-        </Grid.Column>
-        <Grid.Column
-          mobile={16}
-          tablet={12}
-          computer={12}
-          largeScreen={12}
-          widescreen={12}
-        >
-          {projectId && (
-            <Project key={`${projectId}Project}`} projectId={projectId} />
-          )}
-        </Grid.Column>
-      </Grid>
+          let projectId = this.props.match.params.projectId;
+          if (
+            !projectId &&
+            projects &&
+            projects.length >= 0 &&
+            projects[0] &&
+            projects[0].id
+          ) {
+            // no project open, but we have projects: render project comp
+            projectId = projects[0].id;
+          }
+          return (
+            <Grid reverserd="mobile">
+              <Grid.Column
+                mobile={16}
+                tablet={4}
+                computer={4}
+                largeScreen={4}
+                widescreen={4}
+              >
+                <SidebarContainer key={`${projectId}ProjectList}`}>
+                  <h2>Projects</h2>
+                  <Mutation mutation={ADD_PROJECT_MUTATION}>
+                    {(mutate, { error }) => (
+                      <div data-test="newProject">
+                        <Input
+                          name="name"
+                          label="New project name"
+                          value={this.state.name}
+                          type="text"
+                          placeholder="awesome project"
+                          onChange={this.dispatch}
+                        />
+                        <Button
+                          color="teal"
+                          animated
+                          onClick={e => {
+                            e.preventDefault();
+                            this.addProject(mutate);
+                          }}
+                        >
+                          <Button.Content visible>Add</Button.Content>
+                          <Button.Content hidden>
+                            <Icon name="right arrow" />
+                          </Button.Content>
+                        </Button>
+                        {error && `Error!: ${error}`}
+                      </div>
+                    )}
+                  </Mutation>
+                  {projects && (
+                    <ProjectsContainer data-test="projects">
+                      {projects.map(project => (
+                        <li key={project.id}>
+                          <ProjectLink to={`/project/${project.id}`}>
+                            {project.name}
+                          </ProjectLink>
+                        </li>
+                      ))}
+                    </ProjectsContainer>
+                  )}
+                </SidebarContainer>
+              </Grid.Column>
+              <Grid.Column
+                mobile={16}
+                tablet={12}
+                computer={12}
+                largeScreen={12}
+                widescreen={12}
+              >
+                {projectId && (
+                  <Project key={`${projectId}Project}`} projectId={projectId} />
+                )}
+              </Grid.Column>
+            </Grid>
+          );
+        }}
+      </Query>
     );
   }
 }
