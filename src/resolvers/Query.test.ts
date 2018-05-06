@@ -48,6 +48,9 @@ test('query for project', async () => {
 
 test('query for change', async () => {
   const context = {
+    user: {
+      id: 'userId',
+    },
     db: {
       query: {
         change: jest.fn(() => true),
@@ -74,6 +77,9 @@ test('query for change', async () => {
 
   // throw if not author or admin
   const contextFailure = {
+    user: {
+      id: 'userId',
+    },
     db: {
       exists: {
         Change: jest.fn(() => false),
@@ -95,6 +101,9 @@ test('query for change', async () => {
 
 test('query for projects', async () => {
   const context = {
+    user: {
+      id: 'userId',
+    },
     db: {
       query: {
         projects: jest.fn(() => true),
@@ -155,6 +164,9 @@ test('query for changes', async () => {
 
 test('query for me', async () => {
   const context = {
+    user: {
+      id: 'userId',
+    },
     db: {
       query: {
         user: jest.fn(() => true),
@@ -202,6 +214,9 @@ test('query for team', async () => {
 
 test('query for teams', async () => {
   const context = {
+    user: {
+      id: 'userId',
+    },
     db: {
       query: {
         teams: jest.fn(() => true),

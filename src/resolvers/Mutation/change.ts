@@ -2,7 +2,7 @@ import { getUserId, isUserProjectAllowed, Context } from '../../utils';
 
 export const change = {
   async addChange(parent, { projectId, text }, ctx: Context, info) {
-    const userId = getUserId(ctx);
+    const userId = await getUserId(ctx);
     await isUserProjectAllowed(ctx, projectId);
 
     return ctx.db.mutation.createChange(
@@ -27,7 +27,7 @@ export const change = {
     ctx: Context,
     info,
   ) {
-    const userId = getUserId(ctx);
+    const userId = await getUserId(ctx);
 
     const isAuthor = ctx.db.exists.Change({
       id: changeId,
@@ -38,7 +38,7 @@ export const change = {
       id: projectId,
       admin_some: { id: userId },
     });
-    if (!await isAuthor && !await isAdmin) {
+    if (!(await isAuthor) && !(await isAdmin)) {
       throw new Error(`Not your Change`);
     }
 

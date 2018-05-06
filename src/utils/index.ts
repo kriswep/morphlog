@@ -19,7 +19,11 @@ export class AccessError extends Error {
   }
 }
 
-export function getUserId(ctx: Context): ID_Input {
+export async function getUserId(ctx: Context): Promise<ID_Input> {
+  if (ctx.user && ctx.user.id) {
+    console.log(`user ${ctx.user.id} was known in request`);
+    return ctx.user.id;
+  }
   const Authorization = ctx.request.get('Authorization');
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '');
@@ -27,6 +31,7 @@ export function getUserId(ctx: Context): ID_Input {
       const { userId } = jwt.verify(token, process.env.APP_SECRET) as {
         userId: string;
       };
+      ctx.user = { id: userId };
       return userId;
     } catch (e) {
       throw new AuthError();
@@ -37,7 +42,7 @@ export function getUserId(ctx: Context): ID_Input {
 }
 
 export async function isUserProjectAllowed(ctx: Context, projectId) {
-  const userId = getUserId(ctx);
+  const userId = await getUserId(ctx);
   if (!userId || !projectId) {
     throw new AccessError();
   }
@@ -57,7 +62,7 @@ export async function isUserProjectAllowed(ctx: Context, projectId) {
 }
 
 export async function hasTeamRead(ctx: Context, teamId) {
-  const userId = getUserId(ctx);
+  const userId = await getUserId(ctx);
   if (!userId || !teamId) {
     throw new AccessError();
   }
@@ -77,7 +82,7 @@ export async function hasTeamRead(ctx: Context, teamId) {
 }
 
 export async function hasTeamWrite(ctx: Context, teamId) {
-  const userId = getUserId(ctx);
+  const userId = await getUserId(ctx);
   if (!userId || !teamId) {
     throw new AccessError();
   }

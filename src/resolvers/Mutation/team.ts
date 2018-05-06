@@ -3,7 +3,7 @@ import { requiresAuth, requiresTeamWriteAccess } from '../../utils/permissions';
 
 export const team = {
   async createTeam(parent, { name }, ctx: Context, info) {
-    const userId = getUserId(ctx);
+    const userId = await getUserId(ctx);
 
     return ctx.db.mutation.createTeam(
       {

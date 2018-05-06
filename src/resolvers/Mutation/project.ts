@@ -2,7 +2,7 @@ import { getUserId, Context } from '../../utils';
 
 export const project = {
   async createProject(parent, { name, text }, ctx: Context, info) {
-    const userId = getUserId(ctx);
+    const userId = await getUserId(ctx);
 
     return ctx.db.mutation.createProject(
       {
@@ -23,7 +23,7 @@ export const project = {
   },
 
   async addProjectMember(parent, { user, project }, ctx: Context, info) {
-    const userId = getUserId(ctx);
+    const userId = await getUserId(ctx);
     const isProjectAdmin = await ctx.db.exists.Project({
       id: project,
       admin_some: { id: userId },

@@ -7,13 +7,13 @@ import {
   Context,
 } from './index';
 
-export const requiresAuth = addResolver((parent, args, context: Context) => {
-  const userId = getUserId(context);
+export const requiresAuth = addResolver(
+  async (parent, args, context: Context) => {
+    const userId = await getUserId(context);
 
-  context.user = { id: userId };
-
-  return userId;
-});
+    return userId;
+  },
+);
 
 export const requiresProjectAccess = addResolver(
   async (parent, args, context: Context) => {

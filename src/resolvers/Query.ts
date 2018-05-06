@@ -1,4 +1,4 @@
-import { getUserId, isUserProjectAllowed, Context } from '../utils';
+import { isUserProjectAllowed, Context } from '../utils';
 import {
   requiresAuth,
   requiresProjectAccess,
