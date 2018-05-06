@@ -12,6 +12,7 @@ test('requiresAuth should not throw if authenticated with token', async () => {
 
   const userId = await requiresAuth('', '', {
     request: { get: () => auth },
+    db: { exists: { User: () => true } },
   });
   expect(userId).toBe(1);
 });
@@ -23,6 +24,7 @@ test('requiresAuth should throw if trying to authenticate with false token', asy
   try {
     await requiresAuth('', '', {
       request: { get: () => invalidTokenAuth },
+      db: { exists: { User: () => true } },
     });
   } catch (e) {
     error = e.message;
@@ -32,6 +34,7 @@ test('requiresAuth should throw if trying to authenticate with false token', asy
   try {
     await requiresAuth('', '', {
       request: { get: () => 'malformedJWT' },
+      db: { exists: { User: () => true } },
     });
   } catch (e) {
     error = e.message;
@@ -44,7 +47,10 @@ test('requiresAuth should throw if not authenticated', async () => {
 
   let error;
   try {
-    await requiresAuth('', '', { request: { get: () => {} } });
+    await requiresAuth('', '', {
+      request: { get: () => {} },
+      db: { exists: { User: () => true } },
+    });
   } catch (e) {
     error = e.message;
   }
@@ -59,7 +65,7 @@ test('requiresProjectAccess should allow if authenticated and project member', a
     { projectId: 2 },
     {
       request: { get: () => auth },
-      db: { exists: { Project: () => true } },
+      db: { exists: { Project: () => true, User: () => true },
     },
   );
   expect(access).toBeTruthy();
@@ -75,7 +81,7 @@ test('requiresProjectAccess should throw if authenticated and wrong project memb
       { id: 2 },
       {
         request: { get: () => auth },
-        db: { exists: { Project: async () => false } },
+        db: { exists: { Project: async () => false, User: () => true} },
       },
     );
   } catch (error) {
@@ -94,7 +100,7 @@ test('requiresProjectAccess should throw if authenticated without projectID', as
       {}, // no projectId nor id
       {
         request: { get: () => auth },
-        db: { exists: { Project: async () => true } },
+        db: { exists: { Project: async () => true, User: () => true } },
       },
     );
   } catch (error) {
@@ -107,7 +113,7 @@ test('requiresTeamReadAccess should allow if authenticated and project member, a
   const auth = jwt.sign({ userId: 1 }, process.env.APP_SECRET);
   const context = {
     request: { get: () => auth },
-    db: { exists: { Team: jest.fn(() => true) } },
+    db: { exists: { Team: jest.fn(() => true), User: () => true } },
   };
 
   const access = await requiresTeamReadAccess('', { teamId: 2 }, context);
@@ -133,7 +139,7 @@ test('requiresTeamReadAccess should throw if authenticated and not in team', asy
       { id: 2 },
       {
         request: { get: () => auth },
-        db: { exists: { Team: async () => false } },
+        db: { exists: { Team: async () => false, User: () => true } },
       },
     );
   } catch (error) {
@@ -152,7 +158,7 @@ test('requiresTeamReadAccess should throw if authenticated without teamId', asyn
       {}, // no teamId nor id
       {
         request: { get: () => auth },
-        db: { exists: { Team: async () => true } },
+        db: { exists: { Team: async () => true, User: () => true } },
       },
     );
   } catch (error) {
@@ -165,7 +171,7 @@ test('requiresTeamWriteAccess should allow if authenticated and project member, 
   const auth = jwt.sign({ userId: 1 }, process.env.APP_SECRET);
   const context = {
     request: { get: () => auth },
-    db: { exists: { Team: jest.fn(() => true) } },
+    db: { exists: { Team: jest.fn(() => true), User: () => true } },
   };
 
   const access = await requiresTeamWriteAccess('', { teamId: 2 }, context);
@@ -187,7 +193,7 @@ test('requiresTeamWriteAccess should throw if authenticated and not in team', as
       { id: 2 },
       {
         request: { get: () => auth },
-        db: { exists: { Team: async () => false } },
+        db: { exists: { Team: async () => false, User: () => true },
       },
     );
   } catch (error) {
@@ -206,7 +212,7 @@ test('requiresTeamWriteAccess should throw if authenticated without teamId', asy
       {}, // no teamId nor id
       {
         request: { get: () => auth },
-        db: { exists: { Team: async () => true } },
+        db: { exists: { Team: async () => true, User: () => true } },
       },
     );
   } catch (error) {

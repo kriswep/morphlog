@@ -31,6 +31,11 @@ export async function getUserId(ctx: Context): Promise<ID_Input> {
       const { userId } = jwt.verify(token, process.env.APP_SECRET) as {
         userId: string;
       };
+      // check, if user is (still) in the db
+      await ctx.db.exists.User({
+        id: userId,
+      });
+      // set userId in context and return
       ctx.user = { id: userId };
       return userId;
     } catch (e) {
