@@ -354,6 +354,7 @@ Array [
                                         color="teal"
                                         fluid={true}
                                         onClick={[Function]}
+                                        role="button"
                                         size="large"
                                     >
                                         <button
@@ -561,6 +562,7 @@ Array [
                                         as="button"
                                         fluid={true}
                                         onClick={[Function]}
+                                        role="button"
                                         size="large"
                                     >
                                         <button
@@ -927,6 +929,7 @@ Array [
                                     color="teal"
                                     fluid={true}
                                     onClick={[Function]}
+                                    role="button"
                                     size="large"
                                 >
                                     <button
@@ -1134,6 +1137,7 @@ Array [
                                     as="button"
                                     fluid={true}
                                     onClick={[Function]}
+                                    role="button"
                                     size="large"
                                 >
                                     <button
@@ -1188,6 +1192,7 @@ Array [
             color="teal"
             fluid={true}
             onClick={[Function]}
+            role="button"
             size="large"
         >
             <button
@@ -1228,6 +1233,7 @@ Array [
         color="teal"
         fluid={true}
         onClick={[Function]}
+        role="button"
         size="large"
     >
         <button

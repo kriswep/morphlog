@@ -132,6 +132,7 @@ exports[`Projects renders correctly 2`] = `
     as="button"
     color="teal"
     onClick={[Function]}
+    role="button"
   >
     <button
       className="ui teal animated button"
