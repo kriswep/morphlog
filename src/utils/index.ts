@@ -21,7 +21,6 @@ export class AccessError extends Error {
 
 export async function getUserId(ctx: Context): Promise<ID_Input> {
   if (ctx.user && ctx.user.id) {
-    console.log(`user ${ctx.user.id} was known in request`);
     return ctx.user.id;
   }
   const Authorization = ctx.request.get('Authorization');
