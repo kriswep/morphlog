@@ -17,6 +17,19 @@ test('requiresAuth should not throw if authenticated with token', async () => {
   expect(userId).toBe(1);
 });
 
+
+test('requiresAuth should pass through if already autenticated', async () => {
+  const context = {
+    user: { id: 'userId' },
+    request: { get: jest.fn() },
+    db: { exists: { User: jest.fn() } },
+  }
+
+  const userId = await requiresAuth('', '', context);
+  expect(context.request.get).not.toHaveBeenCalled();
+  expect(context.db.exists.User).not.toHaveBeenCalled();
+});
+
 test('requiresAuth should throw if trying to authenticate with false token', async () => {
   const invalidTokenAuth = jwt.sign({ userId: 1 }, 'malicious secret');
 
