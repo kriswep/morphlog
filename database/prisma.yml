@@ -11,8 +11,12 @@ datamodel: datamodel.graphql
 seed:
    import: ${env:PRISMA_SEED}
 
-# post-deploy hooks, for schema downloading and codegen
+# Download the GraphQL schema of the Prisma API into
+# `src/generated/prisma.graphql` (as specfied in `.graphqlconfig.yml`).
+# Then generate the corresponding TypeScript definitions into
+# `src/generated/prisma.ts` (also specfied in `.graphqlconfig.yml`)
+# with `graphql prepare` .
 hooks:
   post-deploy:
-    - graphql get-schema --project database
-    - graphql prepare
+    - graphql get-schema
+    - graphql codegen
