@@ -1,5 +1,5 @@
 # source: http://localhost:4466/morphlog/dev
-# timestamp: Wed Apr 25 2018 21:51:30 GMT+0200 (CEST)
+# timestamp: Fri May 18 2018 00:03:25 GMT+0200 (CEST)
 
 type AggregateChange {
   count: Int!
