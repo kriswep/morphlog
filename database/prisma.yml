@@ -18,5 +18,5 @@ seed:
 # with `graphql prepare` .
 hooks:
   post-deploy:
-    - graphql get-schema
-    - graphql codegen
+    - graphql get-schema --project database
+    - graphql prepare
