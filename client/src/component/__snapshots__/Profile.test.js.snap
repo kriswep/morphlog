@@ -55,9 +55,7 @@ Array [
                         <div
                             className="field"
                         >
-                            <label
-                                key="E-Mail Address"
-                            >
+                            <label>
                                 E-Mail Address
                             </label>
                             <Input
@@ -74,7 +72,6 @@ Array [
                                     className="ui fluid left icon input"
                                 >
                                     <input
-                                        key="text"
                                         name="email"
                                         onChange={[Function]}
                                         placeholder="E-Mail Address"
@@ -83,7 +80,6 @@ Array [
                                     />
                                     <Icon
                                         as="i"
-                                        key="user"
                                         name="user"
                                     >
                                         <i
@@ -124,9 +120,7 @@ Array [
                         <div
                             className="field"
                         >
-                            <label
-                                key="Password"
-                            >
+                            <label>
                                 Password
                             </label>
                             <Input
@@ -143,7 +137,6 @@ Array [
                                     className="ui fluid left icon input"
                                 >
                                     <input
-                                        key="password"
                                         name="password"
                                         onChange={[Function]}
                                         placeholder="Password"
@@ -152,7 +145,6 @@ Array [
                                     />
                                     <Icon
                                         as="i"
-                                        key="lock"
                                         name="lock"
                                     >
                                         <i
@@ -630,9 +622,7 @@ Array [
                     <div
                         className="field"
                     >
-                        <label
-                            key="E-Mail Address"
-                        >
+                        <label>
                             E-Mail Address
                         </label>
                         <Input
@@ -649,7 +639,6 @@ Array [
                                 className="ui fluid left icon input"
                             >
                                 <input
-                                    key="text"
                                     name="email"
                                     onChange={[Function]}
                                     placeholder="E-Mail Address"
@@ -658,7 +647,6 @@ Array [
                                 />
                                 <Icon
                                     as="i"
-                                    key="user"
                                     name="user"
                                 >
                                     <i
@@ -699,9 +687,7 @@ Array [
                     <div
                         className="field"
                     >
-                        <label
-                            key="Password"
-                        >
+                        <label>
                             Password
                         </label>
                         <Input
@@ -718,7 +704,6 @@ Array [
                                 className="ui fluid left icon input"
                             >
                                 <input
-                                    key="password"
                                     name="password"
                                     onChange={[Function]}
                                     placeholder="Password"
@@ -727,7 +712,6 @@ Array [
                                 />
                                 <Icon
                                     as="i"
-                                    key="lock"
                                     name="lock"
                                 >
                                     <i
