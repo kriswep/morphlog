@@ -17,10 +17,15 @@ Array [
             >
                 <Link
                     className="sc-gzVnrw ZyJST"
+                    replace={false}
                     to="/project/1234"
                 >
-                    <a>
-                        MockedLink
+                    <a
+                        className="sc-gzVnrw ZyJST"
+                        href="/project/1234"
+                        onClick={[Function]}
+                    >
+                        Hello World
                     </a>
                 </Link>
             </Styled(Link)>
@@ -33,10 +38,15 @@ Array [
             >
                 <Link
                     className="sc-gzVnrw ZyJST"
+                    replace={false}
                     to="/project/5678"
                 >
-                    <a>
-                        MockedLink
+                    <a
+                        className="sc-gzVnrw ZyJST"
+                        href="/project/5678"
+                        onClick={[Function]}
+                    >
+                        Hello World
                     </a>
                 </Link>
             </Styled(Link)>
@@ -55,10 +65,15 @@ Array [
         >
             <Link
                 className="sc-gzVnrw ZyJST"
+                replace={false}
                 to="/project/1234"
             >
-                <a>
-                    MockedLink
+                <a
+                    className="sc-gzVnrw ZyJST"
+                    href="/project/1234"
+                    onClick={[Function]}
+                >
+                    Hello World
                 </a>
             </Link>
         </Styled(Link)>
@@ -71,10 +86,15 @@ Array [
         >
             <Link
                 className="sc-gzVnrw ZyJST"
+                replace={false}
                 to="/project/5678"
             >
-                <a>
-                    MockedLink
+                <a
+                    className="sc-gzVnrw ZyJST"
+                    href="/project/5678"
+                    onClick={[Function]}
+                >
+                    Hello World
                 </a>
             </Link>
         </Styled(Link)>

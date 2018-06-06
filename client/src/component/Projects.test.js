@@ -3,16 +3,13 @@ import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
+import { BrowserRouter } from 'react-router-dom';
+
 import createClient from '../../utils/apolloMocks';
-// import Project from './Project';
-// import { Link } from 'react-router-dom';
 
 import Projects from './Projects';
 
 jest.mock('./Project', () => () => <div>MockedProject</div>);
-jest.mock('react-router-dom', () => {
-  Link: () => <a>MockedLink</a>; // eslint-disable-line
-});
 
 const mocks = {
   Query: () => ({
@@ -44,9 +41,11 @@ test('Projects renders correctly', async () => {
     },
   };
   const wrapper = mount(
-    <ApolloProvider client={client}>
-      <Projects match={match} />
-    </ApolloProvider>,
+    <BrowserRouter>
+      <ApolloProvider client={client}>
+        <Projects match={match} />
+      </ApolloProvider>
+    </BrowserRouter>,
   );
   await new Promise(res => window.setTimeout(res, 1));
   wrapper.setProps({ projectId: 'bar' }); // poke it to rerender...
