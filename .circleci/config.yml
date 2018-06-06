@@ -10,12 +10,12 @@ jobs:
       #    name: update-npm
       #    command: 'sudo npm install -g npm@latest'
       - restore_cache:
-          key: v1-server-dependency-cache-{{ checksum "./package.json" }}
+          key: v1-server-dependency-cache-{{ checksum "./server/package.json" }}
       - run:
           name: install-npm-server
-          command: npm install --no-save
+          command: cd server && npm install --no-save
       - save_cache:
-          key: v1-server-dependency-cache-{{ checksum "./package.json" }}
+          key: v1-server-dependency-cache-{{ checksum "./server/package.json" }}
           paths:
             - ./node_modules
       - restore_cache:
@@ -27,15 +27,24 @@ jobs:
           key: v1-client-dependency-cache-{{ checksum "./client/package.json" }}
           paths:
             - ./client/node_modules
+      - restore_cache:
+          key: v1-e2e-dependency-cache-{{ checksum "./e2e/package.json" }}
+      - run:
+          name: install-npm-e2e
+          command: cd e2e && npm install --no-save
+      - save_cache:
+          key: v1-e2e-dependency-cache-{{ checksum "./e2e/package.json" }}
+          paths:
+            - ./node_modules
       - run:
           name: test server
-          command: npm test
+          command: cd server && npm test
       - run:
           name: test client
           command: cd client && npm test
       - run:
           name: test e2e
-          command: npm run integration || echo 0
+          command: cd e2e && npm run integration || echo 0
       - store_artifacts:
           path: cypress/videos
       - store_artifacts:

@@ -1,0 +1,24 @@
+{
+  "name": "morphlog-e2e",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "integration:startClient": "cd ../client && PORT=3030 npm run start:noOpen",
+    "integration:startServer": "cd ../server && prisma delete -e .env.test -f && prisma deploy -e .env.test && dotenv -e .env.test -- nodemon -e ts,graphql -x ts-node src/index.ts",
+    "integration:start": "npm-run-all --parallel integration:startServer integration:startClient",
+    "integration:test": "wait-for-server http://localhost:3030 --tries 90 --quiet && wait-for-server http://localhost:4000 --tries 90 --quiet && npm run cypress:run",
+    "integration": "npm-run-all --parallel --race integration:start integration:test",
+    "cypress:run": "cypress run",
+    "cypress:open": "cypress open"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^3.0.1",
+    "npm-run-all": "^4.1.3",
+    "wait-for-server": "^0.1.1"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
+}
