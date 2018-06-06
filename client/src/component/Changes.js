@@ -48,7 +48,7 @@ const initialState = {
 class Project extends React.Component {
   state = initialState;
 
-  dispatch = (e, v, x) => {
+  dispatch = e => {
     if (e.target.name && e.target.name) {
       const newState = {};
       newState[e.target.name] = e.target.value;
@@ -143,7 +143,7 @@ class Project extends React.Component {
             if (loading) return null;
             if (error) return `Error!: ${error}`;
 
-            const changes = data.changes;
+            const { changes } = data;
             if (!changes) return null;
             return (
               <Comment.Group data-test="change">

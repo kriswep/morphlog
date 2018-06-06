@@ -1,3 +1,5 @@
+/* globals localStorage */
+
 import React from 'react';
 import { gql } from 'apollo-boost';
 import { withApollo, Query, Mutation } from 'react-apollo';
@@ -63,7 +65,7 @@ const initialState = {
 class Profile extends React.Component {
   state = initialState;
 
-  dispatch = (e, v, x) => {
+  dispatch = e => {
     if (e.target.name && e.target.name) {
       const newState = {};
       newState[e.target.name] = e.target.value;
@@ -86,7 +88,7 @@ class Profile extends React.Component {
       .then(async ({ data }) => {
         console.log('got data', data);
         localStorage.setItem('auth', data.signup.token);
-        return await this.props.client.resetStore();
+        return this.props.client.resetStore();
       })
       .then(() => {
         this.setState(initialState);
@@ -107,7 +109,7 @@ class Profile extends React.Component {
       .then(async ({ data }) => {
         console.log('got data', data);
         localStorage.setItem('auth', data.login.token);
-        return await this.props.client.resetStore();
+        return this.props.client.resetStore();
       })
       .then(() => {
         this.setState(initialState);
@@ -121,11 +123,11 @@ class Profile extends React.Component {
   render() {
     return (
       <Query query={PROFILE_QUERY} fetchPolicy="network-only">
-        {({ loading, error, data }) => {
+        {({ loading, _, data }) => {
           if (loading) return null;
 
           const me = data && data.me;
-          const authenticated = me ? true : false;
+          const authenticated = me;
 
           return (
             <ContentContainer>
@@ -162,9 +164,9 @@ class Profile extends React.Component {
                           {(
                             mutateSignIn,
                             {
-                              loading: loadingSignInMutation,
-                              error,
-                              data: dataSignInMutation,
+                              // loading: loadingSignInMutation,
+                              mutationError,
+                              // data: dataSignInMutation,
                             },
                           ) => (
                             <Grid.Column>
@@ -179,12 +181,12 @@ class Profile extends React.Component {
                               >
                                 SignIn
                               </Button>
-                              {error && `Error!: ${error}`}
+                              {mutationError && `Error!: ${mutationError}`}
                             </Grid.Column>
                           )}
                         </Mutation>
                         <Mutation mutation={SIGNUP_MUTATION}>
-                          {(mutateSignUp, { error }) => (
+                          {(mutateSignUp, { mutationError }) => (
                             <Grid.Column>
                               <Button
                                 fluid
@@ -196,7 +198,7 @@ class Profile extends React.Component {
                               >
                                 SignUp
                               </Button>
-                              {error && `Error!: ${error}`}
+                              {mutationError && `Error!: ${mutationError}`}
                             </Grid.Column>
                           )}
                         </Mutation>

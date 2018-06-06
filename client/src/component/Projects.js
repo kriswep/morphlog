@@ -50,7 +50,7 @@ const initialState = {
 class Projects extends React.Component {
   state = initialState;
 
-  dispatch = (e, v, x) => {
+  dispatch = e => {
     if (e.target.name && e.target.name) {
       const newState = {};
       newState[e.target.name] = e.target.value;
@@ -72,7 +72,7 @@ class Projects extends React.Component {
       .then(({ data }) => {
         console.log('got data', data);
       })
-      .then(({ data }) => {
+      .then(() => {
         this.setState(initialState);
       })
       .catch(error => {
@@ -88,9 +88,9 @@ class Projects extends React.Component {
           if (loading) return null;
           if (error) return `Error!: ${error}`;
 
-          const projects = data.projects;
+          const { projects } = data;
 
-          let projectId = this.props.match.params.projectId;
+          let { projectId } = this.props.match.params;
           if (
             !projectId &&
             projects &&
@@ -113,7 +113,7 @@ class Projects extends React.Component {
                 <SidebarContainer key={`${projectId}ProjectList}`}>
                   <h2>Projects</h2>
                   <Mutation mutation={ADD_PROJECT_MUTATION}>
-                    {(mutate, { error }) => (
+                    {(mutate, { mutationError }) => (
                       <div data-test="newProject">
                         <Input
                           name="name"
@@ -136,7 +136,7 @@ class Projects extends React.Component {
                             <Icon name="right arrow" />
                           </Button.Content>
                         </Button>
-                        {error && `Error!: ${error}`}
+                        {mutationError && `Error!: ${mutationError}`}
                       </div>
                     )}
                   </Mutation>

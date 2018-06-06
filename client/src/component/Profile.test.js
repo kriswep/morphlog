@@ -1,4 +1,4 @@
-/* globals test expect jest */
+/* globals test expect window */
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { mount } from 'enzyme';

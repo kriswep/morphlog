@@ -1,4 +1,4 @@
-/* globals test expect jest */
+/* globals test expect jest window */
 // TODO checkout https://github.com/react-cosmos/react-cosmos#react-apollo-graphql
 
 import React from 'react';
@@ -6,13 +6,11 @@ import { ApolloProvider } from 'react-apollo';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import createClient from '../../utils/apolloMocks';
-import Changes from './Changes';
+// import Changes from './Changes';
 
 import Project from './Project';
 
-jest.mock('./Changes', () => {
-  return () => <div>MockedChange</div>;
-});
+jest.mock('./Changes', () => () => <div>MockedChange</div>);
 
 const mocks = {
   Query: () => ({

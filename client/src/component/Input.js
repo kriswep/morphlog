@@ -31,17 +31,15 @@ const Textarea = Input.withComponent('textarea').extend`
   height: 8rem;
 `;
 
-const MyInput = ({ textarea, name, label, ...rest }) => {
-  return (
-    <Container>
-      {name && label && <Label for={name}>{label}</Label>}
-      {textarea ? (
-        <Textarea name={name} {...rest} />
-      ) : (
-        <Input name={name} {...rest} />
-      )}
-    </Container>
-  );
-};
+const MyInput = ({ textarea, name, label, ...rest }) => (
+  <Container>
+    {name && label && <Label for={name}>{label}</Label>}
+    {textarea ? (
+      <Textarea name={name} {...rest} />
+    ) : (
+      <Input name={name} {...rest} />
+    )}
+  </Container>
+);
 
 export default MyInput;

@@ -1,19 +1,17 @@
-/* globals test expect jest */
+/* globals test expect jest window */
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import createClient from '../../utils/apolloMocks';
-import Project from './Project';
-import { Link } from 'react-router-dom';
+// import Project from './Project';
+// import { Link } from 'react-router-dom';
 
 import Projects from './Projects';
 
-jest.mock('./Project', () => {
-  return () => <div>MockedProject</div>;
-});
+jest.mock('./Project', () => () => <div>MockedProject</div>);
 jest.mock('react-router-dom', () => {
-  return { Link: () => <a>MockedLink</a> };
+  Link: () => <a>MockedLink</a>; // eslint-disable-line
 });
 
 const mocks = {

@@ -31,7 +31,7 @@ const Project = ({ projectId, match }) => (
       if (loading) return null;
       if (error) return `Error!: ${error}`;
 
-      const project = data.project;
+      const { project } = data;
       return (
         <ContentContainer data-test="project">
           {project && (

@@ -10,7 +10,7 @@ const ContentContainer = styled.section`
   `};
 `;
 
-const Home = props => (
+const Home = () => (
   <ContentContainer>
     <h1>TODO...</h1>
   </ContentContainer>
