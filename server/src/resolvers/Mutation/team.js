@@ -1,8 +1,8 @@
-import { getUserId, Context } from '../../utils';
+import { getUserId } from '../../utils';
 import { requiresAuth, requiresTeamWriteAccess } from '../../utils/permissions';
 
 export const team = {
-  async createTeam(parent, { name }, ctx: Context, info) {
+  async createTeam(parent, { name }, ctx, info) {
     const userId = await getUserId(ctx);
 
     return ctx.db.mutation.createTeam(
@@ -20,7 +20,7 @@ export const team = {
 
   addTeamMember: requiresAuth
     .addResolver(requiresTeamWriteAccess)
-    .addResolver(async (parent, { teamId, email }, ctx: Context, info) => {
+    .addResolver(async (parent, { teamId, email }, ctx, info) => {
       return ctx.db.mutation.updateTeam(
         {
           where: { id: teamId },

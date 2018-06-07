@@ -25,9 +25,7 @@ test('auth should be able to signup and return token', async () => {
     info: 2,
   });
 
-  const { userId } = jwt.verify(received.token, process.env.APP_SECRET) as {
-    userId: string;
-  };
+  const { userId } = jwt.verify(received.token, process.env.APP_SECRET);
   expect(userId).toEqual(1);
   expect(received.user).toEqual({ id: 1 });
 });
@@ -81,9 +79,7 @@ test('auth should be able to login and return token', async () => {
     },
   );
 
-  const { userId } = jwt.verify(received.token, process.env.APP_SECRET) as {
-    userId: string;
-  };
+  const { userId } = jwt.verify(received.token, process.env.APP_SECRET);
   expect(userId).toEqual(1);
   expect(received.user).toEqual(user);
 });

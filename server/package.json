@@ -3,16 +3,18 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "start": "dotenv -- nodemon -e ts,graphql -x ts-node src/index.ts",
-    "test": "dotenv -e .env.test jest -- --coverage",
-    "test:watch": "dotenv -e .env.test jest -- --watch",
+    "start": "dotenv -- nodemon -e ts,graphql -x ts-node src/index.js",
+    "start2": "dotenv --  node -r esm src/index.js",
+    "test": "dotenv -e .env.test node -r esm node_modules/.bin/jest -- --coverage",
+    "test:watch": "dotenv -e .env.test node -r esm node_modules/.bin/jest -- --watch",
     "dev": "npm-run-all --parallel start playground",
-    "debug": "dotenv -- nodemon -e ts,graphql -x ts-node --inspect src/index.ts",
+    "debug": "dotenv -- nodemon -e ts,graphql -x ts-node --inspect src/index.js",
     "playground": "graphql playground",
     "build": "rimraf dist && tsc"
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
+    "esm": "^3.0.48",
     "graphql-yoga": "^1.14.6",
     "jsonwebtoken": "^8.2.2",
     "prisma-binding": "^2.0.2"
@@ -34,6 +36,13 @@
     "ts-node": "^6.0.5",
     "typescript": "^2.9.1",
     "wait-for-server": "^0.1.1"
+  },
+  "esm": {
+    "mode": "all",
+    "cjs": {
+      "interop": true,
+      "namedExports": false
+    }
   },
   "prettier": {
     "singleQuote": true,

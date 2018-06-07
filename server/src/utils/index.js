@@ -1,11 +1,4 @@
 import * as jwt from 'jsonwebtoken';
-import { Prisma, ID_Input } from '../generated/prisma';
-
-export interface Context {
-  db: Prisma;
-  request: any;
-  user: { id: ID_Input };
-}
 
 export class AuthError extends Error {
   constructor() {
@@ -19,7 +12,7 @@ export class AccessError extends Error {
   }
 }
 
-export async function getUserId(ctx: Context): Promise<ID_Input> {
+export async function getUserId(ctx) {
   if (ctx.user && ctx.user.id) {
     return ctx.user.id;
   }
@@ -27,9 +20,7 @@ export async function getUserId(ctx: Context): Promise<ID_Input> {
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '');
     try {
-      const { userId } = jwt.verify(token, process.env.APP_SECRET) as {
-        userId: string;
-      };
+      const { userId } = jwt.verify(token, process.env.APP_SECRET);
       // check, if user is (still) in the db
       await ctx.db.exists.User({
         id: userId,
@@ -45,7 +36,7 @@ export async function getUserId(ctx: Context): Promise<ID_Input> {
   throw new AuthError();
 }
 
-export async function isUserProjectAllowed(ctx: Context, projectId) {
+export async function isUserProjectAllowed(ctx, projectId) {
   const userId = await getUserId(ctx);
   if (!userId || !projectId) {
     throw new AccessError();
@@ -65,7 +56,7 @@ export async function isUserProjectAllowed(ctx: Context, projectId) {
   throw new AccessError();
 }
 
-export async function hasTeamRead(ctx: Context, teamId) {
+export async function hasTeamRead(ctx, teamId) {
   const userId = await getUserId(ctx);
   if (!userId || !teamId) {
     throw new AccessError();
@@ -85,7 +76,7 @@ export async function hasTeamRead(ctx: Context, teamId) {
   throw new AccessError();
 }
 
-export async function hasTeamWrite(ctx: Context, teamId) {
+export async function hasTeamWrite(ctx, teamId) {
   const userId = await getUserId(ctx);
   if (!userId || !teamId) {
     throw new AccessError();

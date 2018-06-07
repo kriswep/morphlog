@@ -1,7 +1,7 @@
-import { getUserId, isUserProjectAllowed, Context } from '../../utils';
+import { getUserId, isUserProjectAllowed } from '../../utils';
 
 export const change = {
-  async addChange(parent, { projectId, text }, ctx: Context, info) {
+  async addChange(parent, { projectId, text }, ctx, info) {
     const userId = await getUserId(ctx);
     await isUserProjectAllowed(ctx, projectId);
 
@@ -21,12 +21,7 @@ export const change = {
     );
   },
 
-  async updateChange(
-    parent,
-    { changeId, projectId, text },
-    ctx: Context,
-    info,
-  ) {
+  async updateChange(parent, { changeId, projectId, text }, ctx, info) {
     const userId = await getUserId(ctx);
 
     const isAuthor = ctx.db.exists.Change({
