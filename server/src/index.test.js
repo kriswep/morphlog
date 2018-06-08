@@ -1,6 +1,6 @@
 import { GraphQLServer } from 'graphql-yoga';
 
-import { server } from './index';
+import { server } from './main';
 
 jest.mock('graphql-yoga', () => ({
   GraphQLServer: function(props) {
@@ -10,6 +10,6 @@ jest.mock('graphql-yoga', () => ({
   },
 }));
 
-test('index should start GraphQLServer', async () => {
+test('main should start GraphQLServer', async () => {
   expect(server).toBeDefined();
 });

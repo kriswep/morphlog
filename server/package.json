@@ -3,16 +3,17 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "start": "dotenv -- nodemon -e ts,graphql --exec babel-node src/index.js",
-    "test": "dotenv -e .env.test jest -- --coverage",
+    "start": "dotenv -- nodemon -r esm -e graphql src/index.js",
+    "test": "dotenv -e .env.test node -r esm ./node_modules/.bin/jest . -- --coverage",
     "test:watch": "dotenv -e .env.test jest -- --watch",
     "dev": "npm-run-all --parallel start playground",
-    "debug": "dotenv -- nodemon -e ts,graphql --exec babel-node --inspect src/index.js",
+    "debug": "dotenv -- nodemon -e graphql --inspect src/index.js",
     "playground": "graphql playground",
     "build": "rimraf dist && tsc"
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
+    "esm": "^3.0.48",
     "graphql-yoga": "^1.14.7",
     "jsonwebtoken": "^8.2.2",
     "prisma-binding": "^2.0.2"
@@ -40,29 +41,16 @@
     "wait-for-server": "^0.1.1"
   },
   "esm": {
-    "mode": "all",
-    "cjs": {
-      "interop": true,
-      "namedExports": false
-    }
+    "mode": "auto"
   },
   "prettier": {
     "singleQuote": true,
     "trailingComma": "all"
   },
-  "2jest": {
+  "jest2": {
     "rootDir": "./src",
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ],
     "collectCoverageFrom": [
-      "**/*.{js,jsx,ts,tsx}",
+      "**/*.{js,jsx}",
       "!**/node_modules/**",
       "!**/generated/**"
     ],
