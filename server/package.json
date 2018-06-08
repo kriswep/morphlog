@@ -4,8 +4,8 @@
   "version": "0.1.0",
   "scripts": {
     "start": "dotenv -- nodemon -e ts,graphql --exec babel-node src/index.js",
-    "test": "dotenv -e .env.test node -r esm node_modules/.bin/jest -- --coverage",
-    "test:watch": "dotenv -e .env.test node -r esm node_modules/.bin/jest -- --watch",
+    "test": "dotenv -e .env.test jest -- --coverage",
+    "test:watch": "dotenv -e .env.test jest -- --watch",
     "dev": "npm-run-all --parallel start playground",
     "debug": "dotenv -- nodemon -e ts,graphql --exec babel-node --inspect src/index.js",
     "playground": "graphql playground",
@@ -27,6 +27,8 @@
     "@types/bcryptjs": "2.4.1",
     "@types/jest": "^23.0.0",
     "apollo-server-express": "^1.3.6",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.0.1",
     "body-parser": "^1.18.3",
     "dotenv-cli": "^1.4.0",
     "express": "^4.16.3",
@@ -52,11 +54,8 @@
     "singleQuote": true,
     "trailingComma": "all"
   },
-  "jest": {
+  "2jest": {
     "rootDir": "./src",
-    "transform": {
-      "^.+\\.tsx?$": "ts-jest"
-    },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "moduleFileExtensions": [
       "ts",

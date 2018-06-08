@@ -17,13 +17,12 @@ test('requiresAuth should not throw if authenticated with token', async () => {
   expect(userId).toBe(1);
 });
 
-
 test('requiresAuth should pass through if already autenticated', async () => {
   const context = {
     user: { id: 'userId' },
     request: { get: jest.fn() },
     db: { exists: { User: jest.fn() } },
-  }
+  };
 
   const userId = await requiresAuth('', '', context);
   expect(context.request.get).not.toHaveBeenCalled();
@@ -78,7 +77,8 @@ test('requiresProjectAccess should allow if authenticated and project member', a
     { projectId: 2 },
     {
       request: { get: () => auth },
-      db: { exists: { Project: () => true, User: () => true },
+      // db: { exists: { Project: async () => false, User: () => true} },
+      db: { exists: { Project: () => true, User: () => true } },
     },
   );
   expect(access).toBeTruthy();
@@ -94,7 +94,7 @@ test('requiresProjectAccess should throw if authenticated and wrong project memb
       { id: 2 },
       {
         request: { get: () => auth },
-        db: { exists: { Project: async () => false, User: () => true} },
+        db: { exists: { Project: async () => false, User: () => true } },
       },
     );
   } catch (error) {
@@ -206,7 +206,7 @@ test('requiresTeamWriteAccess should throw if authenticated and not in team', as
       { id: 2 },
       {
         request: { get: () => auth },
-        db: { exists: { Team: async () => false, User: () => true },
+        db: { exists: { Team: async () => false, User: () => true } },
       },
     );
   } catch (error) {
