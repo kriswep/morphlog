@@ -3,8 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "start": "dotenv -- nodemon -e ts,graphql -x ts-node src/index.js",
-    "start2": "dotenv -- nodemon -e ts,graphql --exec babel-node src/index.js",
+    "start": "dotenv -- nodemon -e ts,graphql --exec babel-node src/index.js",
     "test": "dotenv -e .env.test node -r esm node_modules/.bin/jest -- --coverage",
     "test:watch": "dotenv -e .env.test node -r esm node_modules/.bin/jest -- --watch",
     "dev": "npm-run-all --parallel start playground",
@@ -23,6 +22,7 @@
     "@babel/cli": "^7.0.0-beta.49",
     "@babel/core": "^7.0.0-beta.49",
     "@babel/node": "^7.0.0-beta.49",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.49",
     "@babel/preset-env": "^7.0.0-beta.49",
     "@types/bcryptjs": "2.4.1",
     "@types/jest": "^23.0.0",

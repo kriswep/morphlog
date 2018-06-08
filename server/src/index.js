@@ -1,6 +1,6 @@
 import { GraphQLServer } from 'graphql-yoga';
 
-import Prisma from 'prisma-binding';
+import { Prisma } from 'prisma-binding';
 import resolvers from './resolvers';
 
 const db = new Prisma({
