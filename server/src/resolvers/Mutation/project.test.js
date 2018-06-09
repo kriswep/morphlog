@@ -1,9 +1,8 @@
-// @ts-ignore
 /* globals test expect jest */
 
-import { getUserId } from '../../utils';
+// import { getUserId } from '../../utils';
 
-import { project } from './project';
+import project from './project';
 
 jest.mock('../../utils', () => ({
   getUserId: jest.fn(() => true),

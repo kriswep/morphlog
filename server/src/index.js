@@ -10,7 +10,7 @@ const db = new Prisma({
   secret: process.env.PRISMA_SECRET, // only needed if specified in `database/prisma.yml` (value set in `.env`)
 });
 
-export const server = new GraphQLServer({
+const server = new GraphQLServer({
   typeDefs: './src/schema.graphql',
   resolvers,
   resolverValidationOptions: {
@@ -23,3 +23,5 @@ export const server = new GraphQLServer({
 });
 
 server.start(() => console.log(`Server is running on http://localhost:4000`));
+
+export default server;

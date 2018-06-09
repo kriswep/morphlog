@@ -1,7 +1,7 @@
 import { getUserId } from '../../utils';
 
-export const project = {
-  async createProject(parent, { name, text }, ctx, info) {
+const project = {
+  async createProject(parent, { name }, ctx, info) {
     const userId = await getUserId(ctx);
 
     return ctx.db.mutation.createProject(
@@ -22,10 +22,10 @@ export const project = {
     );
   },
 
-  async addProjectMember(parent, { user, project }, ctx, info) {
+  async addProjectMember(parent, { user, project: projectId }, ctx, info) {
     const userId = await getUserId(ctx);
     const isProjectAdmin = await ctx.db.exists.Project({
-      id: project,
+      id: projectId,
       admin_some: { id: userId },
     });
     if (!isProjectAdmin) {
@@ -40,7 +40,7 @@ export const project = {
 
     return ctx.db.mutation.updateProject(
       {
-        where: { id: project },
+        where: { id: projectId },
         data: {
           member: {
             connect: { id: user },
@@ -51,3 +51,5 @@ export const project = {
     );
   },
 };
+
+export default project;

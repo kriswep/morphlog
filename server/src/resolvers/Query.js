@@ -1,13 +1,13 @@
-import { isUserProjectAllowed } from '../utils';
+// import { isUserProjectAllowed } from '../utils';
 import {
   requiresAuth,
   requiresProjectAccess,
   requiresTeamReadAccess,
 } from '../utils/permissions';
 
-export const Query = {
+const Query = {
   me: requiresAuth.addResolver((parent, args, ctx, info) => {
-    const id = ctx.user.id;
+    const { id } = ctx.user;
     return ctx.db.query.user({ where: { id } }, info);
   }),
 
@@ -18,7 +18,7 @@ export const Query = {
     ),
 
   projects: requiresAuth.addResolver((parent, args, ctx, info) => {
-    const id = ctx.user.id;
+    const { id } = ctx.user;
 
     return ctx.db.query.projects(
       {
@@ -83,7 +83,7 @@ export const Query = {
     ),
 
   teams: requiresAuth.addResolver((parent, args, ctx, info) => {
-    const id = ctx.user.id;
+    const { id } = ctx.user;
 
     return ctx.db.query.teams(
       {
@@ -106,3 +106,5 @@ export const Query = {
     );
   }),
 };
+
+export default Query;

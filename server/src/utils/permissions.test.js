@@ -1,11 +1,11 @@
-/* globals test expect */
+/* globals test expect jest */
+import * as jwt from 'jsonwebtoken';
 import {
   requiresAuth,
   requiresProjectAccess,
   requiresTeamReadAccess,
   requiresTeamWriteAccess,
 } from './permissions';
-import * as jwt from 'jsonwebtoken';
 
 test('requiresAuth should not throw if authenticated with token', async () => {
   const auth = jwt.sign({ userId: 1 }, process.env.APP_SECRET);
@@ -24,7 +24,7 @@ test('requiresAuth should pass through if already autenticated', async () => {
     db: { exists: { User: jest.fn() } },
   };
 
-  const userId = await requiresAuth('', '', context);
+  await requiresAuth('', '', context);
   expect(context.request.get).not.toHaveBeenCalled();
   expect(context.db.exists.User).not.toHaveBeenCalled();
 });
@@ -55,8 +55,6 @@ test('requiresAuth should throw if trying to authenticate with false token', asy
 });
 
 test('requiresAuth should throw if not authenticated', async () => {
-  const user = {};
-
   let error;
   try {
     await requiresAuth('', '', {
@@ -98,7 +96,7 @@ test('requiresProjectAccess should throw if authenticated and wrong project memb
       },
     );
   } catch (error) {
-    message = error.message;
+    ({ message } = error);
   }
   expect(message).toBe('No Access');
 });
@@ -117,7 +115,7 @@ test('requiresProjectAccess should throw if authenticated without projectID', as
       },
     );
   } catch (error) {
-    message = error.message;
+    ({ message } = error);
   }
   expect(message).toBe('No Access');
 });
@@ -156,7 +154,7 @@ test('requiresTeamReadAccess should throw if authenticated and not in team', asy
       },
     );
   } catch (error) {
-    message = error.message;
+    ({ message } = error);
   }
   expect(message).toBe('No Access');
 });
@@ -175,7 +173,7 @@ test('requiresTeamReadAccess should throw if authenticated without teamId', asyn
       },
     );
   } catch (error) {
-    message = error.message;
+    ({ message } = error);
   }
   expect(message).toBe('No Access');
 });
@@ -210,7 +208,7 @@ test('requiresTeamWriteAccess should throw if authenticated and not in team', as
       },
     );
   } catch (error) {
-    message = error.message;
+    ({ message } = error);
   }
   expect(message).toBe('No Access');
 });
@@ -229,7 +227,7 @@ test('requiresTeamWriteAccess should throw if authenticated without teamId', asy
       },
     );
   } catch (error) {
-    message = error.message;
+    ({ message } = error);
   }
   expect(message).toBe('No Access');
 });

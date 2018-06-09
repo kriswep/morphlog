@@ -7,6 +7,7 @@
     "test": "dotenv -e .env.test jest -- --coverage",
     "test:watch": "dotenv -e .env.test jest -- --watch",
     "format": "prettier --write \"./src/**/*.js\"",
+    "lint": "eslint src",
     "dev": "npm-run-all --parallel start playground",
     "debug": "dotenv -- nodemon -e ts,graphql --exec babel-node --inspect src/index.js",
     "playground": "graphql playground",
@@ -31,6 +32,11 @@
     "babel-jest": "^23.0.1",
     "body-parser": "^1.18.3",
     "dotenv-cli": "^1.4.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-prettier": "^2.6.0",
     "express": "^4.16.3",
     "graphql-cli": "^2.16.2",
     "jest": "^23.1.0",
@@ -51,6 +57,29 @@
   "prettier": {
     "singleQuote": true,
     "trailingComma": "all"
+  },
+  "eslintConfig": {
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": "error",
+      "import/no-extraneous-dependencies": false,
+      "no-unused-vars": [
+        "error",
+        {
+          "vars": "all",
+          "args": "after-used",
+          "argsIgnorePattern": "^_",
+          "ignoreRestSiblings": true
+        }
+      ],
+      "react/prefer-stateless-function": false
+    },
+    "extends": [
+      "airbnb-base",
+      "prettier"
+    ]
   },
   "2jest": {
     "rootDir": "./src",

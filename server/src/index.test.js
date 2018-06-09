@@ -1,9 +1,10 @@
-import { GraphQLServer } from 'graphql-yoga';
+/* globals test expect jest */
+// import { GraphQLServer } from 'graphql-yoga';
 
-import { server } from './index';
+import server from './index';
 
 jest.mock('graphql-yoga', () => ({
-  GraphQLServer: function(props) {
+  GraphQLServer: function gqlServer(props) {
     expect(props).toMatchSnapshot();
     this.mockServerStart = jest.fn();
     return { start: () => true };

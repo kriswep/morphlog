@@ -1,8 +1,8 @@
-// import { requiresAuth, requiresProjectAccess } from '../utils/permissions';
+/* globals test expect jest beforeEach */
+// import { exists } from 'fs';
 import { getUserId, isUserProjectAllowed } from '../utils';
 
-import { Query } from './Query';
-import { exists } from 'fs';
+import Query from './Query';
 
 jest.mock('../utils', () => ({
   getUserId: jest.fn(() => 'userId'),
@@ -94,7 +94,7 @@ test('query for change', async () => {
       info: 2,
     });
   } catch (error) {
-    message = error.message;
+    ({ message } = error);
   }
   expect(message).toBe('Not your Change');
 });

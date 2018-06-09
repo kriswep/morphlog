@@ -1,6 +1,6 @@
 import { getUserId, isUserProjectAllowed } from '../../utils';
 
-export const change = {
+const change = {
   async addChange(parent, { projectId, text }, ctx, info) {
     const userId = await getUserId(ctx);
     await isUserProjectAllowed(ctx, projectId);
@@ -50,3 +50,5 @@ export const change = {
     );
   },
 };
+
+export default change;

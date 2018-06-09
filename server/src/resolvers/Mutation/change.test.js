@@ -1,8 +1,8 @@
-/* globals test expect jest */
+/* globals test expect jest  beforeEach */
 
 import { getUserId, isUserProjectAllowed } from '../../utils';
 
-import { change } from './change';
+import change from './change';
 
 jest.mock('../../utils', () => ({
   getUserId: jest.fn(() => 'user'),
@@ -110,7 +110,7 @@ test('update change shoukd fail if not allowed', async () => {
       info: 2,
     });
   } catch (error) {
-    message = error.message;
+    ({ message } = error);
   }
   expect(message).toBe('Not your Change');
 });

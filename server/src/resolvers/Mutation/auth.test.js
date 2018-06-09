@@ -2,7 +2,7 @@
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 
-import { auth } from './auth';
+import auth from './auth';
 
 test('auth should have signup and login fn', async () => {
   expect(auth.signup).toBeDefined();

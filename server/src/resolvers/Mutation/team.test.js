@@ -1,9 +1,8 @@
-// @ts-ignore
-/* globals test expect jest */
+/* globals test expect jest beforeEach */
 
 import { getUserId, hasTeamWrite } from '../../utils';
 
-import { team } from './team';
+import team from './team';
 
 jest.mock('../../utils', () => ({
   getUserId: jest.fn(() => true),

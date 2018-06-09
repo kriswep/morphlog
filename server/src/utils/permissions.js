@@ -15,20 +15,20 @@ export const requiresAuth = addResolver(async (parent, args, context) => {
 export const requiresProjectAccess = addResolver(
   async (parent, args, context) => {
     const projectId = args.projectId || args.id;
-    return await isUserProjectAllowed(context, projectId);
+    return isUserProjectAllowed(context, projectId);
   },
 );
 
 export const requiresTeamReadAccess = addResolver(
   async (parent, args, context) => {
     const teamId = args.teamId || args.id;
-    return await hasTeamRead(context, teamId);
+    return hasTeamRead(context, teamId);
   },
 );
 
 export const requiresTeamWriteAccess = addResolver(
   async (parent, args, context) => {
     const teamId = args.teamId || args.id;
-    return await hasTeamWrite(context, teamId);
+    return hasTeamWrite(context, teamId);
   },
 );
