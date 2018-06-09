@@ -19,6 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start:noOpen": "BROWSER=none react-scripts start",
+    "format": "prettier --write \"./src/**/*.js\"",
     "build": "react-scripts build",
     "test": "TZ=UTC react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
