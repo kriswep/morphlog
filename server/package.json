@@ -10,8 +10,10 @@
     "format": "prettier --write \"./src/**/*.js\"",
     "lint": "eslint src",
     "dev": "npm-run-all --parallel start playground",
+    "devProd": "npm-run-all --parallel startProd playgroundProd",
     "debug": "dotenv -- nodemon -e ts,graphql --exec babel-node --inspect src/index.js",
     "playground": "graphql playground",
+    "playgroundProd": "dotenv -e .env.production graphql playground",
     "build": "rimraf dist && tsc"
   },
   "dependencies": {
