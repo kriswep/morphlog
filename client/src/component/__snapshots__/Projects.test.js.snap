@@ -124,6 +124,7 @@ exports[`Projects renders correctly 2`] = `
         >
           <label
             className="sc-bwzfXH hgqFEP"
+            for="name"
           >
             New project name
           </label>

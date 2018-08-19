@@ -273,6 +273,7 @@ exports[`Changes renders correctly 2`] = `
         >
           <label
             className="sc-bwzfXH hgqFEP"
+            for="text"
           >
             Change
           </label>
