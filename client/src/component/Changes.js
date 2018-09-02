@@ -2,9 +2,7 @@ import React from 'react';
 import { gql } from 'apollo-boost';
 import { Query, Mutation } from 'react-apollo';
 import styled from 'styled-components';
-import { Button, Comment } from 'semantic-ui-react';
-
-import Input from './Input';
+import { Button, Comment, Form } from 'semantic-ui-react';
 
 const Author = styled.div`
   display: inline-block;
@@ -109,9 +107,9 @@ class Project extends React.Component {
       <div>
         <Mutation mutation={ADD_CHANGE_MUTATION}>
           {(mutate, { error }) => (
-            <div data-test="newChange">
-              <Input
-                textarea
+            <Form data-test="newChange">
+              <Form.TextArea
+                autoHeight
                 name="text"
                 label="Change"
                 value={this.state.text}
@@ -129,7 +127,7 @@ class Project extends React.Component {
                 Add
               </Button>
               {error && `Error!: ${error}`}
-            </div>
+            </Form>
           )}
         </Mutation>
         <Query

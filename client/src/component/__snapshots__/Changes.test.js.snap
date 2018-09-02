@@ -26,7 +26,7 @@ Array [
                                 className="author"
                             >
                                 <div
-                                    className="author sc-EHOje iOWvOn"
+                                    className="author sc-bdVaJa bSrzPW"
                                 >
                                     Hello World
                                 </div>
@@ -84,7 +84,7 @@ Array [
                                 className="author"
                             >
                                 <div
-                                    className="author sc-EHOje iOWvOn"
+                                    className="author sc-bdVaJa bSrzPW"
                                 >
                                     Hello World
                                 </div>
@@ -148,7 +148,7 @@ Array [
                             className="author"
                         >
                             <div
-                                className="author sc-EHOje iOWvOn"
+                                className="author sc-bdVaJa bSrzPW"
                             >
                                 Hello World
                             </div>
@@ -206,7 +206,7 @@ Array [
                             className="author"
                         >
                             <div
-                                className="author sc-EHOje iOWvOn"
+                                className="author sc-bdVaJa bSrzPW"
                             >
                                 Hello World
                             </div>
@@ -252,64 +252,161 @@ Array [
 `;
 
 exports[`Changes renders correctly 2`] = `
-<div
-  data-test="newChange"
+Array [
+  <Form
+    as="form"
+    data-test="newChange"
 >
-  <MyInput
-    label="Change"
-    name="text"
-    onChange={[Function]}
-    placeholder="describe your change"
-    textarea={true}
-    type="text"
-    value=""
-  >
-    <styled.div>
-      <div
-        className="sc-bdVaJa bPGLpq"
-      >
-        <styled.label
-          for="text"
-        >
-          <label
-            className="sc-bwzfXH hgqFEP"
-            for="text"
-          >
-            Change
-          </label>
-        </styled.label>
-        <styled.textarea
-          name="text"
-          onChange={[Function]}
-          placeholder="describe your change"
-          type="text"
-          value=""
-        >
-          <textarea
-            className="sc-ifAKCX cCIwth"
+    <form
+        className="ui form"
+        data-test="newChange"
+        onSubmit={[Function]}
+    >
+        <FormTextArea
+            as={[Function]}
+            autoHeight={true}
+            control={[Function]}
+            label="Change"
             name="text"
             onChange={[Function]}
             placeholder="describe your change"
             type="text"
             value=""
-          />
-        </styled.textarea>
-      </div>
-    </styled.div>
-  </MyInput>
-  <Button
-    as="button"
-    color="teal"
-    onClick={[Function]}
-    role="button"
-  >
-    <button
-      className="ui teal button"
-      onClick={[Function]}
-      role="button"
+        >
+            <FormField
+                autoHeight={true}
+                control={[Function]}
+                label="Change"
+                name="text"
+                onChange={[Function]}
+                placeholder="describe your change"
+                type="text"
+                value=""
+            >
+                <div
+                    className="field"
+                >
+                    <label>
+                        Change
+                    </label>
+                    <TextArea
+                        as="textarea"
+                        autoHeight={true}
+                        name="text"
+                        onChange={[Function]}
+                        placeholder="describe your change"
+                        rows={3}
+                        type="text"
+                        value=""
+                    >
+                        <textarea
+                            name="text"
+                            onChange={[Function]}
+                            onInput={[Function]}
+                            placeholder="describe your change"
+                            rows={3}
+                            style={
+                                Object {
+                                    "resize": "none",
+                                  }
+                            }
+                            type="text"
+                            value=""
+                        />
+                    </TextArea>
+                </div>
+            </FormField>
+        </FormTextArea>
+        <Button
+            as="button"
+            color="teal"
+            onClick={[Function]}
+            role="button"
+        >
+            <button
+                className="ui teal button"
+                onClick={[Function]}
+                role="button"
+            >
+                Add
+            </button>
+        </Button>
+    </form>
+</Form>,
+  <form
+    className="ui form"
+    data-test="newChange"
+    onSubmit={[Function]}
+>
+    <FormTextArea
+        as={[Function]}
+        autoHeight={true}
+        control={[Function]}
+        label="Change"
+        name="text"
+        onChange={[Function]}
+        placeholder="describe your change"
+        type="text"
+        value=""
     >
-      Add
-    </button>
-  </Button>
-</div>
+        <FormField
+            autoHeight={true}
+            control={[Function]}
+            label="Change"
+            name="text"
+            onChange={[Function]}
+            placeholder="describe your change"
+            type="text"
+            value=""
+        >
+            <div
+                className="field"
+            >
+                <label>
+                    Change
+                </label>
+                <TextArea
+                    as="textarea"
+                    autoHeight={true}
+                    name="text"
+                    onChange={[Function]}
+                    placeholder="describe your change"
+                    rows={3}
+                    type="text"
+                    value=""
+                >
+                    <textarea
+                        name="text"
+                        onChange={[Function]}
+                        onInput={[Function]}
+                        placeholder="describe your change"
+                        rows={3}
+                        style={
+                            Object {
+                                "resize": "none",
+                              }
+                        }
+                        type="text"
+                        value=""
+                    />
+                </TextArea>
+            </div>
+        </FormField>
+    </FormTextArea>
+    <Button
+        as="button"
+        color="teal"
+        onClick={[Function]}
+        role="button"
+    >
+        <button
+            className="ui teal button"
+            onClick={[Function]}
+            role="button"
+        >
+            Add
+        </button>
+    </Button>
+</form>,
+]
 `;

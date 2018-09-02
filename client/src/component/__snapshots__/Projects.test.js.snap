@@ -6,7 +6,7 @@ Array [
     data-test="projects"
 >
     <ul
-        className="sc-bZQynM eCIGDO"
+        className="sc-bwzfXH bcbJmK"
         data-test="projects"
     >
         <li
@@ -16,12 +16,12 @@ Array [
                 to="/project/1234"
             >
                 <Link
-                    className="sc-gzVnrw ZyJST"
+                    className="sc-htpNat iELaDV"
                     replace={false}
                     to="/project/1234"
                 >
                     <a
-                        className="sc-gzVnrw ZyJST"
+                        className="sc-htpNat iELaDV"
                         href="/project/1234"
                         onClick={[Function]}
                     >
@@ -37,12 +37,12 @@ Array [
                 to="/project/5678"
             >
                 <Link
-                    className="sc-gzVnrw ZyJST"
+                    className="sc-htpNat iELaDV"
                     replace={false}
                     to="/project/5678"
                 >
                     <a
-                        className="sc-gzVnrw ZyJST"
+                        className="sc-htpNat iELaDV"
                         href="/project/5678"
                         onClick={[Function]}
                     >
@@ -54,7 +54,7 @@ Array [
     </ul>
 </styled.ul>,
   <ul
-    className="sc-bZQynM eCIGDO"
+    className="sc-bwzfXH bcbJmK"
     data-test="projects"
 >
     <li
@@ -64,12 +64,12 @@ Array [
             to="/project/1234"
         >
             <Link
-                className="sc-gzVnrw ZyJST"
+                className="sc-htpNat iELaDV"
                 replace={false}
                 to="/project/1234"
             >
                 <a
-                    className="sc-gzVnrw ZyJST"
+                    className="sc-htpNat iELaDV"
                     href="/project/1234"
                     onClick={[Function]}
                 >
@@ -85,12 +85,12 @@ Array [
             to="/project/5678"
         >
             <Link
-                className="sc-gzVnrw ZyJST"
+                className="sc-htpNat iELaDV"
                 replace={false}
                 to="/project/5678"
             >
                 <a
-                    className="sc-gzVnrw ZyJST"
+                    className="sc-htpNat iELaDV"
                     href="/project/5678"
                     onClick={[Function]}
                 >
@@ -104,89 +104,197 @@ Array [
 `;
 
 exports[`Projects renders correctly 2`] = `
-<div
-  data-test="newProject"
+Array [
+  <Form
+    as="form"
+    data-test="newProject"
 >
-  <MyInput
-    label="New project name"
-    name="name"
-    onChange={[Function]}
-    placeholder="awesome project"
-    type="text"
-    value=""
-  >
-    <styled.div>
-      <div
-        className="sc-bdVaJa bPGLpq"
-      >
-        <styled.label
-          for="name"
-        >
-          <label
-            className="sc-bwzfXH hgqFEP"
-            for="name"
-          >
-            New project name
-          </label>
-        </styled.label>
-        <styled.input
-          name="name"
-          onChange={[Function]}
-          placeholder="awesome project"
-          type="text"
-          value=""
-        >
-          <input
-            className="sc-htpNat hHFhwJ"
+    <form
+        className="ui form"
+        data-test="newProject"
+        onSubmit={[Function]}
+    >
+        <FormInput
+            as={[Function]}
+            control={[Function]}
+            label="New project name"
             name="name"
             onChange={[Function]}
             placeholder="awesome project"
             type="text"
             value=""
-          />
-        </styled.input>
-      </div>
-    </styled.div>
-  </MyInput>
-  <Button
-    animated={true}
-    as="button"
-    color="teal"
-    onClick={[Function]}
-    role="button"
-  >
-    <button
-      className="ui teal animated button"
-      onClick={[Function]}
-      role="button"
+        >
+            <FormField
+                control={[Function]}
+                label="New project name"
+                name="name"
+                onChange={[Function]}
+                placeholder="awesome project"
+                type="text"
+                value=""
+            >
+                <div
+                    className="field"
+                >
+                    <label>
+                        New project name
+                    </label>
+                    <Input
+                        name="name"
+                        onChange={[Function]}
+                        placeholder="awesome project"
+                        type="text"
+                        value=""
+                    >
+                        <div
+                            className="ui input"
+                        >
+                            <input
+                                name="name"
+                                onChange={[Function]}
+                                placeholder="awesome project"
+                                type="text"
+                                value=""
+                            />
+                        </div>
+                    </Input>
+                </div>
+            </FormField>
+        </FormInput>
+        <Button
+            animated={true}
+            as="button"
+            color="teal"
+            onClick={[Function]}
+            role="button"
+        >
+            <button
+                className="ui teal animated button"
+                onClick={[Function]}
+                role="button"
+            >
+                <ButtonContent
+                    visible={true}
+                >
+                    <div
+                        className="visible content"
+                    >
+                        Add
+                    </div>
+                </ButtonContent>
+                <ButtonContent
+                    hidden={true}
+                >
+                    <div
+                        className="hidden content"
+                    >
+                        <Icon
+                            as="i"
+                            name="right arrow"
+                        >
+                            <i
+                                aria-hidden="true"
+                                className="right arrow icon"
+                            />
+                        </Icon>
+                    </div>
+                </ButtonContent>
+            </button>
+        </Button>
+    </form>
+</Form>,
+  <form
+    className="ui form"
+    data-test="newProject"
+    onSubmit={[Function]}
+>
+    <FormInput
+        as={[Function]}
+        control={[Function]}
+        label="New project name"
+        name="name"
+        onChange={[Function]}
+        placeholder="awesome project"
+        type="text"
+        value=""
     >
-      <ButtonContent
-        visible={true}
-      >
-        <div
-          className="visible content"
+        <FormField
+            control={[Function]}
+            label="New project name"
+            name="name"
+            onChange={[Function]}
+            placeholder="awesome project"
+            type="text"
+            value=""
         >
-          Add
-        </div>
-      </ButtonContent>
-      <ButtonContent
-        hidden={true}
-      >
-        <div
-          className="hidden content"
+            <div
+                className="field"
+            >
+                <label>
+                    New project name
+                </label>
+                <Input
+                    name="name"
+                    onChange={[Function]}
+                    placeholder="awesome project"
+                    type="text"
+                    value=""
+                >
+                    <div
+                        className="ui input"
+                    >
+                        <input
+                            name="name"
+                            onChange={[Function]}
+                            placeholder="awesome project"
+                            type="text"
+                            value=""
+                        />
+                    </div>
+                </Input>
+            </div>
+        </FormField>
+    </FormInput>
+    <Button
+        animated={true}
+        as="button"
+        color="teal"
+        onClick={[Function]}
+        role="button"
+    >
+        <button
+            className="ui teal animated button"
+            onClick={[Function]}
+            role="button"
         >
-          <Icon
-            as="i"
-            name="right arrow"
-          >
-            <i
-              aria-hidden="true"
-              className="right arrow icon"
-            />
-          </Icon>
-        </div>
-      </ButtonContent>
-    </button>
-  </Button>
-</div>
+            <ButtonContent
+                visible={true}
+            >
+                <div
+                    className="visible content"
+                >
+                    Add
+                </div>
+            </ButtonContent>
+            <ButtonContent
+                hidden={true}
+            >
+                <div
+                    className="hidden content"
+                >
+                    <Icon
+                        as="i"
+                        name="right arrow"
+                    >
+                        <i
+                            aria-hidden="true"
+                            className="right arrow icon"
+                        />
+                    </Icon>
+                </div>
+            </ButtonContent>
+        </button>
+    </Button>
+</form>,
+]
 `;

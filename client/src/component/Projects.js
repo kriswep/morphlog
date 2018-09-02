@@ -3,11 +3,11 @@ import { gql } from 'apollo-boost';
 import { Query, Mutation } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Grid, Button, Icon } from 'semantic-ui-react';
+import { Grid, Button, Icon, Form } from 'semantic-ui-react';
 
 import media from '../styles/media';
 import Project from './Project';
-import Input from './Input';
+// import Input from './Input';
 
 const SidebarContainer = styled.section`
   padding: 1rem 0.25rem 0.75rem;
@@ -114,8 +114,8 @@ class Projects extends React.Component {
                   <h2>Projects</h2>
                   <Mutation mutation={ADD_PROJECT_MUTATION}>
                     {(mutate, { mutationError }) => (
-                      <div data-test="newProject">
-                        <Input
+                      <Form data-test="newProject">
+                        <Form.Input
                           name="name"
                           label="New project name"
                           value={this.state.name}
@@ -137,7 +137,7 @@ class Projects extends React.Component {
                           </Button.Content>
                         </Button>
                         {mutationError && `Error!: ${mutationError}`}
-                      </div>
+                      </Form>
                     )}
                   </Mutation>
                   {projects && (
