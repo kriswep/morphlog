@@ -7,7 +7,7 @@ const Header = props => (
   <Menu color="teal" size="huge" pointing secondary>
     <Menu.Item as={Link} to="/" active={props.match.isExact}>
       <Icon size="large" name="home" />
-      Home
+      Morphlog
     </Menu.Item>
     <Menu.Item as={NavLink} to="/project">
       <Icon size="large" name="space shuttle" />
