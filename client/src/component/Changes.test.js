@@ -1,10 +1,8 @@
 /* globals test expect window */
 import React from 'react';
-import { ApolloProvider } from 'react-apollo';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import createClient from '../../utils/apolloMocks';
-import createClient2 from '../../utils/apolloMocks2';
+import { getData, PreMockedProvider } from '../../utils/apolloMocks2';
 
 import Changes, { CHANGES_QUERY } from './Changes';
 
@@ -29,16 +27,18 @@ const mocks = {
   // Mutation: () => ...
 };
 
-const client = createClient(mocks);
-
 test('Changes renders correctly', async () => {
-  const data = await createClient2(mocks, CHANGES_QUERY, { projectId: 1 });
-  console.log(data);
+  const args = { projectId: 'cjcp94wxp025801100npb28yg' };
+  const data = await getData({
+    mocks,
+    query: CHANGES_QUERY,
+    args,
+  });
 
   const wrapper = mount(
-    <ApolloProvider client={client}>
+    <PreMockedProvider data={data} args={args} query={CHANGES_QUERY}>
       <Changes projectId="cjcp94wxp025801100npb28yg" />
-    </ApolloProvider>,
+    </PreMockedProvider>,
   );
   await new Promise(res => window.setTimeout(res, 1));
   wrapper.setProps({ projectId: 'bar' }); // poke it to rerender...

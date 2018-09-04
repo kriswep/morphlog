@@ -1,7 +1,7 @@
+import React from 'react';
 import fs from 'fs';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { SchemaLink } from 'apollo-link-schema';
+
+import { MockedProvider } from 'react-apollo/test-utils';
 import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 import { graphql } from 'graphql';
 import { print } from 'graphql/language/printer';
@@ -9,7 +9,8 @@ import { print } from 'graphql/language/printer';
 const buffer = fs.readFileSync('../schema/appSchema.graphql');
 const typeDefs = buffer.toString();
 
-const createClient = async (mocks, query, args = {}) => {
+export const getData = async props => {
+  const { mocks, args, query } = props;
   const queryString = print(query);
   const schema = makeExecutableSchema({
     typeDefs,
@@ -22,8 +23,26 @@ const createClient = async (mocks, query, args = {}) => {
     mocks,
   });
   const res = await graphql(schema, queryString, null, null, args);
-
   return res.data;
 };
 
-export default createClient;
+export const PreMockedProvider = props => {
+  const { data, args, query, children } = props;
+  const mocks = [
+    {
+      request: {
+        query,
+        variables: args,
+      },
+      result: {
+        data,
+      },
+    },
+  ];
+
+  return (
+    <MockedProvider mocks={mocks} addTypename={false}>
+      {children}
+    </MockedProvider>
+  );
+};
