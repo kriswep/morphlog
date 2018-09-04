@@ -4,8 +4,9 @@ import { ApolloProvider } from 'react-apollo';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import createClient from '../../utils/apolloMocks';
+import createClient2 from '../../utils/apolloMocks2';
 
-import Changes from './Changes';
+import Changes, { CHANGES_QUERY } from './Changes';
 
 const mocks = {
   Query: () => ({
@@ -31,6 +32,9 @@ const mocks = {
 const client = createClient(mocks);
 
 test('Changes renders correctly', async () => {
+  const data = await createClient2(mocks, CHANGES_QUERY, { projectId: 1 });
+  console.log(data);
+
   const wrapper = mount(
     <ApolloProvider client={client}>
       <Changes projectId="cjcp94wxp025801100npb28yg" />

@@ -8,7 +8,7 @@ const Author = styled.div`
   display: inline-block;
 `;
 
-const CHANGES_QUERY = gql`
+export const CHANGES_QUERY = gql`
   query changes($projectId: ID!) {
     changes(projectId: $projectId) {
       id
