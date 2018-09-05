@@ -13,7 +13,7 @@ const ContentContainer = styled.section`
   `};
 `;
 
-const PROJECT_QUERY = gql`
+export const PROJECT_QUERY = gql`
   query project($id: ID!) {
     project(id: $id) {
       id
