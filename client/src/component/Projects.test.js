@@ -1,13 +1,11 @@
 /* globals test expect jest window */
 import React from 'react';
-import { ApolloProvider } from 'react-apollo';
 import { mount } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { BrowserRouter } from 'react-router-dom';
 
-import createClient from '../../utils/apolloMocks';
-
-import Projects from './Projects';
+import { getData, PreMockedProvider } from '../../utils/apolloMocks2';
+import Projects, { PROJECTS_QUERY } from './Projects';
 
 jest.mock('./Project', () => () => <div>MockedProject</div>);
 
@@ -32,21 +30,25 @@ const mocks = {
   // Mutation: () => ...
 };
 
-const client = createClient(mocks);
-
 test('Projects renders correctly', async () => {
   const match = {
     params: {
       projectId: 'cjcp94wxp025801100npb28yg',
     },
   };
+  const data = await getData({
+    mocks,
+    query: PROJECTS_QUERY,
+  });
+
   const wrapper = mount(
     <BrowserRouter>
-      <ApolloProvider client={client}>
+      <PreMockedProvider data={data} query={PROJECTS_QUERY}>
         <Projects match={match} />
-      </ApolloProvider>
+      </PreMockedProvider>
     </BrowserRouter>,
   );
+
   await new Promise(res => window.setTimeout(res, 1));
   wrapper.setProps({ projectId: 'bar' }); // poke it to rerender...
   expect(toJson(wrapper.find('[data-test="projects"]'))).toMatchSnapshot();

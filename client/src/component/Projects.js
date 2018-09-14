@@ -26,7 +26,7 @@ const ProjectLink = styled(Link)`
   color: ${props => props.theme.darkShades};
 `;
 
-const PROJECTS_QUERY = gql`
+export const PROJECTS_QUERY = gql`
   query projects {
     projects {
       id
