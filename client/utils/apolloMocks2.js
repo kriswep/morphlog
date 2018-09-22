@@ -27,8 +27,9 @@ export const getData = async props => {
 };
 
 export const PreMockedProvider = props => {
-  const { data, args, query, children } = props;
-  const mocks = [
+  const { data, args, query, children, error } = props;
+
+  let mocks = [
     {
       request: {
         query,
@@ -39,6 +40,17 @@ export const PreMockedProvider = props => {
       },
     },
   ];
+  if (error) {
+    mocks = [
+      {
+        request: {
+          query,
+          variables: args,
+        },
+        error,
+      },
+    ];
+  }
 
   return (
     <MockedProvider mocks={mocks} addTypename={false}>

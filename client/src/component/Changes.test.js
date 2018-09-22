@@ -1,10 +1,14 @@
-/* globals test expect window */
+/* globals afterEach test expect window */
 import React from 'react';
-import { mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
+// import { mount } from 'enzyme';
+// import toJson from 'enzyme-to-json';
+import { render, cleanup, waitForElement } from 'react-testing-library';
 import { getData, PreMockedProvider } from '../../utils/apolloMocks2';
 
 import Changes, { CHANGES_QUERY } from './Changes';
+
+// automatically unmount and cleanup DOM after the test is finished.
+afterEach(cleanup);
 
 const mocks = {
   Query: () => ({
@@ -35,13 +39,14 @@ test('Changes renders correctly', async () => {
     args,
   });
 
-  const wrapper = mount(
+  const { getByTestId } = render(
     <PreMockedProvider data={data} args={args} query={CHANGES_QUERY}>
       <Changes projectId="cjcp94wxp025801100npb28yg" />
     </PreMockedProvider>,
   );
-  await new Promise(res => window.setTimeout(res, 1));
-  wrapper.setProps({ projectId: 'bar' }); // poke it to rerender...
-  expect(toJson(wrapper.find('[data-test="change"]'))).toMatchSnapshot();
-  expect(toJson(wrapper.find('[data-test="newChange"]'))).toMatchSnapshot();
+
+  const change = await waitForElement(() => getByTestId('change'));
+  const newChange = await waitForElement(() => getByTestId('newChange'));
+  expect(change).toMatchSnapshot();
+  expect(newChange).toMatchSnapshot();
 });

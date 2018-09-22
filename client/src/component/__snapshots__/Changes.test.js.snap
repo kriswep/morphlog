@@ -1,412 +1,105 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Changes renders correctly 1`] = `
-Array [
-  <CommentGroup
-    data-test="change"
+<div
+  data-testid="change"
+  class="ui comments"
 >
-    <div
-        className="ui comments"
-        data-test="change"
-    >
-        <Comment
-            key="1234"
-        >
-            <div
-                className="comment"
-            >
-                <CommentContent>
-                    <div
-                        className="content"
-                    >
-                        <CommentAuthor
-                            as={[Function]}
-                        >
-                            <styled.div
-                                className="author"
-                            >
-                                <div
-                                    className="author sc-bdVaJa bSrzPW"
-                                >
-                                    Hello World
-                                </div>
-                            </styled.div>
-                        </CommentAuthor>
-                        <CommentMetadata>
-                            <div
-                                className="metadata"
-                            >
-                                <div>
-                                    2018-1-21 20:45:06
-                                </div>
-                            </div>
-                        </CommentMetadata>
-                        <CommentText>
-                            <div
-                                className="text"
-                            >
-                                MyChange
-                            </div>
-                        </CommentText>
-                        <CommentActions>
-                            <div
-                                className="actions"
-                            >
-                                <CommentAction
-                                    as="a"
-                                >
-                                    <a
-                                        className=""
-                                    >
-                                        Maybe Change
-                                    </a>
-                                </CommentAction>
-                            </div>
-                        </CommentActions>
-                    </div>
-                </CommentContent>
-            </div>
-        </Comment>
-        <Comment
-            key="5678"
-        >
-            <div
-                className="comment"
-            >
-                <CommentContent>
-                    <div
-                        className="content"
-                    >
-                        <CommentAuthor
-                            as={[Function]}
-                        >
-                            <styled.div
-                                className="author"
-                            >
-                                <div
-                                    className="author sc-bdVaJa bSrzPW"
-                                >
-                                    Hello World
-                                </div>
-                            </styled.div>
-                        </CommentAuthor>
-                        <CommentMetadata>
-                            <div
-                                className="metadata"
-                            >
-                                <div>
-                                    2018-1-21 20:45:06
-                                </div>
-                            </div>
-                        </CommentMetadata>
-                        <CommentText>
-                            <div
-                                className="text"
-                            >
-                                MyOtherChange
-                            </div>
-                        </CommentText>
-                        <CommentActions>
-                            <div
-                                className="actions"
-                            >
-                                <CommentAction
-                                    as="a"
-                                >
-                                    <a
-                                        className=""
-                                    >
-                                        Maybe Change
-                                    </a>
-                                </CommentAction>
-                            </div>
-                        </CommentActions>
-                    </div>
-                </CommentContent>
-            </div>
-        </Comment>
-    </div>
-</CommentGroup>,
   <div
-    className="ui comments"
-    data-test="change"
->
-    <Comment
-        key="1234"
+    class="comment"
+  >
+    <div
+      class="content"
     >
-        <div
-            className="comment"
-        >
-            <CommentContent>
-                <div
-                    className="content"
-                >
-                    <CommentAuthor
-                        as={[Function]}
-                    >
-                        <styled.div
-                            className="author"
-                        >
-                            <div
-                                className="author sc-bdVaJa bSrzPW"
-                            >
-                                Hello World
-                            </div>
-                        </styled.div>
-                    </CommentAuthor>
-                    <CommentMetadata>
-                        <div
-                            className="metadata"
-                        >
-                            <div>
-                                2018-1-21 20:45:06
-                            </div>
-                        </div>
-                    </CommentMetadata>
-                    <CommentText>
-                        <div
-                            className="text"
-                        >
-                            MyChange
-                        </div>
-                    </CommentText>
-                    <CommentActions>
-                        <div
-                            className="actions"
-                        >
-                            <CommentAction
-                                as="a"
-                            >
-                                <a
-                                    className=""
-                                >
-                                    Maybe Change
-                                </a>
-                            </CommentAction>
-                        </div>
-                    </CommentActions>
-                </div>
-            </CommentContent>
+      <div
+        class="author sc-bdVaJa bSrzPW"
+      >
+        Hello World
+      </div>
+      <div
+        class="metadata"
+      >
+        <div>
+          2018-1-21 20:45:06
         </div>
-    </Comment>
-    <Comment
-        key="5678"
+      </div>
+      <div
+        class="text"
+      >
+        MyChange
+      </div>
+      <div
+        class="actions"
+      >
+        <a
+          class=""
+        >
+          Maybe Change
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    class="comment"
+  >
+    <div
+      class="content"
     >
-        <div
-            className="comment"
-        >
-            <CommentContent>
-                <div
-                    className="content"
-                >
-                    <CommentAuthor
-                        as={[Function]}
-                    >
-                        <styled.div
-                            className="author"
-                        >
-                            <div
-                                className="author sc-bdVaJa bSrzPW"
-                            >
-                                Hello World
-                            </div>
-                        </styled.div>
-                    </CommentAuthor>
-                    <CommentMetadata>
-                        <div
-                            className="metadata"
-                        >
-                            <div>
-                                2018-1-21 20:45:06
-                            </div>
-                        </div>
-                    </CommentMetadata>
-                    <CommentText>
-                        <div
-                            className="text"
-                        >
-                            MyOtherChange
-                        </div>
-                    </CommentText>
-                    <CommentActions>
-                        <div
-                            className="actions"
-                        >
-                            <CommentAction
-                                as="a"
-                            >
-                                <a
-                                    className=""
-                                >
-                                    Maybe Change
-                                </a>
-                            </CommentAction>
-                        </div>
-                    </CommentActions>
-                </div>
-            </CommentContent>
+      <div
+        class="author sc-bdVaJa bSrzPW"
+      >
+        Hello World
+      </div>
+      <div
+        class="metadata"
+      >
+        <div>
+          2018-1-21 20:45:06
         </div>
-    </Comment>
-</div>,
-]
+      </div>
+      <div
+        class="text"
+      >
+        MyOtherChange
+      </div>
+      <div
+        class="actions"
+      >
+        <a
+          class=""
+        >
+          Maybe Change
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 `;
 
 exports[`Changes renders correctly 2`] = `
-Array [
-  <Form
-    as="form"
-    data-test="newChange"
+<form
+  data-testid="newChange"
+  class="ui form"
 >
-    <form
-        className="ui form"
-        data-test="newChange"
-        onSubmit={[Function]}
-    >
-        <FormTextArea
-            as={[Function]}
-            autoHeight={true}
-            control={[Function]}
-            label="Change"
-            name="text"
-            onChange={[Function]}
-            placeholder="describe your change"
-            type="text"
-            value=""
-        >
-            <FormField
-                autoHeight={true}
-                control={[Function]}
-                label="Change"
-                name="text"
-                onChange={[Function]}
-                placeholder="describe your change"
-                type="text"
-                value=""
-            >
-                <div
-                    className="field"
-                >
-                    <label>
-                        Change
-                    </label>
-                    <TextArea
-                        as="textarea"
-                        autoHeight={true}
-                        name="text"
-                        onChange={[Function]}
-                        placeholder="describe your change"
-                        rows={3}
-                        type="text"
-                        value=""
-                    >
-                        <textarea
-                            name="text"
-                            onChange={[Function]}
-                            onInput={[Function]}
-                            placeholder="describe your change"
-                            rows={3}
-                            style={
-                                Object {
-                                    "resize": "none",
-                                  }
-                            }
-                            type="text"
-                            value=""
-                        />
-                    </TextArea>
-                </div>
-            </FormField>
-        </FormTextArea>
-        <Button
-            as="button"
-            color="teal"
-            onClick={[Function]}
-            role="button"
-        >
-            <button
-                className="ui teal button"
-                onClick={[Function]}
-                role="button"
-            >
-                Add
-            </button>
-        </Button>
-    </form>
-</Form>,
-  <form
-    className="ui form"
-    data-test="newChange"
-    onSubmit={[Function]}
->
-    <FormTextArea
-        as={[Function]}
-        autoHeight={true}
-        control={[Function]}
-        label="Change"
-        name="text"
-        onChange={[Function]}
-        placeholder="describe your change"
-        type="text"
-        value=""
-    >
-        <FormField
-            autoHeight={true}
-            control={[Function]}
-            label="Change"
-            name="text"
-            onChange={[Function]}
-            placeholder="describe your change"
-            type="text"
-            value=""
-        >
-            <div
-                className="field"
-            >
-                <label>
-                    Change
-                </label>
-                <TextArea
-                    as="textarea"
-                    autoHeight={true}
-                    name="text"
-                    onChange={[Function]}
-                    placeholder="describe your change"
-                    rows={3}
-                    type="text"
-                    value=""
-                >
-                    <textarea
-                        name="text"
-                        onChange={[Function]}
-                        onInput={[Function]}
-                        placeholder="describe your change"
-                        rows={3}
-                        style={
-                            Object {
-                                "resize": "none",
-                              }
-                        }
-                        type="text"
-                        value=""
-                    />
-                </TextArea>
-            </div>
-        </FormField>
-    </FormTextArea>
-    <Button
-        as="button"
-        color="teal"
-        onClick={[Function]}
-        role="button"
-    >
-        <button
-            className="ui teal button"
-            onClick={[Function]}
-            role="button"
-        >
-            Add
-        </button>
-    </Button>
-</form>,
-]
+  <div
+    class="field"
+  >
+    <label>
+      Change
+    </label>
+    <textarea
+      name="text"
+      placeholder="describe your change"
+      type="text"
+      rows="3"
+      style="resize: none; height: auto;"
+    />
+  </div>
+  <button
+    class="ui teal button"
+    role="button"
+  >
+    Add
+  </button>
+</form>
 `;

@@ -107,7 +107,7 @@ class Project extends React.Component {
       <div>
         <Mutation mutation={ADD_CHANGE_MUTATION}>
           {(mutate, { error }) => (
-            <Form data-test="newChange">
+            <Form data-testid="newChange">
               <Form.TextArea
                 autoHeight
                 name="text"
@@ -144,7 +144,7 @@ class Project extends React.Component {
             const { changes } = data;
             if (!changes) return null;
             return (
-              <Comment.Group data-test="change">
+              <Comment.Group data-testid="change">
                 {changes.map(change => (
                   <Comment key={change.id}>
                     <Comment.Content>
