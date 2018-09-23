@@ -1,7 +1,5 @@
-/* globals afterEach test expect window */
+/* globals afterEach test expect */
 import React from 'react';
-// import { mount } from 'enzyme';
-// import toJson from 'enzyme-to-json';
 import { render, cleanup, waitForElement } from 'react-testing-library';
 import { getData, PreMockedProvider } from '../../utils/apolloMocks2';
 
@@ -49,4 +47,29 @@ test('Changes renders correctly', async () => {
   const newChange = await waitForElement(() => getByTestId('newChange'));
   expect(change).toMatchSnapshot();
   expect(newChange).toMatchSnapshot();
+});
+
+const errorMock = {
+  Query: () => ({
+    changes: () => {
+      throw new Error('changes error');
+    },
+  }),
+};
+test('Changes renders err', async () => {
+  const args = { projectId: 'cjcp94wxp025801100npb28yg' };
+  const data = await getData({
+    mock: errorMock,
+    query: CHANGES_QUERY,
+    args,
+  });
+
+  const { getByTestId } = render(
+    <PreMockedProvider data={data} args={args} query={CHANGES_QUERY}>
+      <Changes projectId="cjcp94wxp025801100npb28yg" />
+    </PreMockedProvider>,
+  );
+
+  const error = await waitForElement(() => getByTestId('error'));
+  expect(error).toMatchSnapshot();
 });

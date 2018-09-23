@@ -139,7 +139,12 @@ class Project extends React.Component {
         >
           {({ loading, error, data }) => {
             if (loading) return null;
-            if (error) return `Error!: ${error}`;
+
+            if (error) {
+              return (
+                <div data-testid="error">Error!: {JSON.stringify(error)}</div>
+              );
+            }
 
             const { changes } = data;
             if (!changes) return null;

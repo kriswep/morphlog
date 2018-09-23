@@ -103,3 +103,12 @@ exports[`Changes renders correctly 2`] = `
   </button>
 </form>
 `;
+
+exports[`Changes renders err 1`] = `
+<div
+  data-testid="error"
+>
+  Error!: 
+  {"graphQLErrors":[],"networkError":{"type":"WriteError"},"message":"Network error: Error writing result to store for query:\\n query changes($projectId: ID!) {\\n  changes(projectId: $projectId) {\\n    id\\n    createdAt\\n    text\\n    author {\\n      id\\n      name\\n    }\\n  }\\n}\\n\\nCannot read property 'changes' of null"}
+</div>
+`;
