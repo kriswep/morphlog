@@ -2,8 +2,8 @@
 
 exports[`Changes renders correctly 1`] = `
 <div
-  data-testid="change"
   class="ui comments"
+  data-testid="change"
 >
   <div
     class="comment"
@@ -78,8 +78,8 @@ exports[`Changes renders correctly 1`] = `
 
 exports[`Changes renders correctly 2`] = `
 <form
-  data-testid="newChange"
   class="ui form"
+  data-testid="newChange"
 >
   <div
     class="field"
@@ -90,14 +90,13 @@ exports[`Changes renders correctly 2`] = `
     <textarea
       name="text"
       placeholder="describe your change"
-      type="text"
       rows="3"
       style="resize: none; height: auto;"
+      type="text"
     />
   </div>
   <button
     class="ui teal button"
-    role="button"
   >
     Add
   </button>

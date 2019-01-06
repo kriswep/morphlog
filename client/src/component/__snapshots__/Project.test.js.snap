@@ -4,41 +4,142 @@ exports[`Projects renders correctly 1`] = `
 Array [
   <styled.section
     data-test="project"
->
-    <section
+  >
+    <StyledComponent
+      data-test="project"
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bdVaJa",
+            "isStatic": true,
+            "lastClassName": "fmkqYI",
+            "rules": Array [
+              "
+  padding: 1rem 0.25rem 0.75rem;
+  ",
+              "
+    @media (min-width: ",
+              "48",
+              "rem) {
+      ",
+              "
+    padding: 1rem 0.75rem 0.75rem;
+  ",
+              ";
+    }
+  ",
+              ";
+",
+            ],
+          },
+          "displayName": "styled.section",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bdVaJa",
+          "target": "section",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+    >
+      <section
         className="sc-bdVaJa fmkqYI"
         data-test="project"
-    >
+      >
         <div>
-            <h2>
-                MyProject
-            </h2>
-            <Component
-                projectId="cjcp94wxp025801100npb28yg"
-            >
-                <div>
-                    MockedChange
-                </div>
-            </Component>
+          <h2>
+            MyProject
+          </h2>
+          <Component
+            projectId="cjcp94wxp025801100npb28yg"
+          >
+            <div>
+              MockedChange
+            </div>
+          </Component>
         </div>
+      </section>
+    </StyledComponent>
+  </styled.section>,
+  <StyledComponent
+    data-test="project"
+    forwardedComponent={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bdVaJa",
+          "isStatic": true,
+          "lastClassName": "fmkqYI",
+          "rules": Array [
+            "
+  padding: 1rem 0.25rem 0.75rem;
+  ",
+            "
+    @media (min-width: ",
+            "48",
+            "rem) {
+      ",
+            "
+    padding: 1rem 0.75rem 0.75rem;
+  ",
+            ";
+    }
+  ",
+            ";
+",
+          ],
+        },
+        "displayName": "styled.section",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bdVaJa",
+        "target": "section",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      }
+    }
+    forwardedRef={null}
+  >
+    <section
+      className="sc-bdVaJa fmkqYI"
+      data-test="project"
+    >
+      <div>
+        <h2>
+          MyProject
+        </h2>
+        <Component
+          projectId="cjcp94wxp025801100npb28yg"
+        >
+          <div>
+            MockedChange
+          </div>
+        </Component>
+      </div>
     </section>
-</styled.section>,
+  </StyledComponent>,
   <section
     className="sc-bdVaJa fmkqYI"
     data-test="project"
->
+  >
     <div>
-        <h2>
-            MyProject
-        </h2>
-        <Component
-            projectId="cjcp94wxp025801100npb28yg"
-        >
-            <div>
-                MockedChange
-            </div>
-        </Component>
+      <h2>
+        MyProject
+      </h2>
+      <Component
+        projectId="cjcp94wxp025801100npb28yg"
+      >
+        <div>
+          MockedChange
+        </div>
+      </Component>
     </div>
-</section>,
+  </section>,
 ]
 `;

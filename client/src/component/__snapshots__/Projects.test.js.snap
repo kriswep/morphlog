@@ -4,102 +4,403 @@ exports[`Projects renders correctly 1`] = `
 Array [
   <styled.ul
     data-test="projects"
->
-    <ul
+  >
+    <StyledComponent
+      data-test="projects"
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bwzfXH",
+            "isStatic": true,
+            "lastClassName": "bcbJmK",
+            "rules": Array [
+              "
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+",
+            ],
+          },
+          "displayName": "styled.ul",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bwzfXH",
+          "target": "ul",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+    >
+      <ul
         className="sc-bwzfXH bcbJmK"
         data-test="projects"
-    >
+      >
         <li
-            key="1234"
+          key="1234"
         >
-            <Styled(Link)
+          <Styled(Link)
+            to="/project/1234"
+          >
+            <StyledComponent
+              forwardedComponent={
+                Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "attrs": Array [],
+                  "componentStyle": ComponentStyle {
+                    "componentId": "sc-htpNat",
+                    "isStatic": false,
+                    "lastClassName": "iELaDV",
+                    "rules": Array [
+                      "
+  color: ",
+                      [Function],
+                      ";
+",
+                    ],
+                  },
+                  "displayName": "Styled(Link)",
+                  "foldedComponentIds": Array [],
+                  "render": [Function],
+                  "styledComponentId": "sc-htpNat",
+                  "target": [Function],
+                  "toString": [Function],
+                  "warnTooManyClasses": [Function],
+                  "withComponent": [Function],
+                  Symbol(Symbol.hasInstance): [Function],
+                }
+              }
+              forwardedRef={null}
+              to="/project/1234"
+            >
+              <Link
+                className="sc-htpNat iELaDV"
+                replace={false}
                 to="/project/1234"
-            >
-                <Link
-                    className="sc-htpNat iELaDV"
-                    replace={false}
-                    to="/project/1234"
+              >
+                <a
+                  className="sc-htpNat iELaDV"
+                  href="/project/1234"
+                  onClick={[Function]}
                 >
-                    <a
-                        className="sc-htpNat iELaDV"
-                        href="/project/1234"
-                        onClick={[Function]}
-                    >
-                        Hello World
-                    </a>
-                </Link>
-            </Styled(Link)>
+                  Hello World
+                </a>
+              </Link>
+            </StyledComponent>
+          </Styled(Link)>
         </li>
         <li
-            key="5678"
+          key="5678"
         >
-            <Styled(Link)
-                to="/project/5678"
+          <Styled(Link)
+            to="/project/5678"
+          >
+            <StyledComponent
+              forwardedComponent={
+                Object {
+                  "$$typeof": Symbol(react.forward_ref),
+                  "attrs": Array [],
+                  "componentStyle": ComponentStyle {
+                    "componentId": "sc-htpNat",
+                    "isStatic": false,
+                    "lastClassName": "iELaDV",
+                    "rules": Array [
+                      "
+  color: ",
+                      [Function],
+                      ";
+",
+                    ],
+                  },
+                  "displayName": "Styled(Link)",
+                  "foldedComponentIds": Array [],
+                  "render": [Function],
+                  "styledComponentId": "sc-htpNat",
+                  "target": [Function],
+                  "toString": [Function],
+                  "warnTooManyClasses": [Function],
+                  "withComponent": [Function],
+                  Symbol(Symbol.hasInstance): [Function],
+                }
+              }
+              forwardedRef={null}
+              to="/project/5678"
             >
-                <Link
-                    className="sc-htpNat iELaDV"
-                    replace={false}
-                    to="/project/5678"
+              <Link
+                className="sc-htpNat iELaDV"
+                replace={false}
+                to="/project/5678"
+              >
+                <a
+                  className="sc-htpNat iELaDV"
+                  href="/project/5678"
+                  onClick={[Function]}
                 >
-                    <a
-                        className="sc-htpNat iELaDV"
-                        href="/project/5678"
-                        onClick={[Function]}
-                    >
-                        Hello World
-                    </a>
-                </Link>
-            </Styled(Link)>
+                  Hello World
+                </a>
+              </Link>
+            </StyledComponent>
+          </Styled(Link)>
         </li>
+      </ul>
+    </StyledComponent>
+  </styled.ul>,
+  <StyledComponent
+    data-test="projects"
+    forwardedComponent={
+      Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "attrs": Array [],
+        "componentStyle": ComponentStyle {
+          "componentId": "sc-bwzfXH",
+          "isStatic": true,
+          "lastClassName": "bcbJmK",
+          "rules": Array [
+            "
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+",
+          ],
+        },
+        "displayName": "styled.ul",
+        "foldedComponentIds": Array [],
+        "render": [Function],
+        "styledComponentId": "sc-bwzfXH",
+        "target": "ul",
+        "toString": [Function],
+        "warnTooManyClasses": [Function],
+        "withComponent": [Function],
+      }
+    }
+    forwardedRef={null}
+  >
+    <ul
+      className="sc-bwzfXH bcbJmK"
+      data-test="projects"
+    >
+      <li
+        key="1234"
+      >
+        <Styled(Link)
+          to="/project/1234"
+        >
+          <StyledComponent
+            forwardedComponent={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-htpNat",
+                  "isStatic": false,
+                  "lastClassName": "iELaDV",
+                  "rules": Array [
+                    "
+  color: ",
+                    [Function],
+                    ";
+",
+                  ],
+                },
+                "displayName": "Styled(Link)",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-htpNat",
+                "target": [Function],
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+                Symbol(Symbol.hasInstance): [Function],
+              }
+            }
+            forwardedRef={null}
+            to="/project/1234"
+          >
+            <Link
+              className="sc-htpNat iELaDV"
+              replace={false}
+              to="/project/1234"
+            >
+              <a
+                className="sc-htpNat iELaDV"
+                href="/project/1234"
+                onClick={[Function]}
+              >
+                Hello World
+              </a>
+            </Link>
+          </StyledComponent>
+        </Styled(Link)>
+      </li>
+      <li
+        key="5678"
+      >
+        <Styled(Link)
+          to="/project/5678"
+        >
+          <StyledComponent
+            forwardedComponent={
+              Object {
+                "$$typeof": Symbol(react.forward_ref),
+                "attrs": Array [],
+                "componentStyle": ComponentStyle {
+                  "componentId": "sc-htpNat",
+                  "isStatic": false,
+                  "lastClassName": "iELaDV",
+                  "rules": Array [
+                    "
+  color: ",
+                    [Function],
+                    ";
+",
+                  ],
+                },
+                "displayName": "Styled(Link)",
+                "foldedComponentIds": Array [],
+                "render": [Function],
+                "styledComponentId": "sc-htpNat",
+                "target": [Function],
+                "toString": [Function],
+                "warnTooManyClasses": [Function],
+                "withComponent": [Function],
+                Symbol(Symbol.hasInstance): [Function],
+              }
+            }
+            forwardedRef={null}
+            to="/project/5678"
+          >
+            <Link
+              className="sc-htpNat iELaDV"
+              replace={false}
+              to="/project/5678"
+            >
+              <a
+                className="sc-htpNat iELaDV"
+                href="/project/5678"
+                onClick={[Function]}
+              >
+                Hello World
+              </a>
+            </Link>
+          </StyledComponent>
+        </Styled(Link)>
+      </li>
     </ul>
-</styled.ul>,
+  </StyledComponent>,
   <ul
     className="sc-bwzfXH bcbJmK"
     data-test="projects"
->
+  >
     <li
-        key="1234"
+      key="1234"
     >
-        <Styled(Link)
+      <Styled(Link)
+        to="/project/1234"
+      >
+        <StyledComponent
+          forwardedComponent={
+            Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-htpNat",
+                "isStatic": false,
+                "lastClassName": "iELaDV",
+                "rules": Array [
+                  "
+  color: ",
+                  [Function],
+                  ";
+",
+                ],
+              },
+              "displayName": "Styled(Link)",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-htpNat",
+              "target": [Function],
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+              Symbol(Symbol.hasInstance): [Function],
+            }
+          }
+          forwardedRef={null}
+          to="/project/1234"
+        >
+          <Link
+            className="sc-htpNat iELaDV"
+            replace={false}
             to="/project/1234"
-        >
-            <Link
-                className="sc-htpNat iELaDV"
-                replace={false}
-                to="/project/1234"
+          >
+            <a
+              className="sc-htpNat iELaDV"
+              href="/project/1234"
+              onClick={[Function]}
             >
-                <a
-                    className="sc-htpNat iELaDV"
-                    href="/project/1234"
-                    onClick={[Function]}
-                >
-                    Hello World
-                </a>
-            </Link>
-        </Styled(Link)>
+              Hello World
+            </a>
+          </Link>
+        </StyledComponent>
+      </Styled(Link)>
     </li>
     <li
-        key="5678"
+      key="5678"
     >
-        <Styled(Link)
-            to="/project/5678"
+      <Styled(Link)
+        to="/project/5678"
+      >
+        <StyledComponent
+          forwardedComponent={
+            Object {
+              "$$typeof": Symbol(react.forward_ref),
+              "attrs": Array [],
+              "componentStyle": ComponentStyle {
+                "componentId": "sc-htpNat",
+                "isStatic": false,
+                "lastClassName": "iELaDV",
+                "rules": Array [
+                  "
+  color: ",
+                  [Function],
+                  ";
+",
+                ],
+              },
+              "displayName": "Styled(Link)",
+              "foldedComponentIds": Array [],
+              "render": [Function],
+              "styledComponentId": "sc-htpNat",
+              "target": [Function],
+              "toString": [Function],
+              "warnTooManyClasses": [Function],
+              "withComponent": [Function],
+              Symbol(Symbol.hasInstance): [Function],
+            }
+          }
+          forwardedRef={null}
+          to="/project/5678"
         >
-            <Link
-                className="sc-htpNat iELaDV"
-                replace={false}
-                to="/project/5678"
+          <Link
+            className="sc-htpNat iELaDV"
+            replace={false}
+            to="/project/5678"
+          >
+            <a
+              className="sc-htpNat iELaDV"
+              href="/project/5678"
+              onClick={[Function]}
             >
-                <a
-                    className="sc-htpNat iELaDV"
-                    href="/project/5678"
-                    onClick={[Function]}
-                >
-                    Hello World
-                </a>
-            </Link>
-        </Styled(Link)>
+              Hello World
+            </a>
+          </Link>
+        </StyledComponent>
+      </Styled(Link)>
     </li>
-</ul>,
+  </ul>,
 ]
 `;
 
@@ -108,107 +409,13 @@ Array [
   <Form
     as="form"
     data-test="newProject"
->
+  >
     <form
-        className="ui form"
-        data-test="newProject"
-        onSubmit={[Function]}
+      className="ui form"
+      data-test="newProject"
+      onSubmit={[Function]}
     >
-        <FormInput
-            as={[Function]}
-            control={[Function]}
-            label="New project name"
-            name="name"
-            onChange={[Function]}
-            placeholder="awesome project"
-            type="text"
-            value=""
-        >
-            <FormField
-                control={[Function]}
-                label="New project name"
-                name="name"
-                onChange={[Function]}
-                placeholder="awesome project"
-                type="text"
-                value=""
-            >
-                <div
-                    className="field"
-                >
-                    <label>
-                        New project name
-                    </label>
-                    <Input
-                        name="name"
-                        onChange={[Function]}
-                        placeholder="awesome project"
-                        type="text"
-                        value=""
-                    >
-                        <div
-                            className="ui input"
-                        >
-                            <input
-                                name="name"
-                                onChange={[Function]}
-                                placeholder="awesome project"
-                                type="text"
-                                value=""
-                            />
-                        </div>
-                    </Input>
-                </div>
-            </FormField>
-        </FormInput>
-        <Button
-            animated={true}
-            as="button"
-            color="teal"
-            onClick={[Function]}
-            role="button"
-        >
-            <button
-                className="ui teal animated button"
-                onClick={[Function]}
-                role="button"
-            >
-                <ButtonContent
-                    visible={true}
-                >
-                    <div
-                        className="visible content"
-                    >
-                        Add
-                    </div>
-                </ButtonContent>
-                <ButtonContent
-                    hidden={true}
-                >
-                    <div
-                        className="hidden content"
-                    >
-                        <Icon
-                            as="i"
-                            name="right arrow"
-                        >
-                            <i
-                                aria-hidden="true"
-                                className="right arrow icon"
-                            />
-                        </Icon>
-                    </div>
-                </ButtonContent>
-            </button>
-        </Button>
-    </form>
-</Form>,
-  <form
-    className="ui form"
-    data-test="newProject"
-    onSubmit={[Function]}
->
-    <FormInput
+      <FormInput
         as={[Function]}
         control={[Function]}
         label="New project name"
@@ -217,84 +424,174 @@ Array [
         placeholder="awesome project"
         type="text"
         value=""
-    >
+      >
         <FormField
-            control={[Function]}
-            label="New project name"
+          control={[Function]}
+          label="New project name"
+          name="name"
+          onChange={[Function]}
+          placeholder="awesome project"
+          type="text"
+          value=""
+        >
+          <div
+            className="field"
+          >
+            <label>
+              New project name
+            </label>
+            <Input
+              name="name"
+              onChange={[Function]}
+              placeholder="awesome project"
+              type="text"
+              value=""
+            >
+              <div
+                className="ui input"
+              >
+                <input
+                  name="name"
+                  onChange={[Function]}
+                  placeholder="awesome project"
+                  type="text"
+                  value=""
+                />
+              </div>
+            </Input>
+          </div>
+        </FormField>
+      </FormInput>
+      <Button
+        animated={true}
+        as="button"
+        color="teal"
+        onClick={[Function]}
+      >
+        <button
+          className="ui teal animated button"
+          onClick={[Function]}
+        >
+          <ButtonContent
+            visible={true}
+          >
+            <div
+              className="visible content"
+            >
+              Add
+            </div>
+          </ButtonContent>
+          <ButtonContent
+            hidden={true}
+          >
+            <div
+              className="hidden content"
+            >
+              <Icon
+                as="i"
+                name="right arrow"
+              >
+                <i
+                  aria-hidden="true"
+                  className="right arrow icon"
+                />
+              </Icon>
+            </div>
+          </ButtonContent>
+        </button>
+      </Button>
+    </form>
+  </Form>,
+  <form
+    className="ui form"
+    data-test="newProject"
+    onSubmit={[Function]}
+  >
+    <FormInput
+      as={[Function]}
+      control={[Function]}
+      label="New project name"
+      name="name"
+      onChange={[Function]}
+      placeholder="awesome project"
+      type="text"
+      value=""
+    >
+      <FormField
+        control={[Function]}
+        label="New project name"
+        name="name"
+        onChange={[Function]}
+        placeholder="awesome project"
+        type="text"
+        value=""
+      >
+        <div
+          className="field"
+        >
+          <label>
+            New project name
+          </label>
+          <Input
             name="name"
             onChange={[Function]}
             placeholder="awesome project"
             type="text"
             value=""
-        >
+          >
             <div
-                className="field"
+              className="ui input"
             >
-                <label>
-                    New project name
-                </label>
-                <Input
-                    name="name"
-                    onChange={[Function]}
-                    placeholder="awesome project"
-                    type="text"
-                    value=""
-                >
-                    <div
-                        className="ui input"
-                    >
-                        <input
-                            name="name"
-                            onChange={[Function]}
-                            placeholder="awesome project"
-                            type="text"
-                            value=""
-                        />
-                    </div>
-                </Input>
+              <input
+                name="name"
+                onChange={[Function]}
+                placeholder="awesome project"
+                type="text"
+                value=""
+              />
             </div>
-        </FormField>
+          </Input>
+        </div>
+      </FormField>
     </FormInput>
     <Button
-        animated={true}
-        as="button"
-        color="teal"
-        onClick={[Function]}
-        role="button"
+      animated={true}
+      as="button"
+      color="teal"
+      onClick={[Function]}
     >
-        <button
-            className="ui teal animated button"
-            onClick={[Function]}
-            role="button"
+      <button
+        className="ui teal animated button"
+        onClick={[Function]}
+      >
+        <ButtonContent
+          visible={true}
         >
-            <ButtonContent
-                visible={true}
+          <div
+            className="visible content"
+          >
+            Add
+          </div>
+        </ButtonContent>
+        <ButtonContent
+          hidden={true}
+        >
+          <div
+            className="hidden content"
+          >
+            <Icon
+              as="i"
+              name="right arrow"
             >
-                <div
-                    className="visible content"
-                >
-                    Add
-                </div>
-            </ButtonContent>
-            <ButtonContent
-                hidden={true}
-            >
-                <div
-                    className="hidden content"
-                >
-                    <Icon
-                        as="i"
-                        name="right arrow"
-                    >
-                        <i
-                            aria-hidden="true"
-                            className="right arrow icon"
-                        />
-                    </Icon>
-                </div>
-            </ButtonContent>
-        </button>
+              <i
+                aria-hidden="true"
+                className="right arrow icon"
+              />
+            </Icon>
+          </div>
+        </ButtonContent>
+      </button>
     </Button>
-</form>,
+  </form>,
 ]
 `;

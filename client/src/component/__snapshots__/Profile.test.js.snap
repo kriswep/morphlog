@@ -6,1140 +6,1132 @@ Array [
     as="form"
     data-test="authenticate"
     size="large"
->
+  >
     <form
-        className="ui large form"
-        data-test="authenticate"
-        onSubmit={[Function]}
+      className="ui large form"
+      data-test="authenticate"
+      onSubmit={[Function]}
     >
-        <Header
-            as="h2"
-            color="teal"
-            textAlign="center"
+      <Header
+        as="h2"
+        color="teal"
+        textAlign="center"
+      >
+        <h2
+          className="ui teal center aligned header"
         >
-            <h2
-                className="ui teal center aligned header"
+          Authenticate
+        </h2>
+      </Header>
+      <Segment
+        raised={true}
+      >
+        <div
+          className="ui raised segment"
+        >
+          <FormInput
+            as={[Function]}
+            control={[Function]}
+            fluid={true}
+            icon="user"
+            iconPosition="left"
+            label="E-Mail Address"
+            name="email"
+            onChange={[Function]}
+            placeholder="E-Mail Address"
+            value=""
+          >
+            <FormField
+              control={[Function]}
+              fluid={true}
+              icon="user"
+              iconPosition="left"
+              label="E-Mail Address"
+              name="email"
+              onChange={[Function]}
+              placeholder="E-Mail Address"
+              value=""
             >
-                Authenticate
-            </h2>
-        </Header>
-        <Segment
-            raised={true}
-        >
+              <div
+                className="field"
+              >
+                <label>
+                  E-Mail Address
+                </label>
+                <Input
+                  fluid={true}
+                  icon="user"
+                  iconPosition="left"
+                  name="email"
+                  onChange={[Function]}
+                  placeholder="E-Mail Address"
+                  type="text"
+                  value=""
+                >
+                  <div
+                    className="ui fluid left icon input"
+                  >
+                    <input
+                      name="email"
+                      onChange={[Function]}
+                      placeholder="E-Mail Address"
+                      type="text"
+                      value=""
+                    />
+                    <Icon
+                      as="i"
+                      name="user"
+                    >
+                      <i
+                        aria-hidden="true"
+                        className="user icon"
+                      />
+                    </Icon>
+                  </div>
+                </Input>
+              </div>
+            </FormField>
+          </FormInput>
+          <FormInput
+            as={[Function]}
+            control={[Function]}
+            fluid={true}
+            icon="lock"
+            iconPosition="left"
+            label="Password"
+            name="password"
+            onChange={[Function]}
+            placeholder="Password"
+            type="password"
+            value=""
+          >
+            <FormField
+              control={[Function]}
+              fluid={true}
+              icon="lock"
+              iconPosition="left"
+              label="Password"
+              name="password"
+              onChange={[Function]}
+              placeholder="Password"
+              type="password"
+              value=""
+            >
+              <div
+                className="field"
+              >
+                <label>
+                  Password
+                </label>
+                <Input
+                  fluid={true}
+                  icon="lock"
+                  iconPosition="left"
+                  name="password"
+                  onChange={[Function]}
+                  placeholder="Password"
+                  type="password"
+                  value=""
+                >
+                  <div
+                    className="ui fluid left icon input"
+                  >
+                    <input
+                      name="password"
+                      onChange={[Function]}
+                      placeholder="Password"
+                      type="password"
+                      value=""
+                    />
+                    <Icon
+                      as="i"
+                      name="lock"
+                    >
+                      <i
+                        aria-hidden="true"
+                        className="lock icon"
+                      />
+                    </Icon>
+                  </div>
+                </Input>
+              </div>
+            </FormField>
+          </FormInput>
+          <Grid
+            columns={2}
+          >
             <div
-                className="ui raised segment"
+              className="ui two column grid"
             >
-                <FormInput
-                    as={[Function]}
-                    control={[Function]}
-                    fluid={true}
-                    icon="user"
-                    iconPosition="left"
-                    label="E-Mail Address"
-                    name="email"
-                    onChange={[Function]}
-                    placeholder="E-Mail Address"
-                    value=""
-                >
-                    <FormField
-                        control={[Function]}
-                        fluid={true}
-                        icon="user"
-                        iconPosition="left"
-                        label="E-Mail Address"
-                        name="email"
-                        onChange={[Function]}
-                        placeholder="E-Mail Address"
-                        value=""
-                    >
-                        <div
-                            className="field"
-                        >
-                            <label>
-                                E-Mail Address
-                            </label>
-                            <Input
-                                fluid={true}
-                                icon="user"
-                                iconPosition="left"
-                                name="email"
-                                onChange={[Function]}
-                                placeholder="E-Mail Address"
-                                type="text"
-                                value=""
-                            >
-                                <div
-                                    className="ui fluid left icon input"
-                                >
-                                    <input
-                                        name="email"
-                                        onChange={[Function]}
-                                        placeholder="E-Mail Address"
-                                        type="text"
-                                        value=""
-                                    />
-                                    <Icon
-                                        as="i"
-                                        name="user"
-                                    >
-                                        <i
-                                            aria-hidden="true"
-                                            className="user icon"
-                                        />
-                                    </Icon>
-                                </div>
-                            </Input>
-                        </div>
-                    </FormField>
-                </FormInput>
-                <FormInput
-                    as={[Function]}
-                    control={[Function]}
-                    fluid={true}
-                    icon="lock"
-                    iconPosition="left"
-                    label="Password"
-                    name="password"
-                    onChange={[Function]}
-                    placeholder="Password"
-                    type="password"
-                    value=""
-                >
-                    <FormField
-                        control={[Function]}
-                        fluid={true}
-                        icon="lock"
-                        iconPosition="left"
-                        label="Password"
-                        name="password"
-                        onChange={[Function]}
-                        placeholder="Password"
-                        type="password"
-                        value=""
-                    >
-                        <div
-                            className="field"
-                        >
-                            <label>
-                                Password
-                            </label>
-                            <Input
-                                fluid={true}
-                                icon="lock"
-                                iconPosition="left"
-                                name="password"
-                                onChange={[Function]}
-                                placeholder="Password"
-                                type="password"
-                                value=""
-                            >
-                                <div
-                                    className="ui fluid left icon input"
-                                >
-                                    <input
-                                        name="password"
-                                        onChange={[Function]}
-                                        placeholder="Password"
-                                        type="password"
-                                        value=""
-                                    />
-                                    <Icon
-                                        as="i"
-                                        name="lock"
-                                    >
-                                        <i
-                                            aria-hidden="true"
-                                            className="lock icon"
-                                        />
-                                    </Icon>
-                                </div>
-                            </Input>
-                        </div>
-                    </FormField>
-                </FormInput>
-                <Grid
-                    columns={2}
-                >
-                    <div
-                        className="ui two column grid"
-                    >
-                        <Mutation
-                            mutation={
+              <Mutation
+                mutation={
+                  Object {
+                    "definitions": Array [
+                      Object {
+                        "directives": Array [],
+                        "kind": "OperationDefinition",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "signin",
+                        },
+                        "operation": "mutation",
+                        "selectionSet": Object {
+                          "kind": "SelectionSet",
+                          "selections": Array [
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [
                                 Object {
-                                    "definitions": Array [
-                                      Object {
-                                        "directives": Array [],
-                                        "kind": "OperationDefinition",
-                                        "name": Object {
-                                          "kind": "Name",
-                                          "value": "signin",
-                                        },
-                                        "operation": "mutation",
-                                        "selectionSet": Object {
-                                          "kind": "SelectionSet",
-                                          "selections": Array [
-                                            Object {
-                                              "alias": undefined,
-                                              "arguments": Array [
-                                                Object {
-                                                  "kind": "Argument",
-                                                  "name": Object {
-                                                    "kind": "Name",
-                                                    "value": "email",
-                                                  },
-                                                  "value": Object {
-                                                    "kind": "Variable",
-                                                    "name": Object {
-                                                      "kind": "Name",
-                                                      "value": "email",
-                                                    },
-                                                  },
-                                                },
-                                                Object {
-                                                  "kind": "Argument",
-                                                  "name": Object {
-                                                    "kind": "Name",
-                                                    "value": "password",
-                                                  },
-                                                  "value": Object {
-                                                    "kind": "Variable",
-                                                    "name": Object {
-                                                      "kind": "Name",
-                                                      "value": "password",
-                                                    },
-                                                  },
-                                                },
-                                              ],
-                                              "directives": Array [],
-                                              "kind": "Field",
-                                              "name": Object {
-                                                "kind": "Name",
-                                                "value": "login",
-                                              },
-                                              "selectionSet": Object {
-                                                "kind": "SelectionSet",
-                                                "selections": Array [
-                                                  Object {
-                                                    "alias": undefined,
-                                                    "arguments": Array [],
-                                                    "directives": Array [],
-                                                    "kind": "Field",
-                                                    "name": Object {
-                                                      "kind": "Name",
-                                                      "value": "token",
-                                                    },
-                                                    "selectionSet": undefined,
-                                                  },
-                                                  Object {
-                                                    "alias": undefined,
-                                                    "arguments": Array [],
-                                                    "directives": Array [],
-                                                    "kind": "Field",
-                                                    "name": Object {
-                                                      "kind": "Name",
-                                                      "value": "user",
-                                                    },
-                                                    "selectionSet": Object {
-                                                      "kind": "SelectionSet",
-                                                      "selections": Array [
-                                                        Object {
-                                                          "alias": undefined,
-                                                          "arguments": Array [],
-                                                          "directives": Array [],
-                                                          "kind": "Field",
-                                                          "name": Object {
-                                                            "kind": "Name",
-                                                            "value": "id",
-                                                          },
-                                                          "selectionSet": undefined,
-                                                        },
-                                                        Object {
-                                                          "alias": undefined,
-                                                          "arguments": Array [],
-                                                          "directives": Array [],
-                                                          "kind": "Field",
-                                                          "name": Object {
-                                                            "kind": "Name",
-                                                            "value": "name",
-                                                          },
-                                                          "selectionSet": undefined,
-                                                        },
-                                                        Object {
-                                                          "alias": undefined,
-                                                          "arguments": Array [],
-                                                          "directives": Array [],
-                                                          "kind": "Field",
-                                                          "name": Object {
-                                                            "kind": "Name",
-                                                            "value": "email",
-                                                          },
-                                                          "selectionSet": undefined,
-                                                        },
-                                                      ],
-                                                    },
-                                                  },
-                                                ],
-                                              },
-                                            },
-                                          ],
-                                        },
-                                        "variableDefinitions": Array [
-                                          Object {
-                                            "defaultValue": undefined,
-                                            "kind": "VariableDefinition",
-                                            "type": Object {
-                                              "kind": "NonNullType",
-                                              "type": Object {
-                                                "kind": "NamedType",
-                                                "name": Object {
-                                                  "kind": "Name",
-                                                  "value": "String",
-                                                },
-                                              },
-                                            },
-                                            "variable": Object {
-                                              "kind": "Variable",
-                                              "name": Object {
-                                                "kind": "Name",
-                                                "value": "email",
-                                              },
-                                            },
-                                          },
-                                          Object {
-                                            "defaultValue": undefined,
-                                            "kind": "VariableDefinition",
-                                            "type": Object {
-                                              "kind": "NonNullType",
-                                              "type": Object {
-                                                "kind": "NamedType",
-                                                "name": Object {
-                                                  "kind": "Name",
-                                                  "value": "String",
-                                                },
-                                              },
-                                            },
-                                            "variable": Object {
-                                              "kind": "Variable",
-                                              "name": Object {
-                                                "kind": "Name",
-                                                "value": "password",
-                                              },
-                                            },
-                                          },
-                                        ],
-                                      },
-                                    ],
-                                    "kind": "Document",
-                                    "loc": Object {
-                                      "end": 187,
-                                      "start": 0,
+                                  "kind": "Argument",
+                                  "name": Object {
+                                    "kind": "Name",
+                                    "value": "email",
+                                  },
+                                  "value": Object {
+                                    "kind": "Variable",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "email",
                                     },
-                                  }
-                            }
-                        >
-                            <GridColumn>
-                                <div
-                                    className="column"
-                                >
-                                    <Button
-                                        as="button"
-                                        color="teal"
-                                        fluid={true}
-                                        onClick={[Function]}
-                                        role="button"
-                                        size="large"
-                                    >
-                                        <button
-                                            className="ui teal large fluid button"
-                                            onClick={[Function]}
-                                            role="button"
-                                        >
-                                            SignIn
-                                        </button>
-                                    </Button>
-                                </div>
-                            </GridColumn>
-                        </Mutation>
-                        <Mutation
-                            mutation={
+                                  },
+                                },
                                 Object {
-                                    "definitions": Array [
-                                      Object {
-                                        "directives": Array [],
-                                        "kind": "OperationDefinition",
-                                        "name": Object {
-                                          "kind": "Name",
-                                          "value": "signup",
-                                        },
-                                        "operation": "mutation",
-                                        "selectionSet": Object {
-                                          "kind": "SelectionSet",
-                                          "selections": Array [
-                                            Object {
-                                              "alias": undefined,
-                                              "arguments": Array [
-                                                Object {
-                                                  "kind": "Argument",
-                                                  "name": Object {
-                                                    "kind": "Name",
-                                                    "value": "email",
-                                                  },
-                                                  "value": Object {
-                                                    "kind": "Variable",
-                                                    "name": Object {
-                                                      "kind": "Name",
-                                                      "value": "email",
-                                                    },
-                                                  },
-                                                },
-                                                Object {
-                                                  "kind": "Argument",
-                                                  "name": Object {
-                                                    "kind": "Name",
-                                                    "value": "password",
-                                                  },
-                                                  "value": Object {
-                                                    "kind": "Variable",
-                                                    "name": Object {
-                                                      "kind": "Name",
-                                                      "value": "password",
-                                                    },
-                                                  },
-                                                },
-                                                Object {
-                                                  "kind": "Argument",
-                                                  "name": Object {
-                                                    "kind": "Name",
-                                                    "value": "name",
-                                                  },
-                                                  "value": Object {
-                                                    "block": false,
-                                                    "kind": "StringValue",
-                                                    "value": "demo3",
-                                                  },
-                                                },
-                                              ],
-                                              "directives": Array [],
-                                              "kind": "Field",
-                                              "name": Object {
-                                                "kind": "Name",
-                                                "value": "signup",
-                                              },
-                                              "selectionSet": Object {
-                                                "kind": "SelectionSet",
-                                                "selections": Array [
-                                                  Object {
-                                                    "alias": undefined,
-                                                    "arguments": Array [],
-                                                    "directives": Array [],
-                                                    "kind": "Field",
-                                                    "name": Object {
-                                                      "kind": "Name",
-                                                      "value": "token",
-                                                    },
-                                                    "selectionSet": undefined,
-                                                  },
-                                                  Object {
-                                                    "alias": undefined,
-                                                    "arguments": Array [],
-                                                    "directives": Array [],
-                                                    "kind": "Field",
-                                                    "name": Object {
-                                                      "kind": "Name",
-                                                      "value": "user",
-                                                    },
-                                                    "selectionSet": Object {
-                                                      "kind": "SelectionSet",
-                                                      "selections": Array [
-                                                        Object {
-                                                          "alias": undefined,
-                                                          "arguments": Array [],
-                                                          "directives": Array [],
-                                                          "kind": "Field",
-                                                          "name": Object {
-                                                            "kind": "Name",
-                                                            "value": "id",
-                                                          },
-                                                          "selectionSet": undefined,
-                                                        },
-                                                        Object {
-                                                          "alias": undefined,
-                                                          "arguments": Array [],
-                                                          "directives": Array [],
-                                                          "kind": "Field",
-                                                          "name": Object {
-                                                            "kind": "Name",
-                                                            "value": "name",
-                                                          },
-                                                          "selectionSet": undefined,
-                                                        },
-                                                        Object {
-                                                          "alias": undefined,
-                                                          "arguments": Array [],
-                                                          "directives": Array [],
-                                                          "kind": "Field",
-                                                          "name": Object {
-                                                            "kind": "Name",
-                                                            "value": "email",
-                                                          },
-                                                          "selectionSet": undefined,
-                                                        },
-                                                      ],
-                                                    },
-                                                  },
-                                                ],
-                                              },
-                                            },
-                                          ],
-                                        },
-                                        "variableDefinitions": Array [
-                                          Object {
-                                            "defaultValue": undefined,
-                                            "kind": "VariableDefinition",
-                                            "type": Object {
-                                              "kind": "NonNullType",
-                                              "type": Object {
-                                                "kind": "NamedType",
-                                                "name": Object {
-                                                  "kind": "Name",
-                                                  "value": "String",
-                                                },
-                                              },
-                                            },
-                                            "variable": Object {
-                                              "kind": "Variable",
-                                              "name": Object {
-                                                "kind": "Name",
-                                                "value": "email",
-                                              },
-                                            },
-                                          },
-                                          Object {
-                                            "defaultValue": undefined,
-                                            "kind": "VariableDefinition",
-                                            "type": Object {
-                                              "kind": "NonNullType",
-                                              "type": Object {
-                                                "kind": "NamedType",
-                                                "name": Object {
-                                                  "kind": "Name",
-                                                  "value": "String",
-                                                },
-                                              },
-                                            },
-                                            "variable": Object {
-                                              "kind": "Variable",
-                                              "name": Object {
-                                                "kind": "Name",
-                                                "value": "password",
-                                              },
-                                            },
-                                          },
-                                        ],
-                                      },
-                                    ],
-                                    "kind": "Document",
-                                    "loc": Object {
-                                      "end": 203,
-                                      "start": 0,
+                                  "kind": "Argument",
+                                  "name": Object {
+                                    "kind": "Name",
+                                    "value": "password",
+                                  },
+                                  "value": Object {
+                                    "kind": "Variable",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "password",
                                     },
-                                  }
-                            }
-                        >
-                            <GridColumn>
-                                <div
-                                    className="column"
-                                >
-                                    <Button
-                                        as="button"
-                                        fluid={true}
-                                        onClick={[Function]}
-                                        role="button"
-                                        size="large"
-                                    >
-                                        <button
-                                            className="ui large fluid button"
-                                            onClick={[Function]}
-                                            role="button"
-                                        >
-                                            SignUp
-                                        </button>
-                                    </Button>
-                                </div>
-                            </GridColumn>
-                        </Mutation>
-                    </div>
-                </Grid>
+                                  },
+                                },
+                              ],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "login",
+                              },
+                              "selectionSet": Object {
+                                "kind": "SelectionSet",
+                                "selections": Array [
+                                  Object {
+                                    "alias": undefined,
+                                    "arguments": Array [],
+                                    "directives": Array [],
+                                    "kind": "Field",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "token",
+                                    },
+                                    "selectionSet": undefined,
+                                  },
+                                  Object {
+                                    "alias": undefined,
+                                    "arguments": Array [],
+                                    "directives": Array [],
+                                    "kind": "Field",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "user",
+                                    },
+                                    "selectionSet": Object {
+                                      "kind": "SelectionSet",
+                                      "selections": Array [
+                                        Object {
+                                          "alias": undefined,
+                                          "arguments": Array [],
+                                          "directives": Array [],
+                                          "kind": "Field",
+                                          "name": Object {
+                                            "kind": "Name",
+                                            "value": "id",
+                                          },
+                                          "selectionSet": undefined,
+                                        },
+                                        Object {
+                                          "alias": undefined,
+                                          "arguments": Array [],
+                                          "directives": Array [],
+                                          "kind": "Field",
+                                          "name": Object {
+                                            "kind": "Name",
+                                            "value": "name",
+                                          },
+                                          "selectionSet": undefined,
+                                        },
+                                        Object {
+                                          "alias": undefined,
+                                          "arguments": Array [],
+                                          "directives": Array [],
+                                          "kind": "Field",
+                                          "name": Object {
+                                            "kind": "Name",
+                                            "value": "email",
+                                          },
+                                          "selectionSet": undefined,
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                        "variableDefinitions": Array [
+                          Object {
+                            "defaultValue": undefined,
+                            "kind": "VariableDefinition",
+                            "type": Object {
+                              "kind": "NonNullType",
+                              "type": Object {
+                                "kind": "NamedType",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "String",
+                                },
+                              },
+                            },
+                            "variable": Object {
+                              "kind": "Variable",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "email",
+                              },
+                            },
+                          },
+                          Object {
+                            "defaultValue": undefined,
+                            "kind": "VariableDefinition",
+                            "type": Object {
+                              "kind": "NonNullType",
+                              "type": Object {
+                                "kind": "NamedType",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "String",
+                                },
+                              },
+                            },
+                            "variable": Object {
+                              "kind": "Variable",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "password",
+                              },
+                            },
+                          },
+                        ],
+                      },
+                    ],
+                    "kind": "Document",
+                    "loc": Object {
+                      "end": 187,
+                      "start": 0,
+                    },
+                  }
+                }
+              >
+                <GridColumn>
+                  <div
+                    className="column"
+                  >
+                    <Button
+                      as="button"
+                      color="teal"
+                      fluid={true}
+                      onClick={[Function]}
+                      size="large"
+                    >
+                      <button
+                        className="ui teal large fluid button"
+                        onClick={[Function]}
+                      >
+                        SignIn
+                      </button>
+                    </Button>
+                  </div>
+                </GridColumn>
+              </Mutation>
+              <Mutation
+                mutation={
+                  Object {
+                    "definitions": Array [
+                      Object {
+                        "directives": Array [],
+                        "kind": "OperationDefinition",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "signup",
+                        },
+                        "operation": "mutation",
+                        "selectionSet": Object {
+                          "kind": "SelectionSet",
+                          "selections": Array [
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [
+                                Object {
+                                  "kind": "Argument",
+                                  "name": Object {
+                                    "kind": "Name",
+                                    "value": "email",
+                                  },
+                                  "value": Object {
+                                    "kind": "Variable",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "email",
+                                    },
+                                  },
+                                },
+                                Object {
+                                  "kind": "Argument",
+                                  "name": Object {
+                                    "kind": "Name",
+                                    "value": "password",
+                                  },
+                                  "value": Object {
+                                    "kind": "Variable",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "password",
+                                    },
+                                  },
+                                },
+                                Object {
+                                  "kind": "Argument",
+                                  "name": Object {
+                                    "kind": "Name",
+                                    "value": "name",
+                                  },
+                                  "value": Object {
+                                    "block": false,
+                                    "kind": "StringValue",
+                                    "value": "demo3",
+                                  },
+                                },
+                              ],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "signup",
+                              },
+                              "selectionSet": Object {
+                                "kind": "SelectionSet",
+                                "selections": Array [
+                                  Object {
+                                    "alias": undefined,
+                                    "arguments": Array [],
+                                    "directives": Array [],
+                                    "kind": "Field",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "token",
+                                    },
+                                    "selectionSet": undefined,
+                                  },
+                                  Object {
+                                    "alias": undefined,
+                                    "arguments": Array [],
+                                    "directives": Array [],
+                                    "kind": "Field",
+                                    "name": Object {
+                                      "kind": "Name",
+                                      "value": "user",
+                                    },
+                                    "selectionSet": Object {
+                                      "kind": "SelectionSet",
+                                      "selections": Array [
+                                        Object {
+                                          "alias": undefined,
+                                          "arguments": Array [],
+                                          "directives": Array [],
+                                          "kind": "Field",
+                                          "name": Object {
+                                            "kind": "Name",
+                                            "value": "id",
+                                          },
+                                          "selectionSet": undefined,
+                                        },
+                                        Object {
+                                          "alias": undefined,
+                                          "arguments": Array [],
+                                          "directives": Array [],
+                                          "kind": "Field",
+                                          "name": Object {
+                                            "kind": "Name",
+                                            "value": "name",
+                                          },
+                                          "selectionSet": undefined,
+                                        },
+                                        Object {
+                                          "alias": undefined,
+                                          "arguments": Array [],
+                                          "directives": Array [],
+                                          "kind": "Field",
+                                          "name": Object {
+                                            "kind": "Name",
+                                            "value": "email",
+                                          },
+                                          "selectionSet": undefined,
+                                        },
+                                      ],
+                                    },
+                                  },
+                                ],
+                              },
+                            },
+                          ],
+                        },
+                        "variableDefinitions": Array [
+                          Object {
+                            "defaultValue": undefined,
+                            "kind": "VariableDefinition",
+                            "type": Object {
+                              "kind": "NonNullType",
+                              "type": Object {
+                                "kind": "NamedType",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "String",
+                                },
+                              },
+                            },
+                            "variable": Object {
+                              "kind": "Variable",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "email",
+                              },
+                            },
+                          },
+                          Object {
+                            "defaultValue": undefined,
+                            "kind": "VariableDefinition",
+                            "type": Object {
+                              "kind": "NonNullType",
+                              "type": Object {
+                                "kind": "NamedType",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "String",
+                                },
+                              },
+                            },
+                            "variable": Object {
+                              "kind": "Variable",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "password",
+                              },
+                            },
+                          },
+                        ],
+                      },
+                    ],
+                    "kind": "Document",
+                    "loc": Object {
+                      "end": 203,
+                      "start": 0,
+                    },
+                  }
+                }
+              >
+                <GridColumn>
+                  <div
+                    className="column"
+                  >
+                    <Button
+                      as="button"
+                      fluid={true}
+                      onClick={[Function]}
+                      size="large"
+                    >
+                      <button
+                        className="ui large fluid button"
+                        onClick={[Function]}
+                      >
+                        SignUp
+                      </button>
+                    </Button>
+                  </div>
+                </GridColumn>
+              </Mutation>
             </div>
-        </Segment>
+          </Grid>
+        </div>
+      </Segment>
     </form>
-</Form>,
+  </Form>,
   <form
     className="ui large form"
     data-test="authenticate"
     onSubmit={[Function]}
->
+  >
     <Header
-        as="h2"
-        color="teal"
-        textAlign="center"
+      as="h2"
+      color="teal"
+      textAlign="center"
     >
-        <h2
-            className="ui teal center aligned header"
-        >
-            Authenticate
-        </h2>
+      <h2
+        className="ui teal center aligned header"
+      >
+        Authenticate
+      </h2>
     </Header>
     <Segment
-        raised={true}
+      raised={true}
     >
-        <div
-            className="ui raised segment"
+      <div
+        className="ui raised segment"
+      >
+        <FormInput
+          as={[Function]}
+          control={[Function]}
+          fluid={true}
+          icon="user"
+          iconPosition="left"
+          label="E-Mail Address"
+          name="email"
+          onChange={[Function]}
+          placeholder="E-Mail Address"
+          value=""
         >
-            <FormInput
-                as={[Function]}
-                control={[Function]}
+          <FormField
+            control={[Function]}
+            fluid={true}
+            icon="user"
+            iconPosition="left"
+            label="E-Mail Address"
+            name="email"
+            onChange={[Function]}
+            placeholder="E-Mail Address"
+            value=""
+          >
+            <div
+              className="field"
+            >
+              <label>
+                E-Mail Address
+              </label>
+              <Input
                 fluid={true}
                 icon="user"
                 iconPosition="left"
-                label="E-Mail Address"
                 name="email"
                 onChange={[Function]}
                 placeholder="E-Mail Address"
+                type="text"
                 value=""
-            >
-                <FormField
-                    control={[Function]}
-                    fluid={true}
-                    icon="user"
-                    iconPosition="left"
-                    label="E-Mail Address"
+              >
+                <div
+                  className="ui fluid left icon input"
+                >
+                  <input
                     name="email"
                     onChange={[Function]}
                     placeholder="E-Mail Address"
+                    type="text"
                     value=""
-                >
-                    <div
-                        className="field"
-                    >
-                        <label>
-                            E-Mail Address
-                        </label>
-                        <Input
-                            fluid={true}
-                            icon="user"
-                            iconPosition="left"
-                            name="email"
-                            onChange={[Function]}
-                            placeholder="E-Mail Address"
-                            type="text"
-                            value=""
-                        >
-                            <div
-                                className="ui fluid left icon input"
-                            >
-                                <input
-                                    name="email"
-                                    onChange={[Function]}
-                                    placeholder="E-Mail Address"
-                                    type="text"
-                                    value=""
-                                />
-                                <Icon
-                                    as="i"
-                                    name="user"
-                                >
-                                    <i
-                                        aria-hidden="true"
-                                        className="user icon"
-                                    />
-                                </Icon>
-                            </div>
-                        </Input>
-                    </div>
-                </FormField>
-            </FormInput>
-            <FormInput
-                as={[Function]}
-                control={[Function]}
+                  />
+                  <Icon
+                    as="i"
+                    name="user"
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="user icon"
+                    />
+                  </Icon>
+                </div>
+              </Input>
+            </div>
+          </FormField>
+        </FormInput>
+        <FormInput
+          as={[Function]}
+          control={[Function]}
+          fluid={true}
+          icon="lock"
+          iconPosition="left"
+          label="Password"
+          name="password"
+          onChange={[Function]}
+          placeholder="Password"
+          type="password"
+          value=""
+        >
+          <FormField
+            control={[Function]}
+            fluid={true}
+            icon="lock"
+            iconPosition="left"
+            label="Password"
+            name="password"
+            onChange={[Function]}
+            placeholder="Password"
+            type="password"
+            value=""
+          >
+            <div
+              className="field"
+            >
+              <label>
+                Password
+              </label>
+              <Input
                 fluid={true}
                 icon="lock"
                 iconPosition="left"
-                label="Password"
                 name="password"
                 onChange={[Function]}
                 placeholder="Password"
                 type="password"
                 value=""
-            >
-                <FormField
-                    control={[Function]}
-                    fluid={true}
-                    icon="lock"
-                    iconPosition="left"
-                    label="Password"
+              >
+                <div
+                  className="ui fluid left icon input"
+                >
+                  <input
                     name="password"
                     onChange={[Function]}
                     placeholder="Password"
                     type="password"
                     value=""
-                >
-                    <div
-                        className="field"
-                    >
-                        <label>
-                            Password
-                        </label>
-                        <Input
-                            fluid={true}
-                            icon="lock"
-                            iconPosition="left"
-                            name="password"
-                            onChange={[Function]}
-                            placeholder="Password"
-                            type="password"
-                            value=""
-                        >
-                            <div
-                                className="ui fluid left icon input"
-                            >
-                                <input
-                                    name="password"
-                                    onChange={[Function]}
-                                    placeholder="Password"
-                                    type="password"
-                                    value=""
-                                />
-                                <Icon
-                                    as="i"
-                                    name="lock"
-                                >
-                                    <i
-                                        aria-hidden="true"
-                                        className="lock icon"
-                                    />
-                                </Icon>
-                            </div>
-                        </Input>
-                    </div>
-                </FormField>
-            </FormInput>
-            <Grid
-                columns={2}
-            >
-                <div
-                    className="ui two column grid"
-                >
-                    <Mutation
-                        mutation={
-                            Object {
-                                "definitions": Array [
-                                  Object {
-                                    "directives": Array [],
-                                    "kind": "OperationDefinition",
-                                    "name": Object {
-                                      "kind": "Name",
-                                      "value": "signin",
-                                    },
-                                    "operation": "mutation",
-                                    "selectionSet": Object {
-                                      "kind": "SelectionSet",
-                                      "selections": Array [
-                                        Object {
-                                          "alias": undefined,
-                                          "arguments": Array [
-                                            Object {
-                                              "kind": "Argument",
-                                              "name": Object {
-                                                "kind": "Name",
-                                                "value": "email",
-                                              },
-                                              "value": Object {
-                                                "kind": "Variable",
-                                                "name": Object {
-                                                  "kind": "Name",
-                                                  "value": "email",
-                                                },
-                                              },
-                                            },
-                                            Object {
-                                              "kind": "Argument",
-                                              "name": Object {
-                                                "kind": "Name",
-                                                "value": "password",
-                                              },
-                                              "value": Object {
-                                                "kind": "Variable",
-                                                "name": Object {
-                                                  "kind": "Name",
-                                                  "value": "password",
-                                                },
-                                              },
-                                            },
-                                          ],
-                                          "directives": Array [],
-                                          "kind": "Field",
-                                          "name": Object {
-                                            "kind": "Name",
-                                            "value": "login",
-                                          },
-                                          "selectionSet": Object {
-                                            "kind": "SelectionSet",
-                                            "selections": Array [
-                                              Object {
-                                                "alias": undefined,
-                                                "arguments": Array [],
-                                                "directives": Array [],
-                                                "kind": "Field",
-                                                "name": Object {
-                                                  "kind": "Name",
-                                                  "value": "token",
-                                                },
-                                                "selectionSet": undefined,
-                                              },
-                                              Object {
-                                                "alias": undefined,
-                                                "arguments": Array [],
-                                                "directives": Array [],
-                                                "kind": "Field",
-                                                "name": Object {
-                                                  "kind": "Name",
-                                                  "value": "user",
-                                                },
-                                                "selectionSet": Object {
-                                                  "kind": "SelectionSet",
-                                                  "selections": Array [
-                                                    Object {
-                                                      "alias": undefined,
-                                                      "arguments": Array [],
-                                                      "directives": Array [],
-                                                      "kind": "Field",
-                                                      "name": Object {
-                                                        "kind": "Name",
-                                                        "value": "id",
-                                                      },
-                                                      "selectionSet": undefined,
-                                                    },
-                                                    Object {
-                                                      "alias": undefined,
-                                                      "arguments": Array [],
-                                                      "directives": Array [],
-                                                      "kind": "Field",
-                                                      "name": Object {
-                                                        "kind": "Name",
-                                                        "value": "name",
-                                                      },
-                                                      "selectionSet": undefined,
-                                                    },
-                                                    Object {
-                                                      "alias": undefined,
-                                                      "arguments": Array [],
-                                                      "directives": Array [],
-                                                      "kind": "Field",
-                                                      "name": Object {
-                                                        "kind": "Name",
-                                                        "value": "email",
-                                                      },
-                                                      "selectionSet": undefined,
-                                                    },
-                                                  ],
-                                                },
-                                              },
-                                            ],
-                                          },
-                                        },
-                                      ],
-                                    },
-                                    "variableDefinitions": Array [
-                                      Object {
-                                        "defaultValue": undefined,
-                                        "kind": "VariableDefinition",
-                                        "type": Object {
-                                          "kind": "NonNullType",
-                                          "type": Object {
-                                            "kind": "NamedType",
-                                            "name": Object {
-                                              "kind": "Name",
-                                              "value": "String",
-                                            },
-                                          },
-                                        },
-                                        "variable": Object {
-                                          "kind": "Variable",
-                                          "name": Object {
-                                            "kind": "Name",
-                                            "value": "email",
-                                          },
-                                        },
-                                      },
-                                      Object {
-                                        "defaultValue": undefined,
-                                        "kind": "VariableDefinition",
-                                        "type": Object {
-                                          "kind": "NonNullType",
-                                          "type": Object {
-                                            "kind": "NamedType",
-                                            "name": Object {
-                                              "kind": "Name",
-                                              "value": "String",
-                                            },
-                                          },
-                                        },
-                                        "variable": Object {
-                                          "kind": "Variable",
-                                          "name": Object {
-                                            "kind": "Name",
-                                            "value": "password",
-                                          },
-                                        },
-                                      },
-                                    ],
-                                  },
-                                ],
-                                "kind": "Document",
-                                "loc": Object {
-                                  "end": 187,
-                                  "start": 0,
-                                },
-                              }
-                        }
-                    >
-                        <GridColumn>
-                            <div
-                                className="column"
-                            >
-                                <Button
-                                    as="button"
-                                    color="teal"
-                                    fluid={true}
-                                    onClick={[Function]}
-                                    role="button"
-                                    size="large"
-                                >
-                                    <button
-                                        className="ui teal large fluid button"
-                                        onClick={[Function]}
-                                        role="button"
-                                    >
-                                        SignIn
-                                    </button>
-                                </Button>
-                            </div>
-                        </GridColumn>
-                    </Mutation>
-                    <Mutation
-                        mutation={
-                            Object {
-                                "definitions": Array [
-                                  Object {
-                                    "directives": Array [],
-                                    "kind": "OperationDefinition",
-                                    "name": Object {
-                                      "kind": "Name",
-                                      "value": "signup",
-                                    },
-                                    "operation": "mutation",
-                                    "selectionSet": Object {
-                                      "kind": "SelectionSet",
-                                      "selections": Array [
-                                        Object {
-                                          "alias": undefined,
-                                          "arguments": Array [
-                                            Object {
-                                              "kind": "Argument",
-                                              "name": Object {
-                                                "kind": "Name",
-                                                "value": "email",
-                                              },
-                                              "value": Object {
-                                                "kind": "Variable",
-                                                "name": Object {
-                                                  "kind": "Name",
-                                                  "value": "email",
-                                                },
-                                              },
-                                            },
-                                            Object {
-                                              "kind": "Argument",
-                                              "name": Object {
-                                                "kind": "Name",
-                                                "value": "password",
-                                              },
-                                              "value": Object {
-                                                "kind": "Variable",
-                                                "name": Object {
-                                                  "kind": "Name",
-                                                  "value": "password",
-                                                },
-                                              },
-                                            },
-                                            Object {
-                                              "kind": "Argument",
-                                              "name": Object {
-                                                "kind": "Name",
-                                                "value": "name",
-                                              },
-                                              "value": Object {
-                                                "block": false,
-                                                "kind": "StringValue",
-                                                "value": "demo3",
-                                              },
-                                            },
-                                          ],
-                                          "directives": Array [],
-                                          "kind": "Field",
-                                          "name": Object {
-                                            "kind": "Name",
-                                            "value": "signup",
-                                          },
-                                          "selectionSet": Object {
-                                            "kind": "SelectionSet",
-                                            "selections": Array [
-                                              Object {
-                                                "alias": undefined,
-                                                "arguments": Array [],
-                                                "directives": Array [],
-                                                "kind": "Field",
-                                                "name": Object {
-                                                  "kind": "Name",
-                                                  "value": "token",
-                                                },
-                                                "selectionSet": undefined,
-                                              },
-                                              Object {
-                                                "alias": undefined,
-                                                "arguments": Array [],
-                                                "directives": Array [],
-                                                "kind": "Field",
-                                                "name": Object {
-                                                  "kind": "Name",
-                                                  "value": "user",
-                                                },
-                                                "selectionSet": Object {
-                                                  "kind": "SelectionSet",
-                                                  "selections": Array [
-                                                    Object {
-                                                      "alias": undefined,
-                                                      "arguments": Array [],
-                                                      "directives": Array [],
-                                                      "kind": "Field",
-                                                      "name": Object {
-                                                        "kind": "Name",
-                                                        "value": "id",
-                                                      },
-                                                      "selectionSet": undefined,
-                                                    },
-                                                    Object {
-                                                      "alias": undefined,
-                                                      "arguments": Array [],
-                                                      "directives": Array [],
-                                                      "kind": "Field",
-                                                      "name": Object {
-                                                        "kind": "Name",
-                                                        "value": "name",
-                                                      },
-                                                      "selectionSet": undefined,
-                                                    },
-                                                    Object {
-                                                      "alias": undefined,
-                                                      "arguments": Array [],
-                                                      "directives": Array [],
-                                                      "kind": "Field",
-                                                      "name": Object {
-                                                        "kind": "Name",
-                                                        "value": "email",
-                                                      },
-                                                      "selectionSet": undefined,
-                                                    },
-                                                  ],
-                                                },
-                                              },
-                                            ],
-                                          },
-                                        },
-                                      ],
-                                    },
-                                    "variableDefinitions": Array [
-                                      Object {
-                                        "defaultValue": undefined,
-                                        "kind": "VariableDefinition",
-                                        "type": Object {
-                                          "kind": "NonNullType",
-                                          "type": Object {
-                                            "kind": "NamedType",
-                                            "name": Object {
-                                              "kind": "Name",
-                                              "value": "String",
-                                            },
-                                          },
-                                        },
-                                        "variable": Object {
-                                          "kind": "Variable",
-                                          "name": Object {
-                                            "kind": "Name",
-                                            "value": "email",
-                                          },
-                                        },
-                                      },
-                                      Object {
-                                        "defaultValue": undefined,
-                                        "kind": "VariableDefinition",
-                                        "type": Object {
-                                          "kind": "NonNullType",
-                                          "type": Object {
-                                            "kind": "NamedType",
-                                            "name": Object {
-                                              "kind": "Name",
-                                              "value": "String",
-                                            },
-                                          },
-                                        },
-                                        "variable": Object {
-                                          "kind": "Variable",
-                                          "name": Object {
-                                            "kind": "Name",
-                                            "value": "password",
-                                          },
-                                        },
-                                      },
-                                    ],
-                                  },
-                                ],
-                                "kind": "Document",
-                                "loc": Object {
-                                  "end": 203,
-                                  "start": 0,
-                                },
-                              }
-                        }
-                    >
-                        <GridColumn>
-                            <div
-                                className="column"
-                            >
-                                <Button
-                                    as="button"
-                                    fluid={true}
-                                    onClick={[Function]}
-                                    role="button"
-                                    size="large"
-                                >
-                                    <button
-                                        className="ui large fluid button"
-                                        onClick={[Function]}
-                                        role="button"
-                                    >
-                                        SignUp
-                                    </button>
-                                </Button>
-                            </div>
-                        </GridColumn>
-                    </Mutation>
+                  />
+                  <Icon
+                    as="i"
+                    name="lock"
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="lock icon"
+                    />
+                  </Icon>
                 </div>
-            </Grid>
-        </div>
+              </Input>
+            </div>
+          </FormField>
+        </FormInput>
+        <Grid
+          columns={2}
+        >
+          <div
+            className="ui two column grid"
+          >
+            <Mutation
+              mutation={
+                Object {
+                  "definitions": Array [
+                    Object {
+                      "directives": Array [],
+                      "kind": "OperationDefinition",
+                      "name": Object {
+                        "kind": "Name",
+                        "value": "signin",
+                      },
+                      "operation": "mutation",
+                      "selectionSet": Object {
+                        "kind": "SelectionSet",
+                        "selections": Array [
+                          Object {
+                            "alias": undefined,
+                            "arguments": Array [
+                              Object {
+                                "kind": "Argument",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "email",
+                                },
+                                "value": Object {
+                                  "kind": "Variable",
+                                  "name": Object {
+                                    "kind": "Name",
+                                    "value": "email",
+                                  },
+                                },
+                              },
+                              Object {
+                                "kind": "Argument",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "password",
+                                },
+                                "value": Object {
+                                  "kind": "Variable",
+                                  "name": Object {
+                                    "kind": "Name",
+                                    "value": "password",
+                                  },
+                                },
+                              },
+                            ],
+                            "directives": Array [],
+                            "kind": "Field",
+                            "name": Object {
+                              "kind": "Name",
+                              "value": "login",
+                            },
+                            "selectionSet": Object {
+                              "kind": "SelectionSet",
+                              "selections": Array [
+                                Object {
+                                  "alias": undefined,
+                                  "arguments": Array [],
+                                  "directives": Array [],
+                                  "kind": "Field",
+                                  "name": Object {
+                                    "kind": "Name",
+                                    "value": "token",
+                                  },
+                                  "selectionSet": undefined,
+                                },
+                                Object {
+                                  "alias": undefined,
+                                  "arguments": Array [],
+                                  "directives": Array [],
+                                  "kind": "Field",
+                                  "name": Object {
+                                    "kind": "Name",
+                                    "value": "user",
+                                  },
+                                  "selectionSet": Object {
+                                    "kind": "SelectionSet",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": undefined,
+                                        "arguments": Array [],
+                                        "directives": Array [],
+                                        "kind": "Field",
+                                        "name": Object {
+                                          "kind": "Name",
+                                          "value": "id",
+                                        },
+                                        "selectionSet": undefined,
+                                      },
+                                      Object {
+                                        "alias": undefined,
+                                        "arguments": Array [],
+                                        "directives": Array [],
+                                        "kind": "Field",
+                                        "name": Object {
+                                          "kind": "Name",
+                                          "value": "name",
+                                        },
+                                        "selectionSet": undefined,
+                                      },
+                                      Object {
+                                        "alias": undefined,
+                                        "arguments": Array [],
+                                        "directives": Array [],
+                                        "kind": "Field",
+                                        "name": Object {
+                                          "kind": "Name",
+                                          "value": "email",
+                                        },
+                                        "selectionSet": undefined,
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                      },
+                      "variableDefinitions": Array [
+                        Object {
+                          "defaultValue": undefined,
+                          "kind": "VariableDefinition",
+                          "type": Object {
+                            "kind": "NonNullType",
+                            "type": Object {
+                              "kind": "NamedType",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "String",
+                              },
+                            },
+                          },
+                          "variable": Object {
+                            "kind": "Variable",
+                            "name": Object {
+                              "kind": "Name",
+                              "value": "email",
+                            },
+                          },
+                        },
+                        Object {
+                          "defaultValue": undefined,
+                          "kind": "VariableDefinition",
+                          "type": Object {
+                            "kind": "NonNullType",
+                            "type": Object {
+                              "kind": "NamedType",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "String",
+                              },
+                            },
+                          },
+                          "variable": Object {
+                            "kind": "Variable",
+                            "name": Object {
+                              "kind": "Name",
+                              "value": "password",
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                  "kind": "Document",
+                  "loc": Object {
+                    "end": 187,
+                    "start": 0,
+                  },
+                }
+              }
+            >
+              <GridColumn>
+                <div
+                  className="column"
+                >
+                  <Button
+                    as="button"
+                    color="teal"
+                    fluid={true}
+                    onClick={[Function]}
+                    size="large"
+                  >
+                    <button
+                      className="ui teal large fluid button"
+                      onClick={[Function]}
+                    >
+                      SignIn
+                    </button>
+                  </Button>
+                </div>
+              </GridColumn>
+            </Mutation>
+            <Mutation
+              mutation={
+                Object {
+                  "definitions": Array [
+                    Object {
+                      "directives": Array [],
+                      "kind": "OperationDefinition",
+                      "name": Object {
+                        "kind": "Name",
+                        "value": "signup",
+                      },
+                      "operation": "mutation",
+                      "selectionSet": Object {
+                        "kind": "SelectionSet",
+                        "selections": Array [
+                          Object {
+                            "alias": undefined,
+                            "arguments": Array [
+                              Object {
+                                "kind": "Argument",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "email",
+                                },
+                                "value": Object {
+                                  "kind": "Variable",
+                                  "name": Object {
+                                    "kind": "Name",
+                                    "value": "email",
+                                  },
+                                },
+                              },
+                              Object {
+                                "kind": "Argument",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "password",
+                                },
+                                "value": Object {
+                                  "kind": "Variable",
+                                  "name": Object {
+                                    "kind": "Name",
+                                    "value": "password",
+                                  },
+                                },
+                              },
+                              Object {
+                                "kind": "Argument",
+                                "name": Object {
+                                  "kind": "Name",
+                                  "value": "name",
+                                },
+                                "value": Object {
+                                  "block": false,
+                                  "kind": "StringValue",
+                                  "value": "demo3",
+                                },
+                              },
+                            ],
+                            "directives": Array [],
+                            "kind": "Field",
+                            "name": Object {
+                              "kind": "Name",
+                              "value": "signup",
+                            },
+                            "selectionSet": Object {
+                              "kind": "SelectionSet",
+                              "selections": Array [
+                                Object {
+                                  "alias": undefined,
+                                  "arguments": Array [],
+                                  "directives": Array [],
+                                  "kind": "Field",
+                                  "name": Object {
+                                    "kind": "Name",
+                                    "value": "token",
+                                  },
+                                  "selectionSet": undefined,
+                                },
+                                Object {
+                                  "alias": undefined,
+                                  "arguments": Array [],
+                                  "directives": Array [],
+                                  "kind": "Field",
+                                  "name": Object {
+                                    "kind": "Name",
+                                    "value": "user",
+                                  },
+                                  "selectionSet": Object {
+                                    "kind": "SelectionSet",
+                                    "selections": Array [
+                                      Object {
+                                        "alias": undefined,
+                                        "arguments": Array [],
+                                        "directives": Array [],
+                                        "kind": "Field",
+                                        "name": Object {
+                                          "kind": "Name",
+                                          "value": "id",
+                                        },
+                                        "selectionSet": undefined,
+                                      },
+                                      Object {
+                                        "alias": undefined,
+                                        "arguments": Array [],
+                                        "directives": Array [],
+                                        "kind": "Field",
+                                        "name": Object {
+                                          "kind": "Name",
+                                          "value": "name",
+                                        },
+                                        "selectionSet": undefined,
+                                      },
+                                      Object {
+                                        "alias": undefined,
+                                        "arguments": Array [],
+                                        "directives": Array [],
+                                        "kind": "Field",
+                                        "name": Object {
+                                          "kind": "Name",
+                                          "value": "email",
+                                        },
+                                        "selectionSet": undefined,
+                                      },
+                                    ],
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                        ],
+                      },
+                      "variableDefinitions": Array [
+                        Object {
+                          "defaultValue": undefined,
+                          "kind": "VariableDefinition",
+                          "type": Object {
+                            "kind": "NonNullType",
+                            "type": Object {
+                              "kind": "NamedType",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "String",
+                              },
+                            },
+                          },
+                          "variable": Object {
+                            "kind": "Variable",
+                            "name": Object {
+                              "kind": "Name",
+                              "value": "email",
+                            },
+                          },
+                        },
+                        Object {
+                          "defaultValue": undefined,
+                          "kind": "VariableDefinition",
+                          "type": Object {
+                            "kind": "NonNullType",
+                            "type": Object {
+                              "kind": "NamedType",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "String",
+                              },
+                            },
+                          },
+                          "variable": Object {
+                            "kind": "Variable",
+                            "name": Object {
+                              "kind": "Name",
+                              "value": "password",
+                            },
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                  "kind": "Document",
+                  "loc": Object {
+                    "end": 203,
+                    "start": 0,
+                  },
+                }
+              }
+            >
+              <GridColumn>
+                <div
+                  className="column"
+                >
+                  <Button
+                    as="button"
+                    fluid={true}
+                    onClick={[Function]}
+                    size="large"
+                  >
+                    <button
+                      className="ui large fluid button"
+                      onClick={[Function]}
+                    >
+                      SignUp
+                    </button>
+                  </Button>
+                </div>
+              </GridColumn>
+            </Mutation>
+          </div>
+        </Grid>
+      </div>
     </Segment>
-</form>,
+  </form>,
 ]
 `;
 
@@ -1147,87 +1139,83 @@ exports[`Profile renders when logged 1`] = `
 Array [
   <Message
     data-test="profile"
->
+  >
     <div
-        className="ui message"
-        data-test="profile"
+      className="ui message"
+      data-test="profile"
     >
-        <Header
-            as="h2"
-            color="teal"
-            textAlign="center"
-        >
-            <h2
-                className="ui teal center aligned header"
-            >
-                Profile
-            </h2>
-        </Header>
-        <p>
-            Name: 
-            name
-        </p>
-        <p>
-            E-Mail: 
-            email
-        </p>
-        <Button
-            as="button"
-            color="teal"
-            fluid={true}
-            onClick={[Function]}
-            role="button"
-            size="large"
-        >
-            <button
-                className="ui teal large fluid button"
-                onClick={[Function]}
-                role="button"
-            >
-                LogOut
-            </button>
-        </Button>
-    </div>
-</Message>,
-  <div
-    className="ui message"
-    data-test="profile"
->
-    <Header
+      <Header
         as="h2"
         color="teal"
         textAlign="center"
-    >
+      >
         <h2
-            className="ui teal center aligned header"
+          className="ui teal center aligned header"
         >
-            Profile
+          Profile
         </h2>
-    </Header>
-    <p>
+      </Header>
+      <p>
         Name: 
         name
-    </p>
-    <p>
+      </p>
+      <p>
         E-Mail: 
         email
-    </p>
-    <Button
+      </p>
+      <Button
         as="button"
         color="teal"
         fluid={true}
         onClick={[Function]}
-        role="button"
         size="large"
-    >
+      >
         <button
-            className="ui teal large fluid button"
-            onClick={[Function]}
-            role="button"
+          className="ui teal large fluid button"
+          onClick={[Function]}
         >
-            LogOut
+          LogOut
         </button>
+      </Button>
+    </div>
+  </Message>,
+  <div
+    className="ui message"
+    data-test="profile"
+  >
+    <Header
+      as="h2"
+      color="teal"
+      textAlign="center"
+    >
+      <h2
+        className="ui teal center aligned header"
+      >
+        Profile
+      </h2>
+    </Header>
+    <p>
+      Name: 
+      name
+    </p>
+    <p>
+      E-Mail: 
+      email
+    </p>
+    <Button
+      as="button"
+      color="teal"
+      fluid={true}
+      onClick={[Function]}
+      size="large"
+    >
+      <button
+        className="ui teal large fluid button"
+        onClick={[Function]}
+      >
+        LogOut
+      </button>
     </Button>
-</div>,
+  </div>,
 ]
 `;
