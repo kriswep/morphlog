@@ -4,60 +4,60 @@ import { Options } from 'graphql-binding'
 import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 
 export interface Query {
-    projects: <T = Project[]>(args: { where?: ProjectWhereInput, orderBy?: ProjectOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    changes: <T = Change[]>(args: { where?: ChangeWhereInput, orderBy?: ChangeOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    users: <T = User[]>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    teams: <T = Team[]>(args: { where?: TeamWhereInput, orderBy?: TeamOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    project: <T = Project | null>(args: { where: ProjectWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    change: <T = Change | null>(args: { where: ChangeWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    team: <T = Team | null>(args: { where: TeamWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    projectsConnection: <T = ProjectConnection>(args: { where?: ProjectWhereInput, orderBy?: ProjectOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    changesConnection: <T = ChangeConnection>(args: { where?: ChangeWhereInput, orderBy?: ChangeOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    usersConnection: <T = UserConnection>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    teamsConnection: <T = TeamConnection>(args: { where?: TeamWhereInput, orderBy?: TeamOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+    projects: <T = Array<Project | null>>(args: { where?: ProjectWhereInput | null, orderBy?: ProjectOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    changes: <T = Array<Change | null>>(args: { where?: ChangeWhereInput | null, orderBy?: ChangeOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    teams: <T = Array<Team | null>>(args: { where?: TeamWhereInput | null, orderBy?: TeamOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    users: <T = Array<User | null>>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    project: <T = Project | null>(args: { where: ProjectWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    change: <T = Change | null>(args: { where: ChangeWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    team: <T = Team | null>(args: { where: TeamWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    projectsConnection: <T = ProjectConnection>(args: { where?: ProjectWhereInput | null, orderBy?: ProjectOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    changesConnection: <T = ChangeConnection>(args: { where?: ChangeWhereInput | null, orderBy?: ChangeOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    teamsConnection: <T = TeamConnection>(args: { where?: TeamWhereInput | null, orderBy?: TeamOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    usersConnection: <T = UserConnection>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> 
   }
 
 export interface Mutation {
     createProject: <T = Project>(args: { data: ProjectCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createChange: <T = Change>(args: { data: ChangeCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createTeam: <T = Team>(args: { data: TeamCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateProject: <T = Project | null>(args: { data: ProjectUpdateInput, where: ProjectWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateChange: <T = Change | null>(args: { data: ChangeUpdateInput, where: ChangeWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateTeam: <T = Team | null>(args: { data: TeamUpdateInput, where: TeamWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteProject: <T = Project | null>(args: { where: ProjectWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteChange: <T = Change | null>(args: { where: ChangeWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteTeam: <T = Team | null>(args: { where: TeamWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateProject: <T = Project | null>(args: { data: ProjectUpdateInput, where: ProjectWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateChange: <T = Change | null>(args: { data: ChangeUpdateInput, where: ChangeWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateTeam: <T = Team | null>(args: { data: TeamUpdateInput, where: TeamWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteProject: <T = Project | null>(args: { where: ProjectWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteChange: <T = Change | null>(args: { where: ChangeWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteTeam: <T = Team | null>(args: { where: TeamWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     upsertProject: <T = Project>(args: { where: ProjectWhereUniqueInput, create: ProjectCreateInput, update: ProjectUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertChange: <T = Change>(args: { where: ChangeWhereUniqueInput, create: ChangeCreateInput, update: ChangeUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertTeam: <T = Team>(args: { where: TeamWhereUniqueInput, create: TeamCreateInput, update: TeamUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyProjects: <T = BatchPayload>(args: { data: ProjectUpdateInput, where?: ProjectWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyChanges: <T = BatchPayload>(args: { data: ChangeUpdateInput, where?: ChangeWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateInput, where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyTeams: <T = BatchPayload>(args: { data: TeamUpdateInput, where?: TeamWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyProjects: <T = BatchPayload>(args: { where?: ProjectWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyChanges: <T = BatchPayload>(args: { where?: ChangeWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyTeams: <T = BatchPayload>(args: { where?: TeamWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+    upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyProjects: <T = BatchPayload>(args: { data: ProjectUpdateInput, where?: ProjectWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyChanges: <T = BatchPayload>(args: { data: ChangeUpdateInput, where?: ChangeWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyTeams: <T = BatchPayload>(args: { data: TeamUpdateInput, where?: TeamWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateInput, where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyProjects: <T = BatchPayload>(args: { where?: ProjectWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyChanges: <T = BatchPayload>(args: { where?: ChangeWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyTeams: <T = BatchPayload>(args: { where?: TeamWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Subscription {
-    project: <T = ProjectSubscriptionPayload | null>(args: { where?: ProjectSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    change: <T = ChangeSubscriptionPayload | null>(args: { where?: ChangeSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    team: <T = TeamSubscriptionPayload | null>(args: { where?: TeamSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> 
+    project: <T = ProjectSubscriptionPayload | null>(args: { where?: ProjectSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    change: <T = ChangeSubscriptionPayload | null>(args: { where?: ChangeSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    team: <T = TeamSubscriptionPayload | null>(args: { where?: TeamSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
   }
 
 export interface Exists {
   Project: (where?: ProjectWhereInput) => Promise<boolean>
   Change: (where?: ChangeWhereInput) => Promise<boolean>
-  User: (where?: UserWhereInput) => Promise<boolean>
   Team: (where?: TeamWhereInput) => Promise<boolean>
+  User: (where?: UserWhereInput) => Promise<boolean>
 }
 
 export interface Prisma {
@@ -387,28 +387,28 @@ scalar Long
 type Mutation {
   createProject(data: ProjectCreateInput!): Project!
   createChange(data: ChangeCreateInput!): Change!
-  createUser(data: UserCreateInput!): User!
   createTeam(data: TeamCreateInput!): Team!
+  createUser(data: UserCreateInput!): User!
   updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project
   updateChange(data: ChangeUpdateInput!, where: ChangeWhereUniqueInput!): Change
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateTeam(data: TeamUpdateInput!, where: TeamWhereUniqueInput!): Team
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   deleteProject(where: ProjectWhereUniqueInput!): Project
   deleteChange(where: ChangeWhereUniqueInput!): Change
-  deleteUser(where: UserWhereUniqueInput!): User
   deleteTeam(where: TeamWhereUniqueInput!): Team
+  deleteUser(where: UserWhereUniqueInput!): User
   upsertProject(where: ProjectWhereUniqueInput!, create: ProjectCreateInput!, update: ProjectUpdateInput!): Project!
   upsertChange(where: ChangeWhereUniqueInput!, create: ChangeCreateInput!, update: ChangeUpdateInput!): Change!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertTeam(where: TeamWhereUniqueInput!, create: TeamCreateInput!, update: TeamUpdateInput!): Team!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   updateManyProjects(data: ProjectUpdateInput!, where: ProjectWhereInput): BatchPayload!
   updateManyChanges(data: ChangeUpdateInput!, where: ChangeWhereInput): BatchPayload!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyTeams(data: TeamUpdateInput!, where: TeamWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   deleteManyProjects(where: ProjectWhereInput): BatchPayload!
   deleteManyChanges(where: ChangeWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyTeams(where: TeamWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -842,16 +842,16 @@ input ProjectWhereUniqueInput {
 type Query {
   projects(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Project]!
   changes(where: ChangeWhereInput, orderBy: ChangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Change]!
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   teams(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Team]!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   project(where: ProjectWhereUniqueInput!): Project
   change(where: ChangeWhereUniqueInput!): Change
-  user(where: UserWhereUniqueInput!): User
   team(where: TeamWhereUniqueInput!): Team
+  user(where: UserWhereUniqueInput!): User
   projectsConnection(where: ProjectWhereInput, orderBy: ProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectConnection!
   changesConnection(where: ChangeWhereInput, orderBy: ChangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ChangeConnection!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   teamsConnection(where: TeamWhereInput, orderBy: TeamOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TeamConnection!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -863,8 +863,8 @@ type Query {
 type Subscription {
   project(where: ProjectSubscriptionWhereInput): ProjectSubscriptionPayload
   change(where: ChangeSubscriptionWhereInput): ChangeSubscriptionPayload
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   team(where: TeamSubscriptionWhereInput): TeamSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
 type Team implements Node {
@@ -1827,6 +1827,19 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
  * Types
 */
 
+export type ChangeOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'text_ASC' |
+  'text_DESC'
+
+export type MutationType =   'CREATED' |
+  'UPDATED' |
+  'DELETED'
+
 export type ProjectOrderByInput =   'id_ASC' |
   'id_DESC' |
   'createdAt_ASC' |
@@ -1858,783 +1871,15 @@ export type UserOrderByInput =   'id_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
-export type ChangeOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'text_ASC' |
-  'text_DESC'
-
-export type MutationType =   'CREATED' |
-  'UPDATED' |
-  'DELETED'
-
-export interface UserUpdateOneWithoutTeamOwnerInput {
-  create?: UserCreateWithoutTeamOwnerInput
-  connect?: UserWhereUniqueInput
-  delete?: Boolean
-  update?: UserUpdateWithoutTeamOwnerDataInput
-  upsert?: UserUpsertWithoutTeamOwnerInput
-}
-
-export interface ProjectWhereInput {
-  AND?: ProjectWhereInput[] | ProjectWhereInput
-  OR?: ProjectWhereInput[] | ProjectWhereInput
-  NOT?: ProjectWhereInput[] | ProjectWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  createdAt?: DateTime
-  createdAt_not?: DateTime
-  createdAt_in?: DateTime[] | DateTime
-  createdAt_not_in?: DateTime[] | DateTime
-  createdAt_lt?: DateTime
-  createdAt_lte?: DateTime
-  createdAt_gt?: DateTime
-  createdAt_gte?: DateTime
-  updatedAt?: DateTime
-  updatedAt_not?: DateTime
-  updatedAt_in?: DateTime[] | DateTime
-  updatedAt_not_in?: DateTime[] | DateTime
-  updatedAt_lt?: DateTime
-  updatedAt_lte?: DateTime
-  updatedAt_gt?: DateTime
-  updatedAt_gte?: DateTime
-  name?: String
-  name_not?: String
-  name_in?: String[] | String
-  name_not_in?: String[] | String
-  name_lt?: String
-  name_lte?: String
-  name_gt?: String
-  name_gte?: String
-  name_contains?: String
-  name_not_contains?: String
-  name_starts_with?: String
-  name_not_starts_with?: String
-  name_ends_with?: String
-  name_not_ends_with?: String
-  team?: TeamWhereInput
-  member_every?: UserWhereInput
-  member_some?: UserWhereInput
-  member_none?: UserWhereInput
-  admin_every?: UserWhereInput
-  admin_some?: UserWhereInput
-  admin_none?: UserWhereInput
-  change_every?: ChangeWhereInput
-  change_some?: ChangeWhereInput
-  change_none?: ChangeWhereInput
-}
-
-export interface TeamUpdateWithoutAdminDataInput {
-  name?: String
-  project?: ProjectUpdateManyWithoutTeamInput
-  owner?: UserUpdateOneWithoutTeamOwnerInput
-  member?: UserUpdateManyWithoutTeamMemberInput
-}
-
-export interface ChangeWhereInput {
-  AND?: ChangeWhereInput[] | ChangeWhereInput
-  OR?: ChangeWhereInput[] | ChangeWhereInput
-  NOT?: ChangeWhereInput[] | ChangeWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  createdAt?: DateTime
-  createdAt_not?: DateTime
-  createdAt_in?: DateTime[] | DateTime
-  createdAt_not_in?: DateTime[] | DateTime
-  createdAt_lt?: DateTime
-  createdAt_lte?: DateTime
-  createdAt_gt?: DateTime
-  createdAt_gte?: DateTime
-  updatedAt?: DateTime
-  updatedAt_not?: DateTime
-  updatedAt_in?: DateTime[] | DateTime
-  updatedAt_not_in?: DateTime[] | DateTime
-  updatedAt_lt?: DateTime
-  updatedAt_lte?: DateTime
-  updatedAt_gt?: DateTime
-  updatedAt_gte?: DateTime
-  text?: String
-  text_not?: String
-  text_in?: String[] | String
-  text_not_in?: String[] | String
-  text_lt?: String
-  text_lte?: String
-  text_gt?: String
-  text_gte?: String
-  text_contains?: String
-  text_not_contains?: String
-  text_starts_with?: String
-  text_not_starts_with?: String
-  text_ends_with?: String
-  text_not_ends_with?: String
-  author?: UserWhereInput
-  project?: ProjectWhereInput
-}
-
-export interface ProjectCreateWithoutAdminInput {
-  name: String
-  team: TeamCreateOneWithoutProjectInput
-  member?: UserCreateManyWithoutProjectMemberInput
-  change?: ChangeCreateManyWithoutProjectInput
-}
-
-export interface UserUpsertWithWhereUniqueWithoutTeamAdminInput {
-  where: UserWhereUniqueInput
-  update: UserUpdateWithoutTeamAdminDataInput
-  create: UserCreateWithoutTeamAdminInput
-}
-
-export interface UserCreateManyWithoutTeamMemberInput {
-  create?: UserCreateWithoutTeamMemberInput[] | UserCreateWithoutTeamMemberInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-}
-
-export interface ProjectUpdateManyWithoutTeamInput {
-  create?: ProjectCreateWithoutTeamInput[] | ProjectCreateWithoutTeamInput
-  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  disconnect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  delete?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  update?: ProjectUpdateWithWhereUniqueWithoutTeamInput[] | ProjectUpdateWithWhereUniqueWithoutTeamInput
-  upsert?: ProjectUpsertWithWhereUniqueWithoutTeamInput[] | ProjectUpsertWithWhereUniqueWithoutTeamInput
-}
-
-export interface UserCreateWithoutTeamMemberInput {
-  email: String
-  password: String
-  name: String
-  TeamOwner?: TeamCreateManyWithoutOwnerInput
-  TeamAdmin?: TeamCreateManyWithoutAdminInput
-  projectMember?: ProjectCreateManyWithoutMemberInput
-  projectAdmin?: ProjectCreateManyWithoutAdminInput
-}
-
-export interface UserSubscriptionWhereInput {
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: UserWhereInput
-}
-
 export interface ChangeCreateInput {
   text: String
   author: UserCreateOneInput
   project: ProjectCreateOneWithoutChangeInput
 }
 
-export interface TeamWhereInput {
-  AND?: TeamWhereInput[] | TeamWhereInput
-  OR?: TeamWhereInput[] | TeamWhereInput
-  NOT?: TeamWhereInput[] | TeamWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  createdAt?: DateTime
-  createdAt_not?: DateTime
-  createdAt_in?: DateTime[] | DateTime
-  createdAt_not_in?: DateTime[] | DateTime
-  createdAt_lt?: DateTime
-  createdAt_lte?: DateTime
-  createdAt_gt?: DateTime
-  createdAt_gte?: DateTime
-  updatedAt?: DateTime
-  updatedAt_not?: DateTime
-  updatedAt_in?: DateTime[] | DateTime
-  updatedAt_not_in?: DateTime[] | DateTime
-  updatedAt_lt?: DateTime
-  updatedAt_lte?: DateTime
-  updatedAt_gt?: DateTime
-  updatedAt_gte?: DateTime
-  name?: String
-  name_not?: String
-  name_in?: String[] | String
-  name_not_in?: String[] | String
-  name_lt?: String
-  name_lte?: String
-  name_gt?: String
-  name_gte?: String
-  name_contains?: String
-  name_not_contains?: String
-  name_starts_with?: String
-  name_not_starts_with?: String
-  name_ends_with?: String
-  name_not_ends_with?: String
-  project_every?: ProjectWhereInput
-  project_some?: ProjectWhereInput
-  project_none?: ProjectWhereInput
-  owner?: UserWhereInput
-  admin_every?: UserWhereInput
-  admin_some?: UserWhereInput
-  admin_none?: UserWhereInput
-  member_every?: UserWhereInput
-  member_some?: UserWhereInput
-  member_none?: UserWhereInput
-}
-
-export interface ProjectCreateOneWithoutChangeInput {
-  create?: ProjectCreateWithoutChangeInput
-  connect?: ProjectWhereUniqueInput
-}
-
-export interface ProjectSubscriptionWhereInput {
-  AND?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput
-  OR?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput
-  NOT?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: ProjectWhereInput
-}
-
-export interface ProjectCreateWithoutChangeInput {
-  name: String
-  team: TeamCreateOneWithoutProjectInput
-  member?: UserCreateManyWithoutProjectMemberInput
-  admin?: UserCreateManyWithoutProjectAdminInput
-}
-
-export interface ChangeWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface TeamCreateInput {
-  name?: String
-  project?: ProjectCreateManyWithoutTeamInput
-  owner: UserCreateOneWithoutTeamOwnerInput
-  admin?: UserCreateManyWithoutTeamAdminInput
-  member?: UserCreateManyWithoutTeamMemberInput
-}
-
-export interface TeamWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface ProjectUpdateInput {
-  name?: String
-  team?: TeamUpdateOneWithoutProjectInput
-  member?: UserUpdateManyWithoutProjectMemberInput
-  admin?: UserUpdateManyWithoutProjectAdminInput
-  change?: ChangeUpdateManyWithoutProjectInput
-}
-
-export interface UserUpdateInput {
-  email?: String
-  password?: String
-  name?: String
-  TeamOwner?: TeamUpdateManyWithoutOwnerInput
-  TeamAdmin?: TeamUpdateManyWithoutAdminInput
-  TeamMember?: TeamUpdateManyWithoutMemberInput
-  projectMember?: ProjectUpdateManyWithoutMemberInput
-  projectAdmin?: ProjectUpdateManyWithoutAdminInput
-}
-
-export interface TeamUpdateOneWithoutProjectInput {
-  create?: TeamCreateWithoutProjectInput
-  connect?: TeamWhereUniqueInput
-  delete?: Boolean
-  update?: TeamUpdateWithoutProjectDataInput
-  upsert?: TeamUpsertWithoutProjectInput
-}
-
-export interface ProjectUpdateWithoutChangeDataInput {
-  name?: String
-  team?: TeamUpdateOneWithoutProjectInput
-  member?: UserUpdateManyWithoutProjectMemberInput
-  admin?: UserUpdateManyWithoutProjectAdminInput
-}
-
-export interface TeamUpdateWithoutProjectDataInput {
-  name?: String
-  owner?: UserUpdateOneWithoutTeamOwnerInput
-  admin?: UserUpdateManyWithoutTeamAdminInput
-  member?: UserUpdateManyWithoutTeamMemberInput
-}
-
-export interface ChangeUpdateInput {
-  text?: String
-  author?: UserUpdateOneInput
-  project?: ProjectUpdateOneWithoutChangeInput
-}
-
-export interface UserUpdateWithWhereUniqueWithoutTeamMemberInput {
-  where: UserWhereUniqueInput
-  data: UserUpdateWithoutTeamMemberDataInput
-}
-
-export interface UserUpsertWithoutTeamOwnerInput {
-  update: UserUpdateWithoutTeamOwnerDataInput
-  create: UserCreateWithoutTeamOwnerInput
-}
-
-export interface UserUpdateWithoutTeamOwnerDataInput {
-  email?: String
-  password?: String
-  name?: String
-  TeamAdmin?: TeamUpdateManyWithoutAdminInput
-  TeamMember?: TeamUpdateManyWithoutMemberInput
-  projectMember?: ProjectUpdateManyWithoutMemberInput
-  projectAdmin?: ProjectUpdateManyWithoutAdminInput
-}
-
-export interface ProjectUpsertWithWhereUniqueWithoutTeamInput {
-  where: ProjectWhereUniqueInput
-  update: ProjectUpdateWithoutTeamDataInput
-  create: ProjectCreateWithoutTeamInput
-}
-
-export interface TeamUpdateManyWithoutAdminInput {
-  create?: TeamCreateWithoutAdminInput[] | TeamCreateWithoutAdminInput
-  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput
-  disconnect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput
-  delete?: TeamWhereUniqueInput[] | TeamWhereUniqueInput
-  update?: TeamUpdateWithWhereUniqueWithoutAdminInput[] | TeamUpdateWithWhereUniqueWithoutAdminInput
-  upsert?: TeamUpsertWithWhereUniqueWithoutAdminInput[] | TeamUpsertWithWhereUniqueWithoutAdminInput
-}
-
-export interface TeamUpsertWithWhereUniqueWithoutOwnerInput {
-  where: TeamWhereUniqueInput
-  update: TeamUpdateWithoutOwnerDataInput
-  create: TeamCreateWithoutOwnerInput
-}
-
-export interface TeamUpdateWithWhereUniqueWithoutAdminInput {
-  where: TeamWhereUniqueInput
-  data: TeamUpdateWithoutAdminDataInput
-}
-
-export interface UserUpdateWithoutTeamMemberDataInput {
-  email?: String
-  password?: String
-  name?: String
-  TeamOwner?: TeamUpdateManyWithoutOwnerInput
-  TeamAdmin?: TeamUpdateManyWithoutAdminInput
-  projectMember?: ProjectUpdateManyWithoutMemberInput
-  projectAdmin?: ProjectUpdateManyWithoutAdminInput
-}
-
-export interface UserUpdateManyWithoutTeamMemberInput {
-  create?: UserCreateWithoutTeamMemberInput[] | UserCreateWithoutTeamMemberInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  update?: UserUpdateWithWhereUniqueWithoutTeamMemberInput[] | UserUpdateWithWhereUniqueWithoutTeamMemberInput
-  upsert?: UserUpsertWithWhereUniqueWithoutTeamMemberInput[] | UserUpsertWithWhereUniqueWithoutTeamMemberInput
-}
-
-export interface TeamCreateOneWithoutProjectInput {
-  create?: TeamCreateWithoutProjectInput
-  connect?: TeamWhereUniqueInput
-}
-
-export interface UserCreateOneWithoutTeamOwnerInput {
-  create?: UserCreateWithoutTeamOwnerInput
-  connect?: UserWhereUniqueInput
-}
-
-export interface TeamCreateManyWithoutAdminInput {
-  create?: TeamCreateWithoutAdminInput[] | TeamCreateWithoutAdminInput
-  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput
-}
-
-export interface ProjectUpdateWithWhereUniqueWithoutTeamInput {
-  where: ProjectWhereUniqueInput
-  data: ProjectUpdateWithoutTeamDataInput
-}
-
-export interface ProjectCreateManyWithoutTeamInput {
-  create?: ProjectCreateWithoutTeamInput[] | ProjectCreateWithoutTeamInput
-  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-}
-
-export interface ProjectUpdateWithoutTeamDataInput {
-  name?: String
-  member?: UserUpdateManyWithoutProjectMemberInput
-  admin?: UserUpdateManyWithoutProjectAdminInput
-  change?: ChangeUpdateManyWithoutProjectInput
-}
-
-export interface UserCreateManyWithoutProjectMemberInput {
-  create?: UserCreateWithoutProjectMemberInput[] | UserCreateWithoutProjectMemberInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-}
-
-export interface UserUpdateManyWithoutProjectMemberInput {
-  create?: UserCreateWithoutProjectMemberInput[] | UserCreateWithoutProjectMemberInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  update?: UserUpdateWithWhereUniqueWithoutProjectMemberInput[] | UserUpdateWithWhereUniqueWithoutProjectMemberInput
-  upsert?: UserUpsertWithWhereUniqueWithoutProjectMemberInput[] | UserUpsertWithWhereUniqueWithoutProjectMemberInput
-}
-
-export interface TeamCreateManyWithoutOwnerInput {
-  create?: TeamCreateWithoutOwnerInput[] | TeamCreateWithoutOwnerInput
-  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput
-}
-
-export interface UserUpdateWithWhereUniqueWithoutProjectMemberInput {
-  where: UserWhereUniqueInput
-  data: UserUpdateWithoutProjectMemberDataInput
-}
-
-export interface UserCreateManyWithoutTeamAdminInput {
-  create?: UserCreateWithoutTeamAdminInput[] | UserCreateWithoutTeamAdminInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-}
-
-export interface UserUpdateWithoutProjectMemberDataInput {
-  email?: String
-  password?: String
-  name?: String
-  TeamOwner?: TeamUpdateManyWithoutOwnerInput
-  TeamAdmin?: TeamUpdateManyWithoutAdminInput
-  TeamMember?: TeamUpdateManyWithoutMemberInput
-  projectAdmin?: ProjectUpdateManyWithoutAdminInput
-}
-
-export interface TeamCreateManyWithoutMemberInput {
-  create?: TeamCreateWithoutMemberInput[] | TeamCreateWithoutMemberInput
-  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput
-}
-
-export interface TeamUpdateManyWithoutOwnerInput {
-  create?: TeamCreateWithoutOwnerInput[] | TeamCreateWithoutOwnerInput
-  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput
-  disconnect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput
-  delete?: TeamWhereUniqueInput[] | TeamWhereUniqueInput
-  update?: TeamUpdateWithWhereUniqueWithoutOwnerInput[] | TeamUpdateWithWhereUniqueWithoutOwnerInput
-  upsert?: TeamUpsertWithWhereUniqueWithoutOwnerInput[] | TeamUpsertWithWhereUniqueWithoutOwnerInput
-}
-
-export interface ProjectCreateManyWithoutMemberInput {
-  create?: ProjectCreateWithoutMemberInput[] | ProjectCreateWithoutMemberInput
-  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-}
-
-export interface TeamUpdateWithWhereUniqueWithoutOwnerInput {
-  where: TeamWhereUniqueInput
-  data: TeamUpdateWithoutOwnerDataInput
-}
-
-export interface UserCreateManyWithoutProjectAdminInput {
-  create?: UserCreateWithoutProjectAdminInput[] | UserCreateWithoutProjectAdminInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-}
-
-export interface TeamUpdateWithoutOwnerDataInput {
-  name?: String
-  project?: ProjectUpdateManyWithoutTeamInput
-  admin?: UserUpdateManyWithoutTeamAdminInput
-  member?: UserUpdateManyWithoutTeamMemberInput
-}
-
 export interface ChangeCreateManyWithoutProjectInput {
-  create?: ChangeCreateWithoutProjectInput[] | ChangeCreateWithoutProjectInput
-  connect?: ChangeWhereUniqueInput[] | ChangeWhereUniqueInput
-}
-
-export interface UserUpdateManyWithoutTeamAdminInput {
-  create?: UserCreateWithoutTeamAdminInput[] | UserCreateWithoutTeamAdminInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  update?: UserUpdateWithWhereUniqueWithoutTeamAdminInput[] | UserUpdateWithWhereUniqueWithoutTeamAdminInput
-  upsert?: UserUpsertWithWhereUniqueWithoutTeamAdminInput[] | UserUpsertWithWhereUniqueWithoutTeamAdminInput
-}
-
-export interface UserCreateOneInput {
-  create?: UserCreateInput
-  connect?: UserWhereUniqueInput
-}
-
-export interface UserUpdateWithWhereUniqueWithoutTeamAdminInput {
-  where: UserWhereUniqueInput
-  data: UserUpdateWithoutTeamAdminDataInput
-}
-
-export interface ProjectCreateManyWithoutAdminInput {
-  create?: ProjectCreateWithoutAdminInput[] | ProjectCreateWithoutAdminInput
-  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-}
-
-export interface UserUpdateWithoutTeamAdminDataInput {
-  email?: String
-  password?: String
-  name?: String
-  TeamOwner?: TeamUpdateManyWithoutOwnerInput
-  TeamMember?: TeamUpdateManyWithoutMemberInput
-  projectMember?: ProjectUpdateManyWithoutMemberInput
-  projectAdmin?: ProjectUpdateManyWithoutAdminInput
-}
-
-export interface UserWhereInput {
-  AND?: UserWhereInput[] | UserWhereInput
-  OR?: UserWhereInput[] | UserWhereInput
-  NOT?: UserWhereInput[] | UserWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  email?: String
-  email_not?: String
-  email_in?: String[] | String
-  email_not_in?: String[] | String
-  email_lt?: String
-  email_lte?: String
-  email_gt?: String
-  email_gte?: String
-  email_contains?: String
-  email_not_contains?: String
-  email_starts_with?: String
-  email_not_starts_with?: String
-  email_ends_with?: String
-  email_not_ends_with?: String
-  password?: String
-  password_not?: String
-  password_in?: String[] | String
-  password_not_in?: String[] | String
-  password_lt?: String
-  password_lte?: String
-  password_gt?: String
-  password_gte?: String
-  password_contains?: String
-  password_not_contains?: String
-  password_starts_with?: String
-  password_not_starts_with?: String
-  password_ends_with?: String
-  password_not_ends_with?: String
-  name?: String
-  name_not?: String
-  name_in?: String[] | String
-  name_not_in?: String[] | String
-  name_lt?: String
-  name_lte?: String
-  name_gt?: String
-  name_gte?: String
-  name_contains?: String
-  name_not_contains?: String
-  name_starts_with?: String
-  name_not_starts_with?: String
-  name_ends_with?: String
-  name_not_ends_with?: String
-  TeamOwner_every?: TeamWhereInput
-  TeamOwner_some?: TeamWhereInput
-  TeamOwner_none?: TeamWhereInput
-  TeamAdmin_every?: TeamWhereInput
-  TeamAdmin_some?: TeamWhereInput
-  TeamAdmin_none?: TeamWhereInput
-  TeamMember_every?: TeamWhereInput
-  TeamMember_some?: TeamWhereInput
-  TeamMember_none?: TeamWhereInput
-  projectMember_every?: ProjectWhereInput
-  projectMember_some?: ProjectWhereInput
-  projectMember_none?: ProjectWhereInput
-  projectAdmin_every?: ProjectWhereInput
-  projectAdmin_some?: ProjectWhereInput
-  projectAdmin_none?: ProjectWhereInput
-}
-
-export interface TeamUpdateManyWithoutMemberInput {
-  create?: TeamCreateWithoutMemberInput[] | TeamCreateWithoutMemberInput
-  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput
-  disconnect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput
-  delete?: TeamWhereUniqueInput[] | TeamWhereUniqueInput
-  update?: TeamUpdateWithWhereUniqueWithoutMemberInput[] | TeamUpdateWithWhereUniqueWithoutMemberInput
-  upsert?: TeamUpsertWithWhereUniqueWithoutMemberInput[] | TeamUpsertWithWhereUniqueWithoutMemberInput
-}
-
-export interface ProjectWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface TeamUpdateWithWhereUniqueWithoutMemberInput {
-  where: TeamWhereUniqueInput
-  data: TeamUpdateWithoutMemberDataInput
-}
-
-export interface TeamUpdateInput {
-  name?: String
-  project?: ProjectUpdateManyWithoutTeamInput
-  owner?: UserUpdateOneWithoutTeamOwnerInput
-  admin?: UserUpdateManyWithoutTeamAdminInput
-  member?: UserUpdateManyWithoutTeamMemberInput
-}
-
-export interface TeamUpdateWithoutMemberDataInput {
-  name?: String
-  project?: ProjectUpdateManyWithoutTeamInput
-  owner?: UserUpdateOneWithoutTeamOwnerInput
-  admin?: UserUpdateManyWithoutTeamAdminInput
-}
-
-export interface ProjectUpdateOneWithoutChangeInput {
-  create?: ProjectCreateWithoutChangeInput
-  connect?: ProjectWhereUniqueInput
-  delete?: Boolean
-  update?: ProjectUpdateWithoutChangeDataInput
-  upsert?: ProjectUpsertWithoutChangeInput
-}
-
-export interface TeamUpsertWithWhereUniqueWithoutMemberInput {
-  where: TeamWhereUniqueInput
-  update: TeamUpdateWithoutMemberDataInput
-  create: TeamCreateWithoutMemberInput
-}
-
-export interface TeamUpsertWithWhereUniqueWithoutAdminInput {
-  where: TeamWhereUniqueInput
-  update: TeamUpdateWithoutAdminDataInput
-  create: TeamCreateWithoutAdminInput
-}
-
-export interface ProjectUpdateManyWithoutMemberInput {
-  create?: ProjectCreateWithoutMemberInput[] | ProjectCreateWithoutMemberInput
-  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  disconnect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  delete?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  update?: ProjectUpdateWithWhereUniqueWithoutMemberInput[] | ProjectUpdateWithWhereUniqueWithoutMemberInput
-  upsert?: ProjectUpsertWithWhereUniqueWithoutMemberInput[] | ProjectUpsertWithWhereUniqueWithoutMemberInput
-}
-
-export interface UserUpsertWithWhereUniqueWithoutTeamMemberInput {
-  where: UserWhereUniqueInput
-  update: UserUpdateWithoutTeamMemberDataInput
-  create: UserCreateWithoutTeamMemberInput
-}
-
-export interface ProjectUpdateWithWhereUniqueWithoutMemberInput {
-  where: ProjectWhereUniqueInput
-  data: ProjectUpdateWithoutMemberDataInput
-}
-
-export interface TeamCreateWithoutProjectInput {
-  name?: String
-  owner: UserCreateOneWithoutTeamOwnerInput
-  admin?: UserCreateManyWithoutTeamAdminInput
-  member?: UserCreateManyWithoutTeamMemberInput
-}
-
-export interface ProjectUpdateWithoutMemberDataInput {
-  name?: String
-  team?: TeamUpdateOneWithoutProjectInput
-  admin?: UserUpdateManyWithoutProjectAdminInput
-  change?: ChangeUpdateManyWithoutProjectInput
-}
-
-export interface TeamCreateWithoutAdminInput {
-  name?: String
-  project?: ProjectCreateManyWithoutTeamInput
-  owner: UserCreateOneWithoutTeamOwnerInput
-  member?: UserCreateManyWithoutTeamMemberInput
-}
-
-export interface UserUpdateManyWithoutProjectAdminInput {
-  create?: UserCreateWithoutProjectAdminInput[] | UserCreateWithoutProjectAdminInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  update?: UserUpdateWithWhereUniqueWithoutProjectAdminInput[] | UserUpdateWithWhereUniqueWithoutProjectAdminInput
-  upsert?: UserUpsertWithWhereUniqueWithoutProjectAdminInput[] | UserUpsertWithWhereUniqueWithoutProjectAdminInput
-}
-
-export interface UserCreateWithoutProjectMemberInput {
-  email: String
-  password: String
-  name: String
-  TeamOwner?: TeamCreateManyWithoutOwnerInput
-  TeamAdmin?: TeamCreateManyWithoutAdminInput
-  TeamMember?: TeamCreateManyWithoutMemberInput
-  projectAdmin?: ProjectCreateManyWithoutAdminInput
-}
-
-export interface UserUpdateWithWhereUniqueWithoutProjectAdminInput {
-  where: UserWhereUniqueInput
-  data: UserUpdateWithoutProjectAdminDataInput
-}
-
-export interface UserCreateWithoutTeamAdminInput {
-  email: String
-  password: String
-  name: String
-  TeamOwner?: TeamCreateManyWithoutOwnerInput
-  TeamMember?: TeamCreateManyWithoutMemberInput
-  projectMember?: ProjectCreateManyWithoutMemberInput
-  projectAdmin?: ProjectCreateManyWithoutAdminInput
-}
-
-export interface UserUpdateWithoutProjectAdminDataInput {
-  email?: String
-  password?: String
-  name?: String
-  TeamOwner?: TeamUpdateManyWithoutOwnerInput
-  TeamAdmin?: TeamUpdateManyWithoutAdminInput
-  TeamMember?: TeamUpdateManyWithoutMemberInput
-  projectMember?: ProjectUpdateManyWithoutMemberInput
-}
-
-export interface ProjectCreateWithoutMemberInput {
-  name: String
-  team: TeamCreateOneWithoutProjectInput
-  admin?: UserCreateManyWithoutProjectAdminInput
-  change?: ChangeCreateManyWithoutProjectInput
-}
-
-export interface UserUpsertWithWhereUniqueWithoutProjectAdminInput {
-  where: UserWhereUniqueInput
-  update: UserUpdateWithoutProjectAdminDataInput
-  create: UserCreateWithoutProjectAdminInput
+  create?: ChangeCreateWithoutProjectInput[] | ChangeCreateWithoutProjectInput | null
+  connect?: ChangeWhereUniqueInput[] | ChangeWhereUniqueInput | null
 }
 
 export interface ChangeCreateWithoutProjectInput {
@@ -2642,128 +1887,40 @@ export interface ChangeCreateWithoutProjectInput {
   author: UserCreateOneInput
 }
 
-export interface ChangeUpdateManyWithoutProjectInput {
-  create?: ChangeCreateWithoutProjectInput[] | ChangeCreateWithoutProjectInput
-  connect?: ChangeWhereUniqueInput[] | ChangeWhereUniqueInput
-  disconnect?: ChangeWhereUniqueInput[] | ChangeWhereUniqueInput
-  delete?: ChangeWhereUniqueInput[] | ChangeWhereUniqueInput
-  update?: ChangeUpdateWithWhereUniqueWithoutProjectInput[] | ChangeUpdateWithWhereUniqueWithoutProjectInput
-  upsert?: ChangeUpsertWithWhereUniqueWithoutProjectInput[] | ChangeUpsertWithWhereUniqueWithoutProjectInput
+export interface ChangeSubscriptionWhereInput {
+  AND?: ChangeSubscriptionWhereInput[] | ChangeSubscriptionWhereInput | null
+  OR?: ChangeSubscriptionWhereInput[] | ChangeSubscriptionWhereInput | null
+  NOT?: ChangeSubscriptionWhereInput[] | ChangeSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: ChangeWhereInput | null
 }
 
-export interface TeamSubscriptionWhereInput {
-  AND?: TeamSubscriptionWhereInput[] | TeamSubscriptionWhereInput
-  OR?: TeamSubscriptionWhereInput[] | TeamSubscriptionWhereInput
-  NOT?: TeamSubscriptionWhereInput[] | TeamSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: TeamWhereInput
+export interface ChangeUpdateInput {
+  text?: String | null
+  author?: UserUpdateOneInput | null
+  project?: ProjectUpdateOneWithoutChangeInput | null
+}
+
+export interface ChangeUpdateManyWithoutProjectInput {
+  create?: ChangeCreateWithoutProjectInput[] | ChangeCreateWithoutProjectInput | null
+  connect?: ChangeWhereUniqueInput[] | ChangeWhereUniqueInput | null
+  disconnect?: ChangeWhereUniqueInput[] | ChangeWhereUniqueInput | null
+  delete?: ChangeWhereUniqueInput[] | ChangeWhereUniqueInput | null
+  update?: ChangeUpdateWithWhereUniqueWithoutProjectInput[] | ChangeUpdateWithWhereUniqueWithoutProjectInput | null
+  upsert?: ChangeUpsertWithWhereUniqueWithoutProjectInput[] | ChangeUpsertWithWhereUniqueWithoutProjectInput | null
+}
+
+export interface ChangeUpdateWithoutProjectDataInput {
+  text?: String | null
+  author?: UserUpdateOneInput | null
 }
 
 export interface ChangeUpdateWithWhereUniqueWithoutProjectInput {
   where: ChangeWhereUniqueInput
   data: ChangeUpdateWithoutProjectDataInput
-}
-
-export interface UserWhereUniqueInput {
-  id?: ID_Input
-  email?: String
-}
-
-export interface ChangeUpdateWithoutProjectDataInput {
-  text?: String
-  author?: UserUpdateOneInput
-}
-
-export interface TeamUpsertWithoutProjectInput {
-  update: TeamUpdateWithoutProjectDataInput
-  create: TeamCreateWithoutProjectInput
-}
-
-export interface UserUpdateOneInput {
-  create?: UserCreateInput
-  connect?: UserWhereUniqueInput
-  delete?: Boolean
-  update?: UserUpdateDataInput
-  upsert?: UserUpsertNestedInput
-}
-
-export interface ProjectCreateInput {
-  name: String
-  team: TeamCreateOneWithoutProjectInput
-  member?: UserCreateManyWithoutProjectMemberInput
-  admin?: UserCreateManyWithoutProjectAdminInput
-  change?: ChangeCreateManyWithoutProjectInput
-}
-
-export interface UserUpdateDataInput {
-  email?: String
-  password?: String
-  name?: String
-  TeamOwner?: TeamUpdateManyWithoutOwnerInput
-  TeamAdmin?: TeamUpdateManyWithoutAdminInput
-  TeamMember?: TeamUpdateManyWithoutMemberInput
-  projectMember?: ProjectUpdateManyWithoutMemberInput
-  projectAdmin?: ProjectUpdateManyWithoutAdminInput
-}
-
-export interface ProjectCreateWithoutTeamInput {
-  name: String
-  member?: UserCreateManyWithoutProjectMemberInput
-  admin?: UserCreateManyWithoutProjectAdminInput
-  change?: ChangeCreateManyWithoutProjectInput
-}
-
-export interface ProjectUpdateManyWithoutAdminInput {
-  create?: ProjectCreateWithoutAdminInput[] | ProjectCreateWithoutAdminInput
-  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  disconnect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  delete?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput
-  update?: ProjectUpdateWithWhereUniqueWithoutAdminInput[] | ProjectUpdateWithWhereUniqueWithoutAdminInput
-  upsert?: ProjectUpsertWithWhereUniqueWithoutAdminInput[] | ProjectUpsertWithWhereUniqueWithoutAdminInput
-}
-
-export interface TeamCreateWithoutMemberInput {
-  name?: String
-  project?: ProjectCreateManyWithoutTeamInput
-  owner: UserCreateOneWithoutTeamOwnerInput
-  admin?: UserCreateManyWithoutTeamAdminInput
-}
-
-export interface ProjectUpdateWithWhereUniqueWithoutAdminInput {
-  where: ProjectWhereUniqueInput
-  data: ProjectUpdateWithoutAdminDataInput
-}
-
-export interface UserCreateInput {
-  email: String
-  password: String
-  name: String
-  TeamOwner?: TeamCreateManyWithoutOwnerInput
-  TeamAdmin?: TeamCreateManyWithoutAdminInput
-  TeamMember?: TeamCreateManyWithoutMemberInput
-  projectMember?: ProjectCreateManyWithoutMemberInput
-  projectAdmin?: ProjectCreateManyWithoutAdminInput
-}
-
-export interface ProjectUpdateWithoutAdminDataInput {
-  name?: String
-  team?: TeamUpdateOneWithoutProjectInput
-  member?: UserUpdateManyWithoutProjectMemberInput
-  change?: ChangeUpdateManyWithoutProjectInput
-}
-
-export interface ProjectUpsertWithoutChangeInput {
-  update: ProjectUpdateWithoutChangeDataInput
-  create: ProjectCreateWithoutChangeInput
-}
-
-export interface ProjectUpsertWithWhereUniqueWithoutMemberInput {
-  where: ProjectWhereUniqueInput
-  update: ProjectUpdateWithoutMemberDataInput
-  create: ProjectCreateWithoutMemberInput
 }
 
 export interface ChangeUpsertWithWhereUniqueWithoutProjectInput {
@@ -2772,9 +1929,218 @@ export interface ChangeUpsertWithWhereUniqueWithoutProjectInput {
   create: ChangeCreateWithoutProjectInput
 }
 
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput
-  create: UserCreateInput
+export interface ChangeWhereInput {
+  AND?: ChangeWhereInput[] | ChangeWhereInput | null
+  OR?: ChangeWhereInput[] | ChangeWhereInput | null
+  NOT?: ChangeWhereInput[] | ChangeWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
+  updatedAt?: DateTime | null
+  updatedAt_not?: DateTime | null
+  updatedAt_in?: DateTime[] | DateTime | null
+  updatedAt_not_in?: DateTime[] | DateTime | null
+  updatedAt_lt?: DateTime | null
+  updatedAt_lte?: DateTime | null
+  updatedAt_gt?: DateTime | null
+  updatedAt_gte?: DateTime | null
+  text?: String | null
+  text_not?: String | null
+  text_in?: String[] | String | null
+  text_not_in?: String[] | String | null
+  text_lt?: String | null
+  text_lte?: String | null
+  text_gt?: String | null
+  text_gte?: String | null
+  text_contains?: String | null
+  text_not_contains?: String | null
+  text_starts_with?: String | null
+  text_not_starts_with?: String | null
+  text_ends_with?: String | null
+  text_not_ends_with?: String | null
+  author?: UserWhereInput | null
+  project?: ProjectWhereInput | null
+}
+
+export interface ChangeWhereUniqueInput {
+  id?: ID_Input | null
+}
+
+export interface ProjectCreateInput {
+  name: String
+  team: TeamCreateOneWithoutProjectInput
+  member?: UserCreateManyWithoutProjectMemberInput | null
+  admin?: UserCreateManyWithoutProjectAdminInput | null
+  change?: ChangeCreateManyWithoutProjectInput | null
+}
+
+export interface ProjectCreateManyWithoutAdminInput {
+  create?: ProjectCreateWithoutAdminInput[] | ProjectCreateWithoutAdminInput | null
+  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput | null
+}
+
+export interface ProjectCreateManyWithoutMemberInput {
+  create?: ProjectCreateWithoutMemberInput[] | ProjectCreateWithoutMemberInput | null
+  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput | null
+}
+
+export interface ProjectCreateManyWithoutTeamInput {
+  create?: ProjectCreateWithoutTeamInput[] | ProjectCreateWithoutTeamInput | null
+  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput | null
+}
+
+export interface ProjectCreateOneWithoutChangeInput {
+  create?: ProjectCreateWithoutChangeInput | null
+  connect?: ProjectWhereUniqueInput | null
+}
+
+export interface ProjectCreateWithoutAdminInput {
+  name: String
+  team: TeamCreateOneWithoutProjectInput
+  member?: UserCreateManyWithoutProjectMemberInput | null
+  change?: ChangeCreateManyWithoutProjectInput | null
+}
+
+export interface ProjectCreateWithoutChangeInput {
+  name: String
+  team: TeamCreateOneWithoutProjectInput
+  member?: UserCreateManyWithoutProjectMemberInput | null
+  admin?: UserCreateManyWithoutProjectAdminInput | null
+}
+
+export interface ProjectCreateWithoutMemberInput {
+  name: String
+  team: TeamCreateOneWithoutProjectInput
+  admin?: UserCreateManyWithoutProjectAdminInput | null
+  change?: ChangeCreateManyWithoutProjectInput | null
+}
+
+export interface ProjectCreateWithoutTeamInput {
+  name: String
+  member?: UserCreateManyWithoutProjectMemberInput | null
+  admin?: UserCreateManyWithoutProjectAdminInput | null
+  change?: ChangeCreateManyWithoutProjectInput | null
+}
+
+export interface ProjectSubscriptionWhereInput {
+  AND?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput | null
+  OR?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput | null
+  NOT?: ProjectSubscriptionWhereInput[] | ProjectSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: ProjectWhereInput | null
+}
+
+export interface ProjectUpdateInput {
+  name?: String | null
+  team?: TeamUpdateOneWithoutProjectInput | null
+  member?: UserUpdateManyWithoutProjectMemberInput | null
+  admin?: UserUpdateManyWithoutProjectAdminInput | null
+  change?: ChangeUpdateManyWithoutProjectInput | null
+}
+
+export interface ProjectUpdateManyWithoutAdminInput {
+  create?: ProjectCreateWithoutAdminInput[] | ProjectCreateWithoutAdminInput | null
+  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput | null
+  disconnect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput | null
+  delete?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput | null
+  update?: ProjectUpdateWithWhereUniqueWithoutAdminInput[] | ProjectUpdateWithWhereUniqueWithoutAdminInput | null
+  upsert?: ProjectUpsertWithWhereUniqueWithoutAdminInput[] | ProjectUpsertWithWhereUniqueWithoutAdminInput | null
+}
+
+export interface ProjectUpdateManyWithoutMemberInput {
+  create?: ProjectCreateWithoutMemberInput[] | ProjectCreateWithoutMemberInput | null
+  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput | null
+  disconnect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput | null
+  delete?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput | null
+  update?: ProjectUpdateWithWhereUniqueWithoutMemberInput[] | ProjectUpdateWithWhereUniqueWithoutMemberInput | null
+  upsert?: ProjectUpsertWithWhereUniqueWithoutMemberInput[] | ProjectUpsertWithWhereUniqueWithoutMemberInput | null
+}
+
+export interface ProjectUpdateManyWithoutTeamInput {
+  create?: ProjectCreateWithoutTeamInput[] | ProjectCreateWithoutTeamInput | null
+  connect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput | null
+  disconnect?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput | null
+  delete?: ProjectWhereUniqueInput[] | ProjectWhereUniqueInput | null
+  update?: ProjectUpdateWithWhereUniqueWithoutTeamInput[] | ProjectUpdateWithWhereUniqueWithoutTeamInput | null
+  upsert?: ProjectUpsertWithWhereUniqueWithoutTeamInput[] | ProjectUpsertWithWhereUniqueWithoutTeamInput | null
+}
+
+export interface ProjectUpdateOneWithoutChangeInput {
+  create?: ProjectCreateWithoutChangeInput | null
+  connect?: ProjectWhereUniqueInput | null
+  delete?: Boolean | null
+  update?: ProjectUpdateWithoutChangeDataInput | null
+  upsert?: ProjectUpsertWithoutChangeInput | null
+}
+
+export interface ProjectUpdateWithoutAdminDataInput {
+  name?: String | null
+  team?: TeamUpdateOneWithoutProjectInput | null
+  member?: UserUpdateManyWithoutProjectMemberInput | null
+  change?: ChangeUpdateManyWithoutProjectInput | null
+}
+
+export interface ProjectUpdateWithoutChangeDataInput {
+  name?: String | null
+  team?: TeamUpdateOneWithoutProjectInput | null
+  member?: UserUpdateManyWithoutProjectMemberInput | null
+  admin?: UserUpdateManyWithoutProjectAdminInput | null
+}
+
+export interface ProjectUpdateWithoutMemberDataInput {
+  name?: String | null
+  team?: TeamUpdateOneWithoutProjectInput | null
+  admin?: UserUpdateManyWithoutProjectAdminInput | null
+  change?: ChangeUpdateManyWithoutProjectInput | null
+}
+
+export interface ProjectUpdateWithoutTeamDataInput {
+  name?: String | null
+  member?: UserUpdateManyWithoutProjectMemberInput | null
+  admin?: UserUpdateManyWithoutProjectAdminInput | null
+  change?: ChangeUpdateManyWithoutProjectInput | null
+}
+
+export interface ProjectUpdateWithWhereUniqueWithoutAdminInput {
+  where: ProjectWhereUniqueInput
+  data: ProjectUpdateWithoutAdminDataInput
+}
+
+export interface ProjectUpdateWithWhereUniqueWithoutMemberInput {
+  where: ProjectWhereUniqueInput
+  data: ProjectUpdateWithoutMemberDataInput
+}
+
+export interface ProjectUpdateWithWhereUniqueWithoutTeamInput {
+  where: ProjectWhereUniqueInput
+  data: ProjectUpdateWithoutTeamDataInput
+}
+
+export interface ProjectUpsertWithoutChangeInput {
+  update: ProjectUpdateWithoutChangeDataInput
+  create: ProjectCreateWithoutChangeInput
 }
 
 export interface ProjectUpsertWithWhereUniqueWithoutAdminInput {
@@ -2783,48 +2149,682 @@ export interface ProjectUpsertWithWhereUniqueWithoutAdminInput {
   create: ProjectCreateWithoutAdminInput
 }
 
-export interface UserUpsertWithWhereUniqueWithoutProjectMemberInput {
-  where: UserWhereUniqueInput
-  update: UserUpdateWithoutProjectMemberDataInput
-  create: UserCreateWithoutProjectMemberInput
+export interface ProjectUpsertWithWhereUniqueWithoutMemberInput {
+  where: ProjectWhereUniqueInput
+  update: ProjectUpdateWithoutMemberDataInput
+  create: ProjectCreateWithoutMemberInput
 }
 
-export interface ChangeSubscriptionWhereInput {
-  AND?: ChangeSubscriptionWhereInput[] | ChangeSubscriptionWhereInput
-  OR?: ChangeSubscriptionWhereInput[] | ChangeSubscriptionWhereInput
-  NOT?: ChangeSubscriptionWhereInput[] | ChangeSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: ChangeWhereInput
+export interface ProjectUpsertWithWhereUniqueWithoutTeamInput {
+  where: ProjectWhereUniqueInput
+  update: ProjectUpdateWithoutTeamDataInput
+  create: ProjectCreateWithoutTeamInput
+}
+
+export interface ProjectWhereInput {
+  AND?: ProjectWhereInput[] | ProjectWhereInput | null
+  OR?: ProjectWhereInput[] | ProjectWhereInput | null
+  NOT?: ProjectWhereInput[] | ProjectWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
+  updatedAt?: DateTime | null
+  updatedAt_not?: DateTime | null
+  updatedAt_in?: DateTime[] | DateTime | null
+  updatedAt_not_in?: DateTime[] | DateTime | null
+  updatedAt_lt?: DateTime | null
+  updatedAt_lte?: DateTime | null
+  updatedAt_gt?: DateTime | null
+  updatedAt_gte?: DateTime | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
+  team?: TeamWhereInput | null
+  member_every?: UserWhereInput | null
+  member_some?: UserWhereInput | null
+  member_none?: UserWhereInput | null
+  admin_every?: UserWhereInput | null
+  admin_some?: UserWhereInput | null
+  admin_none?: UserWhereInput | null
+  change_every?: ChangeWhereInput | null
+  change_some?: ChangeWhereInput | null
+  change_none?: ChangeWhereInput | null
+}
+
+export interface ProjectWhereUniqueInput {
+  id?: ID_Input | null
+}
+
+export interface TeamCreateInput {
+  name?: String | null
+  project?: ProjectCreateManyWithoutTeamInput | null
+  owner: UserCreateOneWithoutTeamOwnerInput
+  admin?: UserCreateManyWithoutTeamAdminInput | null
+  member?: UserCreateManyWithoutTeamMemberInput | null
+}
+
+export interface TeamCreateManyWithoutAdminInput {
+  create?: TeamCreateWithoutAdminInput[] | TeamCreateWithoutAdminInput | null
+  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput | null
+}
+
+export interface TeamCreateManyWithoutMemberInput {
+  create?: TeamCreateWithoutMemberInput[] | TeamCreateWithoutMemberInput | null
+  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput | null
+}
+
+export interface TeamCreateManyWithoutOwnerInput {
+  create?: TeamCreateWithoutOwnerInput[] | TeamCreateWithoutOwnerInput | null
+  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput | null
+}
+
+export interface TeamCreateOneWithoutProjectInput {
+  create?: TeamCreateWithoutProjectInput | null
+  connect?: TeamWhereUniqueInput | null
+}
+
+export interface TeamCreateWithoutAdminInput {
+  name?: String | null
+  project?: ProjectCreateManyWithoutTeamInput | null
+  owner: UserCreateOneWithoutTeamOwnerInput
+  member?: UserCreateManyWithoutTeamMemberInput | null
+}
+
+export interface TeamCreateWithoutMemberInput {
+  name?: String | null
+  project?: ProjectCreateManyWithoutTeamInput | null
+  owner: UserCreateOneWithoutTeamOwnerInput
+  admin?: UserCreateManyWithoutTeamAdminInput | null
+}
+
+export interface TeamCreateWithoutOwnerInput {
+  name?: String | null
+  project?: ProjectCreateManyWithoutTeamInput | null
+  admin?: UserCreateManyWithoutTeamAdminInput | null
+  member?: UserCreateManyWithoutTeamMemberInput | null
+}
+
+export interface TeamCreateWithoutProjectInput {
+  name?: String | null
+  owner: UserCreateOneWithoutTeamOwnerInput
+  admin?: UserCreateManyWithoutTeamAdminInput | null
+  member?: UserCreateManyWithoutTeamMemberInput | null
+}
+
+export interface TeamSubscriptionWhereInput {
+  AND?: TeamSubscriptionWhereInput[] | TeamSubscriptionWhereInput | null
+  OR?: TeamSubscriptionWhereInput[] | TeamSubscriptionWhereInput | null
+  NOT?: TeamSubscriptionWhereInput[] | TeamSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: TeamWhereInput | null
+}
+
+export interface TeamUpdateInput {
+  name?: String | null
+  project?: ProjectUpdateManyWithoutTeamInput | null
+  owner?: UserUpdateOneWithoutTeamOwnerInput | null
+  admin?: UserUpdateManyWithoutTeamAdminInput | null
+  member?: UserUpdateManyWithoutTeamMemberInput | null
+}
+
+export interface TeamUpdateManyWithoutAdminInput {
+  create?: TeamCreateWithoutAdminInput[] | TeamCreateWithoutAdminInput | null
+  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput | null
+  disconnect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput | null
+  delete?: TeamWhereUniqueInput[] | TeamWhereUniqueInput | null
+  update?: TeamUpdateWithWhereUniqueWithoutAdminInput[] | TeamUpdateWithWhereUniqueWithoutAdminInput | null
+  upsert?: TeamUpsertWithWhereUniqueWithoutAdminInput[] | TeamUpsertWithWhereUniqueWithoutAdminInput | null
+}
+
+export interface TeamUpdateManyWithoutMemberInput {
+  create?: TeamCreateWithoutMemberInput[] | TeamCreateWithoutMemberInput | null
+  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput | null
+  disconnect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput | null
+  delete?: TeamWhereUniqueInput[] | TeamWhereUniqueInput | null
+  update?: TeamUpdateWithWhereUniqueWithoutMemberInput[] | TeamUpdateWithWhereUniqueWithoutMemberInput | null
+  upsert?: TeamUpsertWithWhereUniqueWithoutMemberInput[] | TeamUpsertWithWhereUniqueWithoutMemberInput | null
+}
+
+export interface TeamUpdateManyWithoutOwnerInput {
+  create?: TeamCreateWithoutOwnerInput[] | TeamCreateWithoutOwnerInput | null
+  connect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput | null
+  disconnect?: TeamWhereUniqueInput[] | TeamWhereUniqueInput | null
+  delete?: TeamWhereUniqueInput[] | TeamWhereUniqueInput | null
+  update?: TeamUpdateWithWhereUniqueWithoutOwnerInput[] | TeamUpdateWithWhereUniqueWithoutOwnerInput | null
+  upsert?: TeamUpsertWithWhereUniqueWithoutOwnerInput[] | TeamUpsertWithWhereUniqueWithoutOwnerInput | null
+}
+
+export interface TeamUpdateOneWithoutProjectInput {
+  create?: TeamCreateWithoutProjectInput | null
+  connect?: TeamWhereUniqueInput | null
+  delete?: Boolean | null
+  update?: TeamUpdateWithoutProjectDataInput | null
+  upsert?: TeamUpsertWithoutProjectInput | null
+}
+
+export interface TeamUpdateWithoutAdminDataInput {
+  name?: String | null
+  project?: ProjectUpdateManyWithoutTeamInput | null
+  owner?: UserUpdateOneWithoutTeamOwnerInput | null
+  member?: UserUpdateManyWithoutTeamMemberInput | null
+}
+
+export interface TeamUpdateWithoutMemberDataInput {
+  name?: String | null
+  project?: ProjectUpdateManyWithoutTeamInput | null
+  owner?: UserUpdateOneWithoutTeamOwnerInput | null
+  admin?: UserUpdateManyWithoutTeamAdminInput | null
+}
+
+export interface TeamUpdateWithoutOwnerDataInput {
+  name?: String | null
+  project?: ProjectUpdateManyWithoutTeamInput | null
+  admin?: UserUpdateManyWithoutTeamAdminInput | null
+  member?: UserUpdateManyWithoutTeamMemberInput | null
+}
+
+export interface TeamUpdateWithoutProjectDataInput {
+  name?: String | null
+  owner?: UserUpdateOneWithoutTeamOwnerInput | null
+  admin?: UserUpdateManyWithoutTeamAdminInput | null
+  member?: UserUpdateManyWithoutTeamMemberInput | null
+}
+
+export interface TeamUpdateWithWhereUniqueWithoutAdminInput {
+  where: TeamWhereUniqueInput
+  data: TeamUpdateWithoutAdminDataInput
+}
+
+export interface TeamUpdateWithWhereUniqueWithoutMemberInput {
+  where: TeamWhereUniqueInput
+  data: TeamUpdateWithoutMemberDataInput
+}
+
+export interface TeamUpdateWithWhereUniqueWithoutOwnerInput {
+  where: TeamWhereUniqueInput
+  data: TeamUpdateWithoutOwnerDataInput
+}
+
+export interface TeamUpsertWithoutProjectInput {
+  update: TeamUpdateWithoutProjectDataInput
+  create: TeamCreateWithoutProjectInput
+}
+
+export interface TeamUpsertWithWhereUniqueWithoutAdminInput {
+  where: TeamWhereUniqueInput
+  update: TeamUpdateWithoutAdminDataInput
+  create: TeamCreateWithoutAdminInput
+}
+
+export interface TeamUpsertWithWhereUniqueWithoutMemberInput {
+  where: TeamWhereUniqueInput
+  update: TeamUpdateWithoutMemberDataInput
+  create: TeamCreateWithoutMemberInput
+}
+
+export interface TeamUpsertWithWhereUniqueWithoutOwnerInput {
+  where: TeamWhereUniqueInput
+  update: TeamUpdateWithoutOwnerDataInput
+  create: TeamCreateWithoutOwnerInput
+}
+
+export interface TeamWhereInput {
+  AND?: TeamWhereInput[] | TeamWhereInput | null
+  OR?: TeamWhereInput[] | TeamWhereInput | null
+  NOT?: TeamWhereInput[] | TeamWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  createdAt?: DateTime | null
+  createdAt_not?: DateTime | null
+  createdAt_in?: DateTime[] | DateTime | null
+  createdAt_not_in?: DateTime[] | DateTime | null
+  createdAt_lt?: DateTime | null
+  createdAt_lte?: DateTime | null
+  createdAt_gt?: DateTime | null
+  createdAt_gte?: DateTime | null
+  updatedAt?: DateTime | null
+  updatedAt_not?: DateTime | null
+  updatedAt_in?: DateTime[] | DateTime | null
+  updatedAt_not_in?: DateTime[] | DateTime | null
+  updatedAt_lt?: DateTime | null
+  updatedAt_lte?: DateTime | null
+  updatedAt_gt?: DateTime | null
+  updatedAt_gte?: DateTime | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
+  project_every?: ProjectWhereInput | null
+  project_some?: ProjectWhereInput | null
+  project_none?: ProjectWhereInput | null
+  owner?: UserWhereInput | null
+  admin_every?: UserWhereInput | null
+  admin_some?: UserWhereInput | null
+  admin_none?: UserWhereInput | null
+  member_every?: UserWhereInput | null
+  member_some?: UserWhereInput | null
+  member_none?: UserWhereInput | null
+}
+
+export interface TeamWhereUniqueInput {
+  id?: ID_Input | null
+}
+
+export interface UserCreateInput {
+  email: String
+  password: String
+  name: String
+  TeamOwner?: TeamCreateManyWithoutOwnerInput | null
+  TeamAdmin?: TeamCreateManyWithoutAdminInput | null
+  TeamMember?: TeamCreateManyWithoutMemberInput | null
+  projectMember?: ProjectCreateManyWithoutMemberInput | null
+  projectAdmin?: ProjectCreateManyWithoutAdminInput | null
+}
+
+export interface UserCreateManyWithoutProjectAdminInput {
+  create?: UserCreateWithoutProjectAdminInput[] | UserCreateWithoutProjectAdminInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+}
+
+export interface UserCreateManyWithoutProjectMemberInput {
+  create?: UserCreateWithoutProjectMemberInput[] | UserCreateWithoutProjectMemberInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+}
+
+export interface UserCreateManyWithoutTeamAdminInput {
+  create?: UserCreateWithoutTeamAdminInput[] | UserCreateWithoutTeamAdminInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+}
+
+export interface UserCreateManyWithoutTeamMemberInput {
+  create?: UserCreateWithoutTeamMemberInput[] | UserCreateWithoutTeamMemberInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+}
+
+export interface UserCreateOneInput {
+  create?: UserCreateInput | null
+  connect?: UserWhereUniqueInput | null
+}
+
+export interface UserCreateOneWithoutTeamOwnerInput {
+  create?: UserCreateWithoutTeamOwnerInput | null
+  connect?: UserWhereUniqueInput | null
 }
 
 export interface UserCreateWithoutProjectAdminInput {
   email: String
   password: String
   name: String
-  TeamOwner?: TeamCreateManyWithoutOwnerInput
-  TeamAdmin?: TeamCreateManyWithoutAdminInput
-  TeamMember?: TeamCreateManyWithoutMemberInput
-  projectMember?: ProjectCreateManyWithoutMemberInput
+  TeamOwner?: TeamCreateManyWithoutOwnerInput | null
+  TeamAdmin?: TeamCreateManyWithoutAdminInput | null
+  TeamMember?: TeamCreateManyWithoutMemberInput | null
+  projectMember?: ProjectCreateManyWithoutMemberInput | null
 }
 
-export interface TeamCreateWithoutOwnerInput {
-  name?: String
-  project?: ProjectCreateManyWithoutTeamInput
-  admin?: UserCreateManyWithoutTeamAdminInput
-  member?: UserCreateManyWithoutTeamMemberInput
+export interface UserCreateWithoutProjectMemberInput {
+  email: String
+  password: String
+  name: String
+  TeamOwner?: TeamCreateManyWithoutOwnerInput | null
+  TeamAdmin?: TeamCreateManyWithoutAdminInput | null
+  TeamMember?: TeamCreateManyWithoutMemberInput | null
+  projectAdmin?: ProjectCreateManyWithoutAdminInput | null
+}
+
+export interface UserCreateWithoutTeamAdminInput {
+  email: String
+  password: String
+  name: String
+  TeamOwner?: TeamCreateManyWithoutOwnerInput | null
+  TeamMember?: TeamCreateManyWithoutMemberInput | null
+  projectMember?: ProjectCreateManyWithoutMemberInput | null
+  projectAdmin?: ProjectCreateManyWithoutAdminInput | null
+}
+
+export interface UserCreateWithoutTeamMemberInput {
+  email: String
+  password: String
+  name: String
+  TeamOwner?: TeamCreateManyWithoutOwnerInput | null
+  TeamAdmin?: TeamCreateManyWithoutAdminInput | null
+  projectMember?: ProjectCreateManyWithoutMemberInput | null
+  projectAdmin?: ProjectCreateManyWithoutAdminInput | null
 }
 
 export interface UserCreateWithoutTeamOwnerInput {
   email: String
   password: String
   name: String
-  TeamAdmin?: TeamCreateManyWithoutAdminInput
-  TeamMember?: TeamCreateManyWithoutMemberInput
-  projectMember?: ProjectCreateManyWithoutMemberInput
-  projectAdmin?: ProjectCreateManyWithoutAdminInput
+  TeamAdmin?: TeamCreateManyWithoutAdminInput | null
+  TeamMember?: TeamCreateManyWithoutMemberInput | null
+  projectMember?: ProjectCreateManyWithoutMemberInput | null
+  projectAdmin?: ProjectCreateManyWithoutAdminInput | null
+}
+
+export interface UserSubscriptionWhereInput {
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: UserWhereInput | null
+}
+
+export interface UserUpdateDataInput {
+  email?: String | null
+  password?: String | null
+  name?: String | null
+  TeamOwner?: TeamUpdateManyWithoutOwnerInput | null
+  TeamAdmin?: TeamUpdateManyWithoutAdminInput | null
+  TeamMember?: TeamUpdateManyWithoutMemberInput | null
+  projectMember?: ProjectUpdateManyWithoutMemberInput | null
+  projectAdmin?: ProjectUpdateManyWithoutAdminInput | null
+}
+
+export interface UserUpdateInput {
+  email?: String | null
+  password?: String | null
+  name?: String | null
+  TeamOwner?: TeamUpdateManyWithoutOwnerInput | null
+  TeamAdmin?: TeamUpdateManyWithoutAdminInput | null
+  TeamMember?: TeamUpdateManyWithoutMemberInput | null
+  projectMember?: ProjectUpdateManyWithoutMemberInput | null
+  projectAdmin?: ProjectUpdateManyWithoutAdminInput | null
+}
+
+export interface UserUpdateManyWithoutProjectAdminInput {
+  create?: UserCreateWithoutProjectAdminInput[] | UserCreateWithoutProjectAdminInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  update?: UserUpdateWithWhereUniqueWithoutProjectAdminInput[] | UserUpdateWithWhereUniqueWithoutProjectAdminInput | null
+  upsert?: UserUpsertWithWhereUniqueWithoutProjectAdminInput[] | UserUpsertWithWhereUniqueWithoutProjectAdminInput | null
+}
+
+export interface UserUpdateManyWithoutProjectMemberInput {
+  create?: UserCreateWithoutProjectMemberInput[] | UserCreateWithoutProjectMemberInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  update?: UserUpdateWithWhereUniqueWithoutProjectMemberInput[] | UserUpdateWithWhereUniqueWithoutProjectMemberInput | null
+  upsert?: UserUpsertWithWhereUniqueWithoutProjectMemberInput[] | UserUpsertWithWhereUniqueWithoutProjectMemberInput | null
+}
+
+export interface UserUpdateManyWithoutTeamAdminInput {
+  create?: UserCreateWithoutTeamAdminInput[] | UserCreateWithoutTeamAdminInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  update?: UserUpdateWithWhereUniqueWithoutTeamAdminInput[] | UserUpdateWithWhereUniqueWithoutTeamAdminInput | null
+  upsert?: UserUpsertWithWhereUniqueWithoutTeamAdminInput[] | UserUpsertWithWhereUniqueWithoutTeamAdminInput | null
+}
+
+export interface UserUpdateManyWithoutTeamMemberInput {
+  create?: UserCreateWithoutTeamMemberInput[] | UserCreateWithoutTeamMemberInput | null
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput | null
+  update?: UserUpdateWithWhereUniqueWithoutTeamMemberInput[] | UserUpdateWithWhereUniqueWithoutTeamMemberInput | null
+  upsert?: UserUpsertWithWhereUniqueWithoutTeamMemberInput[] | UserUpsertWithWhereUniqueWithoutTeamMemberInput | null
+}
+
+export interface UserUpdateOneInput {
+  create?: UserCreateInput | null
+  connect?: UserWhereUniqueInput | null
+  delete?: Boolean | null
+  update?: UserUpdateDataInput | null
+  upsert?: UserUpsertNestedInput | null
+}
+
+export interface UserUpdateOneWithoutTeamOwnerInput {
+  create?: UserCreateWithoutTeamOwnerInput | null
+  connect?: UserWhereUniqueInput | null
+  delete?: Boolean | null
+  update?: UserUpdateWithoutTeamOwnerDataInput | null
+  upsert?: UserUpsertWithoutTeamOwnerInput | null
+}
+
+export interface UserUpdateWithoutProjectAdminDataInput {
+  email?: String | null
+  password?: String | null
+  name?: String | null
+  TeamOwner?: TeamUpdateManyWithoutOwnerInput | null
+  TeamAdmin?: TeamUpdateManyWithoutAdminInput | null
+  TeamMember?: TeamUpdateManyWithoutMemberInput | null
+  projectMember?: ProjectUpdateManyWithoutMemberInput | null
+}
+
+export interface UserUpdateWithoutProjectMemberDataInput {
+  email?: String | null
+  password?: String | null
+  name?: String | null
+  TeamOwner?: TeamUpdateManyWithoutOwnerInput | null
+  TeamAdmin?: TeamUpdateManyWithoutAdminInput | null
+  TeamMember?: TeamUpdateManyWithoutMemberInput | null
+  projectAdmin?: ProjectUpdateManyWithoutAdminInput | null
+}
+
+export interface UserUpdateWithoutTeamAdminDataInput {
+  email?: String | null
+  password?: String | null
+  name?: String | null
+  TeamOwner?: TeamUpdateManyWithoutOwnerInput | null
+  TeamMember?: TeamUpdateManyWithoutMemberInput | null
+  projectMember?: ProjectUpdateManyWithoutMemberInput | null
+  projectAdmin?: ProjectUpdateManyWithoutAdminInput | null
+}
+
+export interface UserUpdateWithoutTeamMemberDataInput {
+  email?: String | null
+  password?: String | null
+  name?: String | null
+  TeamOwner?: TeamUpdateManyWithoutOwnerInput | null
+  TeamAdmin?: TeamUpdateManyWithoutAdminInput | null
+  projectMember?: ProjectUpdateManyWithoutMemberInput | null
+  projectAdmin?: ProjectUpdateManyWithoutAdminInput | null
+}
+
+export interface UserUpdateWithoutTeamOwnerDataInput {
+  email?: String | null
+  password?: String | null
+  name?: String | null
+  TeamAdmin?: TeamUpdateManyWithoutAdminInput | null
+  TeamMember?: TeamUpdateManyWithoutMemberInput | null
+  projectMember?: ProjectUpdateManyWithoutMemberInput | null
+  projectAdmin?: ProjectUpdateManyWithoutAdminInput | null
+}
+
+export interface UserUpdateWithWhereUniqueWithoutProjectAdminInput {
+  where: UserWhereUniqueInput
+  data: UserUpdateWithoutProjectAdminDataInput
+}
+
+export interface UserUpdateWithWhereUniqueWithoutProjectMemberInput {
+  where: UserWhereUniqueInput
+  data: UserUpdateWithoutProjectMemberDataInput
+}
+
+export interface UserUpdateWithWhereUniqueWithoutTeamAdminInput {
+  where: UserWhereUniqueInput
+  data: UserUpdateWithoutTeamAdminDataInput
+}
+
+export interface UserUpdateWithWhereUniqueWithoutTeamMemberInput {
+  where: UserWhereUniqueInput
+  data: UserUpdateWithoutTeamMemberDataInput
+}
+
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput
+  create: UserCreateInput
+}
+
+export interface UserUpsertWithoutTeamOwnerInput {
+  update: UserUpdateWithoutTeamOwnerDataInput
+  create: UserCreateWithoutTeamOwnerInput
+}
+
+export interface UserUpsertWithWhereUniqueWithoutProjectAdminInput {
+  where: UserWhereUniqueInput
+  update: UserUpdateWithoutProjectAdminDataInput
+  create: UserCreateWithoutProjectAdminInput
+}
+
+export interface UserUpsertWithWhereUniqueWithoutProjectMemberInput {
+  where: UserWhereUniqueInput
+  update: UserUpdateWithoutProjectMemberDataInput
+  create: UserCreateWithoutProjectMemberInput
+}
+
+export interface UserUpsertWithWhereUniqueWithoutTeamAdminInput {
+  where: UserWhereUniqueInput
+  update: UserUpdateWithoutTeamAdminDataInput
+  create: UserCreateWithoutTeamAdminInput
+}
+
+export interface UserUpsertWithWhereUniqueWithoutTeamMemberInput {
+  where: UserWhereUniqueInput
+  update: UserUpdateWithoutTeamMemberDataInput
+  create: UserCreateWithoutTeamMemberInput
+}
+
+export interface UserWhereInput {
+  AND?: UserWhereInput[] | UserWhereInput | null
+  OR?: UserWhereInput[] | UserWhereInput | null
+  NOT?: UserWhereInput[] | UserWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  email?: String | null
+  email_not?: String | null
+  email_in?: String[] | String | null
+  email_not_in?: String[] | String | null
+  email_lt?: String | null
+  email_lte?: String | null
+  email_gt?: String | null
+  email_gte?: String | null
+  email_contains?: String | null
+  email_not_contains?: String | null
+  email_starts_with?: String | null
+  email_not_starts_with?: String | null
+  email_ends_with?: String | null
+  email_not_ends_with?: String | null
+  password?: String | null
+  password_not?: String | null
+  password_in?: String[] | String | null
+  password_not_in?: String[] | String | null
+  password_lt?: String | null
+  password_lte?: String | null
+  password_gt?: String | null
+  password_gte?: String | null
+  password_contains?: String | null
+  password_not_contains?: String | null
+  password_starts_with?: String | null
+  password_not_starts_with?: String | null
+  password_ends_with?: String | null
+  password_not_ends_with?: String | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
+  TeamOwner_every?: TeamWhereInput | null
+  TeamOwner_some?: TeamWhereInput | null
+  TeamOwner_none?: TeamWhereInput | null
+  TeamAdmin_every?: TeamWhereInput | null
+  TeamAdmin_some?: TeamWhereInput | null
+  TeamAdmin_none?: TeamWhereInput | null
+  TeamMember_every?: TeamWhereInput | null
+  TeamMember_some?: TeamWhereInput | null
+  TeamMember_none?: TeamWhereInput | null
+  projectMember_every?: ProjectWhereInput | null
+  projectMember_some?: ProjectWhereInput | null
+  projectMember_none?: ProjectWhereInput | null
+  projectAdmin_every?: ProjectWhereInput | null
+  projectAdmin_some?: ProjectWhereInput | null
+  projectAdmin_none?: ProjectWhereInput | null
+}
+
+export interface UserWhereUniqueInput {
+  id?: ID_Input | null
+  email?: String | null
 }
 
 /*
@@ -2835,96 +2835,24 @@ export interface Node {
   id: ID_Output
 }
 
-export interface TeamPreviousValues {
-  id: ID_Output
-  createdAt: DateTime
-  updatedAt: DateTime
-  name?: String
+export interface AggregateChange {
+  count: Int
 }
 
-/*
- * A connection to a list of items.
-
- */
-export interface ProjectConnection {
-  pageInfo: PageInfo
-  edges: ProjectEdge[]
-  aggregate: AggregateProject
-}
-
-export interface Project extends Node {
-  id: ID_Output
-  createdAt: DateTime
-  updatedAt: DateTime
-  name: String
-  team: Team
-  member?: User[]
-  admin?: User[]
-  change?: Change[]
-}
-
-export interface BatchPayload {
-  count: Long
+export interface AggregateProject {
+  count: Int
 }
 
 export interface AggregateTeam {
   count: Int
 }
 
-export interface Team extends Node {
-  id: ID_Output
-  createdAt: DateTime
-  updatedAt: DateTime
-  name?: String
-  project?: Project[]
-  owner: User
-  admin?: User[]
-  member?: User[]
-}
-
-export interface User extends Node {
-  id: ID_Output
-  email: String
-  password: String
-  name: String
-  TeamOwner?: Team[]
-  TeamAdmin?: Team[]
-  TeamMember?: Team[]
-  projectMember?: Project[]
-  projectAdmin?: Project[]
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface TeamEdge {
-  node: Team
-  cursor: String
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface TeamConnection {
-  pageInfo: PageInfo
-  edges: TeamEdge[]
-  aggregate: AggregateTeam
-}
-
 export interface AggregateUser {
   count: Int
 }
 
-/*
- * A connection to a list of items.
-
- */
-export interface UserConnection {
-  pageInfo: PageInfo
-  edges: UserEdge[]
-  aggregate: AggregateUser
+export interface BatchPayload {
+  count: Long
 }
 
 export interface Change extends Node {
@@ -2937,45 +2865,21 @@ export interface Change extends Node {
 }
 
 /*
- * An edge in a connection.
+ * A connection to a list of items.
 
  */
-export interface ChangeEdge {
-  node: Change
-  cursor: String
-}
-
-export interface UserPreviousValues {
-  id: ID_Output
-  email: String
-  password: String
-  name: String
-}
-
-export interface AggregateProject {
-  count: Int
-}
-
-export interface ProjectSubscriptionPayload {
-  mutation: MutationType
-  node?: Project
-  updatedFields?: String[]
-  previousValues?: ProjectPreviousValues
-}
-
-export interface TeamSubscriptionPayload {
-  mutation: MutationType
-  node?: Team
-  updatedFields?: String[]
-  previousValues?: TeamPreviousValues
+export interface ChangeConnection {
+  pageInfo: PageInfo
+  edges: Array<ChangeEdge | null>
+  aggregate: AggregateChange
 }
 
 /*
  * An edge in a connection.
 
  */
-export interface UserEdge {
-  node: User
+export interface ChangeEdge {
+  node: Change
   cursor: String
 }
 
@@ -2988,27 +2892,9 @@ export interface ChangePreviousValues {
 
 export interface ChangeSubscriptionPayload {
   mutation: MutationType
-  node?: Change
-  updatedFields?: String[]
-  previousValues?: ChangePreviousValues
-}
-
-export interface UserSubscriptionPayload {
-  mutation: MutationType
-  node?: User
-  updatedFields?: String[]
-  previousValues?: UserPreviousValues
-}
-
-export interface ProjectPreviousValues {
-  id: ID_Output
-  createdAt: DateTime
-  updatedAt: DateTime
-  name: String
-}
-
-export interface AggregateChange {
-  count: Int
+  node?: Change | null
+  updatedFields?: Array<String> | null
+  previousValues?: ChangePreviousValues | null
 }
 
 /*
@@ -3018,8 +2904,29 @@ export interface AggregateChange {
 export interface PageInfo {
   hasNextPage: Boolean
   hasPreviousPage: Boolean
-  startCursor?: String
-  endCursor?: String
+  startCursor?: String | null
+  endCursor?: String | null
+}
+
+export interface Project extends Node {
+  id: ID_Output
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+  team: Team
+  member?: Array<User> | null
+  admin?: Array<User> | null
+  change?: Array<Change> | null
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface ProjectConnection {
+  pageInfo: PageInfo
+  edges: Array<ProjectEdge | null>
+  aggregate: AggregateProject
 }
 
 /*
@@ -3031,31 +2938,115 @@ export interface ProjectEdge {
   cursor: String
 }
 
+export interface ProjectPreviousValues {
+  id: ID_Output
+  createdAt: DateTime
+  updatedAt: DateTime
+  name: String
+}
+
+export interface ProjectSubscriptionPayload {
+  mutation: MutationType
+  node?: Project | null
+  updatedFields?: Array<String> | null
+  previousValues?: ProjectPreviousValues | null
+}
+
+export interface Team extends Node {
+  id: ID_Output
+  createdAt: DateTime
+  updatedAt: DateTime
+  name?: String | null
+  project?: Array<Project> | null
+  owner: User
+  admin?: Array<User> | null
+  member?: Array<User> | null
+}
+
 /*
  * A connection to a list of items.
 
  */
-export interface ChangeConnection {
+export interface TeamConnection {
   pageInfo: PageInfo
-  edges: ChangeEdge[]
-  aggregate: AggregateChange
+  edges: Array<TeamEdge | null>
+  aggregate: AggregateTeam
 }
 
 /*
-The `Long` scalar type represents non-fractional signed whole numeric values.
-Long can represent values between -(2^63) and 2^63 - 1.
-*/
-export type Long = string
+ * An edge in a connection.
+
+ */
+export interface TeamEdge {
+  node: Team
+  cursor: String
+}
+
+export interface TeamPreviousValues {
+  id: ID_Output
+  createdAt: DateTime
+  updatedAt: DateTime
+  name?: String | null
+}
+
+export interface TeamSubscriptionPayload {
+  mutation: MutationType
+  node?: Team | null
+  updatedFields?: Array<String> | null
+  previousValues?: TeamPreviousValues | null
+}
+
+export interface User extends Node {
+  id: ID_Output
+  email: String
+  password: String
+  name: String
+  TeamOwner?: Array<Team> | null
+  TeamAdmin?: Array<Team> | null
+  TeamMember?: Array<Team> | null
+  projectMember?: Array<Project> | null
+  projectAdmin?: Array<Project> | null
+}
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
-*/
-export type Int = number
+ * A connection to a list of items.
+
+ */
+export interface UserConnection {
+  pageInfo: PageInfo
+  edges: Array<UserEdge | null>
+  aggregate: AggregateUser
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface UserEdge {
+  node: User
+  cursor: String
+}
+
+export interface UserPreviousValues {
+  id: ID_Output
+  email: String
+  password: String
+  name: String
+}
+
+export interface UserSubscriptionPayload {
+  mutation: MutationType
+  node?: User | null
+  updatedFields?: Array<String> | null
+  previousValues?: UserPreviousValues | null
+}
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean
+
+export type DateTime = Date | string
 
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
@@ -3063,7 +3054,16 @@ The `ID` scalar type represents a unique identifier, often used to refetch an ob
 export type ID_Input = string | number
 export type ID_Output = string
 
-export type DateTime = Date | string
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+*/
+export type Int = number
+
+/*
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+*/
+export type Long = string
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.

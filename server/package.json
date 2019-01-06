@@ -14,7 +14,8 @@
     "debug": "dotenv -- nodemon -e ts,graphql --exec babel-node --inspect src/index.js",
     "playground": "graphql playground",
     "playgroundProd": "dotenv -e .env.production graphql playground",
-    "build": "rimraf dist && tsc"
+    "build": "rimraf dist && tsc",
+    "deploy": "prisma deploy"
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
@@ -48,6 +49,7 @@
     "prettier": "^1.15.3",
     "prisma": "^1.23.2",
     "rimraf": "2.6.2",
+    "typescript": "^3.2.2",
     "wait-for-server": "^0.1.1"
   },
   "esm": {
