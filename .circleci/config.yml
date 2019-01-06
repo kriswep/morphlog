@@ -42,9 +42,9 @@ jobs:
       - run:
           name: test client
           command: cd client && npm test
-      - run:
-          name: lint client
-          command: cd client && npm run lint
+      #- run:
+      #    name: lint client
+      #    command: cd client && npm run lint
       - run:
           name: test e2e
           command: cd e2e && npm run integration || echo 0
