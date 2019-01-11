@@ -21,7 +21,7 @@
     "bcryptjs": "2.4.3",
     "graphql-yoga": "^1.16.9",
     "jsonwebtoken": "^8.4.0",
-    "prisma-binding": "^2.2.12"
+    "prisma-binding": "^2.2.14"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -30,7 +30,7 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
     "@babel/preset-env": "^7.2.3",
     "@types/bcryptjs": "^2.4.2",
-    "@types/jest": "^23.3.10",
+    "@types/jest": "^23.3.12",
     "apollo-server-express": "^2.3.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
@@ -42,13 +42,13 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-prettier": "^2.6.2",
     "express": "^4.16.4",
-    "graphql-cli": "^3.0.3",
+    "graphql-cli": "^3.0.4",
     "jest": "^23.6.0",
     "nodemon": "^1.18.9",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.15.3",
-    "prisma": "^1.23.2",
-    "rimraf": "2.6.2",
+    "prisma": "^1.24.0",
+    "rimraf": "^2.6.3",
     "typescript": "^3.2.2",
     "wait-for-server": "^0.1.1"
   },
